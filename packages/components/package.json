@@ -1,0 +1,8 @@
+{
+  "name": "@monocle/components",
+  "version": "1.0.0",
+  "license": "UNLICENCED",
+  "scripts": {
+    "build": "tsc"
+  }
+}

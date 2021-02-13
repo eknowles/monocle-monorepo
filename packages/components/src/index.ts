@@ -1,0 +1,2 @@
+// COMPONENTS
+export * from "./text";

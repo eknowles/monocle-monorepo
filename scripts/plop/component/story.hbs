@@ -1,0 +1,15 @@
+import React from "react";
+import { {{pascalCase name}} } from "./{{kebabCase name}}.component";
+
+export default {
+  title: "Components/{{pascalCase name}}",
+  component: {{pascalCase name}},
+  argTypes: {},
+};
+
+const Template = (args) => <{{pascalCase name}} {...args} />;
+
+export const Primary = Template.bind({});
+Primary.args = {
+  children: "children",
+};
