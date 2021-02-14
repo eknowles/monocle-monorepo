@@ -2,39 +2,43 @@ const path = require('path');
 
 module.exports = {
   stories: [
-    "../../components/**/*.stories.mdx",
-    "../../components/**/*.stories.@(js|jsx|ts|tsx)"
+    '../../components/**/*.stories.mdx',
+    '../../components/**/*.stories.@(js|jsx|ts|tsx)',
   ],
   typescript: {
-    reactDocgen: "react-docgen-typescript",
+    reactDocgen: 'react-docgen-typescript',
     reactDocgenTypescriptOptions: {
       compilerOptions: {
         allowSyntheticDefaultImports: false,
-        esModuleInterop: false
-      }
-    }
+        esModuleInterop: false,
+      },
+    },
   },
-  addons: ["@storybook/addon-links", "@storybook/addon-essentials", "@storybook/preset-create-react-app"],
+  addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
   webpackFinal: async (config) => {
-    config.module.rules.push({
-      test: /\.css$/,
-      use: [
-        {
-          loader: 'postcss-loader',
-          options: {
-            ident: 'postcss',
-            importLoaders: 1,
-            modules: false,
-            sourceMap: false,
-            plugins: [
-              require('tailwindcss'),
-              require('autoprefixer'),
-            ],
-          },
+    config.module.rules = [
+      {
+        test: /\.(jpe?g|gif|png|woff|ttf|wav|mp3)$/i,
+        loader: 'file-loader',
+        options: {
+          name: '[path][name].[ext]',
         },
-      ],
-      include: path.resolve(__dirname, '../'),
-    })
-    return config
+      },
+      {
+        test: /\.svg$/,
+        use: ['@svgr/webpack'],
+      },
+      {
+        test: /\.tsx?$/,
+        loader: 'ts-loader',
+        options: { configFile: 'tsconfig.base.json' },
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
+      },
+    ];
+    return config;
   },
 };

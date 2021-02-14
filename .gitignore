@@ -1,4 +1,5 @@
 lib
+*.log
 
 # Project exclude paths
 /node_modules/

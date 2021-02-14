@@ -1,8 +1,10 @@
+import { hot } from 'react-hot-loader/root';
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Shell } from '@monocle/components';
 
-import HomePage from '../pages/home';
-import LoginPage from '../pages/login';
+import HomePage from '../routes/home';
+import LoginPage from '../routes/login';
 import { ProvideAuth } from '../services/auth';
 import AuthButton from './AuthButton';
 import PrivateRoute from './PrivateRoute';
@@ -11,16 +13,18 @@ const App = () => {
   return (
     <ProvideAuth>
       <BrowserRouter>
-        <AuthButton />
-        <Switch>
-          <PrivateRoute path="/home">
-            <HomePage />
-          </PrivateRoute>
-          <Route component={LoginPage} path="/login" />
-        </Switch>
+        <Shell>
+          <AuthButton />
+          <Switch>
+            <PrivateRoute path="/home">
+              <HomePage />
+            </PrivateRoute>
+            <Route component={LoginPage} path="/login" />
+          </Switch>
+        </Shell>
       </BrowserRouter>
     </ProvideAuth>
   );
 };
 
-export default App;
+export default hot(App);

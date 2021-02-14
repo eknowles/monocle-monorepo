@@ -1,0 +1,13 @@
+{
+  "name": "@monocle/icons",
+  "version": "1.0.0",
+  "license": "UNLICENCED",
+  "files": [
+    "src/*"
+  ],
+  "scripts": {
+    "build": "echo 'done'"
+  },
+  "devDependencies": {},
+  "dependencies": {}
+}

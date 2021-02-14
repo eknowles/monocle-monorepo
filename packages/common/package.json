@@ -1,0 +1,10 @@
+{
+  "name": "@monocle/common",
+  "version": "1.0.0",
+  "license": "UNLICENCED",
+  "scripts": {
+    "build": "echo 'done'"
+  },
+  "devDependencies": {},
+  "dependencies": {}
+}

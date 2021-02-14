@@ -11,14 +11,6 @@
     "@storybook/addon-actions": "^6.1.17",
     "@storybook/addon-essentials": "^6.1.17",
     "@storybook/addon-links": "^6.1.17",
-    "@storybook/preset-create-react-app": "^3.1.5",
     "@storybook/react": "^6.1.17"
-  },
-  "dependencies": {
-    "react-scripts": "^4.0.2",
-    "postcss": "^7",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
-    "autoprefixer": "^9",
-    "normalizr": "^3.6.1"
   }
 }

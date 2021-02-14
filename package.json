@@ -19,8 +19,21 @@
     "**/*": "prettier --write --ignore-unknown"
   },
   "dependencies": {
+    "@svgr/webpack": "^5.5.0",
+    "autoprefixer": "^10.2.4",
+    "css-loader": "^5.0.2",
+    "file-loader": "^6.2.0",
+    "postcss": "^8.2.6",
+    "postcss-import": "^14.0.0",
+    "postcss-loader": "^4.2.0",
+    "postcss-preset-env": "^6.7.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-hot-loader": "^4.13.0",
+    "style-loader": "^2.0.0",
+    "tailwindcss": "^2.0.3",
+    "ts-loader": "^8.0.17",
+    "tsconfig-paths-webpack-plugin": "^3.3.0",
     "typescript": "^4.1.5"
   },
   "devDependencies": {
@@ -33,7 +46,6 @@
     "lint-staged": "^10.5.4",
     "plop": "^2.7.4",
     "prettier": "2.2.1",
-    "react-scripts": "^4.0.2",
     "ts-node": "^9.1.1"
   }
 }

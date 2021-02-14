@@ -6,5 +6,9 @@
     "baseUrl": "src"
   },
   "include": ["src"],
-  "references": []
+  "references": [
+    { "path": "../icons/src" },
+    { "path": "../common/src" },
+    { "path": "../protos/src" }
+  ]
 }
