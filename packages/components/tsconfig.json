@@ -8,7 +8,7 @@
   "include": ["src"],
   "references": [
     { "path": "../icons/src" },
-    { "path": "../common/src" },
-    { "path": "../protos/src" }
+    { "path": "../common" },
+    { "path": "../protos/generated" }
   ]
 }

@@ -1,4 +1,3 @@
-import React from 'react';
 import { FC } from 'react';
 
 import SettingsIcon from '@monocle/icons/src/settings.svg';

@@ -1,4 +1,3 @@
-import React from 'react';
 import { createContext, FC, useContext, useEffect, useState } from 'react';
 import { LOCALSTORAGE_AUTH_TOKEN_KEY } from '../../constants';
 import { ServiceError } from '@monocle/protos/generated/monocle_pb_service';

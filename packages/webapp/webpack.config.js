@@ -37,7 +37,26 @@ module.exports = {
       },
       {
         test: /\.tsx?$/,
-        use: 'ts-loader',
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              cacheDirectory: true,
+              presets: [
+                [
+                  '@babel/preset-react',
+                  {
+                    runtime: 'automatic',
+                  },
+                ],
+              ],
+            },
+          },
+          {
+            loader: 'ts-loader',
+            options: { configFile: 'tsconfig.base.json' },
+          },
+        ],
         exclude: /node_modules/,
       },
       {
