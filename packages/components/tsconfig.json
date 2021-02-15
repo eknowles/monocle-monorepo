@@ -5,7 +5,7 @@
     "rootDir": "src",
     "baseUrl": "src"
   },
-  "include": ["src"],
+  "include": ["src", "../../common.d.ts"],
   "references": [
     { "path": "../icons/src" },
     { "path": "../common" },

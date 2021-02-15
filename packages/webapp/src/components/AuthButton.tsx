@@ -7,22 +7,16 @@ const AuthButton = () => {
   let auth = useAuth();
 
   return auth.user ? (
-    <p>
-      Welcome!{' '}
-      <button
-        className="bg-ned-blue"
-        onClick={() => {
-          auth.logout();
-          history.push('/');
-        }}
-      >
-        Sign out
-      </button>
-    </p>
+    <button
+      onClick={() => {
+        auth.logout();
+        history.push('/');
+      }}
+    >
+      Log out
+    </button>
   ) : (
-    <p>
-      You are not logged in. <Link to={'/login'}>login</Link>
-    </p>
+    <Link to={'/login'}>Log In</Link>
   );
 };
 

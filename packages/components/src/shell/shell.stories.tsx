@@ -1,8 +1,7 @@
-import React from "react";
-import { Shell } from "./shell.component";
+import { Shell } from './shell.component';
 
 export default {
-  title: "Components/Shell",
+  title: 'Components/Shell',
   component: Shell,
   argTypes: {},
 };
@@ -11,5 +10,5 @@ const Template = (args) => <Shell {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
-  children: "children",
+  children: 'child',
 };

@@ -1,14 +1,13 @@
-import { FC } from 'react';
+import type { FC, ReactChild } from 'react';
 
 import SettingsIcon from '@monocle/icons/src/settings.svg';
 
-export const AppBar: FC = () => (
-  <div className="dark:bg-midnight-500 dark:text-dawn-400 px-2 py-1 uppercase text-xs flex justify-between">
-    <div>
-      Monocle Security <span className="font-bold ml-1">Web Client</span>
+export const AppBar: FC<{ actions: ReactChild }> = ({ actions }) => (
+  <div className="dark:bg-black px-2 py-1 text-xs flex justify-between">
+    <div className="dark:text-code-500 uppercase">
+      <span className="font-medium">Monocle</span>
+      <span className="font-bold ml-1">Security</span>
     </div>
-    <div>
-      <SettingsIcon width="14" height="14" />
-    </div>
+    <div>{actions}</div>
   </div>
 );
