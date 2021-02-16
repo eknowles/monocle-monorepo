@@ -1,14 +1,14 @@
+import type { MouseEvent } from 'react';
 import type { FC, ReactChild } from 'react';
 import classnames from 'classnames';
 
 import CrossIcon from '../../../icons/src/x.svg';
 
 export interface IPageTabProps {
-  id: string | number;
   icon: ReactChild;
   name: string;
   isActive?: boolean;
-  onClose: any;
+  onClose: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
 export const PageTab: FC<IPageTabProps> = ({
@@ -17,7 +17,7 @@ export const PageTab: FC<IPageTabProps> = ({
   name,
   onClose,
 }) => {
-  const handleClose = (e) => {
+  const handleClose = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
 
@@ -33,7 +33,7 @@ export const PageTab: FC<IPageTabProps> = ({
     >
       <div />
       <div className="flex items-center">
-        <div className="dark:text-code-400 p-2">{icon}</div>
+        <div className="dark:text-code-200 p-2">{icon}</div>
         <div className="dark:text-code-100 text-sm py-2">{name}</div>
       </div>
       <button

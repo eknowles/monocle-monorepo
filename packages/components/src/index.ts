@@ -1,5 +1,4 @@
 // COMPONENTS
-export * from '../../webapp/src/components/app-tabs';
 export * from './side-nav-item';
 export * from './page-tab';
 export * from './page-tab-bar';
@@ -9,4 +8,3 @@ export * from './side-section';
 export * from './button';
 export * from './app-bar';
 export * from './shell';
-export * from './text';

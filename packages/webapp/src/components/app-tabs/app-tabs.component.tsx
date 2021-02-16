@@ -33,7 +33,6 @@ const Tab: FC<ITabProps> = ({ icon, name, id, onClose }) => {
     >
       <PageTab
         onClose={onClose}
-        id={id}
         icon={<Icon width="14" height="14" />}
         name={name}
         isActive={!!match}

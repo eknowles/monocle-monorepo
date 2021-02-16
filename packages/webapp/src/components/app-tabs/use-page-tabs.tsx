@@ -9,8 +9,10 @@ export enum IconTypes {
 
 export type ILocationTabState = { path: string; icon: IconTypes } & Pick<
   IPageTabProps,
-  'id' | 'name'
->;
+  'name'
+> & {
+    id: string | number;
+  };
 export type ILocationSetTabState = { setTab: ILocationTabState };
 
 export const usePageTabs = () => {
@@ -28,8 +30,6 @@ export const usePageTabs = () => {
   }
 
   const removeTab = (index: number) => {
-    console.log(index);
-
     // close first and only tab
     if (tabs.length === 1 && index === 0) {
       setTabs([]);
