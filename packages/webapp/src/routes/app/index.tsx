@@ -1,48 +1,23 @@
-import {
-  PageTabBar,
-  ServerListItem,
-  Side,
-  SideSection,
-  SideViewItem,
-} from '@monocle/components';
 import type { FC } from 'react';
-import React, { useState } from 'react';
-import { Route, Switch, useHistory, useRouteMatch } from 'react-router-dom';
-import { SideServerItem } from '../../components/SideServerItem';
-import { useMonocleState } from '../../services/monocle/use-monocle';
-import { usePageTabs } from '../../services/page-tabs/use-page-tabs';
+import { Route, Switch } from 'react-router-dom';
+import { AppTabs } from '../../components/app-tabs';
+import { SideNav } from '../../components/side-nav';
 import { ServerDetailsRoute } from './server-details';
+import { ViewRoute } from './view';
 
 const AppRoute: FC = () => {
-  const [views, setViews] = useState([
-    { id: '1', name: 'Default View', active: false },
-  ]);
-  const { state } = useMonocleState();
-
-  const recordings =
-    state &&
-    state.recordingsList.map((recording) => {
-      recording.activejob;
-    });
-
   return (
     <div className="flex h-full">
-      <Side>
-        <SideSection label="Views" />
-        {views.map((view) => (
-          <SideViewItem isActive={view.active} name={view.name} key={view.id} />
-        ))}
-        <SideSection label="Servers" />
-        {state && <SideServerItem id={state.identifier} name={state?.name} />}
-      </Side>
+      <SideNav />
       <div className="flex flex-col w-full h-full">
-        <PageTabBar />
+        <AppTabs />
         <Switch>
           <Route
             component={ServerDetailsRoute}
             exact
             path="/app/server/:serverId"
           />
+          <Route component={ViewRoute} exact path="/app/view/:viewId" />
         </Switch>
       </div>
     </div>

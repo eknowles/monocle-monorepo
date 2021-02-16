@@ -15,9 +15,10 @@ export const useMonocleState = () => {
   const req = new SubscribeRequest();
   const auth = useAuth();
   const meta = new grpc.Metadata({ jwttoken: auth.user });
+  let subReq: ReturnType<MonocleServiceClient['subscribe']>;
 
   const getState = () => {
-    const subReq = client.subscribe(req, meta);
+    subReq = client.subscribe(req, meta);
     subReq.on('data', (response) => {
       const msg = response.getMessage() as Any;
       const typeName = msg.getTypeName();
@@ -114,6 +115,12 @@ export const useMonocleState = () => {
 
   useEffect(() => {
     getState();
+
+    return () => {
+      if (subReq) {
+        subReq.cancel();
+      }
+    };
   }, []);
 
   return {

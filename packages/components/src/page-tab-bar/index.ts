@@ -1,1 +1,1 @@
-export * from "./page-tab-bar.component";
+export * from './page-tab-bar.component';
