@@ -21,13 +21,15 @@ export const usePageTabs = () => {
   if (location.state?.setTab) {
     const { setTab } = location.state;
 
-    // If tab isn't found, add it to the start
-    if (!tabs.some((tab) => tab.id === setTab.id)) {
-      setTabs([{ ...setTab }, ...tabs]);
+    // If tab isn't found, add it to the end
+    if (!tabs.some((tab) => tab.path === setTab.path)) {
+      setTabs([...tabs, { ...setTab }]);
     }
   }
 
   const removeTab = (index: number) => {
+    console.log(index);
+
     // close first and only tab
     if (tabs.length === 1 && index === 0) {
       setTabs([]);
@@ -38,7 +40,7 @@ export const usePageTabs = () => {
     // has multiple tabs
     const newTabs = [...tabs];
     newTabs.splice(index, 1);
-    const nextActiveTab = newTabs[index];
+    const nextActiveTab = newTabs[index - 1] || newTabs[index];
     setTabs(newTabs);
     history.push(nextActiveTab.path, { setTab: nextActiveTab });
   };
