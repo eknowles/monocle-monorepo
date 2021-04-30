@@ -1,15 +1,10 @@
 import type { FC } from 'react';
 import { ServerDetails } from '@monocle/components';
-import { useMonocleState } from '../../../services/monocle/use-monocle';
+import { useSelector } from 'react-redux';
+import { getServerMeta } from '../../../redux/modules/server';
 
 export const ServerDetailsRoute: FC = () => {
-  const { state } = useMonocleState();
-
-  if (!state) {
-    return null;
-  }
-
-  const { version, name, architecture } = state;
+  const { version, name, architecture } = useSelector(getServerMeta);
   const versionString = `${version!.major}.${version!.minor}.${version!.build}`;
 
   return (

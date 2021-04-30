@@ -1,10 +1,10 @@
-import type { FC, ReactChild } from 'react';
+import type { FC, ReactNode } from 'react';
 
 import './shell.module.css';
 import { AppBar } from '../app-bar';
 
 interface IShellProps {
-  appActions?: ReactChild;
+  appActions?: ReactNode;
 }
 
 export const Shell: FC<IShellProps> = ({ children, appActions }) => (

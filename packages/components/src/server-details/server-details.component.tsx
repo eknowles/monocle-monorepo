@@ -11,9 +11,9 @@ const Metric: FC<{ label: string; value: string }> = ({ label, value }) => (
     <div className="tracking-tight text-xs dark:text-code-400 uppercase">
       {label}
     </div>
-    <h2 className="font-bold tracking-tight text-2xl dark:text-gray-100 mb-6">
+    <div className="font-bold tracking-tight text-2xl dark:text-gray-100 mb-6">
       {value}
-    </h2>
+    </div>
   </div>
 );
 

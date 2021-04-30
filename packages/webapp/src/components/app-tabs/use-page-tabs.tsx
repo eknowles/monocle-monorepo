@@ -45,10 +45,6 @@ export const usePageTabs = () => {
     history.push(nextActiveTab.path, { setTab: nextActiveTab });
   };
 
-  useEffect(() => {
-    console.log(location);
-  }, [location]);
-
   return {
     removeTab,
     tabs,

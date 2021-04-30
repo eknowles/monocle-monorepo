@@ -6,3 +6,4 @@ lib
 /packages/protos/node_modules/
 /packages/storybook/node_modules/
 /packages/webapp/node_modules/
+build/

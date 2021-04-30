@@ -114,6 +114,24 @@ MonocleService.AddUser = {
   responseType: monocle_pb.AddUserResponse
 };
 
+MonocleService.CallWebRTC = {
+  methodName: "CallWebRTC",
+  service: MonocleService,
+  requestStream: false,
+  responseStream: false,
+  requestType: monocle_pb.CallWebRTCRequest,
+  responseType: monocle_pb.CallWebRTCResponse
+};
+
+MonocleService.HangUpWebRTC = {
+  methodName: "HangUpWebRTC",
+  service: MonocleService,
+  requestStream: false,
+  responseStream: false,
+  requestType: monocle_pb.HangUpWebRTCRequest,
+  responseType: monocle_pb.HangUpWebRTCResponse
+};
+
 MonocleService.RemoveUser = {
   methodName: "RemoveUser",
   service: MonocleService,
@@ -144,6 +162,68 @@ MonocleServiceClient.prototype.addUser = function addUser(requestMessage, metada
     callback = arguments[1];
   }
   var client = grpc.unary(MonocleService.AddUser, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
+MonocleServiceClient.prototype.callWebRTC = function callWebRTC(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(MonocleService.CallWebRTC, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
+MonocleServiceClient.prototype.hangUpWebRTC = function hangUpWebRTC(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(MonocleService.HangUpWebRTC, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,

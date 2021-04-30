@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
-import '@monocle/common/index.css';
 
+import '@monocle/common/index.css';
 import App from './components/App';
 
 document.documentElement.classList.add('dark');

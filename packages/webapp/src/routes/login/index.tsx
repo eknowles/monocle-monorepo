@@ -1,27 +1,23 @@
 import { Button, FormLogin, IFormValues } from '@monocle/components';
 import type { FC } from 'react';
 import { Formik, Field, Form } from 'formik';
-import { Redirect, useHistory, useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
-import { useAuth } from '../../services/auth';
+import { GRPC_SERVER } from '../../constants';
+import { auth as serverAuth } from '../../redux/modules/server';
 
 const LoginPage: FC = () => {
-  const history = useHistory();
-  const location = useLocation<any>();
-  const auth = useAuth();
+  const dispatch = useDispatch();
 
-  const { from } = location.state || { from: { pathname: '/app' } };
   const onSubmit = async (values: IFormValues) => {
-    const res = await auth.login(values.username, values.password);
-
-    if (res) {
-      history.replace(from);
-    }
+    dispatch(
+      serverAuth({
+        host: GRPC_SERVER,
+        username: values.username,
+        password: values.password,
+      }),
+    );
   };
-
-  if (auth.user) {
-    return <Redirect to={'/app'} />;
-  }
 
   return (
     <div className="w-full h-full flex items-center justify-center">

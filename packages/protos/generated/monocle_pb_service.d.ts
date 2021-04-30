@@ -37,6 +37,24 @@ type MonocleServiceAddUser = {
   readonly responseType: typeof monocle_pb.AddUserResponse;
 };
 
+type MonocleServiceCallWebRTC = {
+  readonly methodName: string;
+  readonly service: typeof MonocleService;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof monocle_pb.CallWebRTCRequest;
+  readonly responseType: typeof monocle_pb.CallWebRTCResponse;
+};
+
+type MonocleServiceHangUpWebRTC = {
+  readonly methodName: string;
+  readonly service: typeof MonocleService;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof monocle_pb.HangUpWebRTCRequest;
+  readonly responseType: typeof monocle_pb.HangUpWebRTCResponse;
+};
+
 type MonocleServiceRemoveUser = {
   readonly methodName: string;
   readonly service: typeof MonocleService;
@@ -58,6 +76,8 @@ type MonocleServiceSubscribe = {
 export class MonocleService {
   static readonly serviceName: string;
   static readonly AddUser: MonocleServiceAddUser;
+  static readonly CallWebRTC: MonocleServiceCallWebRTC;
+  static readonly HangUpWebRTC: MonocleServiceHangUpWebRTC;
   static readonly RemoveUser: MonocleServiceRemoveUser;
   static readonly Subscribe: MonocleServiceSubscribe;
 }
@@ -126,6 +146,24 @@ export class MonocleServiceClient {
   addUser(
     requestMessage: monocle_pb.AddUserRequest,
     callback: (error: ServiceError|null, responseMessage: monocle_pb.AddUserResponse|null) => void
+  ): UnaryResponse;
+  callWebRTC(
+    requestMessage: monocle_pb.CallWebRTCRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: monocle_pb.CallWebRTCResponse|null) => void
+  ): UnaryResponse;
+  callWebRTC(
+    requestMessage: monocle_pb.CallWebRTCRequest,
+    callback: (error: ServiceError|null, responseMessage: monocle_pb.CallWebRTCResponse|null) => void
+  ): UnaryResponse;
+  hangUpWebRTC(
+    requestMessage: monocle_pb.HangUpWebRTCRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: monocle_pb.HangUpWebRTCResponse|null) => void
+  ): UnaryResponse;
+  hangUpWebRTC(
+    requestMessage: monocle_pb.HangUpWebRTCRequest,
+    callback: (error: ServiceError|null, responseMessage: monocle_pb.HangUpWebRTCResponse|null) => void
   ): UnaryResponse;
   removeUser(
     requestMessage: monocle_pb.RemoveUserRequest,

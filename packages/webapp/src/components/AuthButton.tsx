@@ -1,15 +1,20 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
-import { useAuth } from '../services/auth';
+import { RootState } from '../redux';
+import { serverSlice } from '../redux/modules/server';
 
 const AuthButton = () => {
-  let history = useHistory();
-  let auth = useAuth();
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const isAuthed = useSelector<RootState>(
+    (state) => state.server.authenticated,
+  );
 
-  return auth.user ? (
+  return isAuthed ? (
     <button
       onClick={() => {
-        auth.logout();
+        dispatch(serverSlice.actions.logout());
         history.push('/');
       }}
     >

@@ -1,8 +1,6 @@
-import type { FC, ReactChild } from 'react';
+import type { FC, ReactNode } from 'react';
 
-import SettingsIcon from '@monocle/icons/src/settings.svg';
-
-export const AppBar: FC<{ actions: ReactChild }> = ({ actions }) => (
+export const AppBar: FC<{ actions: ReactNode }> = ({ actions }) => (
   <div className="dark:bg-black px-2 py-1 text-xs flex justify-between">
     <div className="dark:text-code-500 uppercase">
       <span className="font-medium">Monocle</span>

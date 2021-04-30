@@ -28,6 +28,8 @@
     "css-loader": "^5.0.2",
     "file-loader": "^6.2.0",
     "formik": "^2.2.6",
+    "mobx": "^6.1.6",
+    "mobx-react": "^7.1.0",
     "postcss": "^8.2.6",
     "postcss-import": "^14.0.0",
     "postcss-loader": "^4.2.0",

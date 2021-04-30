@@ -1,1 +1,14 @@
-import { GRPC_SERVER } from '../../constants';import { AuthenticateRequest } from '@monocle/protos/generated/monocle_pb';import { AuthServiceClient } from '@monocle/protos/generated/monocle_pb_service';const authClient = new AuthServiceClient(GRPC_SERVER, { debug: true });export const authenticate = (username: string, password: string): Promise<{ token: string | undefined }> => {  return new Promise((resolve, reject) => {    const request = new AuthenticateRequest();    request.setUsername(username);    request.setPassword(password);    authClient.authenticate(request, (error, response) => {      if (error) {        return reject(error);      }      const token = response?.getJwttoken();      return resolve({ token });    });  });}
+import {
+  GrpcWebImpl,
+  AuthServiceClientImpl,
+} from '@monocle/protobuf/generated/monocle';
+
+export const authenticate = (
+  host: string,
+  username: string,
+  password: string,
+) => {
+  const rpc = new GrpcWebImpl(host, { debug: true });
+  const client = new AuthServiceClientImpl(rpc);
+  return client.Authenticate({ username, password });
+};

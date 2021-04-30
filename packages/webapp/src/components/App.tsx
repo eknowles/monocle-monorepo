@@ -1,27 +1,26 @@
 import { hot } from 'react-hot-loader/root';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { Router, Route, Switch } from 'react-router-dom';
 import { Shell } from '@monocle/components';
 
+import { history } from '../history';
+import { store } from '../redux';
 import HomePage from '../routes/app';
 import LoginPage from '../routes/login';
-import { ProvideAuth } from '../services/auth';
 import AuthButton from './AuthButton';
-import PrivateRoute from './PrivateRoute';
 
 const App = () => {
   return (
-    <ProvideAuth>
-      <BrowserRouter>
+    <Provider store={store}>
+      <Router history={history}>
         <Shell appActions={<AuthButton />}>
           <Switch>
-            <PrivateRoute path="/app">
-              <HomePage />
-            </PrivateRoute>
+            <Route component={HomePage} path="/app" />
             <Route component={LoginPage} path="/login" />
           </Switch>
         </Shell>
-      </BrowserRouter>
-    </ProvideAuth>
+      </Router>
+    </Provider>
   );
 };
 

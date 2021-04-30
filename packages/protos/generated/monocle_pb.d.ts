@@ -608,6 +608,11 @@ export class RecordingTrack extends jspb.Message {
   setFilesList(value: Array<number>): void;
   addFiles(value: number, index?: number): number;
 
+  clearIndicesList(): void;
+  getIndicesList(): Array<Index>;
+  setIndicesList(value: Array<Index>): void;
+  addIndices(value?: Index, index?: number): Index;
+
   clearTotaltrackdataList(): void;
   getTotaltrackdataList(): Array<TrackData>;
   setTotaltrackdataList(value: Array<TrackData>): void;
@@ -635,6 +640,7 @@ export namespace RecordingTrack {
     encrypt: boolean,
     flushfrequency: number,
     filesList: Array<number>,
+    indicesList: Array<Index.AsObject>,
     totaltrackdataList: Array<TrackData.AsObject>,
   }
 }
@@ -2326,6 +2332,98 @@ export class AuthenticateResponse extends jspb.Message {
 export namespace AuthenticateResponse {
   export type AsObject = {
     jwttoken: string,
+  }
+}
+
+export class CallWebRTCRequest extends jspb.Message {
+  getRecording(): number;
+  setRecording(value: number): void;
+
+  getVideotrackid(): number;
+  setVideotrackid(value: number): void;
+
+  getAudiotrackid(): number;
+  setAudiotrackid(value: number): void;
+
+  getSdp(): string;
+  setSdp(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): CallWebRTCRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: CallWebRTCRequest): CallWebRTCRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: CallWebRTCRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): CallWebRTCRequest;
+  static deserializeBinaryFromReader(message: CallWebRTCRequest, reader: jspb.BinaryReader): CallWebRTCRequest;
+}
+
+export namespace CallWebRTCRequest {
+  export type AsObject = {
+    recording: number,
+    videotrackid: number,
+    audiotrackid: number,
+    sdp: string,
+  }
+}
+
+export class CallWebRTCResponse extends jspb.Message {
+  getPeerid(): string;
+  setPeerid(value: string): void;
+
+  getSdp(): string;
+  setSdp(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): CallWebRTCResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: CallWebRTCResponse): CallWebRTCResponse.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: CallWebRTCResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): CallWebRTCResponse;
+  static deserializeBinaryFromReader(message: CallWebRTCResponse, reader: jspb.BinaryReader): CallWebRTCResponse;
+}
+
+export namespace CallWebRTCResponse {
+  export type AsObject = {
+    peerid: string,
+    sdp: string,
+  }
+}
+
+export class HangUpWebRTCRequest extends jspb.Message {
+  getPeerid(): string;
+  setPeerid(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): HangUpWebRTCRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: HangUpWebRTCRequest): HangUpWebRTCRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: HangUpWebRTCRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): HangUpWebRTCRequest;
+  static deserializeBinaryFromReader(message: HangUpWebRTCRequest, reader: jspb.BinaryReader): HangUpWebRTCRequest;
+}
+
+export namespace HangUpWebRTCRequest {
+  export type AsObject = {
+    peerid: string,
+  }
+}
+
+export class HangUpWebRTCResponse extends jspb.Message {
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): HangUpWebRTCResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: HangUpWebRTCResponse): HangUpWebRTCResponse.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: HangUpWebRTCResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): HangUpWebRTCResponse;
+  static deserializeBinaryFromReader(message: HangUpWebRTCResponse, reader: jspb.BinaryReader): HangUpWebRTCResponse;
+}
+
+export namespace HangUpWebRTCResponse {
+  export type AsObject = {
   }
 }
 

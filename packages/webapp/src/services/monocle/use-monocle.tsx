@@ -1,23 +1,27 @@
 import { grpc } from '@improbable-eng/grpc-web';
 import { Any } from 'google-protobuf/google/protobuf/any_pb';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import { GRPC_SERVER } from '../../constants';
 import { State, SubscribeRequest } from '@monocle/protos/generated/monocle_pb';
 import { MonocleServiceClient } from '@monocle/protos/generated/monocle_pb_service';
-import { useAuth } from '../auth';
+import { RootState } from '../../redux';
 
 const options: grpc.RpcOptions = { debug: true };
 const client = new MonocleServiceClient(GRPC_SERVER, options);
 
 export const useMonocleState = () => {
+  const token = useSelector<RootState, string>(
+    (state) => state.server.token ?? '',
+  );
   const [state, updateState] = useState<State.AsObject>();
   const req = new SubscribeRequest();
-  const auth = useAuth();
-  const meta = new grpc.Metadata({ jwttoken: auth.user });
+  const meta = new grpc.Metadata({ jwttoken: token });
   let subReq: ReturnType<MonocleServiceClient['subscribe']>;
 
   const getState = () => {
+    console.log('subscribe');
     subReq = client.subscribe(req, meta);
     subReq.on('data', (response) => {
       const msg = response.getMessage() as Any;
@@ -106,7 +110,7 @@ export const useMonocleState = () => {
     });
 
     subReq.on('end', (end) => {
-      console.log('end', end);
+      console.log('end', Date.now(), end);
       if (end?.code === grpc.Code.Unauthenticated) {
         // Unauthenticated
       }
@@ -114,7 +118,9 @@ export const useMonocleState = () => {
   };
 
   useEffect(() => {
-    getState();
+    if (!state) {
+      getState();
+    }
 
     return () => {
       if (subReq) {
