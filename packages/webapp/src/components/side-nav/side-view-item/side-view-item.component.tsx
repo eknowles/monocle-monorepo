@@ -10,11 +10,7 @@ interface ISideViewItemProps {
 export const SideViewItem: FC<ISideViewItemProps> = ({ name, id }) => {
   const path = `/app/view/${id}`;
   return (
-    <SideNavItem
-      path={path}
-      exact={true}
-      state={{ setTab: { path, name, icon: 'view', id } }}
-    >
+    <SideNavItem path={path} exact={true} state={{ setTab: { path, name, icon: 'view', params: { viewId: id } } }}>
       <GridIcon width="14" height="14" className="mr-1 text-code-200" />
       {name}
     </SideNavItem>

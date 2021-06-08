@@ -10,11 +10,7 @@ interface IServerListItemProps {
 export const ServerListItem: FC<IServerListItemProps> = ({ name, id }) => {
   const path = `/app/server/${id}`;
   return (
-    <SideNavItem
-      path={path}
-      exact={true}
-      state={{ setTab: { path, name, icon: 'server', id } }}
-    >
+    <SideNavItem path={path} exact={true} state={{ setTab: { path, name, icon: 'server', params: { serverId: id } } }}>
       <ServerIcon width="14" height="14" className="mr-1 text-code-200" />
       {name}
     </SideNavItem>

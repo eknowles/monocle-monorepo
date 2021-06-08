@@ -5,13 +5,11 @@ import { useHistory, useLocation } from 'react-router-dom';
 export enum IconTypes {
   SERVER = 'server',
   VIEW = 'view',
+  RECORDING = 'recording',
 }
 
-export type ILocationTabState = { path: string; icon: IconTypes } & Pick<
-  IPageTabProps,
-  'name'
-> & {
-    id: string | number;
+export type ILocationTabState = { path: string; icon: IconTypes } & Pick<IPageTabProps, 'name'> & {
+    params: object;
   };
 export type ILocationSetTabState = { setTab: ILocationTabState };
 

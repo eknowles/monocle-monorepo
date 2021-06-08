@@ -1,4 +1,7 @@
 // COMPONENTS
+export * from "./field";
+export * from "./modal-head";
+export * from "./modal";
 export * from "./form-login";
 export * from './side-nav-item';
 export * from './page-tab';

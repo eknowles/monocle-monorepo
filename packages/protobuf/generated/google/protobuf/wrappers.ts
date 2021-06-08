@@ -97,10 +97,7 @@ export interface BytesValue {
 const baseDoubleValue: object = { value: 0 };
 
 export const DoubleValue = {
-  encode(
-    message: DoubleValue,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: DoubleValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.value !== 0) {
       writer.uint32(9).double(message.value);
     }
@@ -155,10 +152,7 @@ export const DoubleValue = {
 const baseFloatValue: object = { value: 0 };
 
 export const FloatValue = {
-  encode(
-    message: FloatValue,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: FloatValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.value !== 0) {
       writer.uint32(13).float(message.value);
     }
@@ -213,10 +207,7 @@ export const FloatValue = {
 const baseInt64Value: object = { value: '0' };
 
 export const Int64Value = {
-  encode(
-    message: Int64Value,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: Int64Value, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.value !== '0') {
       writer.uint32(8).int64(message.value);
     }
@@ -271,10 +262,7 @@ export const Int64Value = {
 const baseUInt64Value: object = { value: '0' };
 
 export const UInt64Value = {
-  encode(
-    message: UInt64Value,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: UInt64Value, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.value !== '0') {
       writer.uint32(8).uint64(message.value);
     }
@@ -329,10 +317,7 @@ export const UInt64Value = {
 const baseInt32Value: object = { value: 0 };
 
 export const Int32Value = {
-  encode(
-    message: Int32Value,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: Int32Value, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.value !== 0) {
       writer.uint32(8).int32(message.value);
     }
@@ -387,10 +372,7 @@ export const Int32Value = {
 const baseUInt32Value: object = { value: 0 };
 
 export const UInt32Value = {
-  encode(
-    message: UInt32Value,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: UInt32Value, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.value !== 0) {
       writer.uint32(8).uint32(message.value);
     }
@@ -445,10 +427,7 @@ export const UInt32Value = {
 const baseBoolValue: object = { value: false };
 
 export const BoolValue = {
-  encode(
-    message: BoolValue,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: BoolValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.value === true) {
       writer.uint32(8).bool(message.value);
     }
@@ -503,10 +482,7 @@ export const BoolValue = {
 const baseStringValue: object = { value: '' };
 
 export const StringValue = {
-  encode(
-    message: StringValue,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: StringValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.value !== '') {
       writer.uint32(10).string(message.value);
     }
@@ -561,10 +537,7 @@ export const StringValue = {
 const baseBytesValue: object = {};
 
 export const BytesValue = {
-  encode(
-    message: BytesValue,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: BytesValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.value.length !== 0) {
       writer.uint32(10).bytes(message.value);
     }
@@ -602,9 +575,7 @@ export const BytesValue = {
   toJSON(message: BytesValue): unknown {
     const obj: any = {};
     message.value !== undefined &&
-      (obj.value = base64FromBytes(
-        message.value !== undefined ? message.value : new Uint8Array(),
-      ));
+      (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
     return obj;
   },
 
@@ -630,8 +601,7 @@ var globalThis: any = (() => {
 })();
 
 const atob: (b64: string) => string =
-  globalThis.atob ||
-  ((b64) => globalThis.Buffer.from(b64, 'base64').toString('binary'));
+  globalThis.atob || ((b64) => globalThis.Buffer.from(b64, 'base64').toString('binary'));
 function bytesFromBase64(b64: string): Uint8Array {
   const bin = atob(b64);
   const arr = new Uint8Array(bin.length);
@@ -642,8 +612,7 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 const btoa: (bin: string) => string =
-  globalThis.btoa ||
-  ((bin) => globalThis.Buffer.from(bin, 'binary').toString('base64'));
+  globalThis.btoa || ((bin) => globalThis.Buffer.from(bin, 'binary').toString('base64'));
 function base64FromBytes(arr: Uint8Array): string {
   const bin: string[] = [];
   for (let i = 0; i < arr.byteLength; ++i) {

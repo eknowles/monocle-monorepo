@@ -96,7 +96,7 @@ enum TrackType
 
 message File
 {
-  fixed64 token = 1;
+  string token = 1;
   string path = 2;
   string mountpoint = 3;
   fixed64 numchunks = 4;
@@ -106,7 +106,7 @@ message File
 
 message Group
 {
-  fixed64 token = 1;
+  string token = 1;
   string name = 2;
   bool manageusers = 3;
   bool managerecordings = 4;
@@ -115,7 +115,7 @@ message Group
   bool manageplugins = 7;
   bool reboot = 8;
   bool allrecordings = 9;
-  repeated fixed64 recordings = 10;
+  repeated string recordings = 10;
 }
 
 message Index
@@ -133,7 +133,7 @@ message LogMessage
 
 message Map
 {
-  fixed64 token = 1;
+  string token = 1;
   string name = 2;
   string location = 3;
   string md5 = 4;
@@ -152,14 +152,14 @@ message Mount
 
 message ONVIFUser
 {
-  fixed64 token = 1;
+  string token = 1;
   string username = 2;
   ONVIFUserLevel onvifuserlevel = 3;
 }
 
 message Plugin
 {
-  fixed64 token = 1;
+  string token = 1;
   string name = 2;
   bool enabled = 3;
   string parameters = 4;
@@ -170,7 +170,7 @@ message Plugin
 
 message Receiver
 {
-  fixed64 token = 1;
+  string token = 1;
   ReceiverMode mode = 2;
   string uri = 3;
   bool autocreated = 4;
@@ -181,7 +181,7 @@ message Receiver
 
 message Recording
 {
-  fixed64 token = 1;
+  string token = 1;
   string sourceid = 2;
   string name = 3;
   string location = 4;
@@ -201,8 +201,8 @@ message Recording
 
 message RecordingJob
 {
-  fixed64 recordingtoken = 1;
-  fixed64 recordingjobtoken = 2;
+  string recordingtoken = 1;
+  string recordingjobtoken = 2;
   string name = 3;
   bool enabled = 4;
   fixed64 priority = 5;
@@ -211,19 +211,19 @@ message RecordingJob
 
 message RecordingJobSource
 {
-  fixed64 recordingtoken = 1;
-  fixed64 recordingjobtoken = 2;
-  fixed64 recordingjobsourcetoken = 3;
-  fixed64 receivertoken = 4;
+  string recordingtoken = 1;
+  string recordingjobtoken = 2;
+  string recordingjobsourcetoken = 3;
+  string receivertoken = 4;
   repeated RecordingJobSourceTrack recordingjobsourcetracks = 5;
 }
 
 message RecordingJobSourceTrack
 {
-  fixed64 recordingtoken = 1;
-  fixed64 recordingjobtoken = 2;
-  fixed64 recordingjobsourcetoken = 3;
-  fixed64 recordingjobsourcetracktoken = 4;
+  string recordingtoken = 1;
+  string recordingjobtoken = 2;
+  string recordingjobsourcetoken = 3;
+  string recordingjobsourcetracktoken = 4;
   fixed32 recordingtrackid = 5;
   repeated string parameters = 6;
   RecordingJobState state = 7;
@@ -233,7 +233,7 @@ message RecordingJobSourceTrack
 
 message RecordingTrack
 {
-  fixed64 recordingtoken = 1;
+  string recordingtoken = 1;
   fixed32 recordingtrackid = 2;
   string token = 3;
   TrackType tracktype = 4;
@@ -242,7 +242,7 @@ message RecordingTrack
   bool digitalsigning = 7;
   bool encrypt = 8;
   fixed32 flushfrequency = 9;
-  repeated fixed64 files = 10;
+  repeated string files = 10;
   repeated Index indices = 11;
   repeated TrackData totaltrackdata = 12;
 }
@@ -255,9 +255,9 @@ message TrackData
 
 message User
 {
-  fixed64 token = 1;
+  string token = 1;
   string username = 2;
-  fixed64 grouptoken = 3;
+  string grouptoken = 3;
 }
 
 message Version
@@ -273,7 +273,7 @@ message State
   string publickey = 2;
   string architecture = 3;
   Version version = 4;
-  fixed64 identifier = 5;
+  string identifier = 5;
   repeated string environmentvariables = 6;
   repeated string commandlinevariables = 7;
   repeated ONVIFUser onvifusers = 8;
@@ -304,18 +304,18 @@ message FileAdded
 
 message FileRemoved
 {
-  fixed64 token = 1;
+  string token = 1;
 }
 
 message FileMonitorStateChanged
 {
-  fixed64 token = 1;
+  string token = 1;
   FileMonitorState state = 2;
 }
 
 message FileStateChanged
 {
-  fixed64 token = 1;
+  string token = 1;
   FileState state = 2;
 }
 
@@ -343,7 +343,7 @@ message GroupChanged
 
 message GroupRemoved
 {
-  fixed64 token = 1;
+  string token = 1;
 }
 
 message LocationChanged
@@ -370,7 +370,7 @@ message MapChanged
 
 message MapRemoved
 {
-  fixed64 token = 1;
+  string token = 1;
 }
 
 message MountAdded
@@ -400,7 +400,7 @@ message ONVIFUserChanged
 
 message ONVIFUserRemoved
 {
-  fixed64 token = 1;
+  string token = 1;
 }
 
 message OpenStreetMapBaseUrisChanged
@@ -415,7 +415,7 @@ message PluginAdded
 
 message PluginChanged
 {
-  fixed64 token = 1;
+  string token = 1;
   bool enabled = 2;
   string parameters = 3;
   fixed64 priority = 4;
@@ -425,12 +425,12 @@ message PluginChanged
 
 message PluginRemoved
 {
-  fixed64 token = 1;
+  string token = 1;
 }
 
 message PluginStateChanged
 {
-  fixed64 token = 1;
+  string token = 1;
   PluginState state = 2;
   string message = 3;
 }
@@ -447,7 +447,7 @@ message ReceiverChanged
 
 message ReceiverRemoved
 {
-  fixed64 token = 1;
+  string token = 1;
 }
 
 message RecordingJobSourceAdded
@@ -457,9 +457,9 @@ message RecordingJobSourceAdded
 
 message RecordingJobSourceRemoved
 {
-  fixed64 recordingtoken = 1;
-  fixed64 recordingjobtoken = 2;
-  fixed64 recordingjobsourcetoken = 3;
+  string recordingtoken = 1;
+  string recordingjobtoken = 2;
+  string recordingjobsourcetoken = 3;
 }
 
 message RecordingJobSourceTrackAdded
@@ -469,21 +469,21 @@ message RecordingJobSourceTrackAdded
 
 message RecordingJobSourceTrackRemoved
 {
-  fixed64 recordingtoken = 1;
-  fixed64 recordingjobtoken = 2;
-  fixed64 recordingjobsourcetoken = 3;
-  fixed64 recordingjobsourcetracktoken = 4;
+  string recordingtoken = 1;
+  string recordingjobtoken = 2;
+  string recordingjobsourcetoken = 3;
+  string recordingjobsourcetracktoken = 4;
 }
 
 message RecordingLogMessage
 {
-  fixed64 token = 1;
+  string token = 1;
   LogMessage logmessage = 2;
 }
 
 message RecordingTrackLogMessage
 {
-  fixed64 recordingtoken = 1;
+  string recordingtoken = 1;
   fixed32 trackid = 2;
   LogMessage logmessage = 3;
 }
@@ -500,7 +500,7 @@ message RecordingChanged
 
 message RecordingRemoved
 {
-  fixed64 token = 1;
+  string token = 1;
 }
 
 message RecordingJobAdded
@@ -515,8 +515,8 @@ message RecordingJobChanged
 
 message RecordingJobRemoved
 {
-  fixed64 recordingtoken = 1;
-  fixed64 recordingjobtoken = 2;
+  string recordingtoken = 1;
+  string recordingjobtoken = 2;
 }
 
 message RecordingTrackAdded
@@ -531,31 +531,31 @@ message RecordingTrackChanged
 
 message RecordingTrackRemoved
 {
-  fixed64 recordingtoken = 1;
+  string recordingtoken = 1;
   fixed32 recordingtrackid = 2;
 }
 
 message RecordingActiveJobChanged
 {
-  fixed64 recordingtoken = 1;
+  string recordingtoken = 1;
   google.protobuf.UInt64Value activejob = 2;
 }
 
 message RecordingJobSourceTrackActiveParametersChanged
 {
-  fixed64 recordingtoken = 1;
-  fixed64 recordingjobtoken = 2;
-  fixed64 recordingjobsourcetoken = 3;
-  fixed64 recordingjobsourcetracktoken = 4;
+  string recordingtoken = 1;
+  string recordingjobtoken = 2;
+  string recordingjobsourcetoken = 3;
+  string recordingjobsourcetracktoken = 4;
   repeated string activeparameters = 5;
 }
 
 message RecordingJobSourceTrackState
 {
-  fixed64 recordingtoken = 1;
-  fixed64 recordingjobtoken = 2;
-  fixed64 recordingjobsourcetoken = 3;
-  fixed64 recordingjobsourcetracktoken = 4;
+  string recordingtoken = 1;
+  string recordingjobtoken = 2;
+  string recordingjobsourcetoken = 3;
+  string recordingjobsourcetracktoken = 4;
   fixed64 time = 5;
   RecordingJobState state = 6;
   string error = 7;
@@ -563,7 +563,7 @@ message RecordingJobSourceTrackState
 
 message RecordingTrackCodecAdded
 {
-  fixed64 recordingtoken = 1;
+  string recordingtoken = 1;
   fixed32 recordingtrackid = 2;
   fixed64 codecid = 3;
   Codec codec = 4;
@@ -573,7 +573,7 @@ message RecordingTrackCodecAdded
 
 message RecordingTrackCodecRemoved
 {
-  fixed64 recordingtoken = 1;
+  string recordingtoken = 1;
   fixed32 recordingtrackid = 2;
   fixed64 codecid = 3;
 }
@@ -585,14 +585,14 @@ message ServerLogMessage
 
 message RecordingTrackSetData
 {
-  fixed64 recordingtoken = 1;
+  string recordingtoken = 1;
   fixed32 recordingtrackid = 2;
   repeated Index indices = 3;
 }
 
 message RecordingTrackDeleteData
 {
-  fixed64 recordingtoken = 1;
+  string recordingtoken = 1;
   fixed32 recordingtrackid = 2;
   google.protobuf.UInt64Value start = 3;
   google.protobuf.UInt64Value end = 4;
@@ -605,33 +605,22 @@ message UserAdded
 
 message UserChanged
 {
-  fixed64 token = 1;
-  fixed64 grouptoken = 2;
+  string token = 1;
+  string grouptoken = 2;
 }
 
 message UserRemoved
 {
-  fixed64 token = 1;
+  string token = 1;
 }
 
-message AddUserRequest
+message AddIceCandidateWebRTCRequest
 {
-  string username = 1;
-  string digest = 2;
-  fixed64 group = 3;
+  string peerid = 1;
+  string icecandidiate = 2;
 }
 
-message AddUserResponse
-{
-
-}
-
-message RemoveUserRequest
-{
-  fixed64 usertoken = 1;
-}
-
-message RemoveUserResponse
+message AddIceCandidateWebRTCResponse
 {
 
 }
@@ -647,11 +636,23 @@ message AuthenticateResponse
   string jwttoken = 1;
 }
 
+message AddUserRequest
+{
+  string username = 1;
+  string digest = 2;
+  string group = 3;
+}
+
+message AddUserResponse
+{
+
+}
+
 message CallWebRTCRequest
 {
-  fixed64 recording = 1;
+  string recording = 1;
   fixed32 videotrackid = 2;
-  fixed32 audiotrackid = 3; // optional can be 0
+  optional fixed32 audiotrackid = 3;
   string sdp = 4;
 }
 
@@ -659,6 +660,16 @@ message CallWebRTCResponse
 {
   string peerid = 1;
   string sdp = 2;
+}
+
+message GetIceCandidatesWebRTCRequest
+{
+  string peerid = 1;
+}
+
+message GetIceCandidatesWebRTCResponse
+{
+  repeated string peerlist = 1;
 }
 
 message HangUpWebRTCRequest
@@ -680,6 +691,16 @@ message RefreshTokenResponse
   string jwttoken = 1;
 }
 
+message RemoveUserRequest
+{
+  string usertoken = 1;
+}
+
+message RemoveUserResponse
+{
+
+}
+
 message SubscribeRequest
 {
 
@@ -698,8 +719,10 @@ service AuthService
 
 service MonocleService
 {
+  rpc AddIceCandidateWebRTC(AddIceCandidateWebRTCRequest) returns (AddIceCandidateWebRTCResponse);
   rpc AddUser(AddUserRequest) returns (AddUserResponse);
   rpc CallWebRTC(CallWebRTCRequest) returns (CallWebRTCResponse);
+  rpc GetIceCandidatesWebRTC(GetIceCandidatesWebRTCRequest) returns (GetIceCandidatesWebRTCResponse);
   rpc HangUpWebRTC(HangUpWebRTCRequest) returns (HangUpWebRTCResponse);
   rpc RemoveUser(RemoveUserRequest) returns (RemoveUserResponse);
   rpc Subscribe(SubscribeRequest) returns (stream SubscribeResponse);
