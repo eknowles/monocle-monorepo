@@ -650,16 +650,16 @@ message AddUserResponse
 
 message CallWebRTCRequest
 {
-  string recording = 1;
-  fixed32 videotrackid = 2;
-  optional fixed32 audiotrackid = 3;
-  string sdp = 4;
+  string peerid = 1;
+  string recording = 2;
+  fixed32 videotrackid = 3;
+  optional fixed32 audiotrackid = 4;
+  string sdp = 5;
 }
 
 message CallWebRTCResponse
 {
-  string peerid = 1;
-  string sdp = 2;
+  string sdp = 1;
 }
 
 message GetIceCandidatesWebRTCRequest

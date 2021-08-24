@@ -1,7 +1,5 @@
 import { MonocleServiceClientImpl } from "../../../../../protobuf/generated/monocle";
 
-type Grpc = { client: MonocleServiceClientImpl; meta: any };
-
 /**
  * Interface with WebRTC-streamer API
  * @constructor
@@ -15,8 +13,8 @@ const WebRtcStreamer = function WebRtcStreamer(
   grpc: Grpc,
   videoElement: HTMLVideoElement | string,
   srvurl: string,
-  videotrackid: number,
-  recording: number
+  recording: number,
+  videotrackid: number
 ) {
   this.videotrackid = videotrackid;
   this.recording = recording;
@@ -34,6 +32,8 @@ const WebRtcStreamer = function WebRtcStreamer(
   this.earlyCandidates = [];
 };
 
+type Grpc = { client: MonocleServiceClientImpl; meta: any };
+
 WebRtcStreamer.prototype._handleHttpErrors = function (response) {
   if (!response.ok) {
     throw Error(response.statusText);
@@ -43,17 +43,8 @@ WebRtcStreamer.prototype._handleHttpErrors = function (response) {
 
 /**
  * Connect a WebRTC Stream to videoElement
- * @param {string} videourl - id of WebRTC video stream
- * @param {string} audiourl - id of WebRTC audio stream
- * @param {string} options -  options of WebRTC call
- * @param {string} stream  -  local stream to send
  */
-WebRtcStreamer.prototype.connect = function (
-  videourl: string,
-  audiourl: string,
-  options: string,
-  localstream: string
-) {
+WebRtcStreamer.prototype.connect = function () {
   this.disconnect();
 
   // getIceServers is not already received
@@ -64,12 +55,10 @@ WebRtcStreamer.prototype.connect = function (
     fetch(this.srvurl + "/api/getIceServers")
       .then(this._handleHttpErrors)
       .then((response) => response.json())
-      .then((response) =>
-        this.onReceiveGetIceServers.call(this, response, localstream)
-      )
+      .then((response) => this.onReceiveGetIceServers.call(this, response))
       .catch((error) => this.onError("getIceServers " + error));
   } else {
-    this.onReceiveGetIceServers(this.iceServers, localstream);
+    this.onReceiveGetIceServers(this.iceServers);
   }
 };
 
@@ -98,18 +87,15 @@ WebRtcStreamer.prototype.disconnect = function () {
 /*
  * GetIceServers callback
  */
-WebRtcStreamer.prototype.onReceiveGetIceServers = function (
-  iceServers,
-  stream
-) {
+WebRtcStreamer.prototype.onReceiveGetIceServers = function (iceServers) {
   this.iceServers = iceServers;
   this.pcConfig = iceServers || { iceServers: [] };
   try {
     this.createPeerConnection();
 
-    if (stream) {
-      this.pc.addStream(stream);
-    }
+    // if (stream) {
+    //   this.pc.addStream(stream);
+    // }
 
     // clear early candidates
     this.earlyCandidates.length = 0;
@@ -124,12 +110,15 @@ WebRtcStreamer.prototype.onReceiveGetIceServers = function (
           sessionDescription,
           function () {
             const options = {
+              peerid: bind.pc.peerid,
               recording: `${bind.recording}`,
               videotrackid: +bind.videotrackid,
               audiotrackid: 0,
               sdp: sessionDescription.sdp,
             };
+
             console.log(options);
+
             bind.grpc.client
               .CallWebRTC(options, bind.grpc.meta)
               .toPromise()
@@ -161,8 +150,7 @@ WebRtcStreamer.prototype.getIceCandidate = function () {
     )
     .toPromise()
     .then((response) => {
-      console.log({ response });
-      // this.onReceiveCandidate.call(this, response)
+      this.onReceiveCandidate.call(this, JSON.parse(response.peerlist));
     })
     .catch((error) => this.onError("getIceCandidate " + error));
 };
@@ -174,7 +162,7 @@ WebRtcStreamer.prototype.createPeerConnection = function () {
   console.log("createPeerConnection  config: " + JSON.stringify(this.pcConfig));
   this.pc = new RTCPeerConnection(this.pcConfig);
   const pc = this.pc;
-  pc.peerid = Math.random();
+  pc.peerid = `${Math.random()}`;
 
   const bind = this;
   pc.onicecandidate = function (evt: any) {
@@ -245,7 +233,7 @@ WebRtcStreamer.prototype.createPeerConnection = function () {
 /*
  * RTCPeerConnection IceCandidate callback
  */
-WebRtcStreamer.prototype.onIceCandidate = function (event) {
+WebRtcStreamer.prototype.onIceCandidate = function (event: RTCIceCandidate) {
   if (event.candidate) {
     if (this.pc.currentRemoteDescription) {
       this.addIceCandidate(this.pc.peerid, event.candidate);
@@ -258,14 +246,14 @@ WebRtcStreamer.prototype.onIceCandidate = function (event) {
 };
 
 WebRtcStreamer.prototype.addIceCandidate = function (
-  peerid,
+  peerid: string,
   icecandidiate: RTCIceCandidate
 ) {
   const { candidate, sdpMid, sdpMLineIndex } = icecandidiate;
 
   const addIceCandidatePayload = {
-    peerid: peerid.toString(),
-    icecandidiate: { candidate, sdpMid, sdpMLineIndex },
+    peerid: peerid,
+    icecandidiate: JSON.stringify({ candidate, sdpMid, sdpMLineIndex }),
   };
 
   console.log({ addIceCandidatePayload });

@@ -974,6 +974,7 @@ export interface AddUserRequest {
 export interface AddUserResponse {}
 
 export interface CallWebRTCRequest {
+  peerid: string;
   recording: string;
   videotrackid: number;
   audiotrackid?: number | undefined;
@@ -981,7 +982,6 @@ export interface CallWebRTCRequest {
 }
 
 export interface CallWebRTCResponse {
-  peerid: string;
   sdp: string;
 }
 
@@ -9329,6 +9329,7 @@ export const AddUserResponse = {
 };
 
 const baseCallWebRTCRequest: object = {
+  peerid: "",
   recording: "",
   videotrackid: 0,
   sdp: "",
@@ -9339,17 +9340,20 @@ export const CallWebRTCRequest = {
     message: CallWebRTCRequest,
     writer: _m0.Writer = _m0.Writer.create()
   ): _m0.Writer {
+    if (message.peerid !== "") {
+      writer.uint32(10).string(message.peerid);
+    }
     if (message.recording !== "") {
-      writer.uint32(10).string(message.recording);
+      writer.uint32(18).string(message.recording);
     }
     if (message.videotrackid !== 0) {
-      writer.uint32(21).fixed32(message.videotrackid);
+      writer.uint32(29).fixed32(message.videotrackid);
     }
     if (message.audiotrackid !== undefined) {
-      writer.uint32(29).fixed32(message.audiotrackid);
+      writer.uint32(37).fixed32(message.audiotrackid);
     }
     if (message.sdp !== "") {
-      writer.uint32(34).string(message.sdp);
+      writer.uint32(42).string(message.sdp);
     }
     return writer;
   },
@@ -9362,15 +9366,18 @@ export const CallWebRTCRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.recording = reader.string();
+          message.peerid = reader.string();
           break;
         case 2:
-          message.videotrackid = reader.fixed32();
+          message.recording = reader.string();
           break;
         case 3:
-          message.audiotrackid = reader.fixed32();
+          message.videotrackid = reader.fixed32();
           break;
         case 4:
+          message.audiotrackid = reader.fixed32();
+          break;
+        case 5:
           message.sdp = reader.string();
           break;
         default:
@@ -9383,6 +9390,11 @@ export const CallWebRTCRequest = {
 
   fromJSON(object: any): CallWebRTCRequest {
     const message = { ...baseCallWebRTCRequest } as CallWebRTCRequest;
+    if (object.peerid !== undefined && object.peerid !== null) {
+      message.peerid = String(object.peerid);
+    } else {
+      message.peerid = "";
+    }
     if (object.recording !== undefined && object.recording !== null) {
       message.recording = String(object.recording);
     } else {
@@ -9408,6 +9420,7 @@ export const CallWebRTCRequest = {
 
   toJSON(message: CallWebRTCRequest): unknown {
     const obj: any = {};
+    message.peerid !== undefined && (obj.peerid = message.peerid);
     message.recording !== undefined && (obj.recording = message.recording);
     message.videotrackid !== undefined &&
       (obj.videotrackid = message.videotrackid);
@@ -9419,6 +9432,11 @@ export const CallWebRTCRequest = {
 
   fromPartial(object: DeepPartial<CallWebRTCRequest>): CallWebRTCRequest {
     const message = { ...baseCallWebRTCRequest } as CallWebRTCRequest;
+    if (object.peerid !== undefined && object.peerid !== null) {
+      message.peerid = object.peerid;
+    } else {
+      message.peerid = "";
+    }
     if (object.recording !== undefined && object.recording !== null) {
       message.recording = object.recording;
     } else {
@@ -9443,18 +9461,15 @@ export const CallWebRTCRequest = {
   },
 };
 
-const baseCallWebRTCResponse: object = { peerid: "", sdp: "" };
+const baseCallWebRTCResponse: object = { sdp: "" };
 
 export const CallWebRTCResponse = {
   encode(
     message: CallWebRTCResponse,
     writer: _m0.Writer = _m0.Writer.create()
   ): _m0.Writer {
-    if (message.peerid !== "") {
-      writer.uint32(10).string(message.peerid);
-    }
     if (message.sdp !== "") {
-      writer.uint32(18).string(message.sdp);
+      writer.uint32(10).string(message.sdp);
     }
     return writer;
   },
@@ -9467,9 +9482,6 @@ export const CallWebRTCResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.peerid = reader.string();
-          break;
-        case 2:
           message.sdp = reader.string();
           break;
         default:
@@ -9482,11 +9494,6 @@ export const CallWebRTCResponse = {
 
   fromJSON(object: any): CallWebRTCResponse {
     const message = { ...baseCallWebRTCResponse } as CallWebRTCResponse;
-    if (object.peerid !== undefined && object.peerid !== null) {
-      message.peerid = String(object.peerid);
-    } else {
-      message.peerid = "";
-    }
     if (object.sdp !== undefined && object.sdp !== null) {
       message.sdp = String(object.sdp);
     } else {
@@ -9497,18 +9504,12 @@ export const CallWebRTCResponse = {
 
   toJSON(message: CallWebRTCResponse): unknown {
     const obj: any = {};
-    message.peerid !== undefined && (obj.peerid = message.peerid);
     message.sdp !== undefined && (obj.sdp = message.sdp);
     return obj;
   },
 
   fromPartial(object: DeepPartial<CallWebRTCResponse>): CallWebRTCResponse {
     const message = { ...baseCallWebRTCResponse } as CallWebRTCResponse;
-    if (object.peerid !== undefined && object.peerid !== null) {
-      message.peerid = object.peerid;
-    } else {
-      message.peerid = "";
-    }
     if (object.sdp !== undefined && object.sdp !== null) {
       message.sdp = object.sdp;
     } else {

@@ -2,7 +2,7 @@ import type { FC } from "react";
 import { Route, Switch } from "react-router-dom";
 import { AppTabs } from "../../components/app-tabs";
 import { SideNav } from "../../components/side-nav";
-import { RecordingRoute } from "./recording/new-recording";
+import { RecordingRoute } from "./recording";
 import { ServerDetailsRoute } from "./server-details";
 import { ViewRoute } from "./view";
 

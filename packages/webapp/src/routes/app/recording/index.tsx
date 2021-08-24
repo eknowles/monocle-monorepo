@@ -1,19 +1,18 @@
-import { FC, useLayoutEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { FC, useLayoutEffect, useRef } from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { GRPC_SERVER } from "../../../constants";
 import {
   getRecordings,
   getServerAuthToken,
 } from "../../../redux/modules/server";
-import { hangUp } from "../../../redux/modules/view";
 import { getClient } from "../../../services/monocle";
+
+import WebRtcStreamer from "./webrtc";
 
 export const RecordingRoute: FC = () => {
   const { recordingToken } = useParams<any>();
-  const [visible, setVisible] = useState(false);
   const videoEl = useRef<HTMLVideoElement>(null);
-  const dispatch = useDispatch();
   const serverAuthToken = useSelector(getServerAuthToken);
   const recordings = useSelector(getRecordings);
   const currentRecording = (recordings || []).find(
@@ -31,171 +30,43 @@ export const RecordingRoute: FC = () => {
     )!.recordingjobsourcetracks[0].recordingtrackid;
 
   useLayoutEffect(() => {
-    let pc: RTCPeerConnection;
-    let peerid: string;
-
-    const grpc = getClient({
-      host: GRPC_SERVER,
-      token: serverAuthToken as string,
-    });
-
-    const getIceCandidate = async () => {
-      const dataJson = await grpc.client
-        .GetIceCandidatesWebRTC({ peerid }, grpc.meta)
-        .toPromise();
-      console.log(dataJson);
-    };
-
-    const addIceCandidate = async () => {
-      const dataJson = await grpc.client
-        .GetIceCandidatesWebRTC({ peerid }, grpc.meta)
-        .toPromise();
-      console.log(dataJson);
-    };
-
-    const setupWebRTC = async () => {
-      // create peer connection
-      pc = new RTCPeerConnection({
-        iceServers: [
-          {
-            urls: ["stun:82.12.81.9:3478"],
-          },
-        ],
+    let webRtcServer: any;
+    if (videoEl.current) {
+      const grpc = getClient({
+        host: GRPC_SERVER,
+        token: serverAuthToken as string,
       });
 
-      // events
-      pc.onicegatheringstatechange = () => {
-        console.info(`onicegatheringstatechange`, pc.iceGatheringState);
-        if (pc.iceGatheringState === "complete") {
-          const receivers = pc.getReceivers();
+      console.log(videoEl.current);
 
-          receivers.forEach((recv) => {
-            if (recv.track && recv.track.kind === "video") {
-              console.log(recv);
-              console.log(
-                "codecs:" + JSON.stringify(recv.getParameters().codecs)
-              );
-            }
-          });
-        }
-      };
+      // @ts-ignore
+      webRtcServer = new WebRtcStreamer(
+        grpc,
+        videoEl.current,
+        "http://151.80.44.148:9854",
+        recordingToken,
+        activeTrackId
+      );
 
-      pc.oniceconnectionstatechange = (_event) => {
-        console.info(`oniceconnectionstatechange`, pc.iceConnectionState);
-        if (videoEl.current) {
-          if (pc.iceConnectionState === "connected") {
-            videoEl.current.style.opacity = "1.0";
-          } else if (pc.iceConnectionState === "disconnected") {
-            videoEl.current.style.opacity = "0.25";
-          } else if (
-            pc.iceConnectionState === "failed" ||
-            pc.iceConnectionState === "closed"
-          ) {
-            videoEl.current.style.opacity = "0.5";
-          } else if (pc.iceConnectionState === "new") {
-            getIceCandidate();
-          }
-        }
-      };
-
-      pc.onsignalingstatechange = (_event) => {
-        console.info(`onsignalingstatechange`, pc.signalingState);
-      };
-
-      pc.ontrack = (event) => {
-        console.info(`ontrack`, event.streams);
-        if (event.streams && videoEl.current) {
-          videoEl.current.srcObject = event.streams[0];
-          videoEl.current.controls = true;
-          videoEl.current.play().catch();
-
-          setVisible(true);
-        }
-      };
-
-      // setup
-      try {
-        const dataChannel = pc.createDataChannel("ClientDataChannel");
-        dataChannel.onopen = function () {
-          console.log("local datachannel open");
-          this.send("local channel opened");
-        };
-        dataChannel.onmessage = function (evt) {
-          console.log("local datachannel recv:" + JSON.stringify(evt.data));
-        };
-      } catch (e) {
-        console.log("Can not create datachannel error: " + e);
-      }
-
-      try {
-        const localDescription = await pc.createOffer({
-          offerToReceiveVideo: true,
-          offerToReceiveAudio: true,
-          iceRestart: true,
-        });
-
-        // set local
-        await pc.setLocalDescription(localDescription);
-
-        // call webrtc via grpc
-        const callWebRTCResponse = await grpc.client
-          .CallWebRTC(
-            {
-              recording: recordingToken,
-              videotrackid: activeTrackId,
-              audiotrackid: 0,
-              sdp: localDescription.sdp,
-            },
-            grpc.meta
-          )
-          .toPromise();
-
-        // set peer id for hangup
-        peerid = callWebRTCResponse.peerid;
-
-        const description = new RTCSessionDescription({
-          sdp: callWebRTCResponse.sdp,
-          type: "answer",
-        });
-
-        await pc.setRemoteDescription(description);
-      } catch (e) {
-        console.error(e);
-
-        if (videoEl.current) {
-          videoEl.current!.pause();
-        }
-      }
-    };
-
-    if (serverAuthToken && activeTrackId) {
-      setupWebRTC().catch((e) => {
-        console.error(e);
-        setVisible(false);
-      });
+      webRtcServer.connect();
     }
 
     return () => {
-      if (videoEl.current) {
-        videoEl.current.srcObject = null;
-        videoEl.current.pause();
-      }
-
-      dispatch(hangUp({ peerid }));
-
-      if (pc) {
-        pc.close();
+      if (webRtcServer) {
+        webRtcServer.disconnect();
       }
     };
-  }, [recordingToken, serverAuthToken, activeTrackId]);
+  }, []);
 
   return (
     <div className="flex w-full h-full dark:bg-code-900 dark:text-white">
       <video
         ref={videoEl}
-        className={`w-full flex-1 bg-code-900 ${
-          visible ? "opacity-100" : "opacity-0"
-        }`}
+        title={recordingToken}
+        muted
+        controls
+        playsInline
+        className={`w-full flex-1 bg-code-900`}
       />
     </div>
   );
