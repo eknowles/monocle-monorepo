@@ -2,27 +2,24 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  devtool: "eval-source-map",
   entry: {
-    index: path.resolve(__dirname, "src", "index.tsx"),
+    app: "./src/index.tsx",
   },
   output: {
-    path: path.resolve(__dirname, "build"),
-    publicPath: "/",
+    filename: "[name].bundle.js",
+    path: path.resolve(__dirname, "dist"),
+    clean: true,
   },
-  optimization: {
-    splitChunks: { chunks: "all" },
-  },
-  devServer: {
-    hot: true,
-    historyApiFallback: true,
-    contentBase: path.join(__dirname, "dist"),
-    compress: true,
-    port: 9000,
-  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: "Production",
+      template: path.resolve(__dirname, "public", "index.html"),
+    }),
+  ],
   resolve: {
     alias: {
       "@monocle/components": path.resolve(__dirname, "../components/src"),
+      react: path.resolve(__dirname, "./../../node_modules/react"),
     },
     extensions: [".tsx", ".ts", ".js"],
   },
@@ -74,9 +71,4 @@ module.exports = {
       },
     ],
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, "public", "index.html"),
-    }),
-  ],
 };

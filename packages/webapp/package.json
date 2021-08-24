@@ -4,7 +4,8 @@
   "license": "UNLICENCED",
   "scripts": {
     "dev": "webpack --mode development",
-    "start": "webpack serve --open 'Chrome' --mode development",
+    "start": "webpack serve --open --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js",
     "eject": "react-scripts eject"
   },
   "browserslist": {
@@ -39,5 +40,8 @@
     "webpack": "^5.21.2",
     "webpack-cli": "^4.5.0",
     "webpack-dev-server": "^3.11.2"
+  },
+  "devDependencies": {
+    "webpack-merge": "^5.8.0"
   }
 }

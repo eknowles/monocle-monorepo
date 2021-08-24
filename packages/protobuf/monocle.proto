@@ -669,7 +669,7 @@ message GetIceCandidatesWebRTCRequest
 
 message GetIceCandidatesWebRTCResponse
 {
-  repeated string peerlist = 1;
+  string peerlist = 1;
 }
 
 message HangUpWebRTCRequest
