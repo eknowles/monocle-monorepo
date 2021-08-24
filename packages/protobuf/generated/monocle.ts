@@ -1,14 +1,14 @@
 /* eslint-disable */
-import Long from 'long';
-import { grpc } from '@improbable-eng/grpc-web';
-import _m0 from 'protobufjs/minimal';
-import { Observable } from 'rxjs';
-import { BrowserHeaders } from 'browser-headers';
-import { take, share } from 'rxjs/operators';
-import { Any } from './google/protobuf/any';
-import { DoubleValue, UInt64Value } from './google/protobuf/wrappers';
+import Long from "long";
+import { grpc } from "@improbable-eng/grpc-web";
+import _m0 from "protobufjs/minimal";
+import { Observable } from "rxjs";
+import { BrowserHeaders } from "browser-headers";
+import { take, share } from "rxjs/operators";
+import { Any } from "./google/protobuf/any";
+import { DoubleValue, UInt64Value } from "./google/protobuf/wrappers";
 
-export const protobufPackage = 'proto';
+export const protobufPackage = "proto";
 
 export enum Codec {
   CodecMETADATA = 0,
@@ -25,31 +25,31 @@ export enum Codec {
 export function codecFromJSON(object: any): Codec {
   switch (object) {
     case 0:
-    case 'CodecMETADATA':
+    case "CodecMETADATA":
       return Codec.CodecMETADATA;
     case 1:
-    case 'CodecMJPEG':
+    case "CodecMJPEG":
       return Codec.CodecMJPEG;
     case 2:
-    case 'CodecMPEG4':
+    case "CodecMPEG4":
       return Codec.CodecMPEG4;
     case 3:
-    case 'CodecH264':
+    case "CodecH264":
       return Codec.CodecH264;
     case 4:
-    case 'CodecH265':
+    case "CodecH265":
       return Codec.CodecH265;
     case 5:
-    case 'CodecOBJECTDETECTOR':
+    case "CodecOBJECTDETECTOR":
       return Codec.CodecOBJECTDETECTOR;
     case 6:
-    case 'CodecPCMU':
+    case "CodecPCMU":
       return Codec.CodecPCMU;
     case 7:
-    case 'CodecG726_32':
+    case "CodecG726_32":
       return Codec.CodecG726_32;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
       return Codec.UNRECOGNIZED;
   }
@@ -58,23 +58,23 @@ export function codecFromJSON(object: any): Codec {
 export function codecToJSON(object: Codec): string {
   switch (object) {
     case Codec.CodecMETADATA:
-      return 'CodecMETADATA';
+      return "CodecMETADATA";
     case Codec.CodecMJPEG:
-      return 'CodecMJPEG';
+      return "CodecMJPEG";
     case Codec.CodecMPEG4:
-      return 'CodecMPEG4';
+      return "CodecMPEG4";
     case Codec.CodecH264:
-      return 'CodecH264';
+      return "CodecH264";
     case Codec.CodecH265:
-      return 'CodecH265';
+      return "CodecH265";
     case Codec.CodecOBJECTDETECTOR:
-      return 'CodecOBJECTDETECTOR';
+      return "CodecOBJECTDETECTOR";
     case Codec.CodecPCMU:
-      return 'CodecPCMU';
+      return "CodecPCMU";
     case Codec.CodecG726_32:
-      return 'CodecG726_32';
+      return "CodecG726_32";
     default:
-      return 'UNKNOWN';
+      return "UNKNOWN";
   }
 }
 
@@ -87,13 +87,13 @@ export enum FileMonitorState {
 export function fileMonitorStateFromJSON(object: any): FileMonitorState {
   switch (object) {
     case 0:
-    case 'FileMonitorStateUnavailable':
+    case "FileMonitorStateUnavailable":
       return FileMonitorState.FileMonitorStateUnavailable;
     case 1:
-    case 'FileMonitorStateAvailable':
+    case "FileMonitorStateAvailable":
       return FileMonitorState.FileMonitorStateAvailable;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
       return FileMonitorState.UNRECOGNIZED;
   }
@@ -102,11 +102,11 @@ export function fileMonitorStateFromJSON(object: any): FileMonitorState {
 export function fileMonitorStateToJSON(object: FileMonitorState): string {
   switch (object) {
     case FileMonitorState.FileMonitorStateUnavailable:
-      return 'FileMonitorStateUnavailable';
+      return "FileMonitorStateUnavailable";
     case FileMonitorState.FileMonitorStateAvailable:
-      return 'FileMonitorStateAvailable';
+      return "FileMonitorStateAvailable";
     default:
-      return 'UNKNOWN';
+      return "UNKNOWN";
   }
 }
 
@@ -121,19 +121,19 @@ export enum FileState {
 export function fileStateFromJSON(object: any): FileState {
   switch (object) {
     case 0:
-    case 'FileStateUnmounted':
+    case "FileStateUnmounted":
       return FileState.FileStateUnmounted;
     case 1:
-    case 'FileStateMounted':
+    case "FileStateMounted":
       return FileState.FileStateMounted;
     case 2:
-    case 'FileStateMounting':
+    case "FileStateMounting":
       return FileState.FileStateMounting;
     case 3:
-    case 'FileStateUnmounting':
+    case "FileStateUnmounting":
       return FileState.FileStateUnmounting;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
       return FileState.UNRECOGNIZED;
   }
@@ -142,15 +142,15 @@ export function fileStateFromJSON(object: any): FileState {
 export function fileStateToJSON(object: FileState): string {
   switch (object) {
     case FileState.FileStateUnmounted:
-      return 'FileStateUnmounted';
+      return "FileStateUnmounted";
     case FileState.FileStateMounted:
-      return 'FileStateMounted';
+      return "FileStateMounted";
     case FileState.FileStateMounting:
-      return 'FileStateMounting';
+      return "FileStateMounting";
     case FileState.FileStateUnmounting:
-      return 'FileStateUnmounting';
+      return "FileStateUnmounting";
     default:
-      return 'UNKNOWN';
+      return "UNKNOWN";
   }
 }
 
@@ -164,16 +164,16 @@ export enum GPSDeviceState {
 export function gPSDeviceStateFromJSON(object: any): GPSDeviceState {
   switch (object) {
     case 0:
-    case 'GPSDeviceStateIdle':
+    case "GPSDeviceStateIdle":
       return GPSDeviceState.GPSDeviceStateIdle;
     case 1:
-    case 'GPSDeviceStateActive':
+    case "GPSDeviceStateActive":
       return GPSDeviceState.GPSDeviceStateActive;
     case 2:
-    case 'GPSDeviceStateError':
+    case "GPSDeviceStateError":
       return GPSDeviceState.GPSDeviceStateError;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
       return GPSDeviceState.UNRECOGNIZED;
   }
@@ -182,13 +182,13 @@ export function gPSDeviceStateFromJSON(object: any): GPSDeviceState {
 export function gPSDeviceStateToJSON(object: GPSDeviceState): string {
   switch (object) {
     case GPSDeviceState.GPSDeviceStateIdle:
-      return 'GPSDeviceStateIdle';
+      return "GPSDeviceStateIdle";
     case GPSDeviceState.GPSDeviceStateActive:
-      return 'GPSDeviceStateActive';
+      return "GPSDeviceStateActive";
     case GPSDeviceState.GPSDeviceStateError:
-      return 'GPSDeviceStateError';
+      return "GPSDeviceStateError";
     default:
-      return 'UNKNOWN';
+      return "UNKNOWN";
   }
 }
 
@@ -205,22 +205,22 @@ export enum ONVIFUserLevel {
 export function oNVIFUserLevelFromJSON(object: any): ONVIFUserLevel {
   switch (object) {
     case 0:
-    case 'ONVIFUserLevelNone':
+    case "ONVIFUserLevelNone":
       return ONVIFUserLevel.ONVIFUserLevelNone;
     case 1:
-    case 'ONVIFUserLevelAnonymous':
+    case "ONVIFUserLevelAnonymous":
       return ONVIFUserLevel.ONVIFUserLevelAnonymous;
     case 2:
-    case 'ONVIFUserLevelUser':
+    case "ONVIFUserLevelUser":
       return ONVIFUserLevel.ONVIFUserLevelUser;
     case 3:
-    case 'ONVIFUserLevelOperator':
+    case "ONVIFUserLevelOperator":
       return ONVIFUserLevel.ONVIFUserLevelOperator;
     case 4:
-    case 'ONVIFUserLevelAdministrator':
+    case "ONVIFUserLevelAdministrator":
       return ONVIFUserLevel.ONVIFUserLevelAdministrator;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
       return ONVIFUserLevel.UNRECOGNIZED;
   }
@@ -229,17 +229,17 @@ export function oNVIFUserLevelFromJSON(object: any): ONVIFUserLevel {
 export function oNVIFUserLevelToJSON(object: ONVIFUserLevel): string {
   switch (object) {
     case ONVIFUserLevel.ONVIFUserLevelNone:
-      return 'ONVIFUserLevelNone';
+      return "ONVIFUserLevelNone";
     case ONVIFUserLevel.ONVIFUserLevelAnonymous:
-      return 'ONVIFUserLevelAnonymous';
+      return "ONVIFUserLevelAnonymous";
     case ONVIFUserLevel.ONVIFUserLevelUser:
-      return 'ONVIFUserLevelUser';
+      return "ONVIFUserLevelUser";
     case ONVIFUserLevel.ONVIFUserLevelOperator:
-      return 'ONVIFUserLevelOperator';
+      return "ONVIFUserLevelOperator";
     case ONVIFUserLevel.ONVIFUserLevelAdministrator:
-      return 'ONVIFUserLevelAdministrator';
+      return "ONVIFUserLevelAdministrator";
     default:
-      return 'UNKNOWN';
+      return "UNKNOWN";
   }
 }
 
@@ -254,19 +254,19 @@ export enum PluginState {
 export function pluginStateFromJSON(object: any): PluginState {
   switch (object) {
     case 0:
-    case 'PluginStateIdle':
+    case "PluginStateIdle":
       return PluginState.PluginStateIdle;
     case 1:
-    case 'PluginStateActive':
+    case "PluginStateActive":
       return PluginState.PluginStateActive;
     case 2:
-    case 'PluginStateDestroying':
+    case "PluginStateDestroying":
       return PluginState.PluginStateDestroying;
     case 3:
-    case 'PluginStateError':
+    case "PluginStateError":
       return PluginState.PluginStateError;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
       return PluginState.UNRECOGNIZED;
   }
@@ -275,15 +275,15 @@ export function pluginStateFromJSON(object: any): PluginState {
 export function pluginStateToJSON(object: PluginState): string {
   switch (object) {
     case PluginState.PluginStateIdle:
-      return 'PluginStateIdle';
+      return "PluginStateIdle";
     case PluginState.PluginStateActive:
-      return 'PluginStateActive';
+      return "PluginStateActive";
     case PluginState.PluginStateDestroying:
-      return 'PluginStateDestroying';
+      return "PluginStateDestroying";
     case PluginState.PluginStateError:
-      return 'PluginStateError';
+      return "PluginStateError";
     default:
-      return 'UNKNOWN';
+      return "UNKNOWN";
   }
 }
 
@@ -297,16 +297,16 @@ export enum ReceiverMode {
 export function receiverModeFromJSON(object: any): ReceiverMode {
   switch (object) {
     case 0:
-    case 'ReceiverModeAutoConnect':
+    case "ReceiverModeAutoConnect":
       return ReceiverMode.ReceiverModeAutoConnect;
     case 1:
-    case 'ReceiverModeAlwaysConnect':
+    case "ReceiverModeAlwaysConnect":
       return ReceiverMode.ReceiverModeAlwaysConnect;
     case 2:
-    case 'ReceiverModeNeverConnect':
+    case "ReceiverModeNeverConnect":
       return ReceiverMode.ReceiverModeNeverConnect;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
       return ReceiverMode.UNRECOGNIZED;
   }
@@ -315,13 +315,13 @@ export function receiverModeFromJSON(object: any): ReceiverMode {
 export function receiverModeToJSON(object: ReceiverMode): string {
   switch (object) {
     case ReceiverMode.ReceiverModeAutoConnect:
-      return 'ReceiverModeAutoConnect';
+      return "ReceiverModeAutoConnect";
     case ReceiverMode.ReceiverModeAlwaysConnect:
-      return 'ReceiverModeAlwaysConnect';
+      return "ReceiverModeAlwaysConnect";
     case ReceiverMode.ReceiverModeNeverConnect:
-      return 'ReceiverModeNeverConnect';
+      return "ReceiverModeNeverConnect";
     default:
-      return 'UNKNOWN';
+      return "UNKNOWN";
   }
 }
 
@@ -335,16 +335,16 @@ export enum ReceiverState {
 export function receiverStateFromJSON(object: any): ReceiverState {
   switch (object) {
     case 0:
-    case 'ReceiverStateNotConnected':
+    case "ReceiverStateNotConnected":
       return ReceiverState.ReceiverStateNotConnected;
     case 1:
-    case 'ReceiverStateConnecting':
+    case "ReceiverStateConnecting":
       return ReceiverState.ReceiverStateConnecting;
     case 2:
-    case 'ReceiverStateConnected':
+    case "ReceiverStateConnected":
       return ReceiverState.ReceiverStateConnected;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
       return ReceiverState.UNRECOGNIZED;
   }
@@ -353,13 +353,13 @@ export function receiverStateFromJSON(object: any): ReceiverState {
 export function receiverStateToJSON(object: ReceiverState): string {
   switch (object) {
     case ReceiverState.ReceiverStateNotConnected:
-      return 'ReceiverStateNotConnected';
+      return "ReceiverStateNotConnected";
     case ReceiverState.ReceiverStateConnecting:
-      return 'ReceiverStateConnecting';
+      return "ReceiverStateConnecting";
     case ReceiverState.ReceiverStateConnected:
-      return 'ReceiverStateConnected';
+      return "ReceiverStateConnected";
     default:
-      return 'UNKNOWN';
+      return "UNKNOWN";
   }
 }
 
@@ -374,19 +374,19 @@ export enum RecordingJobState {
 export function recordingJobStateFromJSON(object: any): RecordingJobState {
   switch (object) {
     case 0:
-    case 'RecordingJobStateIdle':
+    case "RecordingJobStateIdle":
       return RecordingJobState.RecordingJobStateIdle;
     case 1:
-    case 'RecordingJobStateActive':
+    case "RecordingJobStateActive":
       return RecordingJobState.RecordingJobStateActive;
     case 2:
-    case 'RecordingJobStateError':
+    case "RecordingJobStateError":
       return RecordingJobState.RecordingJobStateError;
     case 3:
-    case 'RecordingJobStateActiveNotRecording':
+    case "RecordingJobStateActiveNotRecording":
       return RecordingJobState.RecordingJobStateActiveNotRecording;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
       return RecordingJobState.UNRECOGNIZED;
   }
@@ -395,15 +395,15 @@ export function recordingJobStateFromJSON(object: any): RecordingJobState {
 export function recordingJobStateToJSON(object: RecordingJobState): string {
   switch (object) {
     case RecordingJobState.RecordingJobStateIdle:
-      return 'RecordingJobStateIdle';
+      return "RecordingJobStateIdle";
     case RecordingJobState.RecordingJobStateActive:
-      return 'RecordingJobStateActive';
+      return "RecordingJobStateActive";
     case RecordingJobState.RecordingJobStateError:
-      return 'RecordingJobStateError';
+      return "RecordingJobStateError";
     case RecordingJobState.RecordingJobStateActiveNotRecording:
-      return 'RecordingJobStateActiveNotRecording';
+      return "RecordingJobStateActiveNotRecording";
     default:
-      return 'UNKNOWN';
+      return "UNKNOWN";
   }
 }
 
@@ -420,25 +420,25 @@ export enum Severity {
 export function severityFromJSON(object: any): Severity {
   switch (object) {
     case 0:
-    case 'SeverityTrace':
+    case "SeverityTrace":
       return Severity.SeverityTrace;
     case 1:
-    case 'SeverityDebug':
+    case "SeverityDebug":
       return Severity.SeverityDebug;
     case 2:
-    case 'SeverityInfo':
+    case "SeverityInfo":
       return Severity.SeverityInfo;
     case 3:
-    case 'SeverityWarn':
+    case "SeverityWarn":
       return Severity.SeverityWarn;
     case 4:
-    case 'SeverityErr':
+    case "SeverityErr":
       return Severity.SeverityErr;
     case 5:
-    case 'SeverityCritical':
+    case "SeverityCritical":
       return Severity.SeverityCritical;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
       return Severity.UNRECOGNIZED;
   }
@@ -447,19 +447,19 @@ export function severityFromJSON(object: any): Severity {
 export function severityToJSON(object: Severity): string {
   switch (object) {
     case Severity.SeverityTrace:
-      return 'SeverityTrace';
+      return "SeverityTrace";
     case Severity.SeverityDebug:
-      return 'SeverityDebug';
+      return "SeverityDebug";
     case Severity.SeverityInfo:
-      return 'SeverityInfo';
+      return "SeverityInfo";
     case Severity.SeverityWarn:
-      return 'SeverityWarn';
+      return "SeverityWarn";
     case Severity.SeverityErr:
-      return 'SeverityErr';
+      return "SeverityErr";
     case Severity.SeverityCritical:
-      return 'SeverityCritical';
+      return "SeverityCritical";
     default:
-      return 'UNKNOWN';
+      return "UNKNOWN";
   }
 }
 
@@ -473,16 +473,16 @@ export enum TrackType {
 export function trackTypeFromJSON(object: any): TrackType {
   switch (object) {
     case 0:
-    case 'TrackTypeVideo':
+    case "TrackTypeVideo":
       return TrackType.TrackTypeVideo;
     case 1:
-    case 'TrackTypeAudio':
+    case "TrackTypeAudio":
       return TrackType.TrackTypeAudio;
     case 2:
-    case 'TrackTypeMetadata':
+    case "TrackTypeMetadata":
       return TrackType.TrackTypeMetadata;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
       return TrackType.UNRECOGNIZED;
   }
@@ -491,13 +491,13 @@ export function trackTypeFromJSON(object: any): TrackType {
 export function trackTypeToJSON(object: TrackType): string {
   switch (object) {
     case TrackType.TrackTypeVideo:
-      return 'TrackTypeVideo';
+      return "TrackTypeVideo";
     case TrackType.TrackTypeAudio:
-      return 'TrackTypeAudio';
+      return "TrackTypeAudio";
     case TrackType.TrackTypeMetadata:
-      return 'TrackTypeMetadata';
+      return "TrackTypeMetadata";
     default:
-      return 'UNKNOWN';
+      return "UNKNOWN";
   }
 }
 
@@ -974,6 +974,7 @@ export interface AddUserRequest {
 export interface AddUserResponse {}
 
 export interface CallWebRTCRequest {
+  peerid: string;
   recording: string;
   videotrackid: number;
   audiotrackid?: number | undefined;
@@ -981,7 +982,6 @@ export interface CallWebRTCRequest {
 }
 
 export interface CallWebRTCResponse {
-  peerid: string;
   sdp: string;
 }
 
@@ -990,7 +990,7 @@ export interface GetIceCandidatesWebRTCRequest {
 }
 
 export interface GetIceCandidatesWebRTCResponse {
-  peerlist: string[];
+  peerlist: string;
 }
 
 export interface HangUpWebRTCRequest {
@@ -1017,23 +1017,30 @@ export interface SubscribeResponse {
   message: Any | undefined;
 }
 
-const baseFile: object = { token: '', path: '', mountpoint: '', numchunks: '0', chunksize: '0', automount: false };
+const baseFile: object = {
+  token: "",
+  path: "",
+  mountpoint: "",
+  numchunks: "0",
+  chunksize: "0",
+  automount: false,
+};
 
 export const File = {
   encode(message: File, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.token !== '') {
+    if (message.token !== "") {
       writer.uint32(10).string(message.token);
     }
-    if (message.path !== '') {
+    if (message.path !== "") {
       writer.uint32(18).string(message.path);
     }
-    if (message.mountpoint !== '') {
+    if (message.mountpoint !== "") {
       writer.uint32(26).string(message.mountpoint);
     }
-    if (message.numchunks !== '0') {
+    if (message.numchunks !== "0") {
       writer.uint32(33).fixed64(message.numchunks);
     }
-    if (message.chunksize !== '0') {
+    if (message.chunksize !== "0") {
       writer.uint32(41).fixed64(message.chunksize);
     }
     if (message.automount === true) {
@@ -1080,27 +1087,27 @@ export const File = {
     if (object.token !== undefined && object.token !== null) {
       message.token = String(object.token);
     } else {
-      message.token = '';
+      message.token = "";
     }
     if (object.path !== undefined && object.path !== null) {
       message.path = String(object.path);
     } else {
-      message.path = '';
+      message.path = "";
     }
     if (object.mountpoint !== undefined && object.mountpoint !== null) {
       message.mountpoint = String(object.mountpoint);
     } else {
-      message.mountpoint = '';
+      message.mountpoint = "";
     }
     if (object.numchunks !== undefined && object.numchunks !== null) {
       message.numchunks = String(object.numchunks);
     } else {
-      message.numchunks = '0';
+      message.numchunks = "0";
     }
     if (object.chunksize !== undefined && object.chunksize !== null) {
       message.chunksize = String(object.chunksize);
     } else {
-      message.chunksize = '0';
+      message.chunksize = "0";
     }
     if (object.automount !== undefined && object.automount !== null) {
       message.automount = Boolean(object.automount);
@@ -1126,27 +1133,27 @@ export const File = {
     if (object.token !== undefined && object.token !== null) {
       message.token = object.token;
     } else {
-      message.token = '';
+      message.token = "";
     }
     if (object.path !== undefined && object.path !== null) {
       message.path = object.path;
     } else {
-      message.path = '';
+      message.path = "";
     }
     if (object.mountpoint !== undefined && object.mountpoint !== null) {
       message.mountpoint = object.mountpoint;
     } else {
-      message.mountpoint = '';
+      message.mountpoint = "";
     }
     if (object.numchunks !== undefined && object.numchunks !== null) {
       message.numchunks = object.numchunks;
     } else {
-      message.numchunks = '0';
+      message.numchunks = "0";
     }
     if (object.chunksize !== undefined && object.chunksize !== null) {
       message.chunksize = object.chunksize;
     } else {
-      message.chunksize = '0';
+      message.chunksize = "0";
     }
     if (object.automount !== undefined && object.automount !== null) {
       message.automount = object.automount;
@@ -1158,8 +1165,8 @@ export const File = {
 };
 
 const baseGroup: object = {
-  token: '',
-  name: '',
+  token: "",
+  name: "",
   manageusers: false,
   managerecordings: false,
   managemaps: false,
@@ -1167,15 +1174,15 @@ const baseGroup: object = {
   manageplugins: false,
   reboot: false,
   allrecordings: false,
-  recordings: '',
+  recordings: "",
 };
 
 export const Group = {
   encode(message: Group, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.token !== '') {
+    if (message.token !== "") {
       writer.uint32(10).string(message.token);
     }
-    if (message.name !== '') {
+    if (message.name !== "") {
       writer.uint32(18).string(message.name);
     }
     if (message.manageusers === true) {
@@ -1257,19 +1264,22 @@ export const Group = {
     if (object.token !== undefined && object.token !== null) {
       message.token = String(object.token);
     } else {
-      message.token = '';
+      message.token = "";
     }
     if (object.name !== undefined && object.name !== null) {
       message.name = String(object.name);
     } else {
-      message.name = '';
+      message.name = "";
     }
     if (object.manageusers !== undefined && object.manageusers !== null) {
       message.manageusers = Boolean(object.manageusers);
     } else {
       message.manageusers = false;
     }
-    if (object.managerecordings !== undefined && object.managerecordings !== null) {
+    if (
+      object.managerecordings !== undefined &&
+      object.managerecordings !== null
+    ) {
       message.managerecordings = Boolean(object.managerecordings);
     } else {
       message.managerecordings = false;
@@ -1311,13 +1321,18 @@ export const Group = {
     const obj: any = {};
     message.token !== undefined && (obj.token = message.token);
     message.name !== undefined && (obj.name = message.name);
-    message.manageusers !== undefined && (obj.manageusers = message.manageusers);
-    message.managerecordings !== undefined && (obj.managerecordings = message.managerecordings);
+    message.manageusers !== undefined &&
+      (obj.manageusers = message.manageusers);
+    message.managerecordings !== undefined &&
+      (obj.managerecordings = message.managerecordings);
     message.managemaps !== undefined && (obj.managemaps = message.managemaps);
-    message.managedevice !== undefined && (obj.managedevice = message.managedevice);
-    message.manageplugins !== undefined && (obj.manageplugins = message.manageplugins);
+    message.managedevice !== undefined &&
+      (obj.managedevice = message.managedevice);
+    message.manageplugins !== undefined &&
+      (obj.manageplugins = message.manageplugins);
     message.reboot !== undefined && (obj.reboot = message.reboot);
-    message.allrecordings !== undefined && (obj.allrecordings = message.allrecordings);
+    message.allrecordings !== undefined &&
+      (obj.allrecordings = message.allrecordings);
     if (message.recordings) {
       obj.recordings = message.recordings.map((e) => e);
     } else {
@@ -1332,19 +1347,22 @@ export const Group = {
     if (object.token !== undefined && object.token !== null) {
       message.token = object.token;
     } else {
-      message.token = '';
+      message.token = "";
     }
     if (object.name !== undefined && object.name !== null) {
       message.name = object.name;
     } else {
-      message.name = '';
+      message.name = "";
     }
     if (object.manageusers !== undefined && object.manageusers !== null) {
       message.manageusers = object.manageusers;
     } else {
       message.manageusers = false;
     }
-    if (object.managerecordings !== undefined && object.managerecordings !== null) {
+    if (
+      object.managerecordings !== undefined &&
+      object.managerecordings !== null
+    ) {
       message.managerecordings = object.managerecordings;
     } else {
       message.managerecordings = false;
@@ -1383,14 +1401,14 @@ export const Group = {
   },
 };
 
-const baseIndex: object = { starttime: '0', endtime: '0' };
+const baseIndex: object = { starttime: "0", endtime: "0" };
 
 export const Index = {
   encode(message: Index, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.starttime !== '0') {
+    if (message.starttime !== "0") {
       writer.uint32(9).fixed64(message.starttime);
     }
-    if (message.endtime !== '0') {
+    if (message.endtime !== "0") {
       writer.uint32(17).fixed64(message.endtime);
     }
     return writer;
@@ -1422,12 +1440,12 @@ export const Index = {
     if (object.starttime !== undefined && object.starttime !== null) {
       message.starttime = String(object.starttime);
     } else {
-      message.starttime = '0';
+      message.starttime = "0";
     }
     if (object.endtime !== undefined && object.endtime !== null) {
       message.endtime = String(object.endtime);
     } else {
-      message.endtime = '0';
+      message.endtime = "0";
     }
     return message;
   },
@@ -1444,28 +1462,31 @@ export const Index = {
     if (object.starttime !== undefined && object.starttime !== null) {
       message.starttime = object.starttime;
     } else {
-      message.starttime = '0';
+      message.starttime = "0";
     }
     if (object.endtime !== undefined && object.endtime !== null) {
       message.endtime = object.endtime;
     } else {
-      message.endtime = '0';
+      message.endtime = "0";
     }
     return message;
   },
 };
 
-const baseLogMessage: object = { time: '0', severity: 0, message: '' };
+const baseLogMessage: object = { time: "0", severity: 0, message: "" };
 
 export const LogMessage = {
-  encode(message: LogMessage, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.time !== '0') {
+  encode(
+    message: LogMessage,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.time !== "0") {
       writer.uint32(9).fixed64(message.time);
     }
     if (message.severity !== 0) {
       writer.uint32(16).int32(message.severity);
     }
-    if (message.message !== '') {
+    if (message.message !== "") {
       writer.uint32(26).string(message.message);
     }
     return writer;
@@ -1500,7 +1521,7 @@ export const LogMessage = {
     if (object.time !== undefined && object.time !== null) {
       message.time = String(object.time);
     } else {
-      message.time = '0';
+      message.time = "0";
     }
     if (object.severity !== undefined && object.severity !== null) {
       message.severity = severityFromJSON(object.severity);
@@ -1510,7 +1531,7 @@ export const LogMessage = {
     if (object.message !== undefined && object.message !== null) {
       message.message = String(object.message);
     } else {
-      message.message = '';
+      message.message = "";
     }
     return message;
   },
@@ -1518,7 +1539,8 @@ export const LogMessage = {
   toJSON(message: LogMessage): unknown {
     const obj: any = {};
     message.time !== undefined && (obj.time = message.time);
-    message.severity !== undefined && (obj.severity = severityToJSON(message.severity));
+    message.severity !== undefined &&
+      (obj.severity = severityToJSON(message.severity));
     message.message !== undefined && (obj.message = message.message);
     return obj;
   },
@@ -1528,7 +1550,7 @@ export const LogMessage = {
     if (object.time !== undefined && object.time !== null) {
       message.time = object.time;
     } else {
-      message.time = '0';
+      message.time = "0";
     }
     if (object.severity !== undefined && object.severity !== null) {
       message.severity = object.severity;
@@ -1538,26 +1560,26 @@ export const LogMessage = {
     if (object.message !== undefined && object.message !== null) {
       message.message = object.message;
     } else {
-      message.message = '';
+      message.message = "";
     }
     return message;
   },
 };
 
-const baseMap: object = { token: '', name: '', location: '', md5: '' };
+const baseMap: object = { token: "", name: "", location: "", md5: "" };
 
 export const Map = {
   encode(message: Map, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.token !== '') {
+    if (message.token !== "") {
       writer.uint32(10).string(message.token);
     }
-    if (message.name !== '') {
+    if (message.name !== "") {
       writer.uint32(18).string(message.name);
     }
-    if (message.location !== '') {
+    if (message.location !== "") {
       writer.uint32(26).string(message.location);
     }
-    if (message.md5 !== '') {
+    if (message.md5 !== "") {
       writer.uint32(34).string(message.md5);
     }
     return writer;
@@ -1595,22 +1617,22 @@ export const Map = {
     if (object.token !== undefined && object.token !== null) {
       message.token = String(object.token);
     } else {
-      message.token = '';
+      message.token = "";
     }
     if (object.name !== undefined && object.name !== null) {
       message.name = String(object.name);
     } else {
-      message.name = '';
+      message.name = "";
     }
     if (object.location !== undefined && object.location !== null) {
       message.location = String(object.location);
     } else {
-      message.location = '';
+      message.location = "";
     }
     if (object.md5 !== undefined && object.md5 !== null) {
       message.md5 = String(object.md5);
     } else {
-      message.md5 = '';
+      message.md5 = "";
     }
     return message;
   },
@@ -1629,50 +1651,58 @@ export const Map = {
     if (object.token !== undefined && object.token !== null) {
       message.token = object.token;
     } else {
-      message.token = '';
+      message.token = "";
     }
     if (object.name !== undefined && object.name !== null) {
       message.name = object.name;
     } else {
-      message.name = '';
+      message.name = "";
     }
     if (object.location !== undefined && object.location !== null) {
       message.location = object.location;
     } else {
-      message.location = '';
+      message.location = "";
     }
     if (object.md5 !== undefined && object.md5 !== null) {
       message.md5 = object.md5;
     } else {
-      message.md5 = '';
+      message.md5 = "";
     }
     return message;
   },
 };
 
-const baseMount: object = { id: '0', parentid: '0', majorstdev: '0', minorstdev: '0', path: '', type: '', source: '' };
+const baseMount: object = {
+  id: "0",
+  parentid: "0",
+  majorstdev: "0",
+  minorstdev: "0",
+  path: "",
+  type: "",
+  source: "",
+};
 
 export const Mount = {
   encode(message: Mount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.id !== '0') {
+    if (message.id !== "0") {
       writer.uint32(8).sint64(message.id);
     }
-    if (message.parentid !== '0') {
+    if (message.parentid !== "0") {
       writer.uint32(16).sint64(message.parentid);
     }
-    if (message.majorstdev !== '0') {
+    if (message.majorstdev !== "0") {
       writer.uint32(24).sint64(message.majorstdev);
     }
-    if (message.minorstdev !== '0') {
+    if (message.minorstdev !== "0") {
       writer.uint32(32).sint64(message.minorstdev);
     }
-    if (message.path !== '') {
+    if (message.path !== "") {
       writer.uint32(42).string(message.path);
     }
-    if (message.type !== '') {
+    if (message.type !== "") {
       writer.uint32(50).string(message.type);
     }
-    if (message.source !== '') {
+    if (message.source !== "") {
       writer.uint32(58).string(message.source);
     }
     return writer;
@@ -1719,37 +1749,37 @@ export const Mount = {
     if (object.id !== undefined && object.id !== null) {
       message.id = String(object.id);
     } else {
-      message.id = '0';
+      message.id = "0";
     }
     if (object.parentid !== undefined && object.parentid !== null) {
       message.parentid = String(object.parentid);
     } else {
-      message.parentid = '0';
+      message.parentid = "0";
     }
     if (object.majorstdev !== undefined && object.majorstdev !== null) {
       message.majorstdev = String(object.majorstdev);
     } else {
-      message.majorstdev = '0';
+      message.majorstdev = "0";
     }
     if (object.minorstdev !== undefined && object.minorstdev !== null) {
       message.minorstdev = String(object.minorstdev);
     } else {
-      message.minorstdev = '0';
+      message.minorstdev = "0";
     }
     if (object.path !== undefined && object.path !== null) {
       message.path = String(object.path);
     } else {
-      message.path = '';
+      message.path = "";
     }
     if (object.type !== undefined && object.type !== null) {
       message.type = String(object.type);
     } else {
-      message.type = '';
+      message.type = "";
     }
     if (object.source !== undefined && object.source !== null) {
       message.source = String(object.source);
     } else {
-      message.source = '';
+      message.source = "";
     }
     return message;
   },
@@ -1771,50 +1801,53 @@ export const Mount = {
     if (object.id !== undefined && object.id !== null) {
       message.id = object.id;
     } else {
-      message.id = '0';
+      message.id = "0";
     }
     if (object.parentid !== undefined && object.parentid !== null) {
       message.parentid = object.parentid;
     } else {
-      message.parentid = '0';
+      message.parentid = "0";
     }
     if (object.majorstdev !== undefined && object.majorstdev !== null) {
       message.majorstdev = object.majorstdev;
     } else {
-      message.majorstdev = '0';
+      message.majorstdev = "0";
     }
     if (object.minorstdev !== undefined && object.minorstdev !== null) {
       message.minorstdev = object.minorstdev;
     } else {
-      message.minorstdev = '0';
+      message.minorstdev = "0";
     }
     if (object.path !== undefined && object.path !== null) {
       message.path = object.path;
     } else {
-      message.path = '';
+      message.path = "";
     }
     if (object.type !== undefined && object.type !== null) {
       message.type = object.type;
     } else {
-      message.type = '';
+      message.type = "";
     }
     if (object.source !== undefined && object.source !== null) {
       message.source = object.source;
     } else {
-      message.source = '';
+      message.source = "";
     }
     return message;
   },
 };
 
-const baseONVIFUser: object = { token: '', username: '', onvifuserlevel: 0 };
+const baseONVIFUser: object = { token: "", username: "", onvifuserlevel: 0 };
 
 export const ONVIFUser = {
-  encode(message: ONVIFUser, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.token !== '') {
+  encode(
+    message: ONVIFUser,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.token !== "") {
       writer.uint32(10).string(message.token);
     }
-    if (message.username !== '') {
+    if (message.username !== "") {
       writer.uint32(18).string(message.username);
     }
     if (message.onvifuserlevel !== 0) {
@@ -1852,12 +1885,12 @@ export const ONVIFUser = {
     if (object.token !== undefined && object.token !== null) {
       message.token = String(object.token);
     } else {
-      message.token = '';
+      message.token = "";
     }
     if (object.username !== undefined && object.username !== null) {
       message.username = String(object.username);
     } else {
-      message.username = '';
+      message.username = "";
     }
     if (object.onvifuserlevel !== undefined && object.onvifuserlevel !== null) {
       message.onvifuserlevel = oNVIFUserLevelFromJSON(object.onvifuserlevel);
@@ -1871,7 +1904,8 @@ export const ONVIFUser = {
     const obj: any = {};
     message.token !== undefined && (obj.token = message.token);
     message.username !== undefined && (obj.username = message.username);
-    message.onvifuserlevel !== undefined && (obj.onvifuserlevel = oNVIFUserLevelToJSON(message.onvifuserlevel));
+    message.onvifuserlevel !== undefined &&
+      (obj.onvifuserlevel = oNVIFUserLevelToJSON(message.onvifuserlevel));
     return obj;
   },
 
@@ -1880,12 +1914,12 @@ export const ONVIFUser = {
     if (object.token !== undefined && object.token !== null) {
       message.token = object.token;
     } else {
-      message.token = '';
+      message.token = "";
     }
     if (object.username !== undefined && object.username !== null) {
       message.username = object.username;
     } else {
-      message.username = '';
+      message.username = "";
     }
     if (object.onvifuserlevel !== undefined && object.onvifuserlevel !== null) {
       message.onvifuserlevel = object.onvifuserlevel;
@@ -1897,36 +1931,39 @@ export const ONVIFUser = {
 };
 
 const basePlugin: object = {
-  token: '',
-  name: '',
+  token: "",
+  name: "",
   enabled: false,
-  parameters: '',
-  priority: '0',
+  parameters: "",
+  priority: "0",
   state: 0,
-  statemessage: '',
+  statemessage: "",
 };
 
 export const Plugin = {
-  encode(message: Plugin, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.token !== '') {
+  encode(
+    message: Plugin,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.token !== "") {
       writer.uint32(10).string(message.token);
     }
-    if (message.name !== '') {
+    if (message.name !== "") {
       writer.uint32(18).string(message.name);
     }
     if (message.enabled === true) {
       writer.uint32(24).bool(message.enabled);
     }
-    if (message.parameters !== '') {
+    if (message.parameters !== "") {
       writer.uint32(34).string(message.parameters);
     }
-    if (message.priority !== '0') {
+    if (message.priority !== "0") {
       writer.uint32(41).fixed64(message.priority);
     }
     if (message.state !== 0) {
       writer.uint32(48).int32(message.state);
     }
-    if (message.statemessage !== '') {
+    if (message.statemessage !== "") {
       writer.uint32(58).string(message.statemessage);
     }
     return writer;
@@ -1973,12 +2010,12 @@ export const Plugin = {
     if (object.token !== undefined && object.token !== null) {
       message.token = String(object.token);
     } else {
-      message.token = '';
+      message.token = "";
     }
     if (object.name !== undefined && object.name !== null) {
       message.name = String(object.name);
     } else {
-      message.name = '';
+      message.name = "";
     }
     if (object.enabled !== undefined && object.enabled !== null) {
       message.enabled = Boolean(object.enabled);
@@ -1988,12 +2025,12 @@ export const Plugin = {
     if (object.parameters !== undefined && object.parameters !== null) {
       message.parameters = String(object.parameters);
     } else {
-      message.parameters = '';
+      message.parameters = "";
     }
     if (object.priority !== undefined && object.priority !== null) {
       message.priority = String(object.priority);
     } else {
-      message.priority = '0';
+      message.priority = "0";
     }
     if (object.state !== undefined && object.state !== null) {
       message.state = pluginStateFromJSON(object.state);
@@ -2003,7 +2040,7 @@ export const Plugin = {
     if (object.statemessage !== undefined && object.statemessage !== null) {
       message.statemessage = String(object.statemessage);
     } else {
-      message.statemessage = '';
+      message.statemessage = "";
     }
     return message;
   },
@@ -2015,8 +2052,10 @@ export const Plugin = {
     message.enabled !== undefined && (obj.enabled = message.enabled);
     message.parameters !== undefined && (obj.parameters = message.parameters);
     message.priority !== undefined && (obj.priority = message.priority);
-    message.state !== undefined && (obj.state = pluginStateToJSON(message.state));
-    message.statemessage !== undefined && (obj.statemessage = message.statemessage);
+    message.state !== undefined &&
+      (obj.state = pluginStateToJSON(message.state));
+    message.statemessage !== undefined &&
+      (obj.statemessage = message.statemessage);
     return obj;
   },
 
@@ -2025,12 +2064,12 @@ export const Plugin = {
     if (object.token !== undefined && object.token !== null) {
       message.token = object.token;
     } else {
-      message.token = '';
+      message.token = "";
     }
     if (object.name !== undefined && object.name !== null) {
       message.name = object.name;
     } else {
-      message.name = '';
+      message.name = "";
     }
     if (object.enabled !== undefined && object.enabled !== null) {
       message.enabled = object.enabled;
@@ -2040,12 +2079,12 @@ export const Plugin = {
     if (object.parameters !== undefined && object.parameters !== null) {
       message.parameters = object.parameters;
     } else {
-      message.parameters = '';
+      message.parameters = "";
     }
     if (object.priority !== undefined && object.priority !== null) {
       message.priority = object.priority;
     } else {
-      message.priority = '0';
+      message.priority = "0";
     }
     if (object.state !== undefined && object.state !== null) {
       message.state = object.state;
@@ -2055,40 +2094,43 @@ export const Plugin = {
     if (object.statemessage !== undefined && object.statemessage !== null) {
       message.statemessage = object.statemessage;
     } else {
-      message.statemessage = '';
+      message.statemessage = "";
     }
     return message;
   },
 };
 
 const baseReceiver: object = {
-  token: '',
+  token: "",
   mode: 0,
-  uri: '',
+  uri: "",
   autocreated: false,
-  username: '',
-  password: '',
-  parameters: '',
+  username: "",
+  password: "",
+  parameters: "",
 };
 
 export const Receiver = {
-  encode(message: Receiver, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.token !== '') {
+  encode(
+    message: Receiver,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.token !== "") {
       writer.uint32(10).string(message.token);
     }
     if (message.mode !== 0) {
       writer.uint32(16).int32(message.mode);
     }
-    if (message.uri !== '') {
+    if (message.uri !== "") {
       writer.uint32(26).string(message.uri);
     }
     if (message.autocreated === true) {
       writer.uint32(32).bool(message.autocreated);
     }
-    if (message.username !== '') {
+    if (message.username !== "") {
       writer.uint32(42).string(message.username);
     }
-    if (message.password !== '') {
+    if (message.password !== "") {
       writer.uint32(50).string(message.password);
     }
     for (const v of message.parameters) {
@@ -2140,7 +2182,7 @@ export const Receiver = {
     if (object.token !== undefined && object.token !== null) {
       message.token = String(object.token);
     } else {
-      message.token = '';
+      message.token = "";
     }
     if (object.mode !== undefined && object.mode !== null) {
       message.mode = receiverModeFromJSON(object.mode);
@@ -2150,7 +2192,7 @@ export const Receiver = {
     if (object.uri !== undefined && object.uri !== null) {
       message.uri = String(object.uri);
     } else {
-      message.uri = '';
+      message.uri = "";
     }
     if (object.autocreated !== undefined && object.autocreated !== null) {
       message.autocreated = Boolean(object.autocreated);
@@ -2160,12 +2202,12 @@ export const Receiver = {
     if (object.username !== undefined && object.username !== null) {
       message.username = String(object.username);
     } else {
-      message.username = '';
+      message.username = "";
     }
     if (object.password !== undefined && object.password !== null) {
       message.password = String(object.password);
     } else {
-      message.password = '';
+      message.password = "";
     }
     if (object.parameters !== undefined && object.parameters !== null) {
       for (const e of object.parameters) {
@@ -2180,7 +2222,8 @@ export const Receiver = {
     message.token !== undefined && (obj.token = message.token);
     message.mode !== undefined && (obj.mode = receiverModeToJSON(message.mode));
     message.uri !== undefined && (obj.uri = message.uri);
-    message.autocreated !== undefined && (obj.autocreated = message.autocreated);
+    message.autocreated !== undefined &&
+      (obj.autocreated = message.autocreated);
     message.username !== undefined && (obj.username = message.username);
     message.password !== undefined && (obj.password = message.password);
     if (message.parameters) {
@@ -2197,7 +2240,7 @@ export const Receiver = {
     if (object.token !== undefined && object.token !== null) {
       message.token = object.token;
     } else {
-      message.token = '';
+      message.token = "";
     }
     if (object.mode !== undefined && object.mode !== null) {
       message.mode = object.mode;
@@ -2207,7 +2250,7 @@ export const Receiver = {
     if (object.uri !== undefined && object.uri !== null) {
       message.uri = object.uri;
     } else {
-      message.uri = '';
+      message.uri = "";
     }
     if (object.autocreated !== undefined && object.autocreated !== null) {
       message.autocreated = object.autocreated;
@@ -2217,12 +2260,12 @@ export const Receiver = {
     if (object.username !== undefined && object.username !== null) {
       message.username = object.username;
     } else {
-      message.username = '';
+      message.username = "";
     }
     if (object.password !== undefined && object.password !== null) {
       message.password = object.password;
     } else {
-      message.password = '';
+      message.password = "";
     }
     if (object.parameters !== undefined && object.parameters !== null) {
       for (const e of object.parameters) {
@@ -2234,43 +2277,46 @@ export const Receiver = {
 };
 
 const baseRecording: object = {
-  token: '',
-  sourceid: '',
-  name: '',
-  location: '',
-  description: '',
-  address: '',
-  content: '',
-  retentiontime: '0',
+  token: "",
+  sourceid: "",
+  name: "",
+  location: "",
+  description: "",
+  address: "",
+  content: "",
+  retentiontime: "0",
   adaptivestreaming: false,
   relativelocation: false,
   orientation: 0,
 };
 
 export const Recording = {
-  encode(message: Recording, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.token !== '') {
+  encode(
+    message: Recording,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.token !== "") {
       writer.uint32(10).string(message.token);
     }
-    if (message.sourceid !== '') {
+    if (message.sourceid !== "") {
       writer.uint32(18).string(message.sourceid);
     }
-    if (message.name !== '') {
+    if (message.name !== "") {
       writer.uint32(26).string(message.name);
     }
-    if (message.location !== '') {
+    if (message.location !== "") {
       writer.uint32(34).string(message.location);
     }
-    if (message.description !== '') {
+    if (message.description !== "") {
       writer.uint32(42).string(message.description);
     }
-    if (message.address !== '') {
+    if (message.address !== "") {
       writer.uint32(50).string(message.address);
     }
-    if (message.content !== '') {
+    if (message.content !== "") {
       writer.uint32(58).string(message.content);
     }
-    if (message.retentiontime !== '0') {
+    if (message.retentiontime !== "0") {
       writer.uint32(65).fixed64(message.retentiontime);
     }
     if (message.adaptivestreaming === true) {
@@ -2289,13 +2335,22 @@ export const Recording = {
       RecordingTrack.encode(v!, writer.uint32(106).fork()).ldelim();
     }
     if (message.latitude !== undefined) {
-      DoubleValue.encode({ value: message.latitude! }, writer.uint32(114).fork()).ldelim();
+      DoubleValue.encode(
+        { value: message.latitude! },
+        writer.uint32(114).fork()
+      ).ldelim();
     }
     if (message.longitude !== undefined) {
-      DoubleValue.encode({ value: message.longitude! }, writer.uint32(122).fork()).ldelim();
+      DoubleValue.encode(
+        { value: message.longitude! },
+        writer.uint32(122).fork()
+      ).ldelim();
     }
     if (message.activejob !== undefined) {
-      UInt64Value.encode({ value: message.activejob! }, writer.uint32(130).fork()).ldelim();
+      UInt64Value.encode(
+        { value: message.activejob! },
+        writer.uint32(130).fork()
+      ).ldelim();
     }
     return writer;
   },
@@ -2372,49 +2427,55 @@ export const Recording = {
     if (object.token !== undefined && object.token !== null) {
       message.token = String(object.token);
     } else {
-      message.token = '';
+      message.token = "";
     }
     if (object.sourceid !== undefined && object.sourceid !== null) {
       message.sourceid = String(object.sourceid);
     } else {
-      message.sourceid = '';
+      message.sourceid = "";
     }
     if (object.name !== undefined && object.name !== null) {
       message.name = String(object.name);
     } else {
-      message.name = '';
+      message.name = "";
     }
     if (object.location !== undefined && object.location !== null) {
       message.location = String(object.location);
     } else {
-      message.location = '';
+      message.location = "";
     }
     if (object.description !== undefined && object.description !== null) {
       message.description = String(object.description);
     } else {
-      message.description = '';
+      message.description = "";
     }
     if (object.address !== undefined && object.address !== null) {
       message.address = String(object.address);
     } else {
-      message.address = '';
+      message.address = "";
     }
     if (object.content !== undefined && object.content !== null) {
       message.content = String(object.content);
     } else {
-      message.content = '';
+      message.content = "";
     }
     if (object.retentiontime !== undefined && object.retentiontime !== null) {
       message.retentiontime = String(object.retentiontime);
     } else {
-      message.retentiontime = '0';
+      message.retentiontime = "0";
     }
-    if (object.adaptivestreaming !== undefined && object.adaptivestreaming !== null) {
+    if (
+      object.adaptivestreaming !== undefined &&
+      object.adaptivestreaming !== null
+    ) {
       message.adaptivestreaming = Boolean(object.adaptivestreaming);
     } else {
       message.adaptivestreaming = false;
     }
-    if (object.relativelocation !== undefined && object.relativelocation !== null) {
+    if (
+      object.relativelocation !== undefined &&
+      object.relativelocation !== null
+    ) {
       message.relativelocation = Boolean(object.relativelocation);
     } else {
       message.relativelocation = false;
@@ -2458,20 +2519,29 @@ export const Recording = {
     message.sourceid !== undefined && (obj.sourceid = message.sourceid);
     message.name !== undefined && (obj.name = message.name);
     message.location !== undefined && (obj.location = message.location);
-    message.description !== undefined && (obj.description = message.description);
+    message.description !== undefined &&
+      (obj.description = message.description);
     message.address !== undefined && (obj.address = message.address);
     message.content !== undefined && (obj.content = message.content);
-    message.retentiontime !== undefined && (obj.retentiontime = message.retentiontime);
-    message.adaptivestreaming !== undefined && (obj.adaptivestreaming = message.adaptivestreaming);
-    message.relativelocation !== undefined && (obj.relativelocation = message.relativelocation);
-    message.orientation !== undefined && (obj.orientation = message.orientation);
+    message.retentiontime !== undefined &&
+      (obj.retentiontime = message.retentiontime);
+    message.adaptivestreaming !== undefined &&
+      (obj.adaptivestreaming = message.adaptivestreaming);
+    message.relativelocation !== undefined &&
+      (obj.relativelocation = message.relativelocation);
+    message.orientation !== undefined &&
+      (obj.orientation = message.orientation);
     if (message.jobs) {
-      obj.jobs = message.jobs.map((e) => (e ? RecordingJob.toJSON(e) : undefined));
+      obj.jobs = message.jobs.map((e) =>
+        e ? RecordingJob.toJSON(e) : undefined
+      );
     } else {
       obj.jobs = [];
     }
     if (message.tracks) {
-      obj.tracks = message.tracks.map((e) => (e ? RecordingTrack.toJSON(e) : undefined));
+      obj.tracks = message.tracks.map((e) =>
+        e ? RecordingTrack.toJSON(e) : undefined
+      );
     } else {
       obj.tracks = [];
     }
@@ -2488,49 +2558,55 @@ export const Recording = {
     if (object.token !== undefined && object.token !== null) {
       message.token = object.token;
     } else {
-      message.token = '';
+      message.token = "";
     }
     if (object.sourceid !== undefined && object.sourceid !== null) {
       message.sourceid = object.sourceid;
     } else {
-      message.sourceid = '';
+      message.sourceid = "";
     }
     if (object.name !== undefined && object.name !== null) {
       message.name = object.name;
     } else {
-      message.name = '';
+      message.name = "";
     }
     if (object.location !== undefined && object.location !== null) {
       message.location = object.location;
     } else {
-      message.location = '';
+      message.location = "";
     }
     if (object.description !== undefined && object.description !== null) {
       message.description = object.description;
     } else {
-      message.description = '';
+      message.description = "";
     }
     if (object.address !== undefined && object.address !== null) {
       message.address = object.address;
     } else {
-      message.address = '';
+      message.address = "";
     }
     if (object.content !== undefined && object.content !== null) {
       message.content = object.content;
     } else {
-      message.content = '';
+      message.content = "";
     }
     if (object.retentiontime !== undefined && object.retentiontime !== null) {
       message.retentiontime = object.retentiontime;
     } else {
-      message.retentiontime = '0';
+      message.retentiontime = "0";
     }
-    if (object.adaptivestreaming !== undefined && object.adaptivestreaming !== null) {
+    if (
+      object.adaptivestreaming !== undefined &&
+      object.adaptivestreaming !== null
+    ) {
       message.adaptivestreaming = object.adaptivestreaming;
     } else {
       message.adaptivestreaming = false;
     }
-    if (object.relativelocation !== undefined && object.relativelocation !== null) {
+    if (
+      object.relativelocation !== undefined &&
+      object.relativelocation !== null
+    ) {
       message.relativelocation = object.relativelocation;
     } else {
       message.relativelocation = false;
@@ -2569,23 +2645,32 @@ export const Recording = {
   },
 };
 
-const baseRecordingJob: object = { recordingtoken: '', recordingjobtoken: '', name: '', enabled: false, priority: '0' };
+const baseRecordingJob: object = {
+  recordingtoken: "",
+  recordingjobtoken: "",
+  name: "",
+  enabled: false,
+  priority: "0",
+};
 
 export const RecordingJob = {
-  encode(message: RecordingJob, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.recordingtoken !== '') {
+  encode(
+    message: RecordingJob,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.recordingtoken !== "") {
       writer.uint32(10).string(message.recordingtoken);
     }
-    if (message.recordingjobtoken !== '') {
+    if (message.recordingjobtoken !== "") {
       writer.uint32(18).string(message.recordingjobtoken);
     }
-    if (message.name !== '') {
+    if (message.name !== "") {
       writer.uint32(26).string(message.name);
     }
     if (message.enabled === true) {
       writer.uint32(32).bool(message.enabled);
     }
-    if (message.priority !== '0') {
+    if (message.priority !== "0") {
       writer.uint32(41).fixed64(message.priority);
     }
     for (const v of message.recordingjobsources) {
@@ -2618,7 +2703,9 @@ export const RecordingJob = {
           message.priority = longToString(reader.fixed64() as Long);
           break;
         case 6:
-          message.recordingjobsources.push(RecordingJobSource.decode(reader, reader.uint32()));
+          message.recordingjobsources.push(
+            RecordingJobSource.decode(reader, reader.uint32())
+          );
           break;
         default:
           reader.skipType(tag & 7);
@@ -2634,17 +2721,20 @@ export const RecordingJob = {
     if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
       message.recordingtoken = String(object.recordingtoken);
     } else {
-      message.recordingtoken = '';
+      message.recordingtoken = "";
     }
-    if (object.recordingjobtoken !== undefined && object.recordingjobtoken !== null) {
+    if (
+      object.recordingjobtoken !== undefined &&
+      object.recordingjobtoken !== null
+    ) {
       message.recordingjobtoken = String(object.recordingjobtoken);
     } else {
-      message.recordingjobtoken = '';
+      message.recordingjobtoken = "";
     }
     if (object.name !== undefined && object.name !== null) {
       message.name = String(object.name);
     } else {
-      message.name = '';
+      message.name = "";
     }
     if (object.enabled !== undefined && object.enabled !== null) {
       message.enabled = Boolean(object.enabled);
@@ -2654,9 +2744,12 @@ export const RecordingJob = {
     if (object.priority !== undefined && object.priority !== null) {
       message.priority = String(object.priority);
     } else {
-      message.priority = '0';
+      message.priority = "0";
     }
-    if (object.recordingjobsources !== undefined && object.recordingjobsources !== null) {
+    if (
+      object.recordingjobsources !== undefined &&
+      object.recordingjobsources !== null
+    ) {
       for (const e of object.recordingjobsources) {
         message.recordingjobsources.push(RecordingJobSource.fromJSON(e));
       }
@@ -2666,13 +2759,17 @@ export const RecordingJob = {
 
   toJSON(message: RecordingJob): unknown {
     const obj: any = {};
-    message.recordingtoken !== undefined && (obj.recordingtoken = message.recordingtoken);
-    message.recordingjobtoken !== undefined && (obj.recordingjobtoken = message.recordingjobtoken);
+    message.recordingtoken !== undefined &&
+      (obj.recordingtoken = message.recordingtoken);
+    message.recordingjobtoken !== undefined &&
+      (obj.recordingjobtoken = message.recordingjobtoken);
     message.name !== undefined && (obj.name = message.name);
     message.enabled !== undefined && (obj.enabled = message.enabled);
     message.priority !== undefined && (obj.priority = message.priority);
     if (message.recordingjobsources) {
-      obj.recordingjobsources = message.recordingjobsources.map((e) => (e ? RecordingJobSource.toJSON(e) : undefined));
+      obj.recordingjobsources = message.recordingjobsources.map((e) =>
+        e ? RecordingJobSource.toJSON(e) : undefined
+      );
     } else {
       obj.recordingjobsources = [];
     }
@@ -2685,17 +2782,20 @@ export const RecordingJob = {
     if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
       message.recordingtoken = object.recordingtoken;
     } else {
-      message.recordingtoken = '';
+      message.recordingtoken = "";
     }
-    if (object.recordingjobtoken !== undefined && object.recordingjobtoken !== null) {
+    if (
+      object.recordingjobtoken !== undefined &&
+      object.recordingjobtoken !== null
+    ) {
       message.recordingjobtoken = object.recordingjobtoken;
     } else {
-      message.recordingjobtoken = '';
+      message.recordingjobtoken = "";
     }
     if (object.name !== undefined && object.name !== null) {
       message.name = object.name;
     } else {
-      message.name = '';
+      message.name = "";
     }
     if (object.enabled !== undefined && object.enabled !== null) {
       message.enabled = object.enabled;
@@ -2705,9 +2805,12 @@ export const RecordingJob = {
     if (object.priority !== undefined && object.priority !== null) {
       message.priority = object.priority;
     } else {
-      message.priority = '0';
+      message.priority = "0";
     }
-    if (object.recordingjobsources !== undefined && object.recordingjobsources !== null) {
+    if (
+      object.recordingjobsources !== undefined &&
+      object.recordingjobsources !== null
+    ) {
       for (const e of object.recordingjobsources) {
         message.recordingjobsources.push(RecordingJobSource.fromPartial(e));
       }
@@ -2717,24 +2820,27 @@ export const RecordingJob = {
 };
 
 const baseRecordingJobSource: object = {
-  recordingtoken: '',
-  recordingjobtoken: '',
-  recordingjobsourcetoken: '',
-  receivertoken: '',
+  recordingtoken: "",
+  recordingjobtoken: "",
+  recordingjobsourcetoken: "",
+  receivertoken: "",
 };
 
 export const RecordingJobSource = {
-  encode(message: RecordingJobSource, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.recordingtoken !== '') {
+  encode(
+    message: RecordingJobSource,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.recordingtoken !== "") {
       writer.uint32(10).string(message.recordingtoken);
     }
-    if (message.recordingjobtoken !== '') {
+    if (message.recordingjobtoken !== "") {
       writer.uint32(18).string(message.recordingjobtoken);
     }
-    if (message.recordingjobsourcetoken !== '') {
+    if (message.recordingjobsourcetoken !== "") {
       writer.uint32(26).string(message.recordingjobsourcetoken);
     }
-    if (message.receivertoken !== '') {
+    if (message.receivertoken !== "") {
       writer.uint32(34).string(message.receivertoken);
     }
     for (const v of message.recordingjobsourcetracks) {
@@ -2764,7 +2870,9 @@ export const RecordingJobSource = {
           message.receivertoken = reader.string();
           break;
         case 5:
-          message.recordingjobsourcetracks.push(RecordingJobSourceTrack.decode(reader, reader.uint32()));
+          message.recordingjobsourcetracks.push(
+            RecordingJobSourceTrack.decode(reader, reader.uint32())
+          );
           break;
         default:
           reader.skipType(tag & 7);
@@ -2780,26 +2888,37 @@ export const RecordingJobSource = {
     if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
       message.recordingtoken = String(object.recordingtoken);
     } else {
-      message.recordingtoken = '';
+      message.recordingtoken = "";
     }
-    if (object.recordingjobtoken !== undefined && object.recordingjobtoken !== null) {
+    if (
+      object.recordingjobtoken !== undefined &&
+      object.recordingjobtoken !== null
+    ) {
       message.recordingjobtoken = String(object.recordingjobtoken);
     } else {
-      message.recordingjobtoken = '';
+      message.recordingjobtoken = "";
     }
-    if (object.recordingjobsourcetoken !== undefined && object.recordingjobsourcetoken !== null) {
+    if (
+      object.recordingjobsourcetoken !== undefined &&
+      object.recordingjobsourcetoken !== null
+    ) {
       message.recordingjobsourcetoken = String(object.recordingjobsourcetoken);
     } else {
-      message.recordingjobsourcetoken = '';
+      message.recordingjobsourcetoken = "";
     }
     if (object.receivertoken !== undefined && object.receivertoken !== null) {
       message.receivertoken = String(object.receivertoken);
     } else {
-      message.receivertoken = '';
+      message.receivertoken = "";
     }
-    if (object.recordingjobsourcetracks !== undefined && object.recordingjobsourcetracks !== null) {
+    if (
+      object.recordingjobsourcetracks !== undefined &&
+      object.recordingjobsourcetracks !== null
+    ) {
       for (const e of object.recordingjobsourcetracks) {
-        message.recordingjobsourcetracks.push(RecordingJobSourceTrack.fromJSON(e));
+        message.recordingjobsourcetracks.push(
+          RecordingJobSourceTrack.fromJSON(e)
+        );
       }
     }
     return message;
@@ -2807,13 +2926,17 @@ export const RecordingJobSource = {
 
   toJSON(message: RecordingJobSource): unknown {
     const obj: any = {};
-    message.recordingtoken !== undefined && (obj.recordingtoken = message.recordingtoken);
-    message.recordingjobtoken !== undefined && (obj.recordingjobtoken = message.recordingjobtoken);
-    message.recordingjobsourcetoken !== undefined && (obj.recordingjobsourcetoken = message.recordingjobsourcetoken);
-    message.receivertoken !== undefined && (obj.receivertoken = message.receivertoken);
+    message.recordingtoken !== undefined &&
+      (obj.recordingtoken = message.recordingtoken);
+    message.recordingjobtoken !== undefined &&
+      (obj.recordingjobtoken = message.recordingjobtoken);
+    message.recordingjobsourcetoken !== undefined &&
+      (obj.recordingjobsourcetoken = message.recordingjobsourcetoken);
+    message.receivertoken !== undefined &&
+      (obj.receivertoken = message.receivertoken);
     if (message.recordingjobsourcetracks) {
       obj.recordingjobsourcetracks = message.recordingjobsourcetracks.map((e) =>
-        e ? RecordingJobSourceTrack.toJSON(e) : undefined,
+        e ? RecordingJobSourceTrack.toJSON(e) : undefined
       );
     } else {
       obj.recordingjobsourcetracks = [];
@@ -2827,26 +2950,37 @@ export const RecordingJobSource = {
     if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
       message.recordingtoken = object.recordingtoken;
     } else {
-      message.recordingtoken = '';
+      message.recordingtoken = "";
     }
-    if (object.recordingjobtoken !== undefined && object.recordingjobtoken !== null) {
+    if (
+      object.recordingjobtoken !== undefined &&
+      object.recordingjobtoken !== null
+    ) {
       message.recordingjobtoken = object.recordingjobtoken;
     } else {
-      message.recordingjobtoken = '';
+      message.recordingjobtoken = "";
     }
-    if (object.recordingjobsourcetoken !== undefined && object.recordingjobsourcetoken !== null) {
+    if (
+      object.recordingjobsourcetoken !== undefined &&
+      object.recordingjobsourcetoken !== null
+    ) {
       message.recordingjobsourcetoken = object.recordingjobsourcetoken;
     } else {
-      message.recordingjobsourcetoken = '';
+      message.recordingjobsourcetoken = "";
     }
     if (object.receivertoken !== undefined && object.receivertoken !== null) {
       message.receivertoken = object.receivertoken;
     } else {
-      message.receivertoken = '';
+      message.receivertoken = "";
     }
-    if (object.recordingjobsourcetracks !== undefined && object.recordingjobsourcetracks !== null) {
+    if (
+      object.recordingjobsourcetracks !== undefined &&
+      object.recordingjobsourcetracks !== null
+    ) {
       for (const e of object.recordingjobsourcetracks) {
-        message.recordingjobsourcetracks.push(RecordingJobSourceTrack.fromPartial(e));
+        message.recordingjobsourcetracks.push(
+          RecordingJobSourceTrack.fromPartial(e)
+        );
       }
     }
     return message;
@@ -2854,29 +2988,32 @@ export const RecordingJobSource = {
 };
 
 const baseRecordingJobSourceTrack: object = {
-  recordingtoken: '',
-  recordingjobtoken: '',
-  recordingjobsourcetoken: '',
-  recordingjobsourcetracktoken: '',
+  recordingtoken: "",
+  recordingjobtoken: "",
+  recordingjobsourcetoken: "",
+  recordingjobsourcetracktoken: "",
   recordingtrackid: 0,
-  parameters: '',
+  parameters: "",
   state: 0,
-  error: '',
-  activeparameters: '',
+  error: "",
+  activeparameters: "",
 };
 
 export const RecordingJobSourceTrack = {
-  encode(message: RecordingJobSourceTrack, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.recordingtoken !== '') {
+  encode(
+    message: RecordingJobSourceTrack,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.recordingtoken !== "") {
       writer.uint32(10).string(message.recordingtoken);
     }
-    if (message.recordingjobtoken !== '') {
+    if (message.recordingjobtoken !== "") {
       writer.uint32(18).string(message.recordingjobtoken);
     }
-    if (message.recordingjobsourcetoken !== '') {
+    if (message.recordingjobsourcetoken !== "") {
       writer.uint32(26).string(message.recordingjobsourcetoken);
     }
-    if (message.recordingjobsourcetracktoken !== '') {
+    if (message.recordingjobsourcetracktoken !== "") {
       writer.uint32(34).string(message.recordingjobsourcetracktoken);
     }
     if (message.recordingtrackid !== 0) {
@@ -2888,7 +3025,7 @@ export const RecordingJobSourceTrack = {
     if (message.state !== 0) {
       writer.uint32(56).int32(message.state);
     }
-    if (message.error !== '') {
+    if (message.error !== "") {
       writer.uint32(66).string(message.error);
     }
     for (const v of message.activeparameters) {
@@ -2897,10 +3034,15 @@ export const RecordingJobSourceTrack = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): RecordingJobSourceTrack {
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): RecordingJobSourceTrack {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseRecordingJobSourceTrack } as RecordingJobSourceTrack;
+    const message = {
+      ...baseRecordingJobSourceTrack,
+    } as RecordingJobSourceTrack;
     message.parameters = [];
     message.activeparameters = [];
     while (reader.pos < end) {
@@ -2942,30 +3084,46 @@ export const RecordingJobSourceTrack = {
   },
 
   fromJSON(object: any): RecordingJobSourceTrack {
-    const message = { ...baseRecordingJobSourceTrack } as RecordingJobSourceTrack;
+    const message = {
+      ...baseRecordingJobSourceTrack,
+    } as RecordingJobSourceTrack;
     message.parameters = [];
     message.activeparameters = [];
     if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
       message.recordingtoken = String(object.recordingtoken);
     } else {
-      message.recordingtoken = '';
+      message.recordingtoken = "";
     }
-    if (object.recordingjobtoken !== undefined && object.recordingjobtoken !== null) {
+    if (
+      object.recordingjobtoken !== undefined &&
+      object.recordingjobtoken !== null
+    ) {
       message.recordingjobtoken = String(object.recordingjobtoken);
     } else {
-      message.recordingjobtoken = '';
+      message.recordingjobtoken = "";
     }
-    if (object.recordingjobsourcetoken !== undefined && object.recordingjobsourcetoken !== null) {
+    if (
+      object.recordingjobsourcetoken !== undefined &&
+      object.recordingjobsourcetoken !== null
+    ) {
       message.recordingjobsourcetoken = String(object.recordingjobsourcetoken);
     } else {
-      message.recordingjobsourcetoken = '';
+      message.recordingjobsourcetoken = "";
     }
-    if (object.recordingjobsourcetracktoken !== undefined && object.recordingjobsourcetracktoken !== null) {
-      message.recordingjobsourcetracktoken = String(object.recordingjobsourcetracktoken);
+    if (
+      object.recordingjobsourcetracktoken !== undefined &&
+      object.recordingjobsourcetracktoken !== null
+    ) {
+      message.recordingjobsourcetracktoken = String(
+        object.recordingjobsourcetracktoken
+      );
     } else {
-      message.recordingjobsourcetracktoken = '';
+      message.recordingjobsourcetracktoken = "";
     }
-    if (object.recordingtrackid !== undefined && object.recordingtrackid !== null) {
+    if (
+      object.recordingtrackid !== undefined &&
+      object.recordingtrackid !== null
+    ) {
       message.recordingtrackid = Number(object.recordingtrackid);
     } else {
       message.recordingtrackid = 0;
@@ -2983,9 +3141,12 @@ export const RecordingJobSourceTrack = {
     if (object.error !== undefined && object.error !== null) {
       message.error = String(object.error);
     } else {
-      message.error = '';
+      message.error = "";
     }
-    if (object.activeparameters !== undefined && object.activeparameters !== null) {
+    if (
+      object.activeparameters !== undefined &&
+      object.activeparameters !== null
+    ) {
       for (const e of object.activeparameters) {
         message.activeparameters.push(String(e));
       }
@@ -2995,18 +3156,23 @@ export const RecordingJobSourceTrack = {
 
   toJSON(message: RecordingJobSourceTrack): unknown {
     const obj: any = {};
-    message.recordingtoken !== undefined && (obj.recordingtoken = message.recordingtoken);
-    message.recordingjobtoken !== undefined && (obj.recordingjobtoken = message.recordingjobtoken);
-    message.recordingjobsourcetoken !== undefined && (obj.recordingjobsourcetoken = message.recordingjobsourcetoken);
+    message.recordingtoken !== undefined &&
+      (obj.recordingtoken = message.recordingtoken);
+    message.recordingjobtoken !== undefined &&
+      (obj.recordingjobtoken = message.recordingjobtoken);
+    message.recordingjobsourcetoken !== undefined &&
+      (obj.recordingjobsourcetoken = message.recordingjobsourcetoken);
     message.recordingjobsourcetracktoken !== undefined &&
       (obj.recordingjobsourcetracktoken = message.recordingjobsourcetracktoken);
-    message.recordingtrackid !== undefined && (obj.recordingtrackid = message.recordingtrackid);
+    message.recordingtrackid !== undefined &&
+      (obj.recordingtrackid = message.recordingtrackid);
     if (message.parameters) {
       obj.parameters = message.parameters.map((e) => e);
     } else {
       obj.parameters = [];
     }
-    message.state !== undefined && (obj.state = recordingJobStateToJSON(message.state));
+    message.state !== undefined &&
+      (obj.state = recordingJobStateToJSON(message.state));
     message.error !== undefined && (obj.error = message.error);
     if (message.activeparameters) {
       obj.activeparameters = message.activeparameters.map((e) => e);
@@ -3016,31 +3182,48 @@ export const RecordingJobSourceTrack = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<RecordingJobSourceTrack>): RecordingJobSourceTrack {
-    const message = { ...baseRecordingJobSourceTrack } as RecordingJobSourceTrack;
+  fromPartial(
+    object: DeepPartial<RecordingJobSourceTrack>
+  ): RecordingJobSourceTrack {
+    const message = {
+      ...baseRecordingJobSourceTrack,
+    } as RecordingJobSourceTrack;
     message.parameters = [];
     message.activeparameters = [];
     if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
       message.recordingtoken = object.recordingtoken;
     } else {
-      message.recordingtoken = '';
+      message.recordingtoken = "";
     }
-    if (object.recordingjobtoken !== undefined && object.recordingjobtoken !== null) {
+    if (
+      object.recordingjobtoken !== undefined &&
+      object.recordingjobtoken !== null
+    ) {
       message.recordingjobtoken = object.recordingjobtoken;
     } else {
-      message.recordingjobtoken = '';
+      message.recordingjobtoken = "";
     }
-    if (object.recordingjobsourcetoken !== undefined && object.recordingjobsourcetoken !== null) {
+    if (
+      object.recordingjobsourcetoken !== undefined &&
+      object.recordingjobsourcetoken !== null
+    ) {
       message.recordingjobsourcetoken = object.recordingjobsourcetoken;
     } else {
-      message.recordingjobsourcetoken = '';
+      message.recordingjobsourcetoken = "";
     }
-    if (object.recordingjobsourcetracktoken !== undefined && object.recordingjobsourcetracktoken !== null) {
-      message.recordingjobsourcetracktoken = object.recordingjobsourcetracktoken;
+    if (
+      object.recordingjobsourcetracktoken !== undefined &&
+      object.recordingjobsourcetracktoken !== null
+    ) {
+      message.recordingjobsourcetracktoken =
+        object.recordingjobsourcetracktoken;
     } else {
-      message.recordingjobsourcetracktoken = '';
+      message.recordingjobsourcetracktoken = "";
     }
-    if (object.recordingtrackid !== undefined && object.recordingtrackid !== null) {
+    if (
+      object.recordingtrackid !== undefined &&
+      object.recordingtrackid !== null
+    ) {
       message.recordingtrackid = object.recordingtrackid;
     } else {
       message.recordingtrackid = 0;
@@ -3058,9 +3241,12 @@ export const RecordingJobSourceTrack = {
     if (object.error !== undefined && object.error !== null) {
       message.error = object.error;
     } else {
-      message.error = '';
+      message.error = "";
     }
-    if (object.activeparameters !== undefined && object.activeparameters !== null) {
+    if (
+      object.activeparameters !== undefined &&
+      object.activeparameters !== null
+    ) {
       for (const e of object.activeparameters) {
         message.activeparameters.push(e);
       }
@@ -3070,33 +3256,36 @@ export const RecordingJobSourceTrack = {
 };
 
 const baseRecordingTrack: object = {
-  recordingtoken: '',
+  recordingtoken: "",
   recordingtrackid: 0,
-  token: '',
+  token: "",
   tracktype: 0,
-  description: '',
+  description: "",
   fixedfiles: false,
   digitalsigning: false,
   encrypt: false,
   flushfrequency: 0,
-  files: '',
+  files: "",
 };
 
 export const RecordingTrack = {
-  encode(message: RecordingTrack, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.recordingtoken !== '') {
+  encode(
+    message: RecordingTrack,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.recordingtoken !== "") {
       writer.uint32(10).string(message.recordingtoken);
     }
     if (message.recordingtrackid !== 0) {
       writer.uint32(21).fixed32(message.recordingtrackid);
     }
-    if (message.token !== '') {
+    if (message.token !== "") {
       writer.uint32(26).string(message.token);
     }
     if (message.tracktype !== 0) {
       writer.uint32(32).int32(message.tracktype);
     }
-    if (message.description !== '') {
+    if (message.description !== "") {
       writer.uint32(42).string(message.description);
     }
     if (message.fixedfiles === true) {
@@ -3167,7 +3356,9 @@ export const RecordingTrack = {
           message.indices.push(Index.decode(reader, reader.uint32()));
           break;
         case 12:
-          message.totaltrackdata.push(TrackData.decode(reader, reader.uint32()));
+          message.totaltrackdata.push(
+            TrackData.decode(reader, reader.uint32())
+          );
           break;
         default:
           reader.skipType(tag & 7);
@@ -3185,9 +3376,12 @@ export const RecordingTrack = {
     if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
       message.recordingtoken = String(object.recordingtoken);
     } else {
-      message.recordingtoken = '';
+      message.recordingtoken = "";
     }
-    if (object.recordingtrackid !== undefined && object.recordingtrackid !== null) {
+    if (
+      object.recordingtrackid !== undefined &&
+      object.recordingtrackid !== null
+    ) {
       message.recordingtrackid = Number(object.recordingtrackid);
     } else {
       message.recordingtrackid = 0;
@@ -3195,7 +3389,7 @@ export const RecordingTrack = {
     if (object.token !== undefined && object.token !== null) {
       message.token = String(object.token);
     } else {
-      message.token = '';
+      message.token = "";
     }
     if (object.tracktype !== undefined && object.tracktype !== null) {
       message.tracktype = trackTypeFromJSON(object.tracktype);
@@ -3205,7 +3399,7 @@ export const RecordingTrack = {
     if (object.description !== undefined && object.description !== null) {
       message.description = String(object.description);
     } else {
-      message.description = '';
+      message.description = "";
     }
     if (object.fixedfiles !== undefined && object.fixedfiles !== null) {
       message.fixedfiles = Boolean(object.fixedfiles);
@@ -3247,27 +3441,37 @@ export const RecordingTrack = {
 
   toJSON(message: RecordingTrack): unknown {
     const obj: any = {};
-    message.recordingtoken !== undefined && (obj.recordingtoken = message.recordingtoken);
-    message.recordingtrackid !== undefined && (obj.recordingtrackid = message.recordingtrackid);
+    message.recordingtoken !== undefined &&
+      (obj.recordingtoken = message.recordingtoken);
+    message.recordingtrackid !== undefined &&
+      (obj.recordingtrackid = message.recordingtrackid);
     message.token !== undefined && (obj.token = message.token);
-    message.tracktype !== undefined && (obj.tracktype = trackTypeToJSON(message.tracktype));
-    message.description !== undefined && (obj.description = message.description);
+    message.tracktype !== undefined &&
+      (obj.tracktype = trackTypeToJSON(message.tracktype));
+    message.description !== undefined &&
+      (obj.description = message.description);
     message.fixedfiles !== undefined && (obj.fixedfiles = message.fixedfiles);
-    message.digitalsigning !== undefined && (obj.digitalsigning = message.digitalsigning);
+    message.digitalsigning !== undefined &&
+      (obj.digitalsigning = message.digitalsigning);
     message.encrypt !== undefined && (obj.encrypt = message.encrypt);
-    message.flushfrequency !== undefined && (obj.flushfrequency = message.flushfrequency);
+    message.flushfrequency !== undefined &&
+      (obj.flushfrequency = message.flushfrequency);
     if (message.files) {
       obj.files = message.files.map((e) => e);
     } else {
       obj.files = [];
     }
     if (message.indices) {
-      obj.indices = message.indices.map((e) => (e ? Index.toJSON(e) : undefined));
+      obj.indices = message.indices.map((e) =>
+        e ? Index.toJSON(e) : undefined
+      );
     } else {
       obj.indices = [];
     }
     if (message.totaltrackdata) {
-      obj.totaltrackdata = message.totaltrackdata.map((e) => (e ? TrackData.toJSON(e) : undefined));
+      obj.totaltrackdata = message.totaltrackdata.map((e) =>
+        e ? TrackData.toJSON(e) : undefined
+      );
     } else {
       obj.totaltrackdata = [];
     }
@@ -3282,9 +3486,12 @@ export const RecordingTrack = {
     if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
       message.recordingtoken = object.recordingtoken;
     } else {
-      message.recordingtoken = '';
+      message.recordingtoken = "";
     }
-    if (object.recordingtrackid !== undefined && object.recordingtrackid !== null) {
+    if (
+      object.recordingtrackid !== undefined &&
+      object.recordingtrackid !== null
+    ) {
       message.recordingtrackid = object.recordingtrackid;
     } else {
       message.recordingtrackid = 0;
@@ -3292,7 +3499,7 @@ export const RecordingTrack = {
     if (object.token !== undefined && object.token !== null) {
       message.token = object.token;
     } else {
-      message.token = '';
+      message.token = "";
     }
     if (object.tracktype !== undefined && object.tracktype !== null) {
       message.tracktype = object.tracktype;
@@ -3302,7 +3509,7 @@ export const RecordingTrack = {
     if (object.description !== undefined && object.description !== null) {
       message.description = object.description;
     } else {
-      message.description = '';
+      message.description = "";
     }
     if (object.fixedfiles !== undefined && object.fixedfiles !== null) {
       message.fixedfiles = object.fixedfiles;
@@ -3343,14 +3550,17 @@ export const RecordingTrack = {
   },
 };
 
-const baseTrackData: object = { time: '0', totaldata: '0' };
+const baseTrackData: object = { time: "0", totaldata: "0" };
 
 export const TrackData = {
-  encode(message: TrackData, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.time !== '0') {
+  encode(
+    message: TrackData,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.time !== "0") {
       writer.uint32(9).fixed64(message.time);
     }
-    if (message.totaldata !== '0') {
+    if (message.totaldata !== "0") {
       writer.uint32(17).fixed64(message.totaldata);
     }
     return writer;
@@ -3382,12 +3592,12 @@ export const TrackData = {
     if (object.time !== undefined && object.time !== null) {
       message.time = String(object.time);
     } else {
-      message.time = '0';
+      message.time = "0";
     }
     if (object.totaldata !== undefined && object.totaldata !== null) {
       message.totaldata = String(object.totaldata);
     } else {
-      message.totaldata = '0';
+      message.totaldata = "0";
     }
     return message;
   },
@@ -3404,28 +3614,28 @@ export const TrackData = {
     if (object.time !== undefined && object.time !== null) {
       message.time = object.time;
     } else {
-      message.time = '0';
+      message.time = "0";
     }
     if (object.totaldata !== undefined && object.totaldata !== null) {
       message.totaldata = object.totaldata;
     } else {
-      message.totaldata = '0';
+      message.totaldata = "0";
     }
     return message;
   },
 };
 
-const baseUser: object = { token: '', username: '', grouptoken: '' };
+const baseUser: object = { token: "", username: "", grouptoken: "" };
 
 export const User = {
   encode(message: User, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.token !== '') {
+    if (message.token !== "") {
       writer.uint32(10).string(message.token);
     }
-    if (message.username !== '') {
+    if (message.username !== "") {
       writer.uint32(18).string(message.username);
     }
-    if (message.grouptoken !== '') {
+    if (message.grouptoken !== "") {
       writer.uint32(26).string(message.grouptoken);
     }
     return writer;
@@ -3460,17 +3670,17 @@ export const User = {
     if (object.token !== undefined && object.token !== null) {
       message.token = String(object.token);
     } else {
-      message.token = '';
+      message.token = "";
     }
     if (object.username !== undefined && object.username !== null) {
       message.username = String(object.username);
     } else {
-      message.username = '';
+      message.username = "";
     }
     if (object.grouptoken !== undefined && object.grouptoken !== null) {
       message.grouptoken = String(object.grouptoken);
     } else {
-      message.grouptoken = '';
+      message.grouptoken = "";
     }
     return message;
   },
@@ -3488,33 +3698,36 @@ export const User = {
     if (object.token !== undefined && object.token !== null) {
       message.token = object.token;
     } else {
-      message.token = '';
+      message.token = "";
     }
     if (object.username !== undefined && object.username !== null) {
       message.username = object.username;
     } else {
-      message.username = '';
+      message.username = "";
     }
     if (object.grouptoken !== undefined && object.grouptoken !== null) {
       message.grouptoken = object.grouptoken;
     } else {
-      message.grouptoken = '';
+      message.grouptoken = "";
     }
     return message;
   },
 };
 
-const baseVersion: object = { major: '0', minor: '0', build: '0' };
+const baseVersion: object = { major: "0", minor: "0", build: "0" };
 
 export const Version = {
-  encode(message: Version, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.major !== '0') {
+  encode(
+    message: Version,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.major !== "0") {
       writer.uint32(9).sfixed64(message.major);
     }
-    if (message.minor !== '0') {
+    if (message.minor !== "0") {
       writer.uint32(17).sfixed64(message.minor);
     }
-    if (message.build !== '0') {
+    if (message.build !== "0") {
       writer.uint32(25).sfixed64(message.build);
     }
     return writer;
@@ -3549,17 +3762,17 @@ export const Version = {
     if (object.major !== undefined && object.major !== null) {
       message.major = String(object.major);
     } else {
-      message.major = '0';
+      message.major = "0";
     }
     if (object.minor !== undefined && object.minor !== null) {
       message.minor = String(object.minor);
     } else {
-      message.minor = '0';
+      message.minor = "0";
     }
     if (object.build !== undefined && object.build !== null) {
       message.build = String(object.build);
     } else {
-      message.build = '0';
+      message.build = "0";
     }
     return message;
   },
@@ -3577,52 +3790,52 @@ export const Version = {
     if (object.major !== undefined && object.major !== null) {
       message.major = object.major;
     } else {
-      message.major = '0';
+      message.major = "0";
     }
     if (object.minor !== undefined && object.minor !== null) {
       message.minor = object.minor;
     } else {
-      message.minor = '0';
+      message.minor = "0";
     }
     if (object.build !== undefined && object.build !== null) {
       message.build = object.build;
     } else {
-      message.build = '0';
+      message.build = "0";
     }
     return message;
   },
 };
 
 const baseState: object = {
-  name: '',
-  publickey: '',
-  architecture: '',
-  identifier: '',
-  environmentvariables: '',
-  commandlinevariables: '',
-  locationtime: '0',
-  gpsdevice: '',
+  name: "",
+  publickey: "",
+  architecture: "",
+  identifier: "",
+  environmentvariables: "",
+  commandlinevariables: "",
+  locationtime: "0",
+  gpsdevice: "",
   gpsdevicestate: 0,
-  gpsdevicestatemessage: '',
-  locationretentiontime: '0',
-  openstreetmapbaseuris: '',
+  gpsdevicestatemessage: "",
+  locationretentiontime: "0",
+  openstreetmapbaseuris: "",
 };
 
 export const State = {
   encode(message: State, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.name !== '') {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-    if (message.publickey !== '') {
+    if (message.publickey !== "") {
       writer.uint32(18).string(message.publickey);
     }
-    if (message.architecture !== '') {
+    if (message.architecture !== "") {
       writer.uint32(26).string(message.architecture);
     }
     if (message.version !== undefined) {
       Version.encode(message.version, writer.uint32(34).fork()).ldelim();
     }
-    if (message.identifier !== '') {
+    if (message.identifier !== "") {
       writer.uint32(42).string(message.identifier);
     }
     for (const v of message.environmentvariables) {
@@ -3658,28 +3871,34 @@ export const State = {
     for (const v of message.mounts) {
       Mount.encode(v!, writer.uint32(130).fork()).ldelim();
     }
-    if (message.locationtime !== '0') {
+    if (message.locationtime !== "0") {
       writer.uint32(137).fixed64(message.locationtime);
     }
     if (message.latitude !== undefined) {
-      DoubleValue.encode({ value: message.latitude! }, writer.uint32(146).fork()).ldelim();
+      DoubleValue.encode(
+        { value: message.latitude! },
+        writer.uint32(146).fork()
+      ).ldelim();
     }
     if (message.longitude !== undefined) {
-      DoubleValue.encode({ value: message.longitude! }, writer.uint32(154).fork()).ldelim();
+      DoubleValue.encode(
+        { value: message.longitude! },
+        writer.uint32(154).fork()
+      ).ldelim();
     }
     for (const v of message.locationindices) {
       Index.encode(v!, writer.uint32(162).fork()).ldelim();
     }
-    if (message.gpsdevice !== '') {
+    if (message.gpsdevice !== "") {
       writer.uint32(170).string(message.gpsdevice);
     }
     if (message.gpsdevicestate !== 0) {
       writer.uint32(176).int32(message.gpsdevicestate);
     }
-    if (message.gpsdevicestatemessage !== '') {
+    if (message.gpsdevicestatemessage !== "") {
       writer.uint32(186).string(message.gpsdevicestatemessage);
     }
-    if (message.locationretentiontime !== '0') {
+    if (message.locationretentiontime !== "0") {
       writer.uint32(193).fixed64(message.locationretentiontime);
     }
     for (const v of message.openstreetmapbaseuris) {
@@ -3752,7 +3971,9 @@ export const State = {
           message.recordings.push(Recording.decode(reader, reader.uint32()));
           break;
         case 14:
-          message.serverlogmessages.push(LogMessage.decode(reader, reader.uint32()));
+          message.serverlogmessages.push(
+            LogMessage.decode(reader, reader.uint32())
+          );
           break;
         case 15:
           message.maps.push(Map.decode(reader, reader.uint32()));
@@ -3782,7 +4003,9 @@ export const State = {
           message.gpsdevicestatemessage = reader.string();
           break;
         case 24:
-          message.locationretentiontime = longToString(reader.fixed64() as Long);
+          message.locationretentiontime = longToString(
+            reader.fixed64() as Long
+          );
           break;
         case 25:
           message.openstreetmapbaseuris.push(reader.string());
@@ -3817,17 +4040,17 @@ export const State = {
     if (object.name !== undefined && object.name !== null) {
       message.name = String(object.name);
     } else {
-      message.name = '';
+      message.name = "";
     }
     if (object.publickey !== undefined && object.publickey !== null) {
       message.publickey = String(object.publickey);
     } else {
-      message.publickey = '';
+      message.publickey = "";
     }
     if (object.architecture !== undefined && object.architecture !== null) {
       message.architecture = String(object.architecture);
     } else {
-      message.architecture = '';
+      message.architecture = "";
     }
     if (object.version !== undefined && object.version !== null) {
       message.version = Version.fromJSON(object.version);
@@ -3837,14 +4060,20 @@ export const State = {
     if (object.identifier !== undefined && object.identifier !== null) {
       message.identifier = String(object.identifier);
     } else {
-      message.identifier = '';
+      message.identifier = "";
     }
-    if (object.environmentvariables !== undefined && object.environmentvariables !== null) {
+    if (
+      object.environmentvariables !== undefined &&
+      object.environmentvariables !== null
+    ) {
       for (const e of object.environmentvariables) {
         message.environmentvariables.push(String(e));
       }
     }
-    if (object.commandlinevariables !== undefined && object.commandlinevariables !== null) {
+    if (
+      object.commandlinevariables !== undefined &&
+      object.commandlinevariables !== null
+    ) {
       for (const e of object.commandlinevariables) {
         message.commandlinevariables.push(String(e));
       }
@@ -3879,7 +4108,10 @@ export const State = {
         message.recordings.push(Recording.fromJSON(e));
       }
     }
-    if (object.serverlogmessages !== undefined && object.serverlogmessages !== null) {
+    if (
+      object.serverlogmessages !== undefined &&
+      object.serverlogmessages !== null
+    ) {
       for (const e of object.serverlogmessages) {
         message.serverlogmessages.push(LogMessage.fromJSON(e));
       }
@@ -3897,7 +4129,7 @@ export const State = {
     if (object.locationtime !== undefined && object.locationtime !== null) {
       message.locationtime = String(object.locationtime);
     } else {
-      message.locationtime = '0';
+      message.locationtime = "0";
     }
     if (object.latitude !== undefined && object.latitude !== null) {
       message.latitude = Number(object.latitude);
@@ -3909,7 +4141,10 @@ export const State = {
     } else {
       message.longitude = undefined;
     }
-    if (object.locationindices !== undefined && object.locationindices !== null) {
+    if (
+      object.locationindices !== undefined &&
+      object.locationindices !== null
+    ) {
       for (const e of object.locationindices) {
         message.locationindices.push(Index.fromJSON(e));
       }
@@ -3917,24 +4152,33 @@ export const State = {
     if (object.gpsdevice !== undefined && object.gpsdevice !== null) {
       message.gpsdevice = String(object.gpsdevice);
     } else {
-      message.gpsdevice = '';
+      message.gpsdevice = "";
     }
     if (object.gpsdevicestate !== undefined && object.gpsdevicestate !== null) {
       message.gpsdevicestate = gPSDeviceStateFromJSON(object.gpsdevicestate);
     } else {
       message.gpsdevicestate = 0;
     }
-    if (object.gpsdevicestatemessage !== undefined && object.gpsdevicestatemessage !== null) {
+    if (
+      object.gpsdevicestatemessage !== undefined &&
+      object.gpsdevicestatemessage !== null
+    ) {
       message.gpsdevicestatemessage = String(object.gpsdevicestatemessage);
     } else {
-      message.gpsdevicestatemessage = '';
+      message.gpsdevicestatemessage = "";
     }
-    if (object.locationretentiontime !== undefined && object.locationretentiontime !== null) {
+    if (
+      object.locationretentiontime !== undefined &&
+      object.locationretentiontime !== null
+    ) {
       message.locationretentiontime = String(object.locationretentiontime);
     } else {
-      message.locationretentiontime = '0';
+      message.locationretentiontime = "0";
     }
-    if (object.openstreetmapbaseuris !== undefined && object.openstreetmapbaseuris !== null) {
+    if (
+      object.openstreetmapbaseuris !== undefined &&
+      object.openstreetmapbaseuris !== null
+    ) {
       for (const e of object.openstreetmapbaseuris) {
         message.openstreetmapbaseuris.push(String(e));
       }
@@ -3951,8 +4195,12 @@ export const State = {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.publickey !== undefined && (obj.publickey = message.publickey);
-    message.architecture !== undefined && (obj.architecture = message.architecture);
-    message.version !== undefined && (obj.version = message.version ? Version.toJSON(message.version) : undefined);
+    message.architecture !== undefined &&
+      (obj.architecture = message.architecture);
+    message.version !== undefined &&
+      (obj.version = message.version
+        ? Version.toJSON(message.version)
+        : undefined);
     message.identifier !== undefined && (obj.identifier = message.identifier);
     if (message.environmentvariables) {
       obj.environmentvariables = message.environmentvariables.map((e) => e);
@@ -3965,7 +4213,9 @@ export const State = {
       obj.commandlinevariables = [];
     }
     if (message.onvifusers) {
-      obj.onvifusers = message.onvifusers.map((e) => (e ? ONVIFUser.toJSON(e) : undefined));
+      obj.onvifusers = message.onvifusers.map((e) =>
+        e ? ONVIFUser.toJSON(e) : undefined
+      );
     } else {
       obj.onvifusers = [];
     }
@@ -3985,17 +4235,23 @@ export const State = {
       obj.files = [];
     }
     if (message.receivers) {
-      obj.receivers = message.receivers.map((e) => (e ? Receiver.toJSON(e) : undefined));
+      obj.receivers = message.receivers.map((e) =>
+        e ? Receiver.toJSON(e) : undefined
+      );
     } else {
       obj.receivers = [];
     }
     if (message.recordings) {
-      obj.recordings = message.recordings.map((e) => (e ? Recording.toJSON(e) : undefined));
+      obj.recordings = message.recordings.map((e) =>
+        e ? Recording.toJSON(e) : undefined
+      );
     } else {
       obj.recordings = [];
     }
     if (message.serverlogmessages) {
-      obj.serverlogmessages = message.serverlogmessages.map((e) => (e ? LogMessage.toJSON(e) : undefined));
+      obj.serverlogmessages = message.serverlogmessages.map((e) =>
+        e ? LogMessage.toJSON(e) : undefined
+      );
     } else {
       obj.serverlogmessages = [];
     }
@@ -4009,25 +4265,33 @@ export const State = {
     } else {
       obj.mounts = [];
     }
-    message.locationtime !== undefined && (obj.locationtime = message.locationtime);
+    message.locationtime !== undefined &&
+      (obj.locationtime = message.locationtime);
     message.latitude !== undefined && (obj.latitude = message.latitude);
     message.longitude !== undefined && (obj.longitude = message.longitude);
     if (message.locationindices) {
-      obj.locationindices = message.locationindices.map((e) => (e ? Index.toJSON(e) : undefined));
+      obj.locationindices = message.locationindices.map((e) =>
+        e ? Index.toJSON(e) : undefined
+      );
     } else {
       obj.locationindices = [];
     }
     message.gpsdevice !== undefined && (obj.gpsdevice = message.gpsdevice);
-    message.gpsdevicestate !== undefined && (obj.gpsdevicestate = gPSDeviceStateToJSON(message.gpsdevicestate));
-    message.gpsdevicestatemessage !== undefined && (obj.gpsdevicestatemessage = message.gpsdevicestatemessage);
-    message.locationretentiontime !== undefined && (obj.locationretentiontime = message.locationretentiontime);
+    message.gpsdevicestate !== undefined &&
+      (obj.gpsdevicestate = gPSDeviceStateToJSON(message.gpsdevicestate));
+    message.gpsdevicestatemessage !== undefined &&
+      (obj.gpsdevicestatemessage = message.gpsdevicestatemessage);
+    message.locationretentiontime !== undefined &&
+      (obj.locationretentiontime = message.locationretentiontime);
     if (message.openstreetmapbaseuris) {
       obj.openstreetmapbaseuris = message.openstreetmapbaseuris.map((e) => e);
     } else {
       obj.openstreetmapbaseuris = [];
     }
     if (message.plugins) {
-      obj.plugins = message.plugins.map((e) => (e ? Plugin.toJSON(e) : undefined));
+      obj.plugins = message.plugins.map((e) =>
+        e ? Plugin.toJSON(e) : undefined
+      );
     } else {
       obj.plugins = [];
     }
@@ -4053,17 +4317,17 @@ export const State = {
     if (object.name !== undefined && object.name !== null) {
       message.name = object.name;
     } else {
-      message.name = '';
+      message.name = "";
     }
     if (object.publickey !== undefined && object.publickey !== null) {
       message.publickey = object.publickey;
     } else {
-      message.publickey = '';
+      message.publickey = "";
     }
     if (object.architecture !== undefined && object.architecture !== null) {
       message.architecture = object.architecture;
     } else {
-      message.architecture = '';
+      message.architecture = "";
     }
     if (object.version !== undefined && object.version !== null) {
       message.version = Version.fromPartial(object.version);
@@ -4073,14 +4337,20 @@ export const State = {
     if (object.identifier !== undefined && object.identifier !== null) {
       message.identifier = object.identifier;
     } else {
-      message.identifier = '';
+      message.identifier = "";
     }
-    if (object.environmentvariables !== undefined && object.environmentvariables !== null) {
+    if (
+      object.environmentvariables !== undefined &&
+      object.environmentvariables !== null
+    ) {
       for (const e of object.environmentvariables) {
         message.environmentvariables.push(e);
       }
     }
-    if (object.commandlinevariables !== undefined && object.commandlinevariables !== null) {
+    if (
+      object.commandlinevariables !== undefined &&
+      object.commandlinevariables !== null
+    ) {
       for (const e of object.commandlinevariables) {
         message.commandlinevariables.push(e);
       }
@@ -4115,7 +4385,10 @@ export const State = {
         message.recordings.push(Recording.fromPartial(e));
       }
     }
-    if (object.serverlogmessages !== undefined && object.serverlogmessages !== null) {
+    if (
+      object.serverlogmessages !== undefined &&
+      object.serverlogmessages !== null
+    ) {
       for (const e of object.serverlogmessages) {
         message.serverlogmessages.push(LogMessage.fromPartial(e));
       }
@@ -4133,7 +4406,7 @@ export const State = {
     if (object.locationtime !== undefined && object.locationtime !== null) {
       message.locationtime = object.locationtime;
     } else {
-      message.locationtime = '0';
+      message.locationtime = "0";
     }
     if (object.latitude !== undefined && object.latitude !== null) {
       message.latitude = object.latitude;
@@ -4145,7 +4418,10 @@ export const State = {
     } else {
       message.longitude = undefined;
     }
-    if (object.locationindices !== undefined && object.locationindices !== null) {
+    if (
+      object.locationindices !== undefined &&
+      object.locationindices !== null
+    ) {
       for (const e of object.locationindices) {
         message.locationindices.push(Index.fromPartial(e));
       }
@@ -4153,24 +4429,33 @@ export const State = {
     if (object.gpsdevice !== undefined && object.gpsdevice !== null) {
       message.gpsdevice = object.gpsdevice;
     } else {
-      message.gpsdevice = '';
+      message.gpsdevice = "";
     }
     if (object.gpsdevicestate !== undefined && object.gpsdevicestate !== null) {
       message.gpsdevicestate = object.gpsdevicestate;
     } else {
       message.gpsdevicestate = 0;
     }
-    if (object.gpsdevicestatemessage !== undefined && object.gpsdevicestatemessage !== null) {
+    if (
+      object.gpsdevicestatemessage !== undefined &&
+      object.gpsdevicestatemessage !== null
+    ) {
       message.gpsdevicestatemessage = object.gpsdevicestatemessage;
     } else {
-      message.gpsdevicestatemessage = '';
+      message.gpsdevicestatemessage = "";
     }
-    if (object.locationretentiontime !== undefined && object.locationretentiontime !== null) {
+    if (
+      object.locationretentiontime !== undefined &&
+      object.locationretentiontime !== null
+    ) {
       message.locationretentiontime = object.locationretentiontime;
     } else {
-      message.locationretentiontime = '0';
+      message.locationretentiontime = "0";
     }
-    if (object.openstreetmapbaseuris !== undefined && object.openstreetmapbaseuris !== null) {
+    if (
+      object.openstreetmapbaseuris !== undefined &&
+      object.openstreetmapbaseuris !== null
+    ) {
       for (const e of object.openstreetmapbaseuris) {
         message.openstreetmapbaseuris.push(e);
       }
@@ -4187,7 +4472,10 @@ export const State = {
 const baseFileAdded: object = {};
 
 export const FileAdded = {
-  encode(message: FileAdded, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: FileAdded,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
     if (message.file !== undefined) {
       File.encode(message.file, writer.uint32(10).fork()).ldelim();
     }
@@ -4224,7 +4512,8 @@ export const FileAdded = {
 
   toJSON(message: FileAdded): unknown {
     const obj: any = {};
-    message.file !== undefined && (obj.file = message.file ? File.toJSON(message.file) : undefined);
+    message.file !== undefined &&
+      (obj.file = message.file ? File.toJSON(message.file) : undefined);
     return obj;
   },
 
@@ -4239,11 +4528,14 @@ export const FileAdded = {
   },
 };
 
-const baseFileRemoved: object = { token: '' };
+const baseFileRemoved: object = { token: "" };
 
 export const FileRemoved = {
-  encode(message: FileRemoved, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.token !== '') {
+  encode(
+    message: FileRemoved,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.token !== "") {
       writer.uint32(10).string(message.token);
     }
     return writer;
@@ -4272,7 +4564,7 @@ export const FileRemoved = {
     if (object.token !== undefined && object.token !== null) {
       message.token = String(object.token);
     } else {
-      message.token = '';
+      message.token = "";
     }
     return message;
   },
@@ -4288,17 +4580,20 @@ export const FileRemoved = {
     if (object.token !== undefined && object.token !== null) {
       message.token = object.token;
     } else {
-      message.token = '';
+      message.token = "";
     }
     return message;
   },
 };
 
-const baseFileMonitorStateChanged: object = { token: '', state: 0 };
+const baseFileMonitorStateChanged: object = { token: "", state: 0 };
 
 export const FileMonitorStateChanged = {
-  encode(message: FileMonitorStateChanged, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.token !== '') {
+  encode(
+    message: FileMonitorStateChanged,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.token !== "") {
       writer.uint32(10).string(message.token);
     }
     if (message.state !== 0) {
@@ -4307,10 +4602,15 @@ export const FileMonitorStateChanged = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): FileMonitorStateChanged {
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): FileMonitorStateChanged {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseFileMonitorStateChanged } as FileMonitorStateChanged;
+    const message = {
+      ...baseFileMonitorStateChanged,
+    } as FileMonitorStateChanged;
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -4329,11 +4629,13 @@ export const FileMonitorStateChanged = {
   },
 
   fromJSON(object: any): FileMonitorStateChanged {
-    const message = { ...baseFileMonitorStateChanged } as FileMonitorStateChanged;
+    const message = {
+      ...baseFileMonitorStateChanged,
+    } as FileMonitorStateChanged;
     if (object.token !== undefined && object.token !== null) {
       message.token = String(object.token);
     } else {
-      message.token = '';
+      message.token = "";
     }
     if (object.state !== undefined && object.state !== null) {
       message.state = fileMonitorStateFromJSON(object.state);
@@ -4346,16 +4648,21 @@ export const FileMonitorStateChanged = {
   toJSON(message: FileMonitorStateChanged): unknown {
     const obj: any = {};
     message.token !== undefined && (obj.token = message.token);
-    message.state !== undefined && (obj.state = fileMonitorStateToJSON(message.state));
+    message.state !== undefined &&
+      (obj.state = fileMonitorStateToJSON(message.state));
     return obj;
   },
 
-  fromPartial(object: DeepPartial<FileMonitorStateChanged>): FileMonitorStateChanged {
-    const message = { ...baseFileMonitorStateChanged } as FileMonitorStateChanged;
+  fromPartial(
+    object: DeepPartial<FileMonitorStateChanged>
+  ): FileMonitorStateChanged {
+    const message = {
+      ...baseFileMonitorStateChanged,
+    } as FileMonitorStateChanged;
     if (object.token !== undefined && object.token !== null) {
       message.token = object.token;
     } else {
-      message.token = '';
+      message.token = "";
     }
     if (object.state !== undefined && object.state !== null) {
       message.state = object.state;
@@ -4366,11 +4673,14 @@ export const FileMonitorStateChanged = {
   },
 };
 
-const baseFileStateChanged: object = { token: '', state: 0 };
+const baseFileStateChanged: object = { token: "", state: 0 };
 
 export const FileStateChanged = {
-  encode(message: FileStateChanged, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.token !== '') {
+  encode(
+    message: FileStateChanged,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.token !== "") {
       writer.uint32(10).string(message.token);
     }
     if (message.state !== 0) {
@@ -4405,7 +4715,7 @@ export const FileStateChanged = {
     if (object.token !== undefined && object.token !== null) {
       message.token = String(object.token);
     } else {
-      message.token = '';
+      message.token = "";
     }
     if (object.state !== undefined && object.state !== null) {
       message.state = fileStateFromJSON(object.state);
@@ -4427,7 +4737,7 @@ export const FileStateChanged = {
     if (object.token !== undefined && object.token !== null) {
       message.token = object.token;
     } else {
-      message.token = '';
+      message.token = "";
     }
     if (object.state !== undefined && object.state !== null) {
       message.state = object.state;
@@ -4438,11 +4748,14 @@ export const FileStateChanged = {
   },
 };
 
-const baseGPSDeviceChanged: object = { gpsdevice: '' };
+const baseGPSDeviceChanged: object = { gpsdevice: "" };
 
 export const GPSDeviceChanged = {
-  encode(message: GPSDeviceChanged, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.gpsdevice !== '') {
+  encode(
+    message: GPSDeviceChanged,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.gpsdevice !== "") {
       writer.uint32(10).string(message.gpsdevice);
     }
     return writer;
@@ -4471,7 +4784,7 @@ export const GPSDeviceChanged = {
     if (object.gpsdevice !== undefined && object.gpsdevice !== null) {
       message.gpsdevice = String(object.gpsdevice);
     } else {
-      message.gpsdevice = '';
+      message.gpsdevice = "";
     }
     return message;
   },
@@ -4487,29 +4800,35 @@ export const GPSDeviceChanged = {
     if (object.gpsdevice !== undefined && object.gpsdevice !== null) {
       message.gpsdevice = object.gpsdevice;
     } else {
-      message.gpsdevice = '';
+      message.gpsdevice = "";
     }
     return message;
   },
 };
 
-const baseGPSDeviceStateChanged: object = { time: '0', state: 0, message: '' };
+const baseGPSDeviceStateChanged: object = { time: "0", state: 0, message: "" };
 
 export const GPSDeviceStateChanged = {
-  encode(message: GPSDeviceStateChanged, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.time !== '0') {
+  encode(
+    message: GPSDeviceStateChanged,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.time !== "0") {
       writer.uint32(9).fixed64(message.time);
     }
     if (message.state !== 0) {
       writer.uint32(16).int32(message.state);
     }
-    if (message.message !== '') {
+    if (message.message !== "") {
       writer.uint32(26).string(message.message);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): GPSDeviceStateChanged {
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): GPSDeviceStateChanged {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = { ...baseGPSDeviceStateChanged } as GPSDeviceStateChanged;
@@ -4538,7 +4857,7 @@ export const GPSDeviceStateChanged = {
     if (object.time !== undefined && object.time !== null) {
       message.time = String(object.time);
     } else {
-      message.time = '0';
+      message.time = "0";
     }
     if (object.state !== undefined && object.state !== null) {
       message.state = gPSDeviceStateFromJSON(object.state);
@@ -4548,7 +4867,7 @@ export const GPSDeviceStateChanged = {
     if (object.message !== undefined && object.message !== null) {
       message.message = String(object.message);
     } else {
-      message.message = '';
+      message.message = "";
     }
     return message;
   },
@@ -4556,17 +4875,20 @@ export const GPSDeviceStateChanged = {
   toJSON(message: GPSDeviceStateChanged): unknown {
     const obj: any = {};
     message.time !== undefined && (obj.time = message.time);
-    message.state !== undefined && (obj.state = gPSDeviceStateToJSON(message.state));
+    message.state !== undefined &&
+      (obj.state = gPSDeviceStateToJSON(message.state));
     message.message !== undefined && (obj.message = message.message);
     return obj;
   },
 
-  fromPartial(object: DeepPartial<GPSDeviceStateChanged>): GPSDeviceStateChanged {
+  fromPartial(
+    object: DeepPartial<GPSDeviceStateChanged>
+  ): GPSDeviceStateChanged {
     const message = { ...baseGPSDeviceStateChanged } as GPSDeviceStateChanged;
     if (object.time !== undefined && object.time !== null) {
       message.time = object.time;
     } else {
-      message.time = '0';
+      message.time = "0";
     }
     if (object.state !== undefined && object.state !== null) {
       message.state = object.state;
@@ -4576,7 +4898,7 @@ export const GPSDeviceStateChanged = {
     if (object.message !== undefined && object.message !== null) {
       message.message = object.message;
     } else {
-      message.message = '';
+      message.message = "";
     }
     return message;
   },
@@ -4585,7 +4907,10 @@ export const GPSDeviceStateChanged = {
 const baseGroupAdded: object = {};
 
 export const GroupAdded = {
-  encode(message: GroupAdded, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: GroupAdded,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
     if (message.group !== undefined) {
       Group.encode(message.group, writer.uint32(10).fork()).ldelim();
     }
@@ -4622,7 +4947,8 @@ export const GroupAdded = {
 
   toJSON(message: GroupAdded): unknown {
     const obj: any = {};
-    message.group !== undefined && (obj.group = message.group ? Group.toJSON(message.group) : undefined);
+    message.group !== undefined &&
+      (obj.group = message.group ? Group.toJSON(message.group) : undefined);
     return obj;
   },
 
@@ -4640,7 +4966,10 @@ export const GroupAdded = {
 const baseGroupChanged: object = {};
 
 export const GroupChanged = {
-  encode(message: GroupChanged, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: GroupChanged,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
     if (message.group !== undefined) {
       Group.encode(message.group, writer.uint32(10).fork()).ldelim();
     }
@@ -4677,7 +5006,8 @@ export const GroupChanged = {
 
   toJSON(message: GroupChanged): unknown {
     const obj: any = {};
-    message.group !== undefined && (obj.group = message.group ? Group.toJSON(message.group) : undefined);
+    message.group !== undefined &&
+      (obj.group = message.group ? Group.toJSON(message.group) : undefined);
     return obj;
   },
 
@@ -4692,11 +5022,14 @@ export const GroupChanged = {
   },
 };
 
-const baseGroupRemoved: object = { token: '' };
+const baseGroupRemoved: object = { token: "" };
 
 export const GroupRemoved = {
-  encode(message: GroupRemoved, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.token !== '') {
+  encode(
+    message: GroupRemoved,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.token !== "") {
       writer.uint32(10).string(message.token);
     }
     return writer;
@@ -4725,7 +5058,7 @@ export const GroupRemoved = {
     if (object.token !== undefined && object.token !== null) {
       message.token = String(object.token);
     } else {
-      message.token = '';
+      message.token = "";
     }
     return message;
   },
@@ -4741,24 +5074,33 @@ export const GroupRemoved = {
     if (object.token !== undefined && object.token !== null) {
       message.token = object.token;
     } else {
-      message.token = '';
+      message.token = "";
     }
     return message;
   },
 };
 
-const baseLocationChanged: object = { time: '0' };
+const baseLocationChanged: object = { time: "0" };
 
 export const LocationChanged = {
-  encode(message: LocationChanged, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.time !== '0') {
+  encode(
+    message: LocationChanged,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.time !== "0") {
       writer.uint32(9).fixed64(message.time);
     }
     if (message.latitude !== undefined) {
-      DoubleValue.encode({ value: message.latitude! }, writer.uint32(18).fork()).ldelim();
+      DoubleValue.encode(
+        { value: message.latitude! },
+        writer.uint32(18).fork()
+      ).ldelim();
     }
     if (message.longitude !== undefined) {
-      DoubleValue.encode({ value: message.longitude! }, writer.uint32(26).fork()).ldelim();
+      DoubleValue.encode(
+        { value: message.longitude! },
+        writer.uint32(26).fork()
+      ).ldelim();
     }
     return writer;
   },
@@ -4792,7 +5134,7 @@ export const LocationChanged = {
     if (object.time !== undefined && object.time !== null) {
       message.time = String(object.time);
     } else {
-      message.time = '0';
+      message.time = "0";
     }
     if (object.latitude !== undefined && object.latitude !== null) {
       message.latitude = Number(object.latitude);
@@ -4820,7 +5162,7 @@ export const LocationChanged = {
     if (object.time !== undefined && object.time !== null) {
       message.time = object.time;
     } else {
-      message.time = '0';
+      message.time = "0";
     }
     if (object.latitude !== undefined && object.latitude !== null) {
       message.latitude = object.latitude;
@@ -4836,25 +5178,35 @@ export const LocationChanged = {
   },
 };
 
-const baseLocationRetentionTimeChanged: object = { locationretentiontime: '0' };
+const baseLocationRetentionTimeChanged: object = { locationretentiontime: "0" };
 
 export const LocationRetentionTimeChanged = {
-  encode(message: LocationRetentionTimeChanged, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.locationretentiontime !== '0') {
+  encode(
+    message: LocationRetentionTimeChanged,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.locationretentiontime !== "0") {
       writer.uint32(9).fixed64(message.locationretentiontime);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): LocationRetentionTimeChanged {
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): LocationRetentionTimeChanged {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseLocationRetentionTimeChanged } as LocationRetentionTimeChanged;
+    const message = {
+      ...baseLocationRetentionTimeChanged,
+    } as LocationRetentionTimeChanged;
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.locationretentiontime = longToString(reader.fixed64() as Long);
+          message.locationretentiontime = longToString(
+            reader.fixed64() as Long
+          );
           break;
         default:
           reader.skipType(tag & 7);
@@ -4865,27 +5217,40 @@ export const LocationRetentionTimeChanged = {
   },
 
   fromJSON(object: any): LocationRetentionTimeChanged {
-    const message = { ...baseLocationRetentionTimeChanged } as LocationRetentionTimeChanged;
-    if (object.locationretentiontime !== undefined && object.locationretentiontime !== null) {
+    const message = {
+      ...baseLocationRetentionTimeChanged,
+    } as LocationRetentionTimeChanged;
+    if (
+      object.locationretentiontime !== undefined &&
+      object.locationretentiontime !== null
+    ) {
       message.locationretentiontime = String(object.locationretentiontime);
     } else {
-      message.locationretentiontime = '0';
+      message.locationretentiontime = "0";
     }
     return message;
   },
 
   toJSON(message: LocationRetentionTimeChanged): unknown {
     const obj: any = {};
-    message.locationretentiontime !== undefined && (obj.locationretentiontime = message.locationretentiontime);
+    message.locationretentiontime !== undefined &&
+      (obj.locationretentiontime = message.locationretentiontime);
     return obj;
   },
 
-  fromPartial(object: DeepPartial<LocationRetentionTimeChanged>): LocationRetentionTimeChanged {
-    const message = { ...baseLocationRetentionTimeChanged } as LocationRetentionTimeChanged;
-    if (object.locationretentiontime !== undefined && object.locationretentiontime !== null) {
+  fromPartial(
+    object: DeepPartial<LocationRetentionTimeChanged>
+  ): LocationRetentionTimeChanged {
+    const message = {
+      ...baseLocationRetentionTimeChanged,
+    } as LocationRetentionTimeChanged;
+    if (
+      object.locationretentiontime !== undefined &&
+      object.locationretentiontime !== null
+    ) {
       message.locationretentiontime = object.locationretentiontime;
     } else {
-      message.locationretentiontime = '0';
+      message.locationretentiontime = "0";
     }
     return message;
   },
@@ -4894,7 +5259,10 @@ export const LocationRetentionTimeChanged = {
 const baseMapAdded: object = {};
 
 export const MapAdded = {
-  encode(message: MapAdded, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: MapAdded,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
     if (message.map !== undefined) {
       Map.encode(message.map, writer.uint32(10).fork()).ldelim();
     }
@@ -4931,7 +5299,8 @@ export const MapAdded = {
 
   toJSON(message: MapAdded): unknown {
     const obj: any = {};
-    message.map !== undefined && (obj.map = message.map ? Map.toJSON(message.map) : undefined);
+    message.map !== undefined &&
+      (obj.map = message.map ? Map.toJSON(message.map) : undefined);
     return obj;
   },
 
@@ -4949,7 +5318,10 @@ export const MapAdded = {
 const baseMapChanged: object = {};
 
 export const MapChanged = {
-  encode(message: MapChanged, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: MapChanged,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
     if (message.map !== undefined) {
       Map.encode(message.map, writer.uint32(10).fork()).ldelim();
     }
@@ -4986,7 +5358,8 @@ export const MapChanged = {
 
   toJSON(message: MapChanged): unknown {
     const obj: any = {};
-    message.map !== undefined && (obj.map = message.map ? Map.toJSON(message.map) : undefined);
+    message.map !== undefined &&
+      (obj.map = message.map ? Map.toJSON(message.map) : undefined);
     return obj;
   },
 
@@ -5001,11 +5374,14 @@ export const MapChanged = {
   },
 };
 
-const baseMapRemoved: object = { token: '' };
+const baseMapRemoved: object = { token: "" };
 
 export const MapRemoved = {
-  encode(message: MapRemoved, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.token !== '') {
+  encode(
+    message: MapRemoved,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.token !== "") {
       writer.uint32(10).string(message.token);
     }
     return writer;
@@ -5034,7 +5410,7 @@ export const MapRemoved = {
     if (object.token !== undefined && object.token !== null) {
       message.token = String(object.token);
     } else {
-      message.token = '';
+      message.token = "";
     }
     return message;
   },
@@ -5050,7 +5426,7 @@ export const MapRemoved = {
     if (object.token !== undefined && object.token !== null) {
       message.token = object.token;
     } else {
-      message.token = '';
+      message.token = "";
     }
     return message;
   },
@@ -5059,7 +5435,10 @@ export const MapRemoved = {
 const baseMountAdded: object = {};
 
 export const MountAdded = {
-  encode(message: MountAdded, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: MountAdded,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
     if (message.mount !== undefined) {
       Mount.encode(message.mount, writer.uint32(10).fork()).ldelim();
     }
@@ -5096,7 +5475,8 @@ export const MountAdded = {
 
   toJSON(message: MountAdded): unknown {
     const obj: any = {};
-    message.mount !== undefined && (obj.mount = message.mount ? Mount.toJSON(message.mount) : undefined);
+    message.mount !== undefined &&
+      (obj.mount = message.mount ? Mount.toJSON(message.mount) : undefined);
     return obj;
   },
 
@@ -5114,7 +5494,10 @@ export const MountAdded = {
 const baseMountRemoved: object = {};
 
 export const MountRemoved = {
-  encode(message: MountRemoved, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: MountRemoved,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
     if (message.mount !== undefined) {
       Mount.encode(message.mount, writer.uint32(10).fork()).ldelim();
     }
@@ -5151,7 +5534,8 @@ export const MountRemoved = {
 
   toJSON(message: MountRemoved): unknown {
     const obj: any = {};
-    message.mount !== undefined && (obj.mount = message.mount ? Mount.toJSON(message.mount) : undefined);
+    message.mount !== undefined &&
+      (obj.mount = message.mount ? Mount.toJSON(message.mount) : undefined);
     return obj;
   },
 
@@ -5166,11 +5550,14 @@ export const MountRemoved = {
   },
 };
 
-const baseNameChanged: object = { name: '' };
+const baseNameChanged: object = { name: "" };
 
 export const NameChanged = {
-  encode(message: NameChanged, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.name !== '') {
+  encode(
+    message: NameChanged,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -5199,7 +5586,7 @@ export const NameChanged = {
     if (object.name !== undefined && object.name !== null) {
       message.name = String(object.name);
     } else {
-      message.name = '';
+      message.name = "";
     }
     return message;
   },
@@ -5215,7 +5602,7 @@ export const NameChanged = {
     if (object.name !== undefined && object.name !== null) {
       message.name = object.name;
     } else {
-      message.name = '';
+      message.name = "";
     }
     return message;
   },
@@ -5224,7 +5611,10 @@ export const NameChanged = {
 const baseONVIFUserAdded: object = {};
 
 export const ONVIFUserAdded = {
-  encode(message: ONVIFUserAdded, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: ONVIFUserAdded,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
     if (message.onvifuser !== undefined) {
       ONVIFUser.encode(message.onvifuser, writer.uint32(10).fork()).ldelim();
     }
@@ -5262,7 +5652,9 @@ export const ONVIFUserAdded = {
   toJSON(message: ONVIFUserAdded): unknown {
     const obj: any = {};
     message.onvifuser !== undefined &&
-      (obj.onvifuser = message.onvifuser ? ONVIFUser.toJSON(message.onvifuser) : undefined);
+      (obj.onvifuser = message.onvifuser
+        ? ONVIFUser.toJSON(message.onvifuser)
+        : undefined);
     return obj;
   },
 
@@ -5280,7 +5672,10 @@ export const ONVIFUserAdded = {
 const baseONVIFUserChanged: object = {};
 
 export const ONVIFUserChanged = {
-  encode(message: ONVIFUserChanged, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: ONVIFUserChanged,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
     if (message.onvifuser !== undefined) {
       ONVIFUser.encode(message.onvifuser, writer.uint32(10).fork()).ldelim();
     }
@@ -5318,7 +5713,9 @@ export const ONVIFUserChanged = {
   toJSON(message: ONVIFUserChanged): unknown {
     const obj: any = {};
     message.onvifuser !== undefined &&
-      (obj.onvifuser = message.onvifuser ? ONVIFUser.toJSON(message.onvifuser) : undefined);
+      (obj.onvifuser = message.onvifuser
+        ? ONVIFUser.toJSON(message.onvifuser)
+        : undefined);
     return obj;
   },
 
@@ -5333,11 +5730,14 @@ export const ONVIFUserChanged = {
   },
 };
 
-const baseONVIFUserRemoved: object = { token: '' };
+const baseONVIFUserRemoved: object = { token: "" };
 
 export const ONVIFUserRemoved = {
-  encode(message: ONVIFUserRemoved, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.token !== '') {
+  encode(
+    message: ONVIFUserRemoved,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.token !== "") {
       writer.uint32(10).string(message.token);
     }
     return writer;
@@ -5366,7 +5766,7 @@ export const ONVIFUserRemoved = {
     if (object.token !== undefined && object.token !== null) {
       message.token = String(object.token);
     } else {
-      message.token = '';
+      message.token = "";
     }
     return message;
   },
@@ -5382,26 +5782,34 @@ export const ONVIFUserRemoved = {
     if (object.token !== undefined && object.token !== null) {
       message.token = object.token;
     } else {
-      message.token = '';
+      message.token = "";
     }
     return message;
   },
 };
 
-const baseOpenStreetMapBaseUrisChanged: object = { openstreetmapbaseuris: '' };
+const baseOpenStreetMapBaseUrisChanged: object = { openstreetmapbaseuris: "" };
 
 export const OpenStreetMapBaseUrisChanged = {
-  encode(message: OpenStreetMapBaseUrisChanged, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: OpenStreetMapBaseUrisChanged,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
     for (const v of message.openstreetmapbaseuris) {
       writer.uint32(10).string(v!);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): OpenStreetMapBaseUrisChanged {
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): OpenStreetMapBaseUrisChanged {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseOpenStreetMapBaseUrisChanged } as OpenStreetMapBaseUrisChanged;
+    const message = {
+      ...baseOpenStreetMapBaseUrisChanged,
+    } as OpenStreetMapBaseUrisChanged;
     message.openstreetmapbaseuris = [];
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -5418,9 +5826,14 @@ export const OpenStreetMapBaseUrisChanged = {
   },
 
   fromJSON(object: any): OpenStreetMapBaseUrisChanged {
-    const message = { ...baseOpenStreetMapBaseUrisChanged } as OpenStreetMapBaseUrisChanged;
+    const message = {
+      ...baseOpenStreetMapBaseUrisChanged,
+    } as OpenStreetMapBaseUrisChanged;
     message.openstreetmapbaseuris = [];
-    if (object.openstreetmapbaseuris !== undefined && object.openstreetmapbaseuris !== null) {
+    if (
+      object.openstreetmapbaseuris !== undefined &&
+      object.openstreetmapbaseuris !== null
+    ) {
       for (const e of object.openstreetmapbaseuris) {
         message.openstreetmapbaseuris.push(String(e));
       }
@@ -5438,10 +5851,17 @@ export const OpenStreetMapBaseUrisChanged = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<OpenStreetMapBaseUrisChanged>): OpenStreetMapBaseUrisChanged {
-    const message = { ...baseOpenStreetMapBaseUrisChanged } as OpenStreetMapBaseUrisChanged;
+  fromPartial(
+    object: DeepPartial<OpenStreetMapBaseUrisChanged>
+  ): OpenStreetMapBaseUrisChanged {
+    const message = {
+      ...baseOpenStreetMapBaseUrisChanged,
+    } as OpenStreetMapBaseUrisChanged;
     message.openstreetmapbaseuris = [];
-    if (object.openstreetmapbaseuris !== undefined && object.openstreetmapbaseuris !== null) {
+    if (
+      object.openstreetmapbaseuris !== undefined &&
+      object.openstreetmapbaseuris !== null
+    ) {
       for (const e of object.openstreetmapbaseuris) {
         message.openstreetmapbaseuris.push(e);
       }
@@ -5453,7 +5873,10 @@ export const OpenStreetMapBaseUrisChanged = {
 const basePluginAdded: object = {};
 
 export const PluginAdded = {
-  encode(message: PluginAdded, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: PluginAdded,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
     if (message.plugin !== undefined) {
       Plugin.encode(message.plugin, writer.uint32(10).fork()).ldelim();
     }
@@ -5490,7 +5913,8 @@ export const PluginAdded = {
 
   toJSON(message: PluginAdded): unknown {
     const obj: any = {};
-    message.plugin !== undefined && (obj.plugin = message.plugin ? Plugin.toJSON(message.plugin) : undefined);
+    message.plugin !== undefined &&
+      (obj.plugin = message.plugin ? Plugin.toJSON(message.plugin) : undefined);
     return obj;
   },
 
@@ -5506,32 +5930,35 @@ export const PluginAdded = {
 };
 
 const basePluginChanged: object = {
-  token: '',
+  token: "",
   enabled: false,
-  parameters: '',
-  priority: '0',
+  parameters: "",
+  priority: "0",
   state: 0,
-  statemessage: '',
+  statemessage: "",
 };
 
 export const PluginChanged = {
-  encode(message: PluginChanged, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.token !== '') {
+  encode(
+    message: PluginChanged,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.token !== "") {
       writer.uint32(10).string(message.token);
     }
     if (message.enabled === true) {
       writer.uint32(16).bool(message.enabled);
     }
-    if (message.parameters !== '') {
+    if (message.parameters !== "") {
       writer.uint32(26).string(message.parameters);
     }
-    if (message.priority !== '0') {
+    if (message.priority !== "0") {
       writer.uint32(33).fixed64(message.priority);
     }
     if (message.state !== 0) {
       writer.uint32(40).int32(message.state);
     }
-    if (message.statemessage !== '') {
+    if (message.statemessage !== "") {
       writer.uint32(50).string(message.statemessage);
     }
     return writer;
@@ -5575,7 +6002,7 @@ export const PluginChanged = {
     if (object.token !== undefined && object.token !== null) {
       message.token = String(object.token);
     } else {
-      message.token = '';
+      message.token = "";
     }
     if (object.enabled !== undefined && object.enabled !== null) {
       message.enabled = Boolean(object.enabled);
@@ -5585,12 +6012,12 @@ export const PluginChanged = {
     if (object.parameters !== undefined && object.parameters !== null) {
       message.parameters = String(object.parameters);
     } else {
-      message.parameters = '';
+      message.parameters = "";
     }
     if (object.priority !== undefined && object.priority !== null) {
       message.priority = String(object.priority);
     } else {
-      message.priority = '0';
+      message.priority = "0";
     }
     if (object.state !== undefined && object.state !== null) {
       message.state = pluginStateFromJSON(object.state);
@@ -5600,7 +6027,7 @@ export const PluginChanged = {
     if (object.statemessage !== undefined && object.statemessage !== null) {
       message.statemessage = String(object.statemessage);
     } else {
-      message.statemessage = '';
+      message.statemessage = "";
     }
     return message;
   },
@@ -5611,8 +6038,10 @@ export const PluginChanged = {
     message.enabled !== undefined && (obj.enabled = message.enabled);
     message.parameters !== undefined && (obj.parameters = message.parameters);
     message.priority !== undefined && (obj.priority = message.priority);
-    message.state !== undefined && (obj.state = pluginStateToJSON(message.state));
-    message.statemessage !== undefined && (obj.statemessage = message.statemessage);
+    message.state !== undefined &&
+      (obj.state = pluginStateToJSON(message.state));
+    message.statemessage !== undefined &&
+      (obj.statemessage = message.statemessage);
     return obj;
   },
 
@@ -5621,7 +6050,7 @@ export const PluginChanged = {
     if (object.token !== undefined && object.token !== null) {
       message.token = object.token;
     } else {
-      message.token = '';
+      message.token = "";
     }
     if (object.enabled !== undefined && object.enabled !== null) {
       message.enabled = object.enabled;
@@ -5631,12 +6060,12 @@ export const PluginChanged = {
     if (object.parameters !== undefined && object.parameters !== null) {
       message.parameters = object.parameters;
     } else {
-      message.parameters = '';
+      message.parameters = "";
     }
     if (object.priority !== undefined && object.priority !== null) {
       message.priority = object.priority;
     } else {
-      message.priority = '0';
+      message.priority = "0";
     }
     if (object.state !== undefined && object.state !== null) {
       message.state = object.state;
@@ -5646,17 +6075,20 @@ export const PluginChanged = {
     if (object.statemessage !== undefined && object.statemessage !== null) {
       message.statemessage = object.statemessage;
     } else {
-      message.statemessage = '';
+      message.statemessage = "";
     }
     return message;
   },
 };
 
-const basePluginRemoved: object = { token: '' };
+const basePluginRemoved: object = { token: "" };
 
 export const PluginRemoved = {
-  encode(message: PluginRemoved, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.token !== '') {
+  encode(
+    message: PluginRemoved,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.token !== "") {
       writer.uint32(10).string(message.token);
     }
     return writer;
@@ -5685,7 +6117,7 @@ export const PluginRemoved = {
     if (object.token !== undefined && object.token !== null) {
       message.token = String(object.token);
     } else {
-      message.token = '';
+      message.token = "";
     }
     return message;
   },
@@ -5701,23 +6133,26 @@ export const PluginRemoved = {
     if (object.token !== undefined && object.token !== null) {
       message.token = object.token;
     } else {
-      message.token = '';
+      message.token = "";
     }
     return message;
   },
 };
 
-const basePluginStateChanged: object = { token: '', state: 0, message: '' };
+const basePluginStateChanged: object = { token: "", state: 0, message: "" };
 
 export const PluginStateChanged = {
-  encode(message: PluginStateChanged, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.token !== '') {
+  encode(
+    message: PluginStateChanged,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.token !== "") {
       writer.uint32(10).string(message.token);
     }
     if (message.state !== 0) {
       writer.uint32(16).int32(message.state);
     }
-    if (message.message !== '') {
+    if (message.message !== "") {
       writer.uint32(26).string(message.message);
     }
     return writer;
@@ -5752,7 +6187,7 @@ export const PluginStateChanged = {
     if (object.token !== undefined && object.token !== null) {
       message.token = String(object.token);
     } else {
-      message.token = '';
+      message.token = "";
     }
     if (object.state !== undefined && object.state !== null) {
       message.state = pluginStateFromJSON(object.state);
@@ -5762,7 +6197,7 @@ export const PluginStateChanged = {
     if (object.message !== undefined && object.message !== null) {
       message.message = String(object.message);
     } else {
-      message.message = '';
+      message.message = "";
     }
     return message;
   },
@@ -5770,7 +6205,8 @@ export const PluginStateChanged = {
   toJSON(message: PluginStateChanged): unknown {
     const obj: any = {};
     message.token !== undefined && (obj.token = message.token);
-    message.state !== undefined && (obj.state = pluginStateToJSON(message.state));
+    message.state !== undefined &&
+      (obj.state = pluginStateToJSON(message.state));
     message.message !== undefined && (obj.message = message.message);
     return obj;
   },
@@ -5780,7 +6216,7 @@ export const PluginStateChanged = {
     if (object.token !== undefined && object.token !== null) {
       message.token = object.token;
     } else {
-      message.token = '';
+      message.token = "";
     }
     if (object.state !== undefined && object.state !== null) {
       message.state = object.state;
@@ -5790,7 +6226,7 @@ export const PluginStateChanged = {
     if (object.message !== undefined && object.message !== null) {
       message.message = object.message;
     } else {
-      message.message = '';
+      message.message = "";
     }
     return message;
   },
@@ -5799,7 +6235,10 @@ export const PluginStateChanged = {
 const baseReceiverAdded: object = {};
 
 export const ReceiverAdded = {
-  encode(message: ReceiverAdded, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: ReceiverAdded,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
     if (message.receiver !== undefined) {
       Receiver.encode(message.receiver, writer.uint32(10).fork()).ldelim();
     }
@@ -5836,7 +6275,10 @@ export const ReceiverAdded = {
 
   toJSON(message: ReceiverAdded): unknown {
     const obj: any = {};
-    message.receiver !== undefined && (obj.receiver = message.receiver ? Receiver.toJSON(message.receiver) : undefined);
+    message.receiver !== undefined &&
+      (obj.receiver = message.receiver
+        ? Receiver.toJSON(message.receiver)
+        : undefined);
     return obj;
   },
 
@@ -5854,7 +6296,10 @@ export const ReceiverAdded = {
 const baseReceiverChanged: object = {};
 
 export const ReceiverChanged = {
-  encode(message: ReceiverChanged, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: ReceiverChanged,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
     if (message.receiver !== undefined) {
       Receiver.encode(message.receiver, writer.uint32(10).fork()).ldelim();
     }
@@ -5891,7 +6336,10 @@ export const ReceiverChanged = {
 
   toJSON(message: ReceiverChanged): unknown {
     const obj: any = {};
-    message.receiver !== undefined && (obj.receiver = message.receiver ? Receiver.toJSON(message.receiver) : undefined);
+    message.receiver !== undefined &&
+      (obj.receiver = message.receiver
+        ? Receiver.toJSON(message.receiver)
+        : undefined);
     return obj;
   },
 
@@ -5906,11 +6354,14 @@ export const ReceiverChanged = {
   },
 };
 
-const baseReceiverRemoved: object = { token: '' };
+const baseReceiverRemoved: object = { token: "" };
 
 export const ReceiverRemoved = {
-  encode(message: ReceiverRemoved, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.token !== '') {
+  encode(
+    message: ReceiverRemoved,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.token !== "") {
       writer.uint32(10).string(message.token);
     }
     return writer;
@@ -5939,7 +6390,7 @@ export const ReceiverRemoved = {
     if (object.token !== undefined && object.token !== null) {
       message.token = String(object.token);
     } else {
-      message.token = '';
+      message.token = "";
     }
     return message;
   },
@@ -5955,7 +6406,7 @@ export const ReceiverRemoved = {
     if (object.token !== undefined && object.token !== null) {
       message.token = object.token;
     } else {
-      message.token = '';
+      message.token = "";
     }
     return message;
   },
@@ -5964,17 +6415,28 @@ export const ReceiverRemoved = {
 const baseRecordingJobSourceAdded: object = {};
 
 export const RecordingJobSourceAdded = {
-  encode(message: RecordingJobSourceAdded, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: RecordingJobSourceAdded,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
     if (message.source !== undefined) {
-      RecordingJobSource.encode(message.source, writer.uint32(10).fork()).ldelim();
+      RecordingJobSource.encode(
+        message.source,
+        writer.uint32(10).fork()
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): RecordingJobSourceAdded {
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): RecordingJobSourceAdded {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseRecordingJobSourceAdded } as RecordingJobSourceAdded;
+    const message = {
+      ...baseRecordingJobSourceAdded,
+    } as RecordingJobSourceAdded;
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -5990,7 +6452,9 @@ export const RecordingJobSourceAdded = {
   },
 
   fromJSON(object: any): RecordingJobSourceAdded {
-    const message = { ...baseRecordingJobSourceAdded } as RecordingJobSourceAdded;
+    const message = {
+      ...baseRecordingJobSourceAdded,
+    } as RecordingJobSourceAdded;
     if (object.source !== undefined && object.source !== null) {
       message.source = RecordingJobSource.fromJSON(object.source);
     } else {
@@ -6002,12 +6466,18 @@ export const RecordingJobSourceAdded = {
   toJSON(message: RecordingJobSourceAdded): unknown {
     const obj: any = {};
     message.source !== undefined &&
-      (obj.source = message.source ? RecordingJobSource.toJSON(message.source) : undefined);
+      (obj.source = message.source
+        ? RecordingJobSource.toJSON(message.source)
+        : undefined);
     return obj;
   },
 
-  fromPartial(object: DeepPartial<RecordingJobSourceAdded>): RecordingJobSourceAdded {
-    const message = { ...baseRecordingJobSourceAdded } as RecordingJobSourceAdded;
+  fromPartial(
+    object: DeepPartial<RecordingJobSourceAdded>
+  ): RecordingJobSourceAdded {
+    const message = {
+      ...baseRecordingJobSourceAdded,
+    } as RecordingJobSourceAdded;
     if (object.source !== undefined && object.source !== null) {
       message.source = RecordingJobSource.fromPartial(object.source);
     } else {
@@ -6018,29 +6488,37 @@ export const RecordingJobSourceAdded = {
 };
 
 const baseRecordingJobSourceRemoved: object = {
-  recordingtoken: '',
-  recordingjobtoken: '',
-  recordingjobsourcetoken: '',
+  recordingtoken: "",
+  recordingjobtoken: "",
+  recordingjobsourcetoken: "",
 };
 
 export const RecordingJobSourceRemoved = {
-  encode(message: RecordingJobSourceRemoved, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.recordingtoken !== '') {
+  encode(
+    message: RecordingJobSourceRemoved,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.recordingtoken !== "") {
       writer.uint32(10).string(message.recordingtoken);
     }
-    if (message.recordingjobtoken !== '') {
+    if (message.recordingjobtoken !== "") {
       writer.uint32(18).string(message.recordingjobtoken);
     }
-    if (message.recordingjobsourcetoken !== '') {
+    if (message.recordingjobsourcetoken !== "") {
       writer.uint32(26).string(message.recordingjobsourcetoken);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): RecordingJobSourceRemoved {
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): RecordingJobSourceRemoved {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseRecordingJobSourceRemoved } as RecordingJobSourceRemoved;
+    const message = {
+      ...baseRecordingJobSourceRemoved,
+    } as RecordingJobSourceRemoved;
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -6062,49 +6540,70 @@ export const RecordingJobSourceRemoved = {
   },
 
   fromJSON(object: any): RecordingJobSourceRemoved {
-    const message = { ...baseRecordingJobSourceRemoved } as RecordingJobSourceRemoved;
+    const message = {
+      ...baseRecordingJobSourceRemoved,
+    } as RecordingJobSourceRemoved;
     if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
       message.recordingtoken = String(object.recordingtoken);
     } else {
-      message.recordingtoken = '';
+      message.recordingtoken = "";
     }
-    if (object.recordingjobtoken !== undefined && object.recordingjobtoken !== null) {
+    if (
+      object.recordingjobtoken !== undefined &&
+      object.recordingjobtoken !== null
+    ) {
       message.recordingjobtoken = String(object.recordingjobtoken);
     } else {
-      message.recordingjobtoken = '';
+      message.recordingjobtoken = "";
     }
-    if (object.recordingjobsourcetoken !== undefined && object.recordingjobsourcetoken !== null) {
+    if (
+      object.recordingjobsourcetoken !== undefined &&
+      object.recordingjobsourcetoken !== null
+    ) {
       message.recordingjobsourcetoken = String(object.recordingjobsourcetoken);
     } else {
-      message.recordingjobsourcetoken = '';
+      message.recordingjobsourcetoken = "";
     }
     return message;
   },
 
   toJSON(message: RecordingJobSourceRemoved): unknown {
     const obj: any = {};
-    message.recordingtoken !== undefined && (obj.recordingtoken = message.recordingtoken);
-    message.recordingjobtoken !== undefined && (obj.recordingjobtoken = message.recordingjobtoken);
-    message.recordingjobsourcetoken !== undefined && (obj.recordingjobsourcetoken = message.recordingjobsourcetoken);
+    message.recordingtoken !== undefined &&
+      (obj.recordingtoken = message.recordingtoken);
+    message.recordingjobtoken !== undefined &&
+      (obj.recordingjobtoken = message.recordingjobtoken);
+    message.recordingjobsourcetoken !== undefined &&
+      (obj.recordingjobsourcetoken = message.recordingjobsourcetoken);
     return obj;
   },
 
-  fromPartial(object: DeepPartial<RecordingJobSourceRemoved>): RecordingJobSourceRemoved {
-    const message = { ...baseRecordingJobSourceRemoved } as RecordingJobSourceRemoved;
+  fromPartial(
+    object: DeepPartial<RecordingJobSourceRemoved>
+  ): RecordingJobSourceRemoved {
+    const message = {
+      ...baseRecordingJobSourceRemoved,
+    } as RecordingJobSourceRemoved;
     if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
       message.recordingtoken = object.recordingtoken;
     } else {
-      message.recordingtoken = '';
+      message.recordingtoken = "";
     }
-    if (object.recordingjobtoken !== undefined && object.recordingjobtoken !== null) {
+    if (
+      object.recordingjobtoken !== undefined &&
+      object.recordingjobtoken !== null
+    ) {
       message.recordingjobtoken = object.recordingjobtoken;
     } else {
-      message.recordingjobtoken = '';
+      message.recordingjobtoken = "";
     }
-    if (object.recordingjobsourcetoken !== undefined && object.recordingjobsourcetoken !== null) {
+    if (
+      object.recordingjobsourcetoken !== undefined &&
+      object.recordingjobsourcetoken !== null
+    ) {
       message.recordingjobsourcetoken = object.recordingjobsourcetoken;
     } else {
-      message.recordingjobsourcetoken = '';
+      message.recordingjobsourcetoken = "";
     }
     return message;
   },
@@ -6113,22 +6612,36 @@ export const RecordingJobSourceRemoved = {
 const baseRecordingJobSourceTrackAdded: object = {};
 
 export const RecordingJobSourceTrackAdded = {
-  encode(message: RecordingJobSourceTrackAdded, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: RecordingJobSourceTrackAdded,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
     if (message.track !== undefined) {
-      RecordingJobSourceTrack.encode(message.track, writer.uint32(10).fork()).ldelim();
+      RecordingJobSourceTrack.encode(
+        message.track,
+        writer.uint32(10).fork()
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): RecordingJobSourceTrackAdded {
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): RecordingJobSourceTrackAdded {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseRecordingJobSourceTrackAdded } as RecordingJobSourceTrackAdded;
+    const message = {
+      ...baseRecordingJobSourceTrackAdded,
+    } as RecordingJobSourceTrackAdded;
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.track = RecordingJobSourceTrack.decode(reader, reader.uint32());
+          message.track = RecordingJobSourceTrack.decode(
+            reader,
+            reader.uint32()
+          );
           break;
         default:
           reader.skipType(tag & 7);
@@ -6139,7 +6652,9 @@ export const RecordingJobSourceTrackAdded = {
   },
 
   fromJSON(object: any): RecordingJobSourceTrackAdded {
-    const message = { ...baseRecordingJobSourceTrackAdded } as RecordingJobSourceTrackAdded;
+    const message = {
+      ...baseRecordingJobSourceTrackAdded,
+    } as RecordingJobSourceTrackAdded;
     if (object.track !== undefined && object.track !== null) {
       message.track = RecordingJobSourceTrack.fromJSON(object.track);
     } else {
@@ -6151,12 +6666,18 @@ export const RecordingJobSourceTrackAdded = {
   toJSON(message: RecordingJobSourceTrackAdded): unknown {
     const obj: any = {};
     message.track !== undefined &&
-      (obj.track = message.track ? RecordingJobSourceTrack.toJSON(message.track) : undefined);
+      (obj.track = message.track
+        ? RecordingJobSourceTrack.toJSON(message.track)
+        : undefined);
     return obj;
   },
 
-  fromPartial(object: DeepPartial<RecordingJobSourceTrackAdded>): RecordingJobSourceTrackAdded {
-    const message = { ...baseRecordingJobSourceTrackAdded } as RecordingJobSourceTrackAdded;
+  fromPartial(
+    object: DeepPartial<RecordingJobSourceTrackAdded>
+  ): RecordingJobSourceTrackAdded {
+    const message = {
+      ...baseRecordingJobSourceTrackAdded,
+    } as RecordingJobSourceTrackAdded;
     if (object.track !== undefined && object.track !== null) {
       message.track = RecordingJobSourceTrack.fromPartial(object.track);
     } else {
@@ -6167,33 +6688,41 @@ export const RecordingJobSourceTrackAdded = {
 };
 
 const baseRecordingJobSourceTrackRemoved: object = {
-  recordingtoken: '',
-  recordingjobtoken: '',
-  recordingjobsourcetoken: '',
-  recordingjobsourcetracktoken: '',
+  recordingtoken: "",
+  recordingjobtoken: "",
+  recordingjobsourcetoken: "",
+  recordingjobsourcetracktoken: "",
 };
 
 export const RecordingJobSourceTrackRemoved = {
-  encode(message: RecordingJobSourceTrackRemoved, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.recordingtoken !== '') {
+  encode(
+    message: RecordingJobSourceTrackRemoved,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.recordingtoken !== "") {
       writer.uint32(10).string(message.recordingtoken);
     }
-    if (message.recordingjobtoken !== '') {
+    if (message.recordingjobtoken !== "") {
       writer.uint32(18).string(message.recordingjobtoken);
     }
-    if (message.recordingjobsourcetoken !== '') {
+    if (message.recordingjobsourcetoken !== "") {
       writer.uint32(26).string(message.recordingjobsourcetoken);
     }
-    if (message.recordingjobsourcetracktoken !== '') {
+    if (message.recordingjobsourcetracktoken !== "") {
       writer.uint32(34).string(message.recordingjobsourcetracktoken);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): RecordingJobSourceTrackRemoved {
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): RecordingJobSourceTrackRemoved {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseRecordingJobSourceTrackRemoved } as RecordingJobSourceTrackRemoved;
+    const message = {
+      ...baseRecordingJobSourceTrackRemoved,
+    } as RecordingJobSourceTrackRemoved;
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -6218,71 +6747,104 @@ export const RecordingJobSourceTrackRemoved = {
   },
 
   fromJSON(object: any): RecordingJobSourceTrackRemoved {
-    const message = { ...baseRecordingJobSourceTrackRemoved } as RecordingJobSourceTrackRemoved;
+    const message = {
+      ...baseRecordingJobSourceTrackRemoved,
+    } as RecordingJobSourceTrackRemoved;
     if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
       message.recordingtoken = String(object.recordingtoken);
     } else {
-      message.recordingtoken = '';
+      message.recordingtoken = "";
     }
-    if (object.recordingjobtoken !== undefined && object.recordingjobtoken !== null) {
+    if (
+      object.recordingjobtoken !== undefined &&
+      object.recordingjobtoken !== null
+    ) {
       message.recordingjobtoken = String(object.recordingjobtoken);
     } else {
-      message.recordingjobtoken = '';
+      message.recordingjobtoken = "";
     }
-    if (object.recordingjobsourcetoken !== undefined && object.recordingjobsourcetoken !== null) {
+    if (
+      object.recordingjobsourcetoken !== undefined &&
+      object.recordingjobsourcetoken !== null
+    ) {
       message.recordingjobsourcetoken = String(object.recordingjobsourcetoken);
     } else {
-      message.recordingjobsourcetoken = '';
+      message.recordingjobsourcetoken = "";
     }
-    if (object.recordingjobsourcetracktoken !== undefined && object.recordingjobsourcetracktoken !== null) {
-      message.recordingjobsourcetracktoken = String(object.recordingjobsourcetracktoken);
+    if (
+      object.recordingjobsourcetracktoken !== undefined &&
+      object.recordingjobsourcetracktoken !== null
+    ) {
+      message.recordingjobsourcetracktoken = String(
+        object.recordingjobsourcetracktoken
+      );
     } else {
-      message.recordingjobsourcetracktoken = '';
+      message.recordingjobsourcetracktoken = "";
     }
     return message;
   },
 
   toJSON(message: RecordingJobSourceTrackRemoved): unknown {
     const obj: any = {};
-    message.recordingtoken !== undefined && (obj.recordingtoken = message.recordingtoken);
-    message.recordingjobtoken !== undefined && (obj.recordingjobtoken = message.recordingjobtoken);
-    message.recordingjobsourcetoken !== undefined && (obj.recordingjobsourcetoken = message.recordingjobsourcetoken);
+    message.recordingtoken !== undefined &&
+      (obj.recordingtoken = message.recordingtoken);
+    message.recordingjobtoken !== undefined &&
+      (obj.recordingjobtoken = message.recordingjobtoken);
+    message.recordingjobsourcetoken !== undefined &&
+      (obj.recordingjobsourcetoken = message.recordingjobsourcetoken);
     message.recordingjobsourcetracktoken !== undefined &&
       (obj.recordingjobsourcetracktoken = message.recordingjobsourcetracktoken);
     return obj;
   },
 
-  fromPartial(object: DeepPartial<RecordingJobSourceTrackRemoved>): RecordingJobSourceTrackRemoved {
-    const message = { ...baseRecordingJobSourceTrackRemoved } as RecordingJobSourceTrackRemoved;
+  fromPartial(
+    object: DeepPartial<RecordingJobSourceTrackRemoved>
+  ): RecordingJobSourceTrackRemoved {
+    const message = {
+      ...baseRecordingJobSourceTrackRemoved,
+    } as RecordingJobSourceTrackRemoved;
     if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
       message.recordingtoken = object.recordingtoken;
     } else {
-      message.recordingtoken = '';
+      message.recordingtoken = "";
     }
-    if (object.recordingjobtoken !== undefined && object.recordingjobtoken !== null) {
+    if (
+      object.recordingjobtoken !== undefined &&
+      object.recordingjobtoken !== null
+    ) {
       message.recordingjobtoken = object.recordingjobtoken;
     } else {
-      message.recordingjobtoken = '';
+      message.recordingjobtoken = "";
     }
-    if (object.recordingjobsourcetoken !== undefined && object.recordingjobsourcetoken !== null) {
+    if (
+      object.recordingjobsourcetoken !== undefined &&
+      object.recordingjobsourcetoken !== null
+    ) {
       message.recordingjobsourcetoken = object.recordingjobsourcetoken;
     } else {
-      message.recordingjobsourcetoken = '';
+      message.recordingjobsourcetoken = "";
     }
-    if (object.recordingjobsourcetracktoken !== undefined && object.recordingjobsourcetracktoken !== null) {
-      message.recordingjobsourcetracktoken = object.recordingjobsourcetracktoken;
+    if (
+      object.recordingjobsourcetracktoken !== undefined &&
+      object.recordingjobsourcetracktoken !== null
+    ) {
+      message.recordingjobsourcetracktoken =
+        object.recordingjobsourcetracktoken;
     } else {
-      message.recordingjobsourcetracktoken = '';
+      message.recordingjobsourcetracktoken = "";
     }
     return message;
   },
 };
 
-const baseRecordingLogMessage: object = { token: '' };
+const baseRecordingLogMessage: object = { token: "" };
 
 export const RecordingLogMessage = {
-  encode(message: RecordingLogMessage, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.token !== '') {
+  encode(
+    message: RecordingLogMessage,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.token !== "") {
       writer.uint32(10).string(message.token);
     }
     if (message.logmessage !== undefined) {
@@ -6317,7 +6879,7 @@ export const RecordingLogMessage = {
     if (object.token !== undefined && object.token !== null) {
       message.token = String(object.token);
     } else {
-      message.token = '';
+      message.token = "";
     }
     if (object.logmessage !== undefined && object.logmessage !== null) {
       message.logmessage = LogMessage.fromJSON(object.logmessage);
@@ -6331,7 +6893,9 @@ export const RecordingLogMessage = {
     const obj: any = {};
     message.token !== undefined && (obj.token = message.token);
     message.logmessage !== undefined &&
-      (obj.logmessage = message.logmessage ? LogMessage.toJSON(message.logmessage) : undefined);
+      (obj.logmessage = message.logmessage
+        ? LogMessage.toJSON(message.logmessage)
+        : undefined);
     return obj;
   },
 
@@ -6340,7 +6904,7 @@ export const RecordingLogMessage = {
     if (object.token !== undefined && object.token !== null) {
       message.token = object.token;
     } else {
-      message.token = '';
+      message.token = "";
     }
     if (object.logmessage !== undefined && object.logmessage !== null) {
       message.logmessage = LogMessage.fromPartial(object.logmessage);
@@ -6351,11 +6915,14 @@ export const RecordingLogMessage = {
   },
 };
 
-const baseRecordingTrackLogMessage: object = { recordingtoken: '', trackid: 0 };
+const baseRecordingTrackLogMessage: object = { recordingtoken: "", trackid: 0 };
 
 export const RecordingTrackLogMessage = {
-  encode(message: RecordingTrackLogMessage, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.recordingtoken !== '') {
+  encode(
+    message: RecordingTrackLogMessage,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.recordingtoken !== "") {
       writer.uint32(10).string(message.recordingtoken);
     }
     if (message.trackid !== 0) {
@@ -6367,10 +6934,15 @@ export const RecordingTrackLogMessage = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): RecordingTrackLogMessage {
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): RecordingTrackLogMessage {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseRecordingTrackLogMessage } as RecordingTrackLogMessage;
+    const message = {
+      ...baseRecordingTrackLogMessage,
+    } as RecordingTrackLogMessage;
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -6392,11 +6964,13 @@ export const RecordingTrackLogMessage = {
   },
 
   fromJSON(object: any): RecordingTrackLogMessage {
-    const message = { ...baseRecordingTrackLogMessage } as RecordingTrackLogMessage;
+    const message = {
+      ...baseRecordingTrackLogMessage,
+    } as RecordingTrackLogMessage;
     if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
       message.recordingtoken = String(object.recordingtoken);
     } else {
-      message.recordingtoken = '';
+      message.recordingtoken = "";
     }
     if (object.trackid !== undefined && object.trackid !== null) {
       message.trackid = Number(object.trackid);
@@ -6413,19 +6987,26 @@ export const RecordingTrackLogMessage = {
 
   toJSON(message: RecordingTrackLogMessage): unknown {
     const obj: any = {};
-    message.recordingtoken !== undefined && (obj.recordingtoken = message.recordingtoken);
+    message.recordingtoken !== undefined &&
+      (obj.recordingtoken = message.recordingtoken);
     message.trackid !== undefined && (obj.trackid = message.trackid);
     message.logmessage !== undefined &&
-      (obj.logmessage = message.logmessage ? LogMessage.toJSON(message.logmessage) : undefined);
+      (obj.logmessage = message.logmessage
+        ? LogMessage.toJSON(message.logmessage)
+        : undefined);
     return obj;
   },
 
-  fromPartial(object: DeepPartial<RecordingTrackLogMessage>): RecordingTrackLogMessage {
-    const message = { ...baseRecordingTrackLogMessage } as RecordingTrackLogMessage;
+  fromPartial(
+    object: DeepPartial<RecordingTrackLogMessage>
+  ): RecordingTrackLogMessage {
+    const message = {
+      ...baseRecordingTrackLogMessage,
+    } as RecordingTrackLogMessage;
     if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
       message.recordingtoken = object.recordingtoken;
     } else {
-      message.recordingtoken = '';
+      message.recordingtoken = "";
     }
     if (object.trackid !== undefined && object.trackid !== null) {
       message.trackid = object.trackid;
@@ -6444,7 +7025,10 @@ export const RecordingTrackLogMessage = {
 const baseRecordingAdded: object = {};
 
 export const RecordingAdded = {
-  encode(message: RecordingAdded, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: RecordingAdded,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
     if (message.recording !== undefined) {
       Recording.encode(message.recording, writer.uint32(10).fork()).ldelim();
     }
@@ -6482,7 +7066,9 @@ export const RecordingAdded = {
   toJSON(message: RecordingAdded): unknown {
     const obj: any = {};
     message.recording !== undefined &&
-      (obj.recording = message.recording ? Recording.toJSON(message.recording) : undefined);
+      (obj.recording = message.recording
+        ? Recording.toJSON(message.recording)
+        : undefined);
     return obj;
   },
 
@@ -6500,7 +7086,10 @@ export const RecordingAdded = {
 const baseRecordingChanged: object = {};
 
 export const RecordingChanged = {
-  encode(message: RecordingChanged, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: RecordingChanged,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
     if (message.recording !== undefined) {
       Recording.encode(message.recording, writer.uint32(10).fork()).ldelim();
     }
@@ -6538,7 +7127,9 @@ export const RecordingChanged = {
   toJSON(message: RecordingChanged): unknown {
     const obj: any = {};
     message.recording !== undefined &&
-      (obj.recording = message.recording ? Recording.toJSON(message.recording) : undefined);
+      (obj.recording = message.recording
+        ? Recording.toJSON(message.recording)
+        : undefined);
     return obj;
   },
 
@@ -6553,11 +7144,14 @@ export const RecordingChanged = {
   },
 };
 
-const baseRecordingRemoved: object = { token: '' };
+const baseRecordingRemoved: object = { token: "" };
 
 export const RecordingRemoved = {
-  encode(message: RecordingRemoved, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.token !== '') {
+  encode(
+    message: RecordingRemoved,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.token !== "") {
       writer.uint32(10).string(message.token);
     }
     return writer;
@@ -6586,7 +7180,7 @@ export const RecordingRemoved = {
     if (object.token !== undefined && object.token !== null) {
       message.token = String(object.token);
     } else {
-      message.token = '';
+      message.token = "";
     }
     return message;
   },
@@ -6602,7 +7196,7 @@ export const RecordingRemoved = {
     if (object.token !== undefined && object.token !== null) {
       message.token = object.token;
     } else {
-      message.token = '';
+      message.token = "";
     }
     return message;
   },
@@ -6611,9 +7205,15 @@ export const RecordingRemoved = {
 const baseRecordingJobAdded: object = {};
 
 export const RecordingJobAdded = {
-  encode(message: RecordingJobAdded, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: RecordingJobAdded,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
     if (message.recordingjob !== undefined) {
-      RecordingJob.encode(message.recordingjob, writer.uint32(10).fork()).ldelim();
+      RecordingJob.encode(
+        message.recordingjob,
+        writer.uint32(10).fork()
+      ).ldelim();
     }
     return writer;
   },
@@ -6649,7 +7249,9 @@ export const RecordingJobAdded = {
   toJSON(message: RecordingJobAdded): unknown {
     const obj: any = {};
     message.recordingjob !== undefined &&
-      (obj.recordingjob = message.recordingjob ? RecordingJob.toJSON(message.recordingjob) : undefined);
+      (obj.recordingjob = message.recordingjob
+        ? RecordingJob.toJSON(message.recordingjob)
+        : undefined);
     return obj;
   },
 
@@ -6667,9 +7269,15 @@ export const RecordingJobAdded = {
 const baseRecordingJobChanged: object = {};
 
 export const RecordingJobChanged = {
-  encode(message: RecordingJobChanged, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: RecordingJobChanged,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
     if (message.recordingjob !== undefined) {
-      RecordingJob.encode(message.recordingjob, writer.uint32(10).fork()).ldelim();
+      RecordingJob.encode(
+        message.recordingjob,
+        writer.uint32(10).fork()
+      ).ldelim();
     }
     return writer;
   },
@@ -6705,7 +7313,9 @@ export const RecordingJobChanged = {
   toJSON(message: RecordingJobChanged): unknown {
     const obj: any = {};
     message.recordingjob !== undefined &&
-      (obj.recordingjob = message.recordingjob ? RecordingJob.toJSON(message.recordingjob) : undefined);
+      (obj.recordingjob = message.recordingjob
+        ? RecordingJob.toJSON(message.recordingjob)
+        : undefined);
     return obj;
   },
 
@@ -6720,14 +7330,20 @@ export const RecordingJobChanged = {
   },
 };
 
-const baseRecordingJobRemoved: object = { recordingtoken: '', recordingjobtoken: '' };
+const baseRecordingJobRemoved: object = {
+  recordingtoken: "",
+  recordingjobtoken: "",
+};
 
 export const RecordingJobRemoved = {
-  encode(message: RecordingJobRemoved, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.recordingtoken !== '') {
+  encode(
+    message: RecordingJobRemoved,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.recordingtoken !== "") {
       writer.uint32(10).string(message.recordingtoken);
     }
-    if (message.recordingjobtoken !== '') {
+    if (message.recordingjobtoken !== "") {
       writer.uint32(18).string(message.recordingjobtoken);
     }
     return writer;
@@ -6759,20 +7375,25 @@ export const RecordingJobRemoved = {
     if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
       message.recordingtoken = String(object.recordingtoken);
     } else {
-      message.recordingtoken = '';
+      message.recordingtoken = "";
     }
-    if (object.recordingjobtoken !== undefined && object.recordingjobtoken !== null) {
+    if (
+      object.recordingjobtoken !== undefined &&
+      object.recordingjobtoken !== null
+    ) {
       message.recordingjobtoken = String(object.recordingjobtoken);
     } else {
-      message.recordingjobtoken = '';
+      message.recordingjobtoken = "";
     }
     return message;
   },
 
   toJSON(message: RecordingJobRemoved): unknown {
     const obj: any = {};
-    message.recordingtoken !== undefined && (obj.recordingtoken = message.recordingtoken);
-    message.recordingjobtoken !== undefined && (obj.recordingjobtoken = message.recordingjobtoken);
+    message.recordingtoken !== undefined &&
+      (obj.recordingtoken = message.recordingtoken);
+    message.recordingjobtoken !== undefined &&
+      (obj.recordingjobtoken = message.recordingjobtoken);
     return obj;
   },
 
@@ -6781,12 +7402,15 @@ export const RecordingJobRemoved = {
     if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
       message.recordingtoken = object.recordingtoken;
     } else {
-      message.recordingtoken = '';
+      message.recordingtoken = "";
     }
-    if (object.recordingjobtoken !== undefined && object.recordingjobtoken !== null) {
+    if (
+      object.recordingjobtoken !== undefined &&
+      object.recordingjobtoken !== null
+    ) {
       message.recordingjobtoken = object.recordingjobtoken;
     } else {
-      message.recordingjobtoken = '';
+      message.recordingjobtoken = "";
     }
     return message;
   },
@@ -6795,9 +7419,15 @@ export const RecordingJobRemoved = {
 const baseRecordingTrackAdded: object = {};
 
 export const RecordingTrackAdded = {
-  encode(message: RecordingTrackAdded, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: RecordingTrackAdded,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
     if (message.recordingtrack !== undefined) {
-      RecordingTrack.encode(message.recordingtrack, writer.uint32(10).fork()).ldelim();
+      RecordingTrack.encode(
+        message.recordingtrack,
+        writer.uint32(10).fork()
+      ).ldelim();
     }
     return writer;
   },
@@ -6810,7 +7440,10 @@ export const RecordingTrackAdded = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.recordingtrack = RecordingTrack.decode(reader, reader.uint32());
+          message.recordingtrack = RecordingTrack.decode(
+            reader,
+            reader.uint32()
+          );
           break;
         default:
           reader.skipType(tag & 7);
@@ -6833,14 +7466,18 @@ export const RecordingTrackAdded = {
   toJSON(message: RecordingTrackAdded): unknown {
     const obj: any = {};
     message.recordingtrack !== undefined &&
-      (obj.recordingtrack = message.recordingtrack ? RecordingTrack.toJSON(message.recordingtrack) : undefined);
+      (obj.recordingtrack = message.recordingtrack
+        ? RecordingTrack.toJSON(message.recordingtrack)
+        : undefined);
     return obj;
   },
 
   fromPartial(object: DeepPartial<RecordingTrackAdded>): RecordingTrackAdded {
     const message = { ...baseRecordingTrackAdded } as RecordingTrackAdded;
     if (object.recordingtrack !== undefined && object.recordingtrack !== null) {
-      message.recordingtrack = RecordingTrack.fromPartial(object.recordingtrack);
+      message.recordingtrack = RecordingTrack.fromPartial(
+        object.recordingtrack
+      );
     } else {
       message.recordingtrack = undefined;
     }
@@ -6851,14 +7488,23 @@ export const RecordingTrackAdded = {
 const baseRecordingTrackChanged: object = {};
 
 export const RecordingTrackChanged = {
-  encode(message: RecordingTrackChanged, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: RecordingTrackChanged,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
     if (message.recordingtrack !== undefined) {
-      RecordingTrack.encode(message.recordingtrack, writer.uint32(10).fork()).ldelim();
+      RecordingTrack.encode(
+        message.recordingtrack,
+        writer.uint32(10).fork()
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): RecordingTrackChanged {
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): RecordingTrackChanged {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = { ...baseRecordingTrackChanged } as RecordingTrackChanged;
@@ -6866,7 +7512,10 @@ export const RecordingTrackChanged = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.recordingtrack = RecordingTrack.decode(reader, reader.uint32());
+          message.recordingtrack = RecordingTrack.decode(
+            reader,
+            reader.uint32()
+          );
           break;
         default:
           reader.skipType(tag & 7);
@@ -6889,14 +7538,20 @@ export const RecordingTrackChanged = {
   toJSON(message: RecordingTrackChanged): unknown {
     const obj: any = {};
     message.recordingtrack !== undefined &&
-      (obj.recordingtrack = message.recordingtrack ? RecordingTrack.toJSON(message.recordingtrack) : undefined);
+      (obj.recordingtrack = message.recordingtrack
+        ? RecordingTrack.toJSON(message.recordingtrack)
+        : undefined);
     return obj;
   },
 
-  fromPartial(object: DeepPartial<RecordingTrackChanged>): RecordingTrackChanged {
+  fromPartial(
+    object: DeepPartial<RecordingTrackChanged>
+  ): RecordingTrackChanged {
     const message = { ...baseRecordingTrackChanged } as RecordingTrackChanged;
     if (object.recordingtrack !== undefined && object.recordingtrack !== null) {
-      message.recordingtrack = RecordingTrack.fromPartial(object.recordingtrack);
+      message.recordingtrack = RecordingTrack.fromPartial(
+        object.recordingtrack
+      );
     } else {
       message.recordingtrack = undefined;
     }
@@ -6904,11 +7559,17 @@ export const RecordingTrackChanged = {
   },
 };
 
-const baseRecordingTrackRemoved: object = { recordingtoken: '', recordingtrackid: 0 };
+const baseRecordingTrackRemoved: object = {
+  recordingtoken: "",
+  recordingtrackid: 0,
+};
 
 export const RecordingTrackRemoved = {
-  encode(message: RecordingTrackRemoved, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.recordingtoken !== '') {
+  encode(
+    message: RecordingTrackRemoved,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.recordingtoken !== "") {
       writer.uint32(10).string(message.recordingtoken);
     }
     if (message.recordingtrackid !== 0) {
@@ -6917,7 +7578,10 @@ export const RecordingTrackRemoved = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): RecordingTrackRemoved {
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): RecordingTrackRemoved {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = { ...baseRecordingTrackRemoved } as RecordingTrackRemoved;
@@ -6943,9 +7607,12 @@ export const RecordingTrackRemoved = {
     if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
       message.recordingtoken = String(object.recordingtoken);
     } else {
-      message.recordingtoken = '';
+      message.recordingtoken = "";
     }
-    if (object.recordingtrackid !== undefined && object.recordingtrackid !== null) {
+    if (
+      object.recordingtrackid !== undefined &&
+      object.recordingtrackid !== null
+    ) {
       message.recordingtrackid = Number(object.recordingtrackid);
     } else {
       message.recordingtrackid = 0;
@@ -6955,19 +7622,26 @@ export const RecordingTrackRemoved = {
 
   toJSON(message: RecordingTrackRemoved): unknown {
     const obj: any = {};
-    message.recordingtoken !== undefined && (obj.recordingtoken = message.recordingtoken);
-    message.recordingtrackid !== undefined && (obj.recordingtrackid = message.recordingtrackid);
+    message.recordingtoken !== undefined &&
+      (obj.recordingtoken = message.recordingtoken);
+    message.recordingtrackid !== undefined &&
+      (obj.recordingtrackid = message.recordingtrackid);
     return obj;
   },
 
-  fromPartial(object: DeepPartial<RecordingTrackRemoved>): RecordingTrackRemoved {
+  fromPartial(
+    object: DeepPartial<RecordingTrackRemoved>
+  ): RecordingTrackRemoved {
     const message = { ...baseRecordingTrackRemoved } as RecordingTrackRemoved;
     if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
       message.recordingtoken = object.recordingtoken;
     } else {
-      message.recordingtoken = '';
+      message.recordingtoken = "";
     }
-    if (object.recordingtrackid !== undefined && object.recordingtrackid !== null) {
+    if (
+      object.recordingtrackid !== undefined &&
+      object.recordingtrackid !== null
+    ) {
       message.recordingtrackid = object.recordingtrackid;
     } else {
       message.recordingtrackid = 0;
@@ -6976,23 +7650,34 @@ export const RecordingTrackRemoved = {
   },
 };
 
-const baseRecordingActiveJobChanged: object = { recordingtoken: '' };
+const baseRecordingActiveJobChanged: object = { recordingtoken: "" };
 
 export const RecordingActiveJobChanged = {
-  encode(message: RecordingActiveJobChanged, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.recordingtoken !== '') {
+  encode(
+    message: RecordingActiveJobChanged,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.recordingtoken !== "") {
       writer.uint32(10).string(message.recordingtoken);
     }
     if (message.activejob !== undefined) {
-      UInt64Value.encode({ value: message.activejob! }, writer.uint32(18).fork()).ldelim();
+      UInt64Value.encode(
+        { value: message.activejob! },
+        writer.uint32(18).fork()
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): RecordingActiveJobChanged {
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): RecordingActiveJobChanged {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseRecordingActiveJobChanged } as RecordingActiveJobChanged;
+    const message = {
+      ...baseRecordingActiveJobChanged,
+    } as RecordingActiveJobChanged;
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -7011,11 +7696,13 @@ export const RecordingActiveJobChanged = {
   },
 
   fromJSON(object: any): RecordingActiveJobChanged {
-    const message = { ...baseRecordingActiveJobChanged } as RecordingActiveJobChanged;
+    const message = {
+      ...baseRecordingActiveJobChanged,
+    } as RecordingActiveJobChanged;
     if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
       message.recordingtoken = String(object.recordingtoken);
     } else {
-      message.recordingtoken = '';
+      message.recordingtoken = "";
     }
     if (object.activejob !== undefined && object.activejob !== null) {
       message.activejob = String(object.activejob);
@@ -7027,17 +7714,22 @@ export const RecordingActiveJobChanged = {
 
   toJSON(message: RecordingActiveJobChanged): unknown {
     const obj: any = {};
-    message.recordingtoken !== undefined && (obj.recordingtoken = message.recordingtoken);
+    message.recordingtoken !== undefined &&
+      (obj.recordingtoken = message.recordingtoken);
     message.activejob !== undefined && (obj.activejob = message.activejob);
     return obj;
   },
 
-  fromPartial(object: DeepPartial<RecordingActiveJobChanged>): RecordingActiveJobChanged {
-    const message = { ...baseRecordingActiveJobChanged } as RecordingActiveJobChanged;
+  fromPartial(
+    object: DeepPartial<RecordingActiveJobChanged>
+  ): RecordingActiveJobChanged {
+    const message = {
+      ...baseRecordingActiveJobChanged,
+    } as RecordingActiveJobChanged;
     if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
       message.recordingtoken = object.recordingtoken;
     } else {
-      message.recordingtoken = '';
+      message.recordingtoken = "";
     }
     if (object.activejob !== undefined && object.activejob !== null) {
       message.activejob = object.activejob;
@@ -7049,28 +7741,28 @@ export const RecordingActiveJobChanged = {
 };
 
 const baseRecordingJobSourceTrackActiveParametersChanged: object = {
-  recordingtoken: '',
-  recordingjobtoken: '',
-  recordingjobsourcetoken: '',
-  recordingjobsourcetracktoken: '',
-  activeparameters: '',
+  recordingtoken: "",
+  recordingjobtoken: "",
+  recordingjobsourcetoken: "",
+  recordingjobsourcetracktoken: "",
+  activeparameters: "",
 };
 
 export const RecordingJobSourceTrackActiveParametersChanged = {
   encode(
     message: RecordingJobSourceTrackActiveParametersChanged,
-    writer: _m0.Writer = _m0.Writer.create(),
+    writer: _m0.Writer = _m0.Writer.create()
   ): _m0.Writer {
-    if (message.recordingtoken !== '') {
+    if (message.recordingtoken !== "") {
       writer.uint32(10).string(message.recordingtoken);
     }
-    if (message.recordingjobtoken !== '') {
+    if (message.recordingjobtoken !== "") {
       writer.uint32(18).string(message.recordingjobtoken);
     }
-    if (message.recordingjobsourcetoken !== '') {
+    if (message.recordingjobsourcetoken !== "") {
       writer.uint32(26).string(message.recordingjobsourcetoken);
     }
-    if (message.recordingjobsourcetracktoken !== '') {
+    if (message.recordingjobsourcetracktoken !== "") {
       writer.uint32(34).string(message.recordingjobsourcetracktoken);
     }
     for (const v of message.activeparameters) {
@@ -7079,7 +7771,10 @@ export const RecordingJobSourceTrackActiveParametersChanged = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): RecordingJobSourceTrackActiveParametersChanged {
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): RecordingJobSourceTrackActiveParametersChanged {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = {
@@ -7120,24 +7815,38 @@ export const RecordingJobSourceTrackActiveParametersChanged = {
     if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
       message.recordingtoken = String(object.recordingtoken);
     } else {
-      message.recordingtoken = '';
+      message.recordingtoken = "";
     }
-    if (object.recordingjobtoken !== undefined && object.recordingjobtoken !== null) {
+    if (
+      object.recordingjobtoken !== undefined &&
+      object.recordingjobtoken !== null
+    ) {
       message.recordingjobtoken = String(object.recordingjobtoken);
     } else {
-      message.recordingjobtoken = '';
+      message.recordingjobtoken = "";
     }
-    if (object.recordingjobsourcetoken !== undefined && object.recordingjobsourcetoken !== null) {
+    if (
+      object.recordingjobsourcetoken !== undefined &&
+      object.recordingjobsourcetoken !== null
+    ) {
       message.recordingjobsourcetoken = String(object.recordingjobsourcetoken);
     } else {
-      message.recordingjobsourcetoken = '';
+      message.recordingjobsourcetoken = "";
     }
-    if (object.recordingjobsourcetracktoken !== undefined && object.recordingjobsourcetracktoken !== null) {
-      message.recordingjobsourcetracktoken = String(object.recordingjobsourcetracktoken);
+    if (
+      object.recordingjobsourcetracktoken !== undefined &&
+      object.recordingjobsourcetracktoken !== null
+    ) {
+      message.recordingjobsourcetracktoken = String(
+        object.recordingjobsourcetracktoken
+      );
     } else {
-      message.recordingjobsourcetracktoken = '';
+      message.recordingjobsourcetracktoken = "";
     }
-    if (object.activeparameters !== undefined && object.activeparameters !== null) {
+    if (
+      object.activeparameters !== undefined &&
+      object.activeparameters !== null
+    ) {
       for (const e of object.activeparameters) {
         message.activeparameters.push(String(e));
       }
@@ -7147,9 +7856,12 @@ export const RecordingJobSourceTrackActiveParametersChanged = {
 
   toJSON(message: RecordingJobSourceTrackActiveParametersChanged): unknown {
     const obj: any = {};
-    message.recordingtoken !== undefined && (obj.recordingtoken = message.recordingtoken);
-    message.recordingjobtoken !== undefined && (obj.recordingjobtoken = message.recordingjobtoken);
-    message.recordingjobsourcetoken !== undefined && (obj.recordingjobsourcetoken = message.recordingjobsourcetoken);
+    message.recordingtoken !== undefined &&
+      (obj.recordingtoken = message.recordingtoken);
+    message.recordingjobtoken !== undefined &&
+      (obj.recordingjobtoken = message.recordingjobtoken);
+    message.recordingjobsourcetoken !== undefined &&
+      (obj.recordingjobsourcetoken = message.recordingjobsourcetoken);
     message.recordingjobsourcetracktoken !== undefined &&
       (obj.recordingjobsourcetracktoken = message.recordingjobsourcetracktoken);
     if (message.activeparameters) {
@@ -7161,7 +7873,7 @@ export const RecordingJobSourceTrackActiveParametersChanged = {
   },
 
   fromPartial(
-    object: DeepPartial<RecordingJobSourceTrackActiveParametersChanged>,
+    object: DeepPartial<RecordingJobSourceTrackActiveParametersChanged>
   ): RecordingJobSourceTrackActiveParametersChanged {
     const message = {
       ...baseRecordingJobSourceTrackActiveParametersChanged,
@@ -7170,24 +7882,37 @@ export const RecordingJobSourceTrackActiveParametersChanged = {
     if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
       message.recordingtoken = object.recordingtoken;
     } else {
-      message.recordingtoken = '';
+      message.recordingtoken = "";
     }
-    if (object.recordingjobtoken !== undefined && object.recordingjobtoken !== null) {
+    if (
+      object.recordingjobtoken !== undefined &&
+      object.recordingjobtoken !== null
+    ) {
       message.recordingjobtoken = object.recordingjobtoken;
     } else {
-      message.recordingjobtoken = '';
+      message.recordingjobtoken = "";
     }
-    if (object.recordingjobsourcetoken !== undefined && object.recordingjobsourcetoken !== null) {
+    if (
+      object.recordingjobsourcetoken !== undefined &&
+      object.recordingjobsourcetoken !== null
+    ) {
       message.recordingjobsourcetoken = object.recordingjobsourcetoken;
     } else {
-      message.recordingjobsourcetoken = '';
+      message.recordingjobsourcetoken = "";
     }
-    if (object.recordingjobsourcetracktoken !== undefined && object.recordingjobsourcetracktoken !== null) {
-      message.recordingjobsourcetracktoken = object.recordingjobsourcetracktoken;
+    if (
+      object.recordingjobsourcetracktoken !== undefined &&
+      object.recordingjobsourcetracktoken !== null
+    ) {
+      message.recordingjobsourcetracktoken =
+        object.recordingjobsourcetracktoken;
     } else {
-      message.recordingjobsourcetracktoken = '';
+      message.recordingjobsourcetracktoken = "";
     }
-    if (object.activeparameters !== undefined && object.activeparameters !== null) {
+    if (
+      object.activeparameters !== undefined &&
+      object.activeparameters !== null
+    ) {
       for (const e of object.activeparameters) {
         message.activeparameters.push(e);
       }
@@ -7197,45 +7922,53 @@ export const RecordingJobSourceTrackActiveParametersChanged = {
 };
 
 const baseRecordingJobSourceTrackState: object = {
-  recordingtoken: '',
-  recordingjobtoken: '',
-  recordingjobsourcetoken: '',
-  recordingjobsourcetracktoken: '',
-  time: '0',
+  recordingtoken: "",
+  recordingjobtoken: "",
+  recordingjobsourcetoken: "",
+  recordingjobsourcetracktoken: "",
+  time: "0",
   state: 0,
-  error: '',
+  error: "",
 };
 
 export const RecordingJobSourceTrackState = {
-  encode(message: RecordingJobSourceTrackState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.recordingtoken !== '') {
+  encode(
+    message: RecordingJobSourceTrackState,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.recordingtoken !== "") {
       writer.uint32(10).string(message.recordingtoken);
     }
-    if (message.recordingjobtoken !== '') {
+    if (message.recordingjobtoken !== "") {
       writer.uint32(18).string(message.recordingjobtoken);
     }
-    if (message.recordingjobsourcetoken !== '') {
+    if (message.recordingjobsourcetoken !== "") {
       writer.uint32(26).string(message.recordingjobsourcetoken);
     }
-    if (message.recordingjobsourcetracktoken !== '') {
+    if (message.recordingjobsourcetracktoken !== "") {
       writer.uint32(34).string(message.recordingjobsourcetracktoken);
     }
-    if (message.time !== '0') {
+    if (message.time !== "0") {
       writer.uint32(41).fixed64(message.time);
     }
     if (message.state !== 0) {
       writer.uint32(48).int32(message.state);
     }
-    if (message.error !== '') {
+    if (message.error !== "") {
       writer.uint32(58).string(message.error);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): RecordingJobSourceTrackState {
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): RecordingJobSourceTrackState {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseRecordingJobSourceTrackState } as RecordingJobSourceTrackState;
+    const message = {
+      ...baseRecordingJobSourceTrackState,
+    } as RecordingJobSourceTrackState;
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -7269,31 +8002,44 @@ export const RecordingJobSourceTrackState = {
   },
 
   fromJSON(object: any): RecordingJobSourceTrackState {
-    const message = { ...baseRecordingJobSourceTrackState } as RecordingJobSourceTrackState;
+    const message = {
+      ...baseRecordingJobSourceTrackState,
+    } as RecordingJobSourceTrackState;
     if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
       message.recordingtoken = String(object.recordingtoken);
     } else {
-      message.recordingtoken = '';
+      message.recordingtoken = "";
     }
-    if (object.recordingjobtoken !== undefined && object.recordingjobtoken !== null) {
+    if (
+      object.recordingjobtoken !== undefined &&
+      object.recordingjobtoken !== null
+    ) {
       message.recordingjobtoken = String(object.recordingjobtoken);
     } else {
-      message.recordingjobtoken = '';
+      message.recordingjobtoken = "";
     }
-    if (object.recordingjobsourcetoken !== undefined && object.recordingjobsourcetoken !== null) {
+    if (
+      object.recordingjobsourcetoken !== undefined &&
+      object.recordingjobsourcetoken !== null
+    ) {
       message.recordingjobsourcetoken = String(object.recordingjobsourcetoken);
     } else {
-      message.recordingjobsourcetoken = '';
+      message.recordingjobsourcetoken = "";
     }
-    if (object.recordingjobsourcetracktoken !== undefined && object.recordingjobsourcetracktoken !== null) {
-      message.recordingjobsourcetracktoken = String(object.recordingjobsourcetracktoken);
+    if (
+      object.recordingjobsourcetracktoken !== undefined &&
+      object.recordingjobsourcetracktoken !== null
+    ) {
+      message.recordingjobsourcetracktoken = String(
+        object.recordingjobsourcetracktoken
+      );
     } else {
-      message.recordingjobsourcetracktoken = '';
+      message.recordingjobsourcetracktoken = "";
     }
     if (object.time !== undefined && object.time !== null) {
       message.time = String(object.time);
     } else {
-      message.time = '0';
+      message.time = "0";
     }
     if (object.state !== undefined && object.state !== null) {
       message.state = recordingJobStateFromJSON(object.state);
@@ -7303,50 +8049,68 @@ export const RecordingJobSourceTrackState = {
     if (object.error !== undefined && object.error !== null) {
       message.error = String(object.error);
     } else {
-      message.error = '';
+      message.error = "";
     }
     return message;
   },
 
   toJSON(message: RecordingJobSourceTrackState): unknown {
     const obj: any = {};
-    message.recordingtoken !== undefined && (obj.recordingtoken = message.recordingtoken);
-    message.recordingjobtoken !== undefined && (obj.recordingjobtoken = message.recordingjobtoken);
-    message.recordingjobsourcetoken !== undefined && (obj.recordingjobsourcetoken = message.recordingjobsourcetoken);
+    message.recordingtoken !== undefined &&
+      (obj.recordingtoken = message.recordingtoken);
+    message.recordingjobtoken !== undefined &&
+      (obj.recordingjobtoken = message.recordingjobtoken);
+    message.recordingjobsourcetoken !== undefined &&
+      (obj.recordingjobsourcetoken = message.recordingjobsourcetoken);
     message.recordingjobsourcetracktoken !== undefined &&
       (obj.recordingjobsourcetracktoken = message.recordingjobsourcetracktoken);
     message.time !== undefined && (obj.time = message.time);
-    message.state !== undefined && (obj.state = recordingJobStateToJSON(message.state));
+    message.state !== undefined &&
+      (obj.state = recordingJobStateToJSON(message.state));
     message.error !== undefined && (obj.error = message.error);
     return obj;
   },
 
-  fromPartial(object: DeepPartial<RecordingJobSourceTrackState>): RecordingJobSourceTrackState {
-    const message = { ...baseRecordingJobSourceTrackState } as RecordingJobSourceTrackState;
+  fromPartial(
+    object: DeepPartial<RecordingJobSourceTrackState>
+  ): RecordingJobSourceTrackState {
+    const message = {
+      ...baseRecordingJobSourceTrackState,
+    } as RecordingJobSourceTrackState;
     if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
       message.recordingtoken = object.recordingtoken;
     } else {
-      message.recordingtoken = '';
+      message.recordingtoken = "";
     }
-    if (object.recordingjobtoken !== undefined && object.recordingjobtoken !== null) {
+    if (
+      object.recordingjobtoken !== undefined &&
+      object.recordingjobtoken !== null
+    ) {
       message.recordingjobtoken = object.recordingjobtoken;
     } else {
-      message.recordingjobtoken = '';
+      message.recordingjobtoken = "";
     }
-    if (object.recordingjobsourcetoken !== undefined && object.recordingjobsourcetoken !== null) {
+    if (
+      object.recordingjobsourcetoken !== undefined &&
+      object.recordingjobsourcetoken !== null
+    ) {
       message.recordingjobsourcetoken = object.recordingjobsourcetoken;
     } else {
-      message.recordingjobsourcetoken = '';
+      message.recordingjobsourcetoken = "";
     }
-    if (object.recordingjobsourcetracktoken !== undefined && object.recordingjobsourcetracktoken !== null) {
-      message.recordingjobsourcetracktoken = object.recordingjobsourcetracktoken;
+    if (
+      object.recordingjobsourcetracktoken !== undefined &&
+      object.recordingjobsourcetracktoken !== null
+    ) {
+      message.recordingjobsourcetracktoken =
+        object.recordingjobsourcetracktoken;
     } else {
-      message.recordingjobsourcetracktoken = '';
+      message.recordingjobsourcetracktoken = "";
     }
     if (object.time !== undefined && object.time !== null) {
       message.time = object.time;
     } else {
-      message.time = '0';
+      message.time = "0";
     }
     if (object.state !== undefined && object.state !== null) {
       message.state = object.state;
@@ -7356,48 +8120,56 @@ export const RecordingJobSourceTrackState = {
     if (object.error !== undefined && object.error !== null) {
       message.error = object.error;
     } else {
-      message.error = '';
+      message.error = "";
     }
     return message;
   },
 };
 
 const baseRecordingTrackCodecAdded: object = {
-  recordingtoken: '',
+  recordingtoken: "",
   recordingtrackid: 0,
-  codecid: '0',
+  codecid: "0",
   codec: 0,
-  parameters: '',
-  timestamp: '0',
+  parameters: "",
+  timestamp: "0",
 };
 
 export const RecordingTrackCodecAdded = {
-  encode(message: RecordingTrackCodecAdded, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.recordingtoken !== '') {
+  encode(
+    message: RecordingTrackCodecAdded,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.recordingtoken !== "") {
       writer.uint32(10).string(message.recordingtoken);
     }
     if (message.recordingtrackid !== 0) {
       writer.uint32(21).fixed32(message.recordingtrackid);
     }
-    if (message.codecid !== '0') {
+    if (message.codecid !== "0") {
       writer.uint32(25).fixed64(message.codecid);
     }
     if (message.codec !== 0) {
       writer.uint32(32).int32(message.codec);
     }
-    if (message.parameters !== '') {
+    if (message.parameters !== "") {
       writer.uint32(42).string(message.parameters);
     }
-    if (message.timestamp !== '0') {
+    if (message.timestamp !== "0") {
       writer.uint32(49).fixed64(message.timestamp);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): RecordingTrackCodecAdded {
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): RecordingTrackCodecAdded {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseRecordingTrackCodecAdded } as RecordingTrackCodecAdded;
+    const message = {
+      ...baseRecordingTrackCodecAdded,
+    } as RecordingTrackCodecAdded;
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -7428,13 +8200,18 @@ export const RecordingTrackCodecAdded = {
   },
 
   fromJSON(object: any): RecordingTrackCodecAdded {
-    const message = { ...baseRecordingTrackCodecAdded } as RecordingTrackCodecAdded;
+    const message = {
+      ...baseRecordingTrackCodecAdded,
+    } as RecordingTrackCodecAdded;
     if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
       message.recordingtoken = String(object.recordingtoken);
     } else {
-      message.recordingtoken = '';
+      message.recordingtoken = "";
     }
-    if (object.recordingtrackid !== undefined && object.recordingtrackid !== null) {
+    if (
+      object.recordingtrackid !== undefined &&
+      object.recordingtrackid !== null
+    ) {
       message.recordingtrackid = Number(object.recordingtrackid);
     } else {
       message.recordingtrackid = 0;
@@ -7442,7 +8219,7 @@ export const RecordingTrackCodecAdded = {
     if (object.codecid !== undefined && object.codecid !== null) {
       message.codecid = String(object.codecid);
     } else {
-      message.codecid = '0';
+      message.codecid = "0";
     }
     if (object.codec !== undefined && object.codec !== null) {
       message.codec = codecFromJSON(object.codec);
@@ -7452,20 +8229,22 @@ export const RecordingTrackCodecAdded = {
     if (object.parameters !== undefined && object.parameters !== null) {
       message.parameters = String(object.parameters);
     } else {
-      message.parameters = '';
+      message.parameters = "";
     }
     if (object.timestamp !== undefined && object.timestamp !== null) {
       message.timestamp = String(object.timestamp);
     } else {
-      message.timestamp = '0';
+      message.timestamp = "0";
     }
     return message;
   },
 
   toJSON(message: RecordingTrackCodecAdded): unknown {
     const obj: any = {};
-    message.recordingtoken !== undefined && (obj.recordingtoken = message.recordingtoken);
-    message.recordingtrackid !== undefined && (obj.recordingtrackid = message.recordingtrackid);
+    message.recordingtoken !== undefined &&
+      (obj.recordingtoken = message.recordingtoken);
+    message.recordingtrackid !== undefined &&
+      (obj.recordingtrackid = message.recordingtrackid);
     message.codecid !== undefined && (obj.codecid = message.codecid);
     message.codec !== undefined && (obj.codec = codecToJSON(message.codec));
     message.parameters !== undefined && (obj.parameters = message.parameters);
@@ -7473,14 +8252,21 @@ export const RecordingTrackCodecAdded = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<RecordingTrackCodecAdded>): RecordingTrackCodecAdded {
-    const message = { ...baseRecordingTrackCodecAdded } as RecordingTrackCodecAdded;
+  fromPartial(
+    object: DeepPartial<RecordingTrackCodecAdded>
+  ): RecordingTrackCodecAdded {
+    const message = {
+      ...baseRecordingTrackCodecAdded,
+    } as RecordingTrackCodecAdded;
     if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
       message.recordingtoken = object.recordingtoken;
     } else {
-      message.recordingtoken = '';
+      message.recordingtoken = "";
     }
-    if (object.recordingtrackid !== undefined && object.recordingtrackid !== null) {
+    if (
+      object.recordingtrackid !== undefined &&
+      object.recordingtrackid !== null
+    ) {
       message.recordingtrackid = object.recordingtrackid;
     } else {
       message.recordingtrackid = 0;
@@ -7488,7 +8274,7 @@ export const RecordingTrackCodecAdded = {
     if (object.codecid !== undefined && object.codecid !== null) {
       message.codecid = object.codecid;
     } else {
-      message.codecid = '0';
+      message.codecid = "0";
     }
     if (object.codec !== undefined && object.codec !== null) {
       message.codec = object.codec;
@@ -7498,37 +8284,49 @@ export const RecordingTrackCodecAdded = {
     if (object.parameters !== undefined && object.parameters !== null) {
       message.parameters = object.parameters;
     } else {
-      message.parameters = '';
+      message.parameters = "";
     }
     if (object.timestamp !== undefined && object.timestamp !== null) {
       message.timestamp = object.timestamp;
     } else {
-      message.timestamp = '0';
+      message.timestamp = "0";
     }
     return message;
   },
 };
 
-const baseRecordingTrackCodecRemoved: object = { recordingtoken: '', recordingtrackid: 0, codecid: '0' };
+const baseRecordingTrackCodecRemoved: object = {
+  recordingtoken: "",
+  recordingtrackid: 0,
+  codecid: "0",
+};
 
 export const RecordingTrackCodecRemoved = {
-  encode(message: RecordingTrackCodecRemoved, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.recordingtoken !== '') {
+  encode(
+    message: RecordingTrackCodecRemoved,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.recordingtoken !== "") {
       writer.uint32(10).string(message.recordingtoken);
     }
     if (message.recordingtrackid !== 0) {
       writer.uint32(21).fixed32(message.recordingtrackid);
     }
-    if (message.codecid !== '0') {
+    if (message.codecid !== "0") {
       writer.uint32(25).fixed64(message.codecid);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): RecordingTrackCodecRemoved {
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): RecordingTrackCodecRemoved {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseRecordingTrackCodecRemoved } as RecordingTrackCodecRemoved;
+    const message = {
+      ...baseRecordingTrackCodecRemoved,
+    } as RecordingTrackCodecRemoved;
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -7550,13 +8348,18 @@ export const RecordingTrackCodecRemoved = {
   },
 
   fromJSON(object: any): RecordingTrackCodecRemoved {
-    const message = { ...baseRecordingTrackCodecRemoved } as RecordingTrackCodecRemoved;
+    const message = {
+      ...baseRecordingTrackCodecRemoved,
+    } as RecordingTrackCodecRemoved;
     if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
       message.recordingtoken = String(object.recordingtoken);
     } else {
-      message.recordingtoken = '';
+      message.recordingtoken = "";
     }
-    if (object.recordingtrackid !== undefined && object.recordingtrackid !== null) {
+    if (
+      object.recordingtrackid !== undefined &&
+      object.recordingtrackid !== null
+    ) {
       message.recordingtrackid = Number(object.recordingtrackid);
     } else {
       message.recordingtrackid = 0;
@@ -7564,27 +8367,36 @@ export const RecordingTrackCodecRemoved = {
     if (object.codecid !== undefined && object.codecid !== null) {
       message.codecid = String(object.codecid);
     } else {
-      message.codecid = '0';
+      message.codecid = "0";
     }
     return message;
   },
 
   toJSON(message: RecordingTrackCodecRemoved): unknown {
     const obj: any = {};
-    message.recordingtoken !== undefined && (obj.recordingtoken = message.recordingtoken);
-    message.recordingtrackid !== undefined && (obj.recordingtrackid = message.recordingtrackid);
+    message.recordingtoken !== undefined &&
+      (obj.recordingtoken = message.recordingtoken);
+    message.recordingtrackid !== undefined &&
+      (obj.recordingtrackid = message.recordingtrackid);
     message.codecid !== undefined && (obj.codecid = message.codecid);
     return obj;
   },
 
-  fromPartial(object: DeepPartial<RecordingTrackCodecRemoved>): RecordingTrackCodecRemoved {
-    const message = { ...baseRecordingTrackCodecRemoved } as RecordingTrackCodecRemoved;
+  fromPartial(
+    object: DeepPartial<RecordingTrackCodecRemoved>
+  ): RecordingTrackCodecRemoved {
+    const message = {
+      ...baseRecordingTrackCodecRemoved,
+    } as RecordingTrackCodecRemoved;
     if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
       message.recordingtoken = object.recordingtoken;
     } else {
-      message.recordingtoken = '';
+      message.recordingtoken = "";
     }
-    if (object.recordingtrackid !== undefined && object.recordingtrackid !== null) {
+    if (
+      object.recordingtrackid !== undefined &&
+      object.recordingtrackid !== null
+    ) {
       message.recordingtrackid = object.recordingtrackid;
     } else {
       message.recordingtrackid = 0;
@@ -7592,7 +8404,7 @@ export const RecordingTrackCodecRemoved = {
     if (object.codecid !== undefined && object.codecid !== null) {
       message.codecid = object.codecid;
     } else {
-      message.codecid = '0';
+      message.codecid = "0";
     }
     return message;
   },
@@ -7601,7 +8413,10 @@ export const RecordingTrackCodecRemoved = {
 const baseServerLogMessage: object = {};
 
 export const ServerLogMessage = {
-  encode(message: ServerLogMessage, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: ServerLogMessage,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
     if (message.logmessage !== undefined) {
       LogMessage.encode(message.logmessage, writer.uint32(10).fork()).ldelim();
     }
@@ -7639,7 +8454,9 @@ export const ServerLogMessage = {
   toJSON(message: ServerLogMessage): unknown {
     const obj: any = {};
     message.logmessage !== undefined &&
-      (obj.logmessage = message.logmessage ? LogMessage.toJSON(message.logmessage) : undefined);
+      (obj.logmessage = message.logmessage
+        ? LogMessage.toJSON(message.logmessage)
+        : undefined);
     return obj;
   },
 
@@ -7654,11 +8471,17 @@ export const ServerLogMessage = {
   },
 };
 
-const baseRecordingTrackSetData: object = { recordingtoken: '', recordingtrackid: 0 };
+const baseRecordingTrackSetData: object = {
+  recordingtoken: "",
+  recordingtrackid: 0,
+};
 
 export const RecordingTrackSetData = {
-  encode(message: RecordingTrackSetData, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.recordingtoken !== '') {
+  encode(
+    message: RecordingTrackSetData,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.recordingtoken !== "") {
       writer.uint32(10).string(message.recordingtoken);
     }
     if (message.recordingtrackid !== 0) {
@@ -7670,7 +8493,10 @@ export const RecordingTrackSetData = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): RecordingTrackSetData {
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): RecordingTrackSetData {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = { ...baseRecordingTrackSetData } as RecordingTrackSetData;
@@ -7701,9 +8527,12 @@ export const RecordingTrackSetData = {
     if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
       message.recordingtoken = String(object.recordingtoken);
     } else {
-      message.recordingtoken = '';
+      message.recordingtoken = "";
     }
-    if (object.recordingtrackid !== undefined && object.recordingtrackid !== null) {
+    if (
+      object.recordingtrackid !== undefined &&
+      object.recordingtrackid !== null
+    ) {
       message.recordingtrackid = Number(object.recordingtrackid);
     } else {
       message.recordingtrackid = 0;
@@ -7718,25 +8547,34 @@ export const RecordingTrackSetData = {
 
   toJSON(message: RecordingTrackSetData): unknown {
     const obj: any = {};
-    message.recordingtoken !== undefined && (obj.recordingtoken = message.recordingtoken);
-    message.recordingtrackid !== undefined && (obj.recordingtrackid = message.recordingtrackid);
+    message.recordingtoken !== undefined &&
+      (obj.recordingtoken = message.recordingtoken);
+    message.recordingtrackid !== undefined &&
+      (obj.recordingtrackid = message.recordingtrackid);
     if (message.indices) {
-      obj.indices = message.indices.map((e) => (e ? Index.toJSON(e) : undefined));
+      obj.indices = message.indices.map((e) =>
+        e ? Index.toJSON(e) : undefined
+      );
     } else {
       obj.indices = [];
     }
     return obj;
   },
 
-  fromPartial(object: DeepPartial<RecordingTrackSetData>): RecordingTrackSetData {
+  fromPartial(
+    object: DeepPartial<RecordingTrackSetData>
+  ): RecordingTrackSetData {
     const message = { ...baseRecordingTrackSetData } as RecordingTrackSetData;
     message.indices = [];
     if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
       message.recordingtoken = object.recordingtoken;
     } else {
-      message.recordingtoken = '';
+      message.recordingtoken = "";
     }
-    if (object.recordingtrackid !== undefined && object.recordingtrackid !== null) {
+    if (
+      object.recordingtrackid !== undefined &&
+      object.recordingtrackid !== null
+    ) {
       message.recordingtrackid = object.recordingtrackid;
     } else {
       message.recordingtrackid = 0;
@@ -7750,29 +8588,46 @@ export const RecordingTrackSetData = {
   },
 };
 
-const baseRecordingTrackDeleteData: object = { recordingtoken: '', recordingtrackid: 0 };
+const baseRecordingTrackDeleteData: object = {
+  recordingtoken: "",
+  recordingtrackid: 0,
+};
 
 export const RecordingTrackDeleteData = {
-  encode(message: RecordingTrackDeleteData, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.recordingtoken !== '') {
+  encode(
+    message: RecordingTrackDeleteData,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.recordingtoken !== "") {
       writer.uint32(10).string(message.recordingtoken);
     }
     if (message.recordingtrackid !== 0) {
       writer.uint32(21).fixed32(message.recordingtrackid);
     }
     if (message.start !== undefined) {
-      UInt64Value.encode({ value: message.start! }, writer.uint32(26).fork()).ldelim();
+      UInt64Value.encode(
+        { value: message.start! },
+        writer.uint32(26).fork()
+      ).ldelim();
     }
     if (message.end !== undefined) {
-      UInt64Value.encode({ value: message.end! }, writer.uint32(34).fork()).ldelim();
+      UInt64Value.encode(
+        { value: message.end! },
+        writer.uint32(34).fork()
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): RecordingTrackDeleteData {
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): RecordingTrackDeleteData {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseRecordingTrackDeleteData } as RecordingTrackDeleteData;
+    const message = {
+      ...baseRecordingTrackDeleteData,
+    } as RecordingTrackDeleteData;
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -7797,13 +8652,18 @@ export const RecordingTrackDeleteData = {
   },
 
   fromJSON(object: any): RecordingTrackDeleteData {
-    const message = { ...baseRecordingTrackDeleteData } as RecordingTrackDeleteData;
+    const message = {
+      ...baseRecordingTrackDeleteData,
+    } as RecordingTrackDeleteData;
     if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
       message.recordingtoken = String(object.recordingtoken);
     } else {
-      message.recordingtoken = '';
+      message.recordingtoken = "";
     }
-    if (object.recordingtrackid !== undefined && object.recordingtrackid !== null) {
+    if (
+      object.recordingtrackid !== undefined &&
+      object.recordingtrackid !== null
+    ) {
       message.recordingtrackid = Number(object.recordingtrackid);
     } else {
       message.recordingtrackid = 0;
@@ -7823,21 +8683,30 @@ export const RecordingTrackDeleteData = {
 
   toJSON(message: RecordingTrackDeleteData): unknown {
     const obj: any = {};
-    message.recordingtoken !== undefined && (obj.recordingtoken = message.recordingtoken);
-    message.recordingtrackid !== undefined && (obj.recordingtrackid = message.recordingtrackid);
+    message.recordingtoken !== undefined &&
+      (obj.recordingtoken = message.recordingtoken);
+    message.recordingtrackid !== undefined &&
+      (obj.recordingtrackid = message.recordingtrackid);
     message.start !== undefined && (obj.start = message.start);
     message.end !== undefined && (obj.end = message.end);
     return obj;
   },
 
-  fromPartial(object: DeepPartial<RecordingTrackDeleteData>): RecordingTrackDeleteData {
-    const message = { ...baseRecordingTrackDeleteData } as RecordingTrackDeleteData;
+  fromPartial(
+    object: DeepPartial<RecordingTrackDeleteData>
+  ): RecordingTrackDeleteData {
+    const message = {
+      ...baseRecordingTrackDeleteData,
+    } as RecordingTrackDeleteData;
     if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
       message.recordingtoken = object.recordingtoken;
     } else {
-      message.recordingtoken = '';
+      message.recordingtoken = "";
     }
-    if (object.recordingtrackid !== undefined && object.recordingtrackid !== null) {
+    if (
+      object.recordingtrackid !== undefined &&
+      object.recordingtrackid !== null
+    ) {
       message.recordingtrackid = object.recordingtrackid;
     } else {
       message.recordingtrackid = 0;
@@ -7859,7 +8728,10 @@ export const RecordingTrackDeleteData = {
 const baseUserAdded: object = {};
 
 export const UserAdded = {
-  encode(message: UserAdded, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: UserAdded,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
     if (message.user !== undefined) {
       User.encode(message.user, writer.uint32(10).fork()).ldelim();
     }
@@ -7896,7 +8768,8 @@ export const UserAdded = {
 
   toJSON(message: UserAdded): unknown {
     const obj: any = {};
-    message.user !== undefined && (obj.user = message.user ? User.toJSON(message.user) : undefined);
+    message.user !== undefined &&
+      (obj.user = message.user ? User.toJSON(message.user) : undefined);
     return obj;
   },
 
@@ -7911,14 +8784,17 @@ export const UserAdded = {
   },
 };
 
-const baseUserChanged: object = { token: '', grouptoken: '' };
+const baseUserChanged: object = { token: "", grouptoken: "" };
 
 export const UserChanged = {
-  encode(message: UserChanged, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.token !== '') {
+  encode(
+    message: UserChanged,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.token !== "") {
       writer.uint32(10).string(message.token);
     }
-    if (message.grouptoken !== '') {
+    if (message.grouptoken !== "") {
       writer.uint32(18).string(message.grouptoken);
     }
     return writer;
@@ -7950,12 +8826,12 @@ export const UserChanged = {
     if (object.token !== undefined && object.token !== null) {
       message.token = String(object.token);
     } else {
-      message.token = '';
+      message.token = "";
     }
     if (object.grouptoken !== undefined && object.grouptoken !== null) {
       message.grouptoken = String(object.grouptoken);
     } else {
-      message.grouptoken = '';
+      message.grouptoken = "";
     }
     return message;
   },
@@ -7972,22 +8848,25 @@ export const UserChanged = {
     if (object.token !== undefined && object.token !== null) {
       message.token = object.token;
     } else {
-      message.token = '';
+      message.token = "";
     }
     if (object.grouptoken !== undefined && object.grouptoken !== null) {
       message.grouptoken = object.grouptoken;
     } else {
-      message.grouptoken = '';
+      message.grouptoken = "";
     }
     return message;
   },
 };
 
-const baseUserRemoved: object = { token: '' };
+const baseUserRemoved: object = { token: "" };
 
 export const UserRemoved = {
-  encode(message: UserRemoved, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.token !== '') {
+  encode(
+    message: UserRemoved,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.token !== "") {
       writer.uint32(10).string(message.token);
     }
     return writer;
@@ -8016,7 +8895,7 @@ export const UserRemoved = {
     if (object.token !== undefined && object.token !== null) {
       message.token = String(object.token);
     } else {
-      message.token = '';
+      message.token = "";
     }
     return message;
   },
@@ -8032,29 +8911,40 @@ export const UserRemoved = {
     if (object.token !== undefined && object.token !== null) {
       message.token = object.token;
     } else {
-      message.token = '';
+      message.token = "";
     }
     return message;
   },
 };
 
-const baseAddIceCandidateWebRTCRequest: object = { peerid: '', icecandidiate: '' };
+const baseAddIceCandidateWebRTCRequest: object = {
+  peerid: "",
+  icecandidiate: "",
+};
 
 export const AddIceCandidateWebRTCRequest = {
-  encode(message: AddIceCandidateWebRTCRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.peerid !== '') {
+  encode(
+    message: AddIceCandidateWebRTCRequest,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.peerid !== "") {
       writer.uint32(10).string(message.peerid);
     }
-    if (message.icecandidiate !== '') {
+    if (message.icecandidiate !== "") {
       writer.uint32(18).string(message.icecandidiate);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): AddIceCandidateWebRTCRequest {
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): AddIceCandidateWebRTCRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseAddIceCandidateWebRTCRequest } as AddIceCandidateWebRTCRequest;
+    const message = {
+      ...baseAddIceCandidateWebRTCRequest,
+    } as AddIceCandidateWebRTCRequest;
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -8073,16 +8963,18 @@ export const AddIceCandidateWebRTCRequest = {
   },
 
   fromJSON(object: any): AddIceCandidateWebRTCRequest {
-    const message = { ...baseAddIceCandidateWebRTCRequest } as AddIceCandidateWebRTCRequest;
+    const message = {
+      ...baseAddIceCandidateWebRTCRequest,
+    } as AddIceCandidateWebRTCRequest;
     if (object.peerid !== undefined && object.peerid !== null) {
       message.peerid = String(object.peerid);
     } else {
-      message.peerid = '';
+      message.peerid = "";
     }
     if (object.icecandidiate !== undefined && object.icecandidiate !== null) {
       message.icecandidiate = String(object.icecandidiate);
     } else {
-      message.icecandidiate = '';
+      message.icecandidiate = "";
     }
     return message;
   },
@@ -8090,21 +8982,26 @@ export const AddIceCandidateWebRTCRequest = {
   toJSON(message: AddIceCandidateWebRTCRequest): unknown {
     const obj: any = {};
     message.peerid !== undefined && (obj.peerid = message.peerid);
-    message.icecandidiate !== undefined && (obj.icecandidiate = message.icecandidiate);
+    message.icecandidiate !== undefined &&
+      (obj.icecandidiate = message.icecandidiate);
     return obj;
   },
 
-  fromPartial(object: DeepPartial<AddIceCandidateWebRTCRequest>): AddIceCandidateWebRTCRequest {
-    const message = { ...baseAddIceCandidateWebRTCRequest } as AddIceCandidateWebRTCRequest;
+  fromPartial(
+    object: DeepPartial<AddIceCandidateWebRTCRequest>
+  ): AddIceCandidateWebRTCRequest {
+    const message = {
+      ...baseAddIceCandidateWebRTCRequest,
+    } as AddIceCandidateWebRTCRequest;
     if (object.peerid !== undefined && object.peerid !== null) {
       message.peerid = object.peerid;
     } else {
-      message.peerid = '';
+      message.peerid = "";
     }
     if (object.icecandidiate !== undefined && object.icecandidiate !== null) {
       message.icecandidiate = object.icecandidiate;
     } else {
-      message.icecandidiate = '';
+      message.icecandidiate = "";
     }
     return message;
   },
@@ -8113,14 +9010,22 @@ export const AddIceCandidateWebRTCRequest = {
 const baseAddIceCandidateWebRTCResponse: object = {};
 
 export const AddIceCandidateWebRTCResponse = {
-  encode(_: AddIceCandidateWebRTCResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    _: AddIceCandidateWebRTCResponse,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): AddIceCandidateWebRTCResponse {
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): AddIceCandidateWebRTCResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseAddIceCandidateWebRTCResponse } as AddIceCandidateWebRTCResponse;
+    const message = {
+      ...baseAddIceCandidateWebRTCResponse,
+    } as AddIceCandidateWebRTCResponse;
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -8133,7 +9038,9 @@ export const AddIceCandidateWebRTCResponse = {
   },
 
   fromJSON(_: any): AddIceCandidateWebRTCResponse {
-    const message = { ...baseAddIceCandidateWebRTCResponse } as AddIceCandidateWebRTCResponse;
+    const message = {
+      ...baseAddIceCandidateWebRTCResponse,
+    } as AddIceCandidateWebRTCResponse;
     return message;
   },
 
@@ -8142,20 +9049,27 @@ export const AddIceCandidateWebRTCResponse = {
     return obj;
   },
 
-  fromPartial(_: DeepPartial<AddIceCandidateWebRTCResponse>): AddIceCandidateWebRTCResponse {
-    const message = { ...baseAddIceCandidateWebRTCResponse } as AddIceCandidateWebRTCResponse;
+  fromPartial(
+    _: DeepPartial<AddIceCandidateWebRTCResponse>
+  ): AddIceCandidateWebRTCResponse {
+    const message = {
+      ...baseAddIceCandidateWebRTCResponse,
+    } as AddIceCandidateWebRTCResponse;
     return message;
   },
 };
 
-const baseAuthenticateRequest: object = { username: '', password: '' };
+const baseAuthenticateRequest: object = { username: "", password: "" };
 
 export const AuthenticateRequest = {
-  encode(message: AuthenticateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.username !== '') {
+  encode(
+    message: AuthenticateRequest,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.username !== "") {
       writer.uint32(10).string(message.username);
     }
-    if (message.password !== '') {
+    if (message.password !== "") {
       writer.uint32(18).string(message.password);
     }
     return writer;
@@ -8187,12 +9101,12 @@ export const AuthenticateRequest = {
     if (object.username !== undefined && object.username !== null) {
       message.username = String(object.username);
     } else {
-      message.username = '';
+      message.username = "";
     }
     if (object.password !== undefined && object.password !== null) {
       message.password = String(object.password);
     } else {
-      message.password = '';
+      message.password = "";
     }
     return message;
   },
@@ -8209,28 +9123,34 @@ export const AuthenticateRequest = {
     if (object.username !== undefined && object.username !== null) {
       message.username = object.username;
     } else {
-      message.username = '';
+      message.username = "";
     }
     if (object.password !== undefined && object.password !== null) {
       message.password = object.password;
     } else {
-      message.password = '';
+      message.password = "";
     }
     return message;
   },
 };
 
-const baseAuthenticateResponse: object = { jwttoken: '' };
+const baseAuthenticateResponse: object = { jwttoken: "" };
 
 export const AuthenticateResponse = {
-  encode(message: AuthenticateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.jwttoken !== '') {
+  encode(
+    message: AuthenticateResponse,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.jwttoken !== "") {
       writer.uint32(10).string(message.jwttoken);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): AuthenticateResponse {
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): AuthenticateResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = { ...baseAuthenticateResponse } as AuthenticateResponse;
@@ -8253,7 +9173,7 @@ export const AuthenticateResponse = {
     if (object.jwttoken !== undefined && object.jwttoken !== null) {
       message.jwttoken = String(object.jwttoken);
     } else {
-      message.jwttoken = '';
+      message.jwttoken = "";
     }
     return message;
   },
@@ -8269,23 +9189,26 @@ export const AuthenticateResponse = {
     if (object.jwttoken !== undefined && object.jwttoken !== null) {
       message.jwttoken = object.jwttoken;
     } else {
-      message.jwttoken = '';
+      message.jwttoken = "";
     }
     return message;
   },
 };
 
-const baseAddUserRequest: object = { username: '', digest: '', group: '' };
+const baseAddUserRequest: object = { username: "", digest: "", group: "" };
 
 export const AddUserRequest = {
-  encode(message: AddUserRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.username !== '') {
+  encode(
+    message: AddUserRequest,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.username !== "") {
       writer.uint32(10).string(message.username);
     }
-    if (message.digest !== '') {
+    if (message.digest !== "") {
       writer.uint32(18).string(message.digest);
     }
-    if (message.group !== '') {
+    if (message.group !== "") {
       writer.uint32(26).string(message.group);
     }
     return writer;
@@ -8320,17 +9243,17 @@ export const AddUserRequest = {
     if (object.username !== undefined && object.username !== null) {
       message.username = String(object.username);
     } else {
-      message.username = '';
+      message.username = "";
     }
     if (object.digest !== undefined && object.digest !== null) {
       message.digest = String(object.digest);
     } else {
-      message.digest = '';
+      message.digest = "";
     }
     if (object.group !== undefined && object.group !== null) {
       message.group = String(object.group);
     } else {
-      message.group = '';
+      message.group = "";
     }
     return message;
   },
@@ -8348,17 +9271,17 @@ export const AddUserRequest = {
     if (object.username !== undefined && object.username !== null) {
       message.username = object.username;
     } else {
-      message.username = '';
+      message.username = "";
     }
     if (object.digest !== undefined && object.digest !== null) {
       message.digest = object.digest;
     } else {
-      message.digest = '';
+      message.digest = "";
     }
     if (object.group !== undefined && object.group !== null) {
       message.group = object.group;
     } else {
-      message.group = '';
+      message.group = "";
     }
     return message;
   },
@@ -8367,7 +9290,10 @@ export const AddUserRequest = {
 const baseAddUserResponse: object = {};
 
 export const AddUserResponse = {
-  encode(_: AddUserResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    _: AddUserResponse,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
     return writer;
   },
 
@@ -8402,21 +9328,32 @@ export const AddUserResponse = {
   },
 };
 
-const baseCallWebRTCRequest: object = { recording: '', videotrackid: 0, sdp: '' };
+const baseCallWebRTCRequest: object = {
+  peerid: "",
+  recording: "",
+  videotrackid: 0,
+  sdp: "",
+};
 
 export const CallWebRTCRequest = {
-  encode(message: CallWebRTCRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.recording !== '') {
-      writer.uint32(10).string(message.recording);
+  encode(
+    message: CallWebRTCRequest,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.peerid !== "") {
+      writer.uint32(10).string(message.peerid);
+    }
+    if (message.recording !== "") {
+      writer.uint32(18).string(message.recording);
     }
     if (message.videotrackid !== 0) {
-      writer.uint32(21).fixed32(message.videotrackid);
+      writer.uint32(29).fixed32(message.videotrackid);
     }
     if (message.audiotrackid !== undefined) {
-      writer.uint32(29).fixed32(message.audiotrackid);
+      writer.uint32(37).fixed32(message.audiotrackid);
     }
-    if (message.sdp !== '') {
-      writer.uint32(34).string(message.sdp);
+    if (message.sdp !== "") {
+      writer.uint32(42).string(message.sdp);
     }
     return writer;
   },
@@ -8429,15 +9366,18 @@ export const CallWebRTCRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.recording = reader.string();
+          message.peerid = reader.string();
           break;
         case 2:
-          message.videotrackid = reader.fixed32();
+          message.recording = reader.string();
           break;
         case 3:
-          message.audiotrackid = reader.fixed32();
+          message.videotrackid = reader.fixed32();
           break;
         case 4:
+          message.audiotrackid = reader.fixed32();
+          break;
+        case 5:
           message.sdp = reader.string();
           break;
         default:
@@ -8450,10 +9390,15 @@ export const CallWebRTCRequest = {
 
   fromJSON(object: any): CallWebRTCRequest {
     const message = { ...baseCallWebRTCRequest } as CallWebRTCRequest;
+    if (object.peerid !== undefined && object.peerid !== null) {
+      message.peerid = String(object.peerid);
+    } else {
+      message.peerid = "";
+    }
     if (object.recording !== undefined && object.recording !== null) {
       message.recording = String(object.recording);
     } else {
-      message.recording = '';
+      message.recording = "";
     }
     if (object.videotrackid !== undefined && object.videotrackid !== null) {
       message.videotrackid = Number(object.videotrackid);
@@ -8468,26 +9413,34 @@ export const CallWebRTCRequest = {
     if (object.sdp !== undefined && object.sdp !== null) {
       message.sdp = String(object.sdp);
     } else {
-      message.sdp = '';
+      message.sdp = "";
     }
     return message;
   },
 
   toJSON(message: CallWebRTCRequest): unknown {
     const obj: any = {};
+    message.peerid !== undefined && (obj.peerid = message.peerid);
     message.recording !== undefined && (obj.recording = message.recording);
-    message.videotrackid !== undefined && (obj.videotrackid = message.videotrackid);
-    message.audiotrackid !== undefined && (obj.audiotrackid = message.audiotrackid);
+    message.videotrackid !== undefined &&
+      (obj.videotrackid = message.videotrackid);
+    message.audiotrackid !== undefined &&
+      (obj.audiotrackid = message.audiotrackid);
     message.sdp !== undefined && (obj.sdp = message.sdp);
     return obj;
   },
 
   fromPartial(object: DeepPartial<CallWebRTCRequest>): CallWebRTCRequest {
     const message = { ...baseCallWebRTCRequest } as CallWebRTCRequest;
+    if (object.peerid !== undefined && object.peerid !== null) {
+      message.peerid = object.peerid;
+    } else {
+      message.peerid = "";
+    }
     if (object.recording !== undefined && object.recording !== null) {
       message.recording = object.recording;
     } else {
-      message.recording = '';
+      message.recording = "";
     }
     if (object.videotrackid !== undefined && object.videotrackid !== null) {
       message.videotrackid = object.videotrackid;
@@ -8502,21 +9455,21 @@ export const CallWebRTCRequest = {
     if (object.sdp !== undefined && object.sdp !== null) {
       message.sdp = object.sdp;
     } else {
-      message.sdp = '';
+      message.sdp = "";
     }
     return message;
   },
 };
 
-const baseCallWebRTCResponse: object = { peerid: '', sdp: '' };
+const baseCallWebRTCResponse: object = { sdp: "" };
 
 export const CallWebRTCResponse = {
-  encode(message: CallWebRTCResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.peerid !== '') {
-      writer.uint32(10).string(message.peerid);
-    }
-    if (message.sdp !== '') {
-      writer.uint32(18).string(message.sdp);
+  encode(
+    message: CallWebRTCResponse,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.sdp !== "") {
+      writer.uint32(10).string(message.sdp);
     }
     return writer;
   },
@@ -8529,9 +9482,6 @@ export const CallWebRTCResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.peerid = reader.string();
-          break;
-        case 2:
           message.sdp = reader.string();
           break;
         default:
@@ -8544,56 +9494,53 @@ export const CallWebRTCResponse = {
 
   fromJSON(object: any): CallWebRTCResponse {
     const message = { ...baseCallWebRTCResponse } as CallWebRTCResponse;
-    if (object.peerid !== undefined && object.peerid !== null) {
-      message.peerid = String(object.peerid);
-    } else {
-      message.peerid = '';
-    }
     if (object.sdp !== undefined && object.sdp !== null) {
       message.sdp = String(object.sdp);
     } else {
-      message.sdp = '';
+      message.sdp = "";
     }
     return message;
   },
 
   toJSON(message: CallWebRTCResponse): unknown {
     const obj: any = {};
-    message.peerid !== undefined && (obj.peerid = message.peerid);
     message.sdp !== undefined && (obj.sdp = message.sdp);
     return obj;
   },
 
   fromPartial(object: DeepPartial<CallWebRTCResponse>): CallWebRTCResponse {
     const message = { ...baseCallWebRTCResponse } as CallWebRTCResponse;
-    if (object.peerid !== undefined && object.peerid !== null) {
-      message.peerid = object.peerid;
-    } else {
-      message.peerid = '';
-    }
     if (object.sdp !== undefined && object.sdp !== null) {
       message.sdp = object.sdp;
     } else {
-      message.sdp = '';
+      message.sdp = "";
     }
     return message;
   },
 };
 
-const baseGetIceCandidatesWebRTCRequest: object = { peerid: '' };
+const baseGetIceCandidatesWebRTCRequest: object = { peerid: "" };
 
 export const GetIceCandidatesWebRTCRequest = {
-  encode(message: GetIceCandidatesWebRTCRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.peerid !== '') {
+  encode(
+    message: GetIceCandidatesWebRTCRequest,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.peerid !== "") {
       writer.uint32(10).string(message.peerid);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetIceCandidatesWebRTCRequest {
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): GetIceCandidatesWebRTCRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseGetIceCandidatesWebRTCRequest } as GetIceCandidatesWebRTCRequest;
+    const message = {
+      ...baseGetIceCandidatesWebRTCRequest,
+    } as GetIceCandidatesWebRTCRequest;
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -8609,11 +9556,13 @@ export const GetIceCandidatesWebRTCRequest = {
   },
 
   fromJSON(object: any): GetIceCandidatesWebRTCRequest {
-    const message = { ...baseGetIceCandidatesWebRTCRequest } as GetIceCandidatesWebRTCRequest;
+    const message = {
+      ...baseGetIceCandidatesWebRTCRequest,
+    } as GetIceCandidatesWebRTCRequest;
     if (object.peerid !== undefined && object.peerid !== null) {
       message.peerid = String(object.peerid);
     } else {
-      message.peerid = '';
+      message.peerid = "";
     }
     return message;
   },
@@ -8624,37 +9573,48 @@ export const GetIceCandidatesWebRTCRequest = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<GetIceCandidatesWebRTCRequest>): GetIceCandidatesWebRTCRequest {
-    const message = { ...baseGetIceCandidatesWebRTCRequest } as GetIceCandidatesWebRTCRequest;
+  fromPartial(
+    object: DeepPartial<GetIceCandidatesWebRTCRequest>
+  ): GetIceCandidatesWebRTCRequest {
+    const message = {
+      ...baseGetIceCandidatesWebRTCRequest,
+    } as GetIceCandidatesWebRTCRequest;
     if (object.peerid !== undefined && object.peerid !== null) {
       message.peerid = object.peerid;
     } else {
-      message.peerid = '';
+      message.peerid = "";
     }
     return message;
   },
 };
 
-const baseGetIceCandidatesWebRTCResponse: object = { peerlist: '' };
+const baseGetIceCandidatesWebRTCResponse: object = { peerlist: "" };
 
 export const GetIceCandidatesWebRTCResponse = {
-  encode(message: GetIceCandidatesWebRTCResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.peerlist) {
-      writer.uint32(10).string(v!);
+  encode(
+    message: GetIceCandidatesWebRTCResponse,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.peerlist !== "") {
+      writer.uint32(10).string(message.peerlist);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetIceCandidatesWebRTCResponse {
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): GetIceCandidatesWebRTCResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseGetIceCandidatesWebRTCResponse } as GetIceCandidatesWebRTCResponse;
-    message.peerlist = [];
+    const message = {
+      ...baseGetIceCandidatesWebRTCResponse,
+    } as GetIceCandidatesWebRTCResponse;
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.peerlist.push(reader.string());
+          message.peerlist = reader.string();
           break;
         default:
           reader.skipType(tag & 7);
@@ -8665,43 +9625,46 @@ export const GetIceCandidatesWebRTCResponse = {
   },
 
   fromJSON(object: any): GetIceCandidatesWebRTCResponse {
-    const message = { ...baseGetIceCandidatesWebRTCResponse } as GetIceCandidatesWebRTCResponse;
-    message.peerlist = [];
+    const message = {
+      ...baseGetIceCandidatesWebRTCResponse,
+    } as GetIceCandidatesWebRTCResponse;
     if (object.peerlist !== undefined && object.peerlist !== null) {
-      for (const e of object.peerlist) {
-        message.peerlist.push(String(e));
-      }
+      message.peerlist = String(object.peerlist);
+    } else {
+      message.peerlist = "";
     }
     return message;
   },
 
   toJSON(message: GetIceCandidatesWebRTCResponse): unknown {
     const obj: any = {};
-    if (message.peerlist) {
-      obj.peerlist = message.peerlist.map((e) => e);
-    } else {
-      obj.peerlist = [];
-    }
+    message.peerlist !== undefined && (obj.peerlist = message.peerlist);
     return obj;
   },
 
-  fromPartial(object: DeepPartial<GetIceCandidatesWebRTCResponse>): GetIceCandidatesWebRTCResponse {
-    const message = { ...baseGetIceCandidatesWebRTCResponse } as GetIceCandidatesWebRTCResponse;
-    message.peerlist = [];
+  fromPartial(
+    object: DeepPartial<GetIceCandidatesWebRTCResponse>
+  ): GetIceCandidatesWebRTCResponse {
+    const message = {
+      ...baseGetIceCandidatesWebRTCResponse,
+    } as GetIceCandidatesWebRTCResponse;
     if (object.peerlist !== undefined && object.peerlist !== null) {
-      for (const e of object.peerlist) {
-        message.peerlist.push(e);
-      }
+      message.peerlist = object.peerlist;
+    } else {
+      message.peerlist = "";
     }
     return message;
   },
 };
 
-const baseHangUpWebRTCRequest: object = { peerid: '' };
+const baseHangUpWebRTCRequest: object = { peerid: "" };
 
 export const HangUpWebRTCRequest = {
-  encode(message: HangUpWebRTCRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.peerid !== '') {
+  encode(
+    message: HangUpWebRTCRequest,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.peerid !== "") {
       writer.uint32(10).string(message.peerid);
     }
     return writer;
@@ -8730,7 +9693,7 @@ export const HangUpWebRTCRequest = {
     if (object.peerid !== undefined && object.peerid !== null) {
       message.peerid = String(object.peerid);
     } else {
-      message.peerid = '';
+      message.peerid = "";
     }
     return message;
   },
@@ -8746,7 +9709,7 @@ export const HangUpWebRTCRequest = {
     if (object.peerid !== undefined && object.peerid !== null) {
       message.peerid = object.peerid;
     } else {
-      message.peerid = '';
+      message.peerid = "";
     }
     return message;
   },
@@ -8755,11 +9718,17 @@ export const HangUpWebRTCRequest = {
 const baseHangUpWebRTCResponse: object = {};
 
 export const HangUpWebRTCResponse = {
-  encode(_: HangUpWebRTCResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    _: HangUpWebRTCResponse,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): HangUpWebRTCResponse {
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): HangUpWebRTCResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = { ...baseHangUpWebRTCResponse } as HangUpWebRTCResponse;
@@ -8793,7 +9762,10 @@ export const HangUpWebRTCResponse = {
 const baseRefreshTokenRequest: object = {};
 
 export const RefreshTokenRequest = {
-  encode(_: RefreshTokenRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    _: RefreshTokenRequest,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
     return writer;
   },
 
@@ -8828,17 +9800,23 @@ export const RefreshTokenRequest = {
   },
 };
 
-const baseRefreshTokenResponse: object = { jwttoken: '' };
+const baseRefreshTokenResponse: object = { jwttoken: "" };
 
 export const RefreshTokenResponse = {
-  encode(message: RefreshTokenResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.jwttoken !== '') {
+  encode(
+    message: RefreshTokenResponse,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.jwttoken !== "") {
       writer.uint32(10).string(message.jwttoken);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): RefreshTokenResponse {
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): RefreshTokenResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = { ...baseRefreshTokenResponse } as RefreshTokenResponse;
@@ -8861,7 +9839,7 @@ export const RefreshTokenResponse = {
     if (object.jwttoken !== undefined && object.jwttoken !== null) {
       message.jwttoken = String(object.jwttoken);
     } else {
-      message.jwttoken = '';
+      message.jwttoken = "";
     }
     return message;
   },
@@ -8877,17 +9855,20 @@ export const RefreshTokenResponse = {
     if (object.jwttoken !== undefined && object.jwttoken !== null) {
       message.jwttoken = object.jwttoken;
     } else {
-      message.jwttoken = '';
+      message.jwttoken = "";
     }
     return message;
   },
 };
 
-const baseRemoveUserRequest: object = { usertoken: '' };
+const baseRemoveUserRequest: object = { usertoken: "" };
 
 export const RemoveUserRequest = {
-  encode(message: RemoveUserRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.usertoken !== '') {
+  encode(
+    message: RemoveUserRequest,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.usertoken !== "") {
       writer.uint32(10).string(message.usertoken);
     }
     return writer;
@@ -8916,7 +9897,7 @@ export const RemoveUserRequest = {
     if (object.usertoken !== undefined && object.usertoken !== null) {
       message.usertoken = String(object.usertoken);
     } else {
-      message.usertoken = '';
+      message.usertoken = "";
     }
     return message;
   },
@@ -8932,7 +9913,7 @@ export const RemoveUserRequest = {
     if (object.usertoken !== undefined && object.usertoken !== null) {
       message.usertoken = object.usertoken;
     } else {
-      message.usertoken = '';
+      message.usertoken = "";
     }
     return message;
   },
@@ -8941,7 +9922,10 @@ export const RemoveUserRequest = {
 const baseRemoveUserResponse: object = {};
 
 export const RemoveUserResponse = {
-  encode(_: RemoveUserResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    _: RemoveUserResponse,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
     return writer;
   },
 
@@ -8979,7 +9963,10 @@ export const RemoveUserResponse = {
 const baseSubscribeRequest: object = {};
 
 export const SubscribeRequest = {
-  encode(_: SubscribeRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    _: SubscribeRequest,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
     return writer;
   },
 
@@ -9017,7 +10004,10 @@ export const SubscribeRequest = {
 const baseSubscribeResponse: object = {};
 
 export const SubscribeResponse = {
-  encode(message: SubscribeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: SubscribeResponse,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
     if (message.message !== undefined) {
       Any.encode(message.message, writer.uint32(10).fork()).ldelim();
     }
@@ -9054,7 +10044,8 @@ export const SubscribeResponse = {
 
   toJSON(message: SubscribeResponse): unknown {
     const obj: any = {};
-    message.message !== undefined && (obj.message = message.message ? Any.toJSON(message.message) : undefined);
+    message.message !== undefined &&
+      (obj.message = message.message ? Any.toJSON(message.message) : undefined);
     return obj;
   },
 
@@ -9070,8 +10061,14 @@ export const SubscribeResponse = {
 };
 
 export interface AuthService {
-  Authenticate(request: DeepPartial<AuthenticateRequest>, metadata?: grpc.Metadata): Observable<AuthenticateResponse>;
-  RefreshToken(request: DeepPartial<RefreshTokenRequest>, metadata?: grpc.Metadata): Observable<RefreshTokenResponse>;
+  Authenticate(
+    request: DeepPartial<AuthenticateRequest>,
+    metadata?: grpc.Metadata
+  ): Observable<AuthenticateResponse>;
+  RefreshToken(
+    request: DeepPartial<RefreshTokenRequest>,
+    metadata?: grpc.Metadata
+  ): Observable<RefreshTokenResponse>;
 }
 
 export class AuthServiceClientImpl implements AuthService {
@@ -9081,21 +10078,35 @@ export class AuthServiceClientImpl implements AuthService {
     this.rpc = rpc;
   }
 
-  Authenticate(request: DeepPartial<AuthenticateRequest>, metadata?: grpc.Metadata): Observable<AuthenticateResponse> {
-    return this.rpc.unary(AuthServiceAuthenticateDesc, AuthenticateRequest.fromPartial(request), metadata);
+  Authenticate(
+    request: DeepPartial<AuthenticateRequest>,
+    metadata?: grpc.Metadata
+  ): Observable<AuthenticateResponse> {
+    return this.rpc.unary(
+      AuthServiceAuthenticateDesc,
+      AuthenticateRequest.fromPartial(request),
+      metadata
+    );
   }
 
-  RefreshToken(request: DeepPartial<RefreshTokenRequest>, metadata?: grpc.Metadata): Observable<RefreshTokenResponse> {
-    return this.rpc.unary(AuthServiceRefreshTokenDesc, RefreshTokenRequest.fromPartial(request), metadata);
+  RefreshToken(
+    request: DeepPartial<RefreshTokenRequest>,
+    metadata?: grpc.Metadata
+  ): Observable<RefreshTokenResponse> {
+    return this.rpc.unary(
+      AuthServiceRefreshTokenDesc,
+      RefreshTokenRequest.fromPartial(request),
+      metadata
+    );
   }
 }
 
 export const AuthServiceDesc = {
-  serviceName: 'proto.AuthService',
+  serviceName: "proto.AuthService",
 };
 
 export const AuthServiceAuthenticateDesc: UnaryMethodDefinitionish = {
-  methodName: 'Authenticate',
+  methodName: "Authenticate",
   service: AuthServiceDesc,
   requestStream: false,
   responseStream: false,
@@ -9117,7 +10128,7 @@ export const AuthServiceAuthenticateDesc: UnaryMethodDefinitionish = {
 };
 
 export const AuthServiceRefreshTokenDesc: UnaryMethodDefinitionish = {
-  methodName: 'RefreshToken',
+  methodName: "RefreshToken",
   service: AuthServiceDesc,
   requestStream: false,
   responseStream: false,
@@ -9141,17 +10152,32 @@ export const AuthServiceRefreshTokenDesc: UnaryMethodDefinitionish = {
 export interface MonocleService {
   AddIceCandidateWebRTC(
     request: DeepPartial<AddIceCandidateWebRTCRequest>,
-    metadata?: grpc.Metadata,
+    metadata?: grpc.Metadata
   ): Observable<AddIceCandidateWebRTCResponse>;
-  AddUser(request: DeepPartial<AddUserRequest>, metadata?: grpc.Metadata): Observable<AddUserResponse>;
-  CallWebRTC(request: DeepPartial<CallWebRTCRequest>, metadata?: grpc.Metadata): Observable<CallWebRTCResponse>;
+  AddUser(
+    request: DeepPartial<AddUserRequest>,
+    metadata?: grpc.Metadata
+  ): Observable<AddUserResponse>;
+  CallWebRTC(
+    request: DeepPartial<CallWebRTCRequest>,
+    metadata?: grpc.Metadata
+  ): Observable<CallWebRTCResponse>;
   GetIceCandidatesWebRTC(
     request: DeepPartial<GetIceCandidatesWebRTCRequest>,
-    metadata?: grpc.Metadata,
+    metadata?: grpc.Metadata
   ): Observable<GetIceCandidatesWebRTCResponse>;
-  HangUpWebRTC(request: DeepPartial<HangUpWebRTCRequest>, metadata?: grpc.Metadata): Observable<HangUpWebRTCResponse>;
-  RemoveUser(request: DeepPartial<RemoveUserRequest>, metadata?: grpc.Metadata): Observable<RemoveUserResponse>;
-  Subscribe(request: DeepPartial<SubscribeRequest>, metadata?: grpc.Metadata): Observable<SubscribeResponse>;
+  HangUpWebRTC(
+    request: DeepPartial<HangUpWebRTCRequest>,
+    metadata?: grpc.Metadata
+  ): Observable<HangUpWebRTCResponse>;
+  RemoveUser(
+    request: DeepPartial<RemoveUserRequest>,
+    metadata?: grpc.Metadata
+  ): Observable<RemoveUserResponse>;
+  Subscribe(
+    request: DeepPartial<SubscribeRequest>,
+    metadata?: grpc.Metadata
+  ): Observable<SubscribeResponse>;
 }
 
 export class MonocleServiceClientImpl implements MonocleService {
@@ -9163,53 +10189,88 @@ export class MonocleServiceClientImpl implements MonocleService {
 
   AddIceCandidateWebRTC(
     request: DeepPartial<AddIceCandidateWebRTCRequest>,
-    metadata?: grpc.Metadata,
+    metadata?: grpc.Metadata
   ): Observable<AddIceCandidateWebRTCResponse> {
     return this.rpc.unary(
       MonocleServiceAddIceCandidateWebRTCDesc,
       AddIceCandidateWebRTCRequest.fromPartial(request),
-      metadata,
+      metadata
     );
   }
 
-  AddUser(request: DeepPartial<AddUserRequest>, metadata?: grpc.Metadata): Observable<AddUserResponse> {
-    return this.rpc.unary(MonocleServiceAddUserDesc, AddUserRequest.fromPartial(request), metadata);
+  AddUser(
+    request: DeepPartial<AddUserRequest>,
+    metadata?: grpc.Metadata
+  ): Observable<AddUserResponse> {
+    return this.rpc.unary(
+      MonocleServiceAddUserDesc,
+      AddUserRequest.fromPartial(request),
+      metadata
+    );
   }
 
-  CallWebRTC(request: DeepPartial<CallWebRTCRequest>, metadata?: grpc.Metadata): Observable<CallWebRTCResponse> {
-    return this.rpc.unary(MonocleServiceCallWebRTCDesc, CallWebRTCRequest.fromPartial(request), metadata);
+  CallWebRTC(
+    request: DeepPartial<CallWebRTCRequest>,
+    metadata?: grpc.Metadata
+  ): Observable<CallWebRTCResponse> {
+    return this.rpc.unary(
+      MonocleServiceCallWebRTCDesc,
+      CallWebRTCRequest.fromPartial(request),
+      metadata
+    );
   }
 
   GetIceCandidatesWebRTC(
     request: DeepPartial<GetIceCandidatesWebRTCRequest>,
-    metadata?: grpc.Metadata,
+    metadata?: grpc.Metadata
   ): Observable<GetIceCandidatesWebRTCResponse> {
     return this.rpc.unary(
       MonocleServiceGetIceCandidatesWebRTCDesc,
       GetIceCandidatesWebRTCRequest.fromPartial(request),
-      metadata,
+      metadata
     );
   }
 
-  HangUpWebRTC(request: DeepPartial<HangUpWebRTCRequest>, metadata?: grpc.Metadata): Observable<HangUpWebRTCResponse> {
-    return this.rpc.unary(MonocleServiceHangUpWebRTCDesc, HangUpWebRTCRequest.fromPartial(request), metadata);
+  HangUpWebRTC(
+    request: DeepPartial<HangUpWebRTCRequest>,
+    metadata?: grpc.Metadata
+  ): Observable<HangUpWebRTCResponse> {
+    return this.rpc.unary(
+      MonocleServiceHangUpWebRTCDesc,
+      HangUpWebRTCRequest.fromPartial(request),
+      metadata
+    );
   }
 
-  RemoveUser(request: DeepPartial<RemoveUserRequest>, metadata?: grpc.Metadata): Observable<RemoveUserResponse> {
-    return this.rpc.unary(MonocleServiceRemoveUserDesc, RemoveUserRequest.fromPartial(request), metadata);
+  RemoveUser(
+    request: DeepPartial<RemoveUserRequest>,
+    metadata?: grpc.Metadata
+  ): Observable<RemoveUserResponse> {
+    return this.rpc.unary(
+      MonocleServiceRemoveUserDesc,
+      RemoveUserRequest.fromPartial(request),
+      metadata
+    );
   }
 
-  Subscribe(request: DeepPartial<SubscribeRequest>, metadata?: grpc.Metadata): Observable<SubscribeResponse> {
-    return this.rpc.invoke(MonocleServiceSubscribeDesc, SubscribeRequest.fromPartial(request), metadata);
+  Subscribe(
+    request: DeepPartial<SubscribeRequest>,
+    metadata?: grpc.Metadata
+  ): Observable<SubscribeResponse> {
+    return this.rpc.invoke(
+      MonocleServiceSubscribeDesc,
+      SubscribeRequest.fromPartial(request),
+      metadata
+    );
   }
 }
 
 export const MonocleServiceDesc = {
-  serviceName: 'proto.MonocleService',
+  serviceName: "proto.MonocleService",
 };
 
 export const MonocleServiceAddIceCandidateWebRTCDesc: UnaryMethodDefinitionish = {
-  methodName: 'AddIceCandidateWebRTC',
+  methodName: "AddIceCandidateWebRTC",
   service: MonocleServiceDesc,
   requestStream: false,
   responseStream: false,
@@ -9231,7 +10292,7 @@ export const MonocleServiceAddIceCandidateWebRTCDesc: UnaryMethodDefinitionish =
 };
 
 export const MonocleServiceAddUserDesc: UnaryMethodDefinitionish = {
-  methodName: 'AddUser',
+  methodName: "AddUser",
   service: MonocleServiceDesc,
   requestStream: false,
   responseStream: false,
@@ -9253,7 +10314,7 @@ export const MonocleServiceAddUserDesc: UnaryMethodDefinitionish = {
 };
 
 export const MonocleServiceCallWebRTCDesc: UnaryMethodDefinitionish = {
-  methodName: 'CallWebRTC',
+  methodName: "CallWebRTC",
   service: MonocleServiceDesc,
   requestStream: false,
   responseStream: false,
@@ -9275,7 +10336,7 @@ export const MonocleServiceCallWebRTCDesc: UnaryMethodDefinitionish = {
 };
 
 export const MonocleServiceGetIceCandidatesWebRTCDesc: UnaryMethodDefinitionish = {
-  methodName: 'GetIceCandidatesWebRTC',
+  methodName: "GetIceCandidatesWebRTC",
   service: MonocleServiceDesc,
   requestStream: false,
   responseStream: false,
@@ -9297,7 +10358,7 @@ export const MonocleServiceGetIceCandidatesWebRTCDesc: UnaryMethodDefinitionish 
 };
 
 export const MonocleServiceHangUpWebRTCDesc: UnaryMethodDefinitionish = {
-  methodName: 'HangUpWebRTC',
+  methodName: "HangUpWebRTC",
   service: MonocleServiceDesc,
   requestStream: false,
   responseStream: false,
@@ -9319,7 +10380,7 @@ export const MonocleServiceHangUpWebRTCDesc: UnaryMethodDefinitionish = {
 };
 
 export const MonocleServiceRemoveUserDesc: UnaryMethodDefinitionish = {
-  methodName: 'RemoveUser',
+  methodName: "RemoveUser",
   service: MonocleServiceDesc,
   requestStream: false,
   responseStream: false,
@@ -9341,7 +10402,7 @@ export const MonocleServiceRemoveUserDesc: UnaryMethodDefinitionish = {
 };
 
 export const MonocleServiceSubscribeDesc: UnaryMethodDefinitionish = {
-  methodName: 'Subscribe',
+  methodName: "Subscribe",
   service: MonocleServiceDesc,
   requestStream: false,
   responseStream: true,
@@ -9362,7 +10423,8 @@ export const MonocleServiceSubscribeDesc: UnaryMethodDefinitionish = {
   } as any,
 };
 
-interface UnaryMethodDefinitionishR extends grpc.UnaryMethodDefinition<any, any> {
+interface UnaryMethodDefinitionishR
+  extends grpc.UnaryMethodDefinition<any, any> {
   requestStream: any;
   responseStream: any;
 }
@@ -9373,12 +10435,12 @@ interface Rpc {
   unary<T extends UnaryMethodDefinitionish>(
     methodDesc: T,
     request: any,
-    metadata: grpc.Metadata | undefined,
+    metadata: grpc.Metadata | undefined
   ): Observable<any>;
   invoke<T extends UnaryMethodDefinitionish>(
     methodDesc: T,
     request: any,
-    metadata: grpc.Metadata | undefined,
+    metadata: grpc.Metadata | undefined
   ): Observable<any>;
 }
 
@@ -9398,7 +10460,7 @@ export class GrpcWebImpl {
       streamingTransport?: grpc.TransportFactory;
       debug?: boolean;
       metadata?: grpc.Metadata;
-    },
+    }
   ) {
     this.host = host;
     this.options = options;
@@ -9407,12 +10469,15 @@ export class GrpcWebImpl {
   unary<T extends UnaryMethodDefinitionish>(
     methodDesc: T,
     _request: any,
-    metadata: grpc.Metadata | undefined,
+    metadata: grpc.Metadata | undefined
   ): Observable<any> {
     const request = { ..._request, ...methodDesc.requestType };
     const maybeCombinedMetadata =
       metadata && this.options.metadata
-        ? new BrowserHeaders({ ...this.options?.metadata.headersMap, ...metadata?.headersMap })
+        ? new BrowserHeaders({
+            ...this.options?.metadata.headersMap,
+            ...metadata?.headersMap,
+          })
         : metadata || this.options.metadata;
     return new Observable((observer) => {
       grpc.unary(methodDesc, {
@@ -9436,7 +10501,7 @@ export class GrpcWebImpl {
   invoke<T extends UnaryMethodDefinitionish>(
     methodDesc: T,
     _request: any,
-    metadata: grpc.Metadata | undefined,
+    metadata: grpc.Metadata | undefined
   ): Observable<any> {
     // Status Response Codes (https://developers.google.com/maps-booking/reference/grpc-api/status_codes)
     const upStreamCodes = [2, 4, 8, 9, 10, 13, 14, 15];
@@ -9444,7 +10509,10 @@ export class GrpcWebImpl {
     const request = { ..._request, ...methodDesc.requestType };
     const maybeCombinedMetadata =
       metadata && this.options.metadata
-        ? new BrowserHeaders({ ...this.options?.metadata.headersMap, ...metadata?.headersMap })
+        ? new BrowserHeaders({
+            ...this.options?.metadata.headersMap,
+            ...metadata?.headersMap,
+          })
         : metadata || this.options.metadata;
     return new Observable((observer) => {
       const upStream = () => {
