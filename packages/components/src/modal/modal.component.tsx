@@ -1,5 +1,5 @@
-import type { FC } from 'react';
-import ReactModal from 'react-modal';
+import type { FC } from "react";
+import ReactModal from "react-modal";
 
 export const Modal: FC<ReactModal.Props> = ({ children, ...props }) => (
   <ReactModal

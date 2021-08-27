@@ -1,7 +1,9 @@
 module.exports = {
   purge: {
+    enabled: true,
     mode: "all",
     preserveHtmlElements: false,
+    layers: ["components", "utilities"],
     content: [
       "./src/**/*.{js,jsx,ts,tsx}",
       "./public/index.html",

@@ -1,4 +1,7 @@
-import { MonocleServiceClientImpl } from "../../../../../protobuf/generated/monocle";
+import {
+  GetIceCandidatesWebRTCResponse,
+  MonocleServiceClientImpl,
+} from "../../../../../protobuf/generated/monocle";
 
 /**
  * Interface with WebRTC-streamer API
@@ -9,32 +12,41 @@ import { MonocleServiceClientImpl } from "../../../../../protobuf/generated/mono
  * @param videotrackid
  * @param recording
  */
-const WebRtcStreamer = function WebRtcStreamer(
+function WebRtcStreamer(
   grpc: Grpc,
   videoElement: HTMLVideoElement | string,
   srvurl: string,
   recording: number,
   videotrackid: number
 ) {
+  // @ts-ignore
   this.videotrackid = videotrackid;
+  // @ts-ignore
   this.recording = recording;
+  // @ts-ignore
   this.videoElement = videoElement;
+  // @ts-ignore
   this.srvurl = srvurl;
+  // @ts-ignore
   this.pc = null;
+  // @ts-ignore
   this.grpc = grpc;
 
+  // @ts-ignore
   this.mediaConstraints = {
     offerToReceiveAudio: true,
     offerToReceiveVideo: true,
   };
 
+  // @ts-ignore
   this.iceServers = null;
+  // @ts-ignore
   this.earlyCandidates = [];
-};
+}
 
 type Grpc = { client: MonocleServiceClientImpl; meta: any };
 
-WebRtcStreamer.prototype._handleHttpErrors = function (response) {
+WebRtcStreamer.prototype._handleHttpErrors = function (response: any) {
   if (!response.ok) {
     throw Error(response.statusText);
   }
@@ -49,7 +61,7 @@ WebRtcStreamer.prototype.connect = function () {
 
   // getIceServers is not already received
   if (!this.iceServers) {
-    console.log("Get IceServers");
+    console.debug("Get IceServers");
 
     // leave as is
     fetch(this.srvurl + "/api/getIceServers")
@@ -78,7 +90,7 @@ WebRtcStreamer.prototype.disconnect = function () {
     try {
       this.pc.close();
     } catch (e) {
-      console.log("Failure close peer connection:" + e);
+      console.debug("Failure close peer connection:" + e);
     }
     this.pc = null;
   }
@@ -87,7 +99,10 @@ WebRtcStreamer.prototype.disconnect = function () {
 /*
  * GetIceServers callback
  */
-WebRtcStreamer.prototype.onReceiveGetIceServers = function (iceServers) {
+type IceServers = { iceServers: string[] };
+WebRtcStreamer.prototype.onReceiveGetIceServers = function (
+  iceServers: IceServers
+) {
   this.iceServers = iceServers;
   this.pcConfig = iceServers || { iceServers: [] };
   try {
@@ -104,7 +119,7 @@ WebRtcStreamer.prototype.onReceiveGetIceServers = function (iceServers) {
     const bind = this;
     this.pc.createOffer(this.mediaConstraints).then(
       function (sessionDescription: RTCSessionDescription) {
-        console.log("Create offer:" + JSON.stringify(sessionDescription));
+        console.debug("Create offer:" + JSON.stringify(sessionDescription));
 
         bind.pc.setLocalDescription(
           sessionDescription,
@@ -117,16 +132,16 @@ WebRtcStreamer.prototype.onReceiveGetIceServers = function (iceServers) {
               sdp: sessionDescription.sdp,
             };
 
-            console.log(options);
+            console.debug(options);
 
             bind.grpc.client
               .CallWebRTC(options, bind.grpc.meta)
               .toPromise()
-              .then((response) => bind.onReceiveCall.call(bind, response))
-              .catch((error) => bind.onError("call " + error));
+              .then((response: any) => bind.onReceiveCall.call(bind, response))
+              .catch((error: any) => bind.onError("call " + error));
           },
           function (error: any) {
-            console.log("setLocalDescription error:" + JSON.stringify(error));
+            console.debug("setLocalDescription error:" + JSON.stringify(error));
           }
         );
       },
@@ -149,17 +164,19 @@ WebRtcStreamer.prototype.getIceCandidate = function () {
       this.grpc.meta
     )
     .toPromise()
-    .then((response) => {
+    .then((response: GetIceCandidatesWebRTCResponse) => {
       this.onReceiveCandidate.call(this, JSON.parse(response.peerlist));
     })
-    .catch((error) => this.onError("getIceCandidate " + error));
+    .catch((error: any) => this.onError("getIceCandidate " + error));
 };
 
 /*
  * create RTCPeerConnection
  */
 WebRtcStreamer.prototype.createPeerConnection = function () {
-  console.log("createPeerConnection  config: " + JSON.stringify(this.pcConfig));
+  console.debug(
+    "createPeerConnection  config: " + JSON.stringify(this.pcConfig)
+  );
   this.pc = new RTCPeerConnection(this.pcConfig);
   const pc = this.pc;
   pc.peerid = `${Math.random()}`;
@@ -172,7 +189,9 @@ WebRtcStreamer.prototype.createPeerConnection = function () {
     bind.onAddStream.call(bind, evt);
   };
   pc.oniceconnectionstatechange = function (evt: any) {
-    console.log("oniceconnectionstatechange  state: " + pc.iceConnectionState);
+    console.debug(
+      "oniceconnectionstatechange  state: " + pc.iceConnectionState
+    );
     if (bind.videoElement) {
       if (pc.iceConnectionState === "connected") {
         bind.videoElement.style.opacity = "1.0";
@@ -189,23 +208,25 @@ WebRtcStreamer.prototype.createPeerConnection = function () {
     }
   };
   pc.ondatachannel = function (evt: any) {
-    console.log("remote datachannel created:" + JSON.stringify(evt));
+    console.debug("remote datachannel created:" + JSON.stringify(evt));
 
     evt.channel.onopen = function () {
-      console.log("remote datachannel open");
-      this.send("remote channel openned");
+      console.debug("remote datachannel open");
+      this.send("remote channel opened");
     };
     evt.channel.onmessage = function (event: any) {
-      console.log("remote datachannel recv:" + JSON.stringify(event.data));
+      console.debug("remote datachannel recv:" + JSON.stringify(event.data));
     };
   };
   pc.onicegatheringstatechange = function () {
     if (pc.iceGatheringState === "complete") {
-      const recvs = pc.getReceivers();
+      const receivers = pc.getReceivers();
 
-      recvs.forEach((recv) => {
-        if (recv.track && recv.track.kind === "video") {
-          console.log("codecs:" + JSON.stringify(recv.getParameters().codecs));
+      receivers.forEach((receiver: RTCRtpReceiver) => {
+        if (receiver.track && receiver.track.kind === "video") {
+          console.debug(
+            "codecs:" + JSON.stringify(receiver.getParameters().codecs)
+          );
         }
       });
     }
@@ -214,17 +235,17 @@ WebRtcStreamer.prototype.createPeerConnection = function () {
   try {
     const dataChannel = pc.createDataChannel("ClientDataChannel");
     dataChannel.onopen = function () {
-      console.log("local datachannel open");
+      console.debug("local datachannel open");
       this.send("local channel opened");
     };
-    dataChannel.onmessage = function (evt) {
-      console.log("local datachannel recv:" + JSON.stringify(evt.data));
+    dataChannel.onmessage = function (evt: MessageEvent) {
+      console.debug("local datachannel recv:" + JSON.stringify(evt.data));
     };
   } catch (e) {
-    console.log("Cannot create datachannel error: " + e);
+    console.debug("Cannot create datachannel error: " + e);
   }
 
-  console.log(
+  console.debug(
     "Created RTCPeerConnnection with config: " + JSON.stringify(this.pcConfig)
   );
   return pc;
@@ -241,7 +262,7 @@ WebRtcStreamer.prototype.onIceCandidate = function (event: RTCIceCandidate) {
       this.earlyCandidates.push(event.candidate);
     }
   } else {
-    console.log("End of candidates.");
+    console.debug("End of candidates.");
   }
 };
 
@@ -256,22 +277,22 @@ WebRtcStreamer.prototype.addIceCandidate = function (
     icecandidiate: JSON.stringify({ candidate, sdpMid, sdpMLineIndex }),
   };
 
-  console.log({ addIceCandidatePayload });
+  console.debug({ addIceCandidatePayload });
 
   this.grpc.client
     .AddIceCandidateWebRTC(addIceCandidatePayload, this.grpc.meta)
     .toPromise()
-    .then((response) => {
-      console.log("addIceCandidate ok:" + response);
+    .then((response: any) => {
+      console.debug("addIceCandidate ok:" + response);
     })
-    .catch((error) => this.onError("addIceCandidate " + error));
+    .catch((error: any) => this.onError("addIceCandidate " + error));
 };
 
 /*
  * RTCPeerConnection AddTrack callback
  */
-WebRtcStreamer.prototype.onAddStream = function (event) {
-  console.log("Remote track added:" + JSON.stringify(event));
+WebRtcStreamer.prototype.onAddStream = function (event: any) {
+  console.debug("Remote track added:" + JSON.stringify(event));
 
   this.videoElement.srcObject = event.stream;
   const promise = this.videoElement.play();
@@ -287,9 +308,9 @@ WebRtcStreamer.prototype.onAddStream = function (event) {
 /*
  * AJAX /call callback
  */
-WebRtcStreamer.prototype.onReceiveCall = function (dataJson) {
+WebRtcStreamer.prototype.onReceiveCall = function (dataJson: any) {
   const bind = this;
-  console.log("offer: " + JSON.stringify(dataJson));
+  console.debug("offer: " + JSON.stringify(dataJson));
   const descr = new RTCSessionDescription({
     sdp: dataJson.sdp,
     type: "answer",
@@ -297,7 +318,7 @@ WebRtcStreamer.prototype.onReceiveCall = function (dataJson) {
   this.pc.setRemoteDescription(
     descr,
     function () {
-      console.log("setRemoteDescription ok");
+      console.debug("setRemoteDescription ok");
       while (bind.earlyCandidates.length) {
         const candidate = bind.earlyCandidates.shift();
         bind.addIceCandidate.call(bind, bind.pc.peerid, candidate);
@@ -306,7 +327,7 @@ WebRtcStreamer.prototype.onReceiveCall = function (dataJson) {
       bind.getIceCandidate.call(bind);
     },
     function (error: any) {
-      console.log("setRemoteDescription error:" + JSON.stringify(error));
+      console.debug("setRemoteDescription error:" + JSON.stringify(error));
     }
   );
 };
@@ -314,20 +335,20 @@ WebRtcStreamer.prototype.onReceiveCall = function (dataJson) {
 /*
  * AJAX /getIceCandidate callback
  */
-WebRtcStreamer.prototype.onReceiveCandidate = function (dataJson) {
-  console.log("candidate: " + JSON.stringify(dataJson));
+WebRtcStreamer.prototype.onReceiveCandidate = function (dataJson: any) {
+  console.debug("candidate: " + JSON.stringify(dataJson));
   if (dataJson) {
     for (let i = 0; i < dataJson.length; i++) {
       const candidate = new RTCIceCandidate(dataJson[i]);
 
-      console.log("Adding ICE candidate :" + JSON.stringify(candidate));
+      console.debug("Adding ICE candidate :" + JSON.stringify(candidate));
       this.pc.addIceCandidate(
         candidate,
         function () {
-          console.log("addIceCandidate OK");
+          console.debug("addIceCandidate OK");
         },
         function (error: any) {
-          console.log("addIceCandidate error:" + JSON.stringify(error));
+          console.debug("addIceCandidate error:" + JSON.stringify(error));
         }
       );
     }
@@ -338,8 +359,8 @@ WebRtcStreamer.prototype.onReceiveCandidate = function (dataJson) {
 /*
  * AJAX callback for Error
  */
-WebRtcStreamer.prototype.onError = function (status) {
-  console.log("onError:" + status);
+WebRtcStreamer.prototype.onError = function (status: any) {
+  console.debug("onError:" + status);
 };
 
 export default WebRtcStreamer;

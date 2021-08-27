@@ -1,9 +1,10 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 
 module.exports = {
   entry: {
-    app: "./src/index.tsx",
+    app: path.resolve(__dirname, "./src/index.tsx"),
   },
   output: {
     filename: "[name].bundle.js",
@@ -11,6 +12,7 @@ module.exports = {
     clean: true,
   },
   plugins: [
+    new ForkTsCheckerWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: "Production",
       template: path.resolve(__dirname, "public", "index.html"),
@@ -51,7 +53,7 @@ module.exports = {
           },
           {
             loader: "ts-loader",
-            options: { configFile: "tsconfig.base.json" },
+            options: { configFile: "tsconfig.base.json", transpileOnly: true },
           },
         ],
         exclude: /node_modules/,
@@ -71,4 +73,5 @@ module.exports = {
       },
     ],
   },
+  ignoreWarnings: [/Failed to parse source map/],
 };

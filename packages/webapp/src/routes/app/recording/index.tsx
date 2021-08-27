@@ -56,17 +56,17 @@ export const RecordingRoute: FC = () => {
         webRtcServer.disconnect();
       }
     };
-  }, []);
+  }, [recordingToken, activeTrackId]);
 
   return (
-    <div className="flex w-full h-full dark:bg-code-900 dark:text-white">
+    <div className="flex w-full h-full dark:bg-code-900 dark:text-white bg-white">
       <video
         ref={videoEl}
         title={recordingToken}
         muted
         controls
         playsInline
-        className={`w-full flex-1 bg-code-900`}
+        className={`w-full flex-1`}
       />
     </div>
   );

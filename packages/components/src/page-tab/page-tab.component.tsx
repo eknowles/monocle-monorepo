@@ -1,8 +1,8 @@
-import type { MouseEvent } from 'react';
-import type { FC, ReactChild } from 'react';
-import classnames from 'classnames';
+import type { MouseEvent } from "react";
+import type { FC, ReactChild } from "react";
+import classnames from "classnames";
 
-import CrossIcon from '@monocle/icons/src/x.svg';
+import CrossIcon from "@monocle/icons/src/x.svg";
 
 export interface IPageTabProps {
   icon: ReactChild;
@@ -11,7 +11,12 @@ export interface IPageTabProps {
   onClose: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
-export const PageTab: FC<IPageTabProps> = ({ icon, isActive, name, onClose }) => {
+export const PageTab: FC<IPageTabProps> = ({
+  icon,
+  isActive,
+  name,
+  onClose,
+}) => {
   const handleClose = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
@@ -21,9 +26,9 @@ export const PageTab: FC<IPageTabProps> = ({ icon, isActive, name, onClose }) =>
 
   return (
     <div
-      className={classnames('inline-flex items-center justify-between', {
-        'dark:bg-code-900': isActive,
-        'dark:bg-code-700': !isActive,
+      className={classnames("inline-flex items-center justify-between", {
+        "dark:bg-code-900 bg-white": isActive,
+        "dark:bg-code-700 bg-gray-200": !isActive,
       })}
     >
       <div />
@@ -34,9 +39,12 @@ export const PageTab: FC<IPageTabProps> = ({ icon, isActive, name, onClose }) =>
       <button
         onClick={handleClose}
         disabled={!isActive}
-        className={classnames('dark:text-code-100 dark:hover:text-white p-2 focus:outline-none', {
-          'pointer-events-none opacity-0': !isActive,
-        })}
+        className={classnames(
+          "dark:text-code-100 dark:hover:text-white p-2 focus:outline-none",
+          {
+            "pointer-events-none opacity-0": !isActive,
+          }
+        )}
       >
         <CrossIcon width="16" height="16" />
       </button>

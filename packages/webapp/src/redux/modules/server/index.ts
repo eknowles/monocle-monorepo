@@ -1,4 +1,5 @@
 import {
+  Action,
   createAction,
   createSelector,
   createSlice,
@@ -114,8 +115,9 @@ export const getServerMeta = createSelector(
 // epics
 const authEpic: Epic = (action$, _state$, { history }) => {
   return action$.pipe(
-    ofType<Auth>(auth.type),
+    ofType<Auth, any>(auth.type),
     switchMap(({ payload: { host, username, password } }) =>
+      // @ts-ignore
       authenticate(host, username, password).pipe(
         // @ts-ignore
         map(({ jwttoken }) => {
@@ -129,7 +131,7 @@ const authEpic: Epic = (action$, _state$, { history }) => {
 
           return serverSlice.actions.authSuccess({ host, token: jwttoken! });
         }),
-        catchError((_error) => of(serverSlice.actions.authFailed({ host })))
+        catchError((_error) => [serverSlice.actions.authFailed({ host })])
       )
     )
   );
@@ -156,18 +158,18 @@ const logoutEpic: Epic = (action$, _state$, { history }) => {
 
 const subscribeEpic: Epic = (action$, _state$) => {
   return action$.pipe(
-    ofType<Subscribe>(subscribe.type),
+    ofType<Subscribe, any>(subscribe.type),
     switchMap(({ payload }) =>
+      // @ts-ignore
       monocleSubscribe(payload).pipe(
         // @ts-ignore
         map((value: SubscribeResponse) => {
-          console.log(value);
-          if (value.message.typeUrl === "type.googleapis.com/proto.State") {
-            const stateObj = MonocleState.decode(value.message.value);
+          if (value.message!.typeUrl === "type.googleapis.com/proto.State") {
+            const stateObj = MonocleState.decode(value.message!.value);
             return serverSlice.actions.state(stateObj);
           }
 
-          return { type: value.message.typeUrl };
+          return [{ type: value.message!.typeUrl }];
         })
       )
     )
