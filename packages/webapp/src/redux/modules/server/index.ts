@@ -1,5 +1,4 @@
 import {
-  Action,
   createAction,
   createSelector,
   createSlice,
@@ -10,16 +9,13 @@ import {
   State as MonocleState,
   SubscribeResponse,
 } from "@monocle/protobuf/generated/monocle";
+import { toast } from "@monocle/components";
 import { combineEpics, Epic, ofType } from "redux-observable";
-import { EMPTY, of } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 import { switchMap } from "rxjs/operators";
 import { LOCALSTORAGE_AUTH_TOKEN_KEY } from "../../../constants";
 import { authenticate } from "../../../services/auth/authenticate";
-import {
-  subscribe as monocleSubscribe,
-  getClient,
-} from "../../../services/monocle";
+import { subscribe as monocleSubscribe } from "../../../services/monocle";
 
 const NAME = "server";
 const initialToken =
@@ -85,6 +81,8 @@ export type LoggedOut = ReturnType<typeof loggedOut>;
 // selectors
 export const getServerId = (state: any) =>
   (state.server as ServerState).state?.identifier;
+export const getAuthStatus = (state: any) =>
+  (state.server as ServerState).authenticated;
 export const getServerAuthToken = (state: any) =>
   (state.server as ServerState).token;
 export const getServerVersion = (state: any) =>
@@ -129,9 +127,13 @@ const authEpic: Epic = (action$, _state$, { history }) => {
 
           history.push("/app");
 
+          toast.success("Authentication successful");
           return serverSlice.actions.authSuccess({ host, token: jwttoken! });
         }),
-        catchError((_error) => [serverSlice.actions.authFailed({ host })])
+        catchError((_error) => {
+          toast.error(_error.message || "Failed to authenticate");
+          return [serverSlice.actions.authFailed({ host })];
+        })
       )
     )
   );
@@ -150,7 +152,6 @@ const logoutEpic: Epic = (action$, _state$, { history }) => {
     map(() => {
       localStorage.removeItem(LOCALSTORAGE_AUTH_TOKEN_KEY);
       history.push("/login");
-
       return loggedOut();
     })
   );

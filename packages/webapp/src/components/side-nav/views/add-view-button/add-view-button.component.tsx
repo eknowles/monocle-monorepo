@@ -1,9 +1,15 @@
-import { Form, Formik } from 'formik';
-import { FC, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Button, Field, IFormValues, Modal, ModalHead } from '@monocle/components';
-import Plus from '@monocle/icons/src/plus.svg';
-import { actions as viewActions } from '../../../redux/modules/view';
+import { Form, Formik } from "formik";
+import { FC, useState } from "react";
+import { useDispatch } from "react-redux";
+import {
+  Button,
+  Field,
+  IFormValues,
+  Modal,
+  ModalHead,
+} from "@monocle/components";
+import Plus from "@monocle/icons/src/plus.svg";
+import { actions as viewActions } from "../../../../redux/modules/view";
 
 type NewFormValues = { name: string };
 
@@ -32,7 +38,7 @@ export const AddViewButton = () => {
         shouldCloseOnOverlayClick={true}
       >
         <ModalHead onClose={() => setOpen(false)}>NEW VIEW</ModalHead>
-        <Formik<NewFormValues> initialValues={{ name: '' }} onSubmit={onSubmit}>
+        <Formik<NewFormValues> initialValues={{ name: "" }} onSubmit={onSubmit}>
           <NewViewForm />
         </Formik>
       </Modal>
@@ -41,8 +47,12 @@ export const AddViewButton = () => {
 };
 
 const NewViewForm: FC = () => (
-  <Form className="grid gap-2 grid-cols-1 p-3 dark:bg-code-800">
-    <Field name="name" type="text" placeholder="View Name (e.g. Ground Floor)" />
+  <Form className="grid gap-2 grid-cols-1 p-3 dark:bg-code-800 bg-white">
+    <Field
+      name="name"
+      type="text"
+      placeholder="View Name (e.g. Ground Floor)"
+    />
     <Button type="submit">Create New View</Button>
   </Form>
 );

@@ -24,7 +24,7 @@ function WebRtcStreamer(
   // @ts-ignore
   this.recording = recording;
   // @ts-ignore
-  this.videoElement = videoElement;
+  this.videoElement = videoElement as HTMLVideoElement;
   // @ts-ignore
   this.srvurl = srvurl;
   // @ts-ignore
@@ -194,14 +194,14 @@ WebRtcStreamer.prototype.createPeerConnection = function () {
     );
     if (bind.videoElement) {
       if (pc.iceConnectionState === "connected") {
-        bind.videoElement.style.opacity = "1.0";
+        // bind.videoElement.style.opacity = "1.0";
       } else if (pc.iceConnectionState === "disconnected") {
-        bind.videoElement.style.opacity = "0.25";
+        // bind.videoElement.style.opacity = "0.25";
       } else if (
         pc.iceConnectionState === "failed" ||
         pc.iceConnectionState === "closed"
       ) {
-        bind.videoElement.style.opacity = "0.5";
+        // bind.videoElement.style.opacity = "0.5";
       } else if (pc.iceConnectionState === "new") {
         bind.getIceCandidate.call(bind);
       }
@@ -295,14 +295,14 @@ WebRtcStreamer.prototype.onAddStream = function (event: any) {
   console.debug("Remote track added:" + JSON.stringify(event));
 
   this.videoElement.srcObject = event.stream;
-  const promise = this.videoElement.play();
-  if (promise !== undefined) {
-    const bind = this;
-    promise.catch(function (error: any) {
+  (this.videoElement as HTMLVideoElement)
+    .play()
+    .then(() => {
+      (this.videoElement as HTMLVideoElement).controls = false;
+    })
+    .catch(function (error: any) {
       console.warn("error:" + error);
-      bind.videoElement.setAttribute("controls", true);
     });
-  }
 };
 
 /*

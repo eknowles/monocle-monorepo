@@ -1,4 +1,5 @@
 module.exports = {
+  mode: "jit",
   purge: {
     enabled: true,
     mode: "all",
@@ -6,7 +7,7 @@ module.exports = {
     layers: ["components", "utilities"],
     content: [
       "./src/**/*.{js,jsx,ts,tsx}",
-      "./public/index.html",
+      "./public/index.ejs",
       "../components/**/*.{js,jsx,ts,tsx}",
       "../webapp/**/*.{js,jsx,ts,tsx}",
     ],

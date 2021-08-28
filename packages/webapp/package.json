@@ -4,8 +4,8 @@
   "license": "UNLICENCED",
   "scripts": {
     "dev": "webpack --mode development",
-    "start": "webpack serve --config webpack.dev.js",
-    "build": "webpack --config webpack.prod.js",
+    "start": "NODE_ENV=development webpack serve --config webpack.dev.js --mode development",
+    "build": "NODE_ENV=production webpack --config webpack.prod.js --mode production",
     "eject": "react-scripts eject"
   },
   "browserslist": {
@@ -42,6 +42,8 @@
     "webpack-dev-server": "^4.0.0"
   },
   "devDependencies": {
+    "favicons": "^6.2.2",
+    "favicons-webpack-plugin": "^5.0.2",
     "webpack-merge": "^5.8.0"
   }
 }

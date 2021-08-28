@@ -1,26 +1,25 @@
-import { PageTab } from './page-tab.component';
+import { Meta, Story } from "@storybook/react";
+import { IPageTabProps, PageTab } from "./page-tab.component";
 
-import Icon from '@monocle/icons/src/grid.svg';
+import Icon from "@monocle/icons/src/grid.svg";
 
 export default {
-  title: 'Components/PageTab',
+  title: "Components/PageTab",
   component: PageTab,
   argTypes: {},
-};
+} as Meta;
 
-const Template = (args) => <PageTab {...args} />;
+const Template: Story<IPageTabProps> = (args) => <PageTab {...args} />;
 
 export const Active = Template.bind({});
 Active.args = {
-  id: 'Active',
   icon: <Icon width="14" height="14" />,
-  name: 'Example Server Name',
+  name: "Example Server Name",
   isActive: true,
 };
 export const InActive = Template.bind({});
 InActive.args = {
-  id: 'InActive',
   icon: <Icon width="14" height="14" />,
-  name: 'Default View',
+  name: "Default View",
   isActive: false,
 };

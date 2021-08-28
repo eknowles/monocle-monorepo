@@ -1,10 +1,10 @@
-import type { FC } from 'react';
+import type { FC } from "react";
 
-interface IServerDetailsProps {
+export type IServerDetailsProps = {
   name: string;
   architecture: string;
   version: string;
-}
+};
 
 const Metric: FC<{ label: string; value: string }> = ({ label, value }) => (
   <div>
@@ -22,8 +22,8 @@ export const ServerDetails: FC<IServerDetailsProps> = ({
   architecture,
   version,
 }) => (
-  <div className="h-full w-full dark:bg-code-900 p-4">
-    <div className="">
+  <div className="h-full w-full dark:bg-code-900 bg-white p-4">
+    <div>
       <Metric label="Server Name" value={name} />
       <Metric label="Architecture" value={architecture} />
       <Metric label="Version" value={version} />

@@ -17,7 +17,6 @@
       "@monocle/icons": ["./packages/icons/src"],
       "@monocle/components": ["./packages/components/src"],
       "@monocle/common": ["./packages/common"],
-      "@monocle/protos": ["./packages/protos/generated"],
       "@monocle/protobuf": ["./packages/protobuf/generated"]
     }
   }

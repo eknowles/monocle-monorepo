@@ -1,13 +1,14 @@
-import { useState } from 'react';
-import { Modal } from './modal.component';
+import { Meta, Story } from "@storybook/react";
+import { useState } from "react";
+import { Modal } from "./modal.component";
 
 export default {
-  title: 'Components/Modal',
+  title: "Components/Modal",
   component: Modal,
   argTypes: {},
-};
+} as Meta;
 
-const Template = (args) => {
+const Template: Story = (args) => {
   const [open, setOpen] = useState(false);
   return (
     <div>
@@ -21,5 +22,5 @@ const Template = (args) => {
 
 export const Primary = Template.bind({});
 Primary.args = {
-  children: 'children',
+  children: "children",
 };

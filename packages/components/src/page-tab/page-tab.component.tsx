@@ -28,7 +28,7 @@ export const PageTab: FC<IPageTabProps> = ({
     <div
       className={classnames("inline-flex items-center justify-between", {
         "dark:bg-code-900 bg-white": isActive,
-        "dark:bg-code-700 bg-gray-200": !isActive,
+        "dark:bg-code-700 bg-gray-100": !isActive,
       })}
     >
       <div />

@@ -973,6 +973,35 @@ export interface AddUserRequest {
 
 export interface AddUserResponse {}
 
+export interface UpdateUserRequest {
+  token: string;
+  password: string;
+  group: string;
+}
+
+export interface UpdateUserResponse {}
+
+export interface DeleteUserRequest {
+  token: string;
+}
+
+export interface DeleteUserResponse {}
+
+export interface GetUserDataRequest {
+  key: string;
+}
+
+export interface GetUserDataResponse {
+  data: string;
+}
+
+export interface SetUserDataRequest {
+  key: string;
+  data: string;
+}
+
+export interface SetUserDataResponse {}
+
 export interface CallWebRTCRequest {
   peerid: string;
   recording: string;
@@ -1004,12 +1033,6 @@ export interface RefreshTokenRequest {}
 export interface RefreshTokenResponse {
   jwttoken: string;
 }
-
-export interface RemoveUserRequest {
-  usertoken: string;
-}
-
-export interface RemoveUserResponse {}
 
 export interface SubscribeRequest {}
 
@@ -9328,6 +9351,470 @@ export const AddUserResponse = {
   },
 };
 
+const baseUpdateUserRequest: object = { token: "", password: "", group: "" };
+
+export const UpdateUserRequest = {
+  encode(
+    message: UpdateUserRequest,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.token !== "") {
+      writer.uint32(10).string(message.token);
+    }
+    if (message.password !== "") {
+      writer.uint32(18).string(message.password);
+    }
+    if (message.group !== "") {
+      writer.uint32(26).string(message.group);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): UpdateUserRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseUpdateUserRequest } as UpdateUserRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.token = reader.string();
+          break;
+        case 2:
+          message.password = reader.string();
+          break;
+        case 3:
+          message.group = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): UpdateUserRequest {
+    const message = { ...baseUpdateUserRequest } as UpdateUserRequest;
+    if (object.token !== undefined && object.token !== null) {
+      message.token = String(object.token);
+    } else {
+      message.token = "";
+    }
+    if (object.password !== undefined && object.password !== null) {
+      message.password = String(object.password);
+    } else {
+      message.password = "";
+    }
+    if (object.group !== undefined && object.group !== null) {
+      message.group = String(object.group);
+    } else {
+      message.group = "";
+    }
+    return message;
+  },
+
+  toJSON(message: UpdateUserRequest): unknown {
+    const obj: any = {};
+    message.token !== undefined && (obj.token = message.token);
+    message.password !== undefined && (obj.password = message.password);
+    message.group !== undefined && (obj.group = message.group);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<UpdateUserRequest>): UpdateUserRequest {
+    const message = { ...baseUpdateUserRequest } as UpdateUserRequest;
+    if (object.token !== undefined && object.token !== null) {
+      message.token = object.token;
+    } else {
+      message.token = "";
+    }
+    if (object.password !== undefined && object.password !== null) {
+      message.password = object.password;
+    } else {
+      message.password = "";
+    }
+    if (object.group !== undefined && object.group !== null) {
+      message.group = object.group;
+    } else {
+      message.group = "";
+    }
+    return message;
+  },
+};
+
+const baseUpdateUserResponse: object = {};
+
+export const UpdateUserResponse = {
+  encode(
+    _: UpdateUserResponse,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): UpdateUserResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseUpdateUserResponse } as UpdateUserResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): UpdateUserResponse {
+    const message = { ...baseUpdateUserResponse } as UpdateUserResponse;
+    return message;
+  },
+
+  toJSON(_: UpdateUserResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial(_: DeepPartial<UpdateUserResponse>): UpdateUserResponse {
+    const message = { ...baseUpdateUserResponse } as UpdateUserResponse;
+    return message;
+  },
+};
+
+const baseDeleteUserRequest: object = { token: "" };
+
+export const DeleteUserRequest = {
+  encode(
+    message: DeleteUserRequest,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.token !== "") {
+      writer.uint32(10).string(message.token);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): DeleteUserRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseDeleteUserRequest } as DeleteUserRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.token = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): DeleteUserRequest {
+    const message = { ...baseDeleteUserRequest } as DeleteUserRequest;
+    if (object.token !== undefined && object.token !== null) {
+      message.token = String(object.token);
+    } else {
+      message.token = "";
+    }
+    return message;
+  },
+
+  toJSON(message: DeleteUserRequest): unknown {
+    const obj: any = {};
+    message.token !== undefined && (obj.token = message.token);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<DeleteUserRequest>): DeleteUserRequest {
+    const message = { ...baseDeleteUserRequest } as DeleteUserRequest;
+    if (object.token !== undefined && object.token !== null) {
+      message.token = object.token;
+    } else {
+      message.token = "";
+    }
+    return message;
+  },
+};
+
+const baseDeleteUserResponse: object = {};
+
+export const DeleteUserResponse = {
+  encode(
+    _: DeleteUserResponse,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): DeleteUserResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseDeleteUserResponse } as DeleteUserResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): DeleteUserResponse {
+    const message = { ...baseDeleteUserResponse } as DeleteUserResponse;
+    return message;
+  },
+
+  toJSON(_: DeleteUserResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial(_: DeepPartial<DeleteUserResponse>): DeleteUserResponse {
+    const message = { ...baseDeleteUserResponse } as DeleteUserResponse;
+    return message;
+  },
+};
+
+const baseGetUserDataRequest: object = { key: "0" };
+
+export const GetUserDataRequest = {
+  encode(
+    message: GetUserDataRequest,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.key !== "0") {
+      writer.uint32(9).fixed64(message.key);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetUserDataRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseGetUserDataRequest } as GetUserDataRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.key = longToString(reader.fixed64() as Long);
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): GetUserDataRequest {
+    const message = { ...baseGetUserDataRequest } as GetUserDataRequest;
+    if (object.key !== undefined && object.key !== null) {
+      message.key = String(object.key);
+    } else {
+      message.key = "0";
+    }
+    return message;
+  },
+
+  toJSON(message: GetUserDataRequest): unknown {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<GetUserDataRequest>): GetUserDataRequest {
+    const message = { ...baseGetUserDataRequest } as GetUserDataRequest;
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    } else {
+      message.key = "0";
+    }
+    return message;
+  },
+};
+
+const baseGetUserDataResponse: object = { data: "" };
+
+export const GetUserDataResponse = {
+  encode(
+    message: GetUserDataResponse,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.data !== "") {
+      writer.uint32(10).string(message.data);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetUserDataResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseGetUserDataResponse } as GetUserDataResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.data = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): GetUserDataResponse {
+    const message = { ...baseGetUserDataResponse } as GetUserDataResponse;
+    if (object.data !== undefined && object.data !== null) {
+      message.data = String(object.data);
+    } else {
+      message.data = "";
+    }
+    return message;
+  },
+
+  toJSON(message: GetUserDataResponse): unknown {
+    const obj: any = {};
+    message.data !== undefined && (obj.data = message.data);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<GetUserDataResponse>): GetUserDataResponse {
+    const message = { ...baseGetUserDataResponse } as GetUserDataResponse;
+    if (object.data !== undefined && object.data !== null) {
+      message.data = object.data;
+    } else {
+      message.data = "";
+    }
+    return message;
+  },
+};
+
+const baseSetUserDataRequest: object = { key: "0", data: "" };
+
+export const SetUserDataRequest = {
+  encode(
+    message: SetUserDataRequest,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.key !== "0") {
+      writer.uint32(9).fixed64(message.key);
+    }
+    if (message.data !== "") {
+      writer.uint32(18).string(message.data);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): SetUserDataRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseSetUserDataRequest } as SetUserDataRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.key = longToString(reader.fixed64() as Long);
+          break;
+        case 2:
+          message.data = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): SetUserDataRequest {
+    const message = { ...baseSetUserDataRequest } as SetUserDataRequest;
+    if (object.key !== undefined && object.key !== null) {
+      message.key = String(object.key);
+    } else {
+      message.key = "0";
+    }
+    if (object.data !== undefined && object.data !== null) {
+      message.data = String(object.data);
+    } else {
+      message.data = "";
+    }
+    return message;
+  },
+
+  toJSON(message: SetUserDataRequest): unknown {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.data !== undefined && (obj.data = message.data);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<SetUserDataRequest>): SetUserDataRequest {
+    const message = { ...baseSetUserDataRequest } as SetUserDataRequest;
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    } else {
+      message.key = "0";
+    }
+    if (object.data !== undefined && object.data !== null) {
+      message.data = object.data;
+    } else {
+      message.data = "";
+    }
+    return message;
+  },
+};
+
+const baseSetUserDataResponse: object = {};
+
+export const SetUserDataResponse = {
+  encode(
+    _: SetUserDataResponse,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): SetUserDataResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseSetUserDataResponse } as SetUserDataResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): SetUserDataResponse {
+    const message = { ...baseSetUserDataResponse } as SetUserDataResponse;
+    return message;
+  },
+
+  toJSON(_: SetUserDataResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial(_: DeepPartial<SetUserDataResponse>): SetUserDataResponse {
+    const message = { ...baseSetUserDataResponse } as SetUserDataResponse;
+    return message;
+  },
+};
+
 const baseCallWebRTCRequest: object = {
   peerid: "",
   recording: "",
@@ -9861,105 +10348,6 @@ export const RefreshTokenResponse = {
   },
 };
 
-const baseRemoveUserRequest: object = { usertoken: "" };
-
-export const RemoveUserRequest = {
-  encode(
-    message: RemoveUserRequest,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
-    if (message.usertoken !== "") {
-      writer.uint32(10).string(message.usertoken);
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): RemoveUserRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseRemoveUserRequest } as RemoveUserRequest;
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          message.usertoken = reader.string();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-    return message;
-  },
-
-  fromJSON(object: any): RemoveUserRequest {
-    const message = { ...baseRemoveUserRequest } as RemoveUserRequest;
-    if (object.usertoken !== undefined && object.usertoken !== null) {
-      message.usertoken = String(object.usertoken);
-    } else {
-      message.usertoken = "";
-    }
-    return message;
-  },
-
-  toJSON(message: RemoveUserRequest): unknown {
-    const obj: any = {};
-    message.usertoken !== undefined && (obj.usertoken = message.usertoken);
-    return obj;
-  },
-
-  fromPartial(object: DeepPartial<RemoveUserRequest>): RemoveUserRequest {
-    const message = { ...baseRemoveUserRequest } as RemoveUserRequest;
-    if (object.usertoken !== undefined && object.usertoken !== null) {
-      message.usertoken = object.usertoken;
-    } else {
-      message.usertoken = "";
-    }
-    return message;
-  },
-};
-
-const baseRemoveUserResponse: object = {};
-
-export const RemoveUserResponse = {
-  encode(
-    _: RemoveUserResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): RemoveUserResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseRemoveUserResponse } as RemoveUserResponse;
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-    return message;
-  },
-
-  fromJSON(_: any): RemoveUserResponse {
-    const message = { ...baseRemoveUserResponse } as RemoveUserResponse;
-    return message;
-  },
-
-  toJSON(_: RemoveUserResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromPartial(_: DeepPartial<RemoveUserResponse>): RemoveUserResponse {
-    const message = { ...baseRemoveUserResponse } as RemoveUserResponse;
-    return message;
-  },
-};
-
 const baseSubscribeRequest: object = {};
 
 export const SubscribeRequest = {
@@ -10076,6 +10464,8 @@ export class AuthServiceClientImpl implements AuthService {
 
   constructor(rpc: Rpc) {
     this.rpc = rpc;
+    this.Authenticate = this.Authenticate.bind(this);
+    this.RefreshToken = this.RefreshToken.bind(this);
   }
 
   Authenticate(
@@ -10158,6 +10548,22 @@ export interface MonocleService {
     request: DeepPartial<AddUserRequest>,
     metadata?: grpc.Metadata
   ): Observable<AddUserResponse>;
+  UpdateUser(
+    request: DeepPartial<UpdateUserRequest>,
+    metadata?: grpc.Metadata
+  ): Observable<UpdateUserResponse>;
+  DeleteUser(
+    request: DeepPartial<DeleteUserRequest>,
+    metadata?: grpc.Metadata
+  ): Observable<DeleteUserResponse>;
+  GetUserData(
+    request: DeepPartial<GetUserDataRequest>,
+    metadata?: grpc.Metadata
+  ): Observable<GetUserDataResponse>;
+  SetUserData(
+    request: DeepPartial<SetUserDataRequest>,
+    metadata?: grpc.Metadata
+  ): Observable<SetUserDataResponse>;
   CallWebRTC(
     request: DeepPartial<CallWebRTCRequest>,
     metadata?: grpc.Metadata
@@ -10170,10 +10576,6 @@ export interface MonocleService {
     request: DeepPartial<HangUpWebRTCRequest>,
     metadata?: grpc.Metadata
   ): Observable<HangUpWebRTCResponse>;
-  RemoveUser(
-    request: DeepPartial<RemoveUserRequest>,
-    metadata?: grpc.Metadata
-  ): Observable<RemoveUserResponse>;
   Subscribe(
     request: DeepPartial<SubscribeRequest>,
     metadata?: grpc.Metadata
@@ -10185,6 +10587,16 @@ export class MonocleServiceClientImpl implements MonocleService {
 
   constructor(rpc: Rpc) {
     this.rpc = rpc;
+    this.AddIceCandidateWebRTC = this.AddIceCandidateWebRTC.bind(this);
+    this.AddUser = this.AddUser.bind(this);
+    this.UpdateUser = this.UpdateUser.bind(this);
+    this.DeleteUser = this.DeleteUser.bind(this);
+    this.GetUserData = this.GetUserData.bind(this);
+    this.SetUserData = this.SetUserData.bind(this);
+    this.CallWebRTC = this.CallWebRTC.bind(this);
+    this.GetIceCandidatesWebRTC = this.GetIceCandidatesWebRTC.bind(this);
+    this.HangUpWebRTC = this.HangUpWebRTC.bind(this);
+    this.Subscribe = this.Subscribe.bind(this);
   }
 
   AddIceCandidateWebRTC(
@@ -10205,6 +10617,50 @@ export class MonocleServiceClientImpl implements MonocleService {
     return this.rpc.unary(
       MonocleServiceAddUserDesc,
       AddUserRequest.fromPartial(request),
+      metadata
+    );
+  }
+
+  UpdateUser(
+    request: DeepPartial<UpdateUserRequest>,
+    metadata?: grpc.Metadata
+  ): Observable<UpdateUserResponse> {
+    return this.rpc.unary(
+      MonocleServiceUpdateUserDesc,
+      UpdateUserRequest.fromPartial(request),
+      metadata
+    );
+  }
+
+  DeleteUser(
+    request: DeepPartial<DeleteUserRequest>,
+    metadata?: grpc.Metadata
+  ): Observable<DeleteUserResponse> {
+    return this.rpc.unary(
+      MonocleServiceDeleteUserDesc,
+      DeleteUserRequest.fromPartial(request),
+      metadata
+    );
+  }
+
+  GetUserData(
+    request: DeepPartial<GetUserDataRequest>,
+    metadata?: grpc.Metadata
+  ): Observable<GetUserDataResponse> {
+    return this.rpc.unary(
+      MonocleServiceGetUserDataDesc,
+      GetUserDataRequest.fromPartial(request),
+      metadata
+    );
+  }
+
+  SetUserData(
+    request: DeepPartial<SetUserDataRequest>,
+    metadata?: grpc.Metadata
+  ): Observable<SetUserDataResponse> {
+    return this.rpc.unary(
+      MonocleServiceSetUserDataDesc,
+      SetUserDataRequest.fromPartial(request),
       metadata
     );
   }
@@ -10238,17 +10694,6 @@ export class MonocleServiceClientImpl implements MonocleService {
     return this.rpc.unary(
       MonocleServiceHangUpWebRTCDesc,
       HangUpWebRTCRequest.fromPartial(request),
-      metadata
-    );
-  }
-
-  RemoveUser(
-    request: DeepPartial<RemoveUserRequest>,
-    metadata?: grpc.Metadata
-  ): Observable<RemoveUserResponse> {
-    return this.rpc.unary(
-      MonocleServiceRemoveUserDesc,
-      RemoveUserRequest.fromPartial(request),
       metadata
     );
   }
@@ -10305,6 +10750,94 @@ export const MonocleServiceAddUserDesc: UnaryMethodDefinitionish = {
     deserializeBinary(data: Uint8Array) {
       return {
         ...AddUserResponse.decode(data),
+        toObject() {
+          return this;
+        },
+      };
+    },
+  } as any,
+};
+
+export const MonocleServiceUpdateUserDesc: UnaryMethodDefinitionish = {
+  methodName: "UpdateUser",
+  service: MonocleServiceDesc,
+  requestStream: false,
+  responseStream: false,
+  requestType: {
+    serializeBinary() {
+      return UpdateUserRequest.encode(this).finish();
+    },
+  } as any,
+  responseType: {
+    deserializeBinary(data: Uint8Array) {
+      return {
+        ...UpdateUserResponse.decode(data),
+        toObject() {
+          return this;
+        },
+      };
+    },
+  } as any,
+};
+
+export const MonocleServiceDeleteUserDesc: UnaryMethodDefinitionish = {
+  methodName: "DeleteUser",
+  service: MonocleServiceDesc,
+  requestStream: false,
+  responseStream: false,
+  requestType: {
+    serializeBinary() {
+      return DeleteUserRequest.encode(this).finish();
+    },
+  } as any,
+  responseType: {
+    deserializeBinary(data: Uint8Array) {
+      return {
+        ...DeleteUserResponse.decode(data),
+        toObject() {
+          return this;
+        },
+      };
+    },
+  } as any,
+};
+
+export const MonocleServiceGetUserDataDesc: UnaryMethodDefinitionish = {
+  methodName: "GetUserData",
+  service: MonocleServiceDesc,
+  requestStream: false,
+  responseStream: false,
+  requestType: {
+    serializeBinary() {
+      return GetUserDataRequest.encode(this).finish();
+    },
+  } as any,
+  responseType: {
+    deserializeBinary(data: Uint8Array) {
+      return {
+        ...GetUserDataResponse.decode(data),
+        toObject() {
+          return this;
+        },
+      };
+    },
+  } as any,
+};
+
+export const MonocleServiceSetUserDataDesc: UnaryMethodDefinitionish = {
+  methodName: "SetUserData",
+  service: MonocleServiceDesc,
+  requestStream: false,
+  responseStream: false,
+  requestType: {
+    serializeBinary() {
+      return SetUserDataRequest.encode(this).finish();
+    },
+  } as any,
+  responseType: {
+    deserializeBinary(data: Uint8Array) {
+      return {
+        ...SetUserDataResponse.decode(data),
         toObject() {
           return this;
         },
@@ -10371,28 +10904,6 @@ export const MonocleServiceHangUpWebRTCDesc: UnaryMethodDefinitionish = {
     deserializeBinary(data: Uint8Array) {
       return {
         ...HangUpWebRTCResponse.decode(data),
-        toObject() {
-          return this;
-        },
-      };
-    },
-  } as any,
-};
-
-export const MonocleServiceRemoveUserDesc: UnaryMethodDefinitionish = {
-  methodName: "RemoveUser",
-  service: MonocleServiceDesc,
-  requestStream: false,
-  responseStream: false,
-  requestType: {
-    serializeBinary() {
-      return RemoveUserRequest.encode(this).finish();
-    },
-  } as any,
-  responseType: {
-    deserializeBinary(data: Uint8Array) {
-      return {
-        ...RemoveUserResponse.decode(data),
         toObject() {
           return this;
         },
@@ -10516,7 +11027,7 @@ export class GrpcWebImpl {
         : metadata || this.options.metadata;
     return new Observable((observer) => {
       const upStream = () => {
-        grpc.invoke(methodDesc, {
+        const client = grpc.invoke(methodDesc, {
           host: this.host,
           request,
           transport: this.options.streamingTransport || this.options.transport,
@@ -10533,13 +11044,21 @@ export class GrpcWebImpl {
             }
           },
         });
+        observer.add(() => client.close());
       };
       upStream();
     }).pipe(share());
   }
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | undefined;
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 export type DeepPartial<T> = T extends Builtin
   ? T
   : T extends Array<infer U>

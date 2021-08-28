@@ -1,12 +1,15 @@
-const path = require('path');
+const path = require("path");
 
 module.exports = {
+  core: {
+    builder: "webpack5",
+  },
   stories: [
-    '../../components/**/*.stories.mdx',
-    '../../components/**/*.stories.@(js|jsx|ts|tsx)',
+    "../../components/**/*.stories.mdx",
+    "../../components/**/*.stories.@(js|jsx|ts|tsx)",
   ],
   typescript: {
-    reactDocgen: 'react-docgen-typescript',
+    reactDocgen: "react-docgen-typescript",
     reactDocgenTypescriptOptions: {
       compilerOptions: {
         allowSyntheticDefaultImports: false,
@@ -14,47 +17,51 @@ module.exports = {
       },
     },
   },
-  addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
+  addons: [
+    "@storybook/addon-links",
+    "@storybook/addon-essentials",
+    "@storybook/addon-postcss",
+  ],
   webpackFinal: async (config) => {
     config.module.rules = [
       {
         test: /\.(jpe?g|gif|png|woff|ttf|wav|mp3)$/i,
-        loader: 'file-loader',
+        loader: "file-loader",
         options: {
-          name: '[path][name].[ext]',
+          name: "[path][name].[ext]",
         },
       },
       {
         test: /\.svg$/,
-        use: ['@svgr/webpack'],
+        use: ["@svgr/webpack"],
       },
       {
         test: /\.tsx?$/,
         use: [
           {
-            loader: 'babel-loader',
+            loader: "babel-loader",
             options: {
               cacheDirectory: true,
               presets: [
                 [
-                  '@babel/preset-react',
+                  "@babel/preset-react",
                   {
-                    runtime: 'automatic',
+                    runtime: "automatic",
                   },
                 ],
               ],
             },
           },
           {
-            loader: 'ts-loader',
-            options: { configFile: 'tsconfig.base.json' },
+            loader: "ts-loader",
+            options: { configFile: "tsconfig.base.json" },
           },
         ],
         exclude: /node_modules/,
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader'],
+        use: ["style-loader", "css-loader", "postcss-loader"],
       },
     ];
     return config;

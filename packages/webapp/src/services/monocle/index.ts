@@ -1,5 +1,8 @@
-import { grpc } from '@improbable-eng/grpc-web';
-import { MonocleServiceClientImpl, GrpcWebImpl } from '@monocle/protobuf/generated/monocle';
+import { grpc } from "@improbable-eng/grpc-web";
+import {
+  MonocleServiceClientImpl,
+  GrpcWebImpl,
+} from "@monocle/protobuf/generated/monocle";
 
 export const subscribe = ({ host, token }: { host: string; token: string }) => {
   const { client, meta } = getClient({ host, token });
@@ -7,7 +10,7 @@ export const subscribe = ({ host, token }: { host: string; token: string }) => {
 };
 
 export const getClient = ({ host, token }: { host: string; token: string }) => {
-  const rpc = new GrpcWebImpl(host, { debug: true });
+  const rpc = new GrpcWebImpl(host, { debug: false });
   const client = new MonocleServiceClientImpl(rpc);
   const meta = new grpc.Metadata({ jwttoken: token });
   return { client, meta };

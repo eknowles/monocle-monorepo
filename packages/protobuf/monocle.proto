@@ -648,6 +648,49 @@ message AddUserResponse
 
 }
 
+message UpdateUserRequest
+{
+  string token = 1;
+  string password = 2;
+  string group = 3;
+}
+
+message UpdateUserResponse
+{
+
+}
+
+message DeleteUserRequest
+{
+  string token = 1;
+}
+
+message DeleteUserResponse
+{
+
+}
+
+message GetUserDataRequest
+{
+  fixed64 key = 1;
+}
+
+message GetUserDataResponse
+{
+  string data = 1;
+}
+
+message SetUserDataRequest
+{
+  fixed64 key = 1;
+  string data = 2;
+}
+
+message SetUserDataResponse
+{
+
+}
+
 message CallWebRTCRequest
 {
   string peerid = 1;
@@ -691,16 +734,6 @@ message RefreshTokenResponse
   string jwttoken = 1;
 }
 
-message RemoveUserRequest
-{
-  string usertoken = 1;
-}
-
-message RemoveUserResponse
-{
-
-}
-
 message SubscribeRequest
 {
 
@@ -721,9 +754,12 @@ service MonocleService
 {
   rpc AddIceCandidateWebRTC(AddIceCandidateWebRTCRequest) returns (AddIceCandidateWebRTCResponse);
   rpc AddUser(AddUserRequest) returns (AddUserResponse);
+  rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse);
+  rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse);
+  rpc GetUserData(GetUserDataRequest) returns (GetUserDataResponse);
+  rpc SetUserData(SetUserDataRequest) returns (SetUserDataResponse);
   rpc CallWebRTC(CallWebRTCRequest) returns (CallWebRTCResponse);
   rpc GetIceCandidatesWebRTC(GetIceCandidatesWebRTCRequest) returns (GetIceCandidatesWebRTCResponse);
   rpc HangUpWebRTC(HangUpWebRTCRequest) returns (HangUpWebRTCResponse);
-  rpc RemoveUser(RemoveUserRequest) returns (RemoveUserResponse);
   rpc Subscribe(SubscribeRequest) returns (stream SubscribeResponse);
 }

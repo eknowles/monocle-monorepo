@@ -22,7 +22,7 @@ const LoginPage: FC = () => {
   return (
     <div className="w-full h-full flex items-center justify-center">
       <Formik<IFormValues>
-        initialValues={{ username: "admin", password: "password" }}
+        initialValues={{ username: "", password: "" }}
         onSubmit={onSubmit}
       >
         <FormLogin />
