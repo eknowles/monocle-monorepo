@@ -38,8 +38,12 @@ const initialState = {
     "1": {
       id: "1",
       name: "Default View",
-      size: 1,
-      recordings: [],
+      size: 4,
+      recordings: [
+        "2415377118017325286",
+        "3611975266688258670",
+        "7020385884664454866",
+      ],
     },
   },
 };
