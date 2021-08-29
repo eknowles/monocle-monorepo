@@ -16,7 +16,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
         with:
-          token: ${{ secrets.ACTIONS_TOKEN }}
+          token: ${{ github.token }}
 
       - uses: actions/setup-node@v2
         with:
