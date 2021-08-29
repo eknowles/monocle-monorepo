@@ -102,6 +102,7 @@ module.exports = {
                   "@babel/preset-react",
                   {
                     runtime: "classic",
+                    development: process.env.BABEL_ENV !== "production",
                   },
                 ],
               ],
@@ -109,7 +110,16 @@ module.exports = {
           },
           {
             loader: "ts-loader",
-            options: { configFile: "tsconfig.base.json", transpileOnly: true },
+            options: {
+              configFile: "tsconfig.base.json",
+              transpileOnly: true,
+              compilerOptions: {
+                jsx:
+                  process.env.NODE_ENV === "development"
+                    ? "react-jsxdev"
+                    : "react-jsx",
+              },
+            },
           },
         ],
         exclude: /node_modules/,
