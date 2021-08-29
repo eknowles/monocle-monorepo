@@ -1,7 +1,7 @@
 import {
   GetIceCandidatesWebRTCResponse,
   MonocleServiceClientImpl,
-} from "../../../../../protobuf/generated/monocle";
+} from "@monocle/protobuf/generated/monocle";
 
 /**
  * Interface with WebRTC-streamer API
@@ -16,7 +16,7 @@ function WebRtcStreamer(
   grpc: Grpc,
   videoElement: HTMLVideoElement | string,
   srvurl: string,
-  recording: number,
+  recording: number | string,
   videotrackid: number
 ) {
   // @ts-ignore
