@@ -28,7 +28,7 @@ interface ITabProps {
 const Tab: FC<ITabProps> = ({ icon, name, params, onClose }) => {
   const Icon = iconMap[icon as string];
   const path = generatePath(pathMap[icon], params);
-  const match = useRouteMatch({ path, exact: true });
+  const match = useRouteMatch({ path, exact: false });
 
   return (
     <Link<ILocationSetTabState>

@@ -40,7 +40,7 @@ export const PageTab: FC<IPageTabProps> = ({
         onClick={handleClose}
         disabled={!isActive}
         className={classnames(
-          "dark:text-code-100 dark:hover:text-white p-2 focus:outline-none",
+          "dark:text-code-100 dark:hover:text-white p-2 focus:outline-none hover:opacity-100 opacity-40",
           {
             "pointer-events-none opacity-0": !isActive,
           }
