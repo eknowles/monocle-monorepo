@@ -42,6 +42,8 @@
     "webpack-dev-server": "^4.0.0"
   },
   "devDependencies": {
+    "babel-plugin-formatjs": "^10.3.11",
+    "eslint-plugin-formatjs": "^2.18.0",
     "favicons": "^6.2.2",
     "favicons-webpack-plugin": "^5.0.2",
     "luxon": "^2.0.2",

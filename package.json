@@ -8,7 +8,11 @@
   ],
   "scripts": {
     "plop": "plop --plopfile scripts/plop/plopfile.ts --dest . --require ./scripts/ts-node-register",
-    "build": "lerna run build --stream --scope=@monocle/*"
+    "build": "lerna run build --stream --scope=@monocle/*",
+    "extract": "formatjs extract",
+    "compile": "formatjs compile",
+    "extract-en": "yarn extract 'packages/**/*.tsx' --out-file packages/common/lang/en.json --id-interpolation-pattern '[sha512:contenthash:base64:6]'",
+    "compile-en": "yarn compile packages/common/lang/en.json --ast --out-file packages/common/compiled-lang/en.json"
   },
   "husky": {
     "hooks": {
@@ -40,6 +44,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-hot-loader": "^4.13.0",
+    "react-intl": "^5.21.0",
     "react-modal": "^3.14.3",
     "react-packed-grid": "^2.1.0",
     "react-toastify": "^8.0.1",
@@ -53,6 +58,8 @@
     "webrtc-adapter": "^8.1.0"
   },
   "devDependencies": {
+    "@formatjs/cli": "^4.4.0",
+    "@formatjs/ts-transformer": "^3.6.0",
     "@types/luxon": "^2.0.2",
     "@types/node": "^16.7.4",
     "@types/react": "^17.0.19",
