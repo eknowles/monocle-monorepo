@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { FormattedMessage } from "react-intl";
 import { useSelector } from "react-redux";
 import { DateTime } from "luxon";
 import { getServerLogs } from "../../../redux/modules/server";
@@ -14,17 +15,65 @@ const TD: FC = ({ children }) => <td className="px-2">{children}</td>;
 const SeverityMessage: FC<{ type: number }> = ({ type }) => {
   switch (type) {
     case Severity.SeverityTrace:
-      return <div className="px-1 text-white bg-blue-700">Trace</div>;
+      return (
+        <div className="px-1 text-white bg-blue-700">
+          <FormattedMessage
+            id="err-trace"
+            description="Trace"
+            defaultMessage="Trace"
+          />
+        </div>
+      );
     case Severity.SeverityDebug:
-      return <div className="px-1 text-white bg-blue-800">Debug</div>;
+      return (
+        <div className="px-1 text-white bg-blue-800">
+          <FormattedMessage
+            id="err-debug"
+            description="Debug"
+            defaultMessage="Debug"
+          />
+        </div>
+      );
     case Severity.SeverityInfo:
-      return <div className="px-1 text-white bg-blue-900">Info</div>;
+      return (
+        <div className="px-1 text-white bg-blue-900">
+          <FormattedMessage
+            id="err-info"
+            description="Info"
+            defaultMessage="Info"
+          />
+        </div>
+      );
     case Severity.SeverityWarn:
-      return <div className="px-1 text-white bg-yellow-700">Warning</div>;
+      return (
+        <div className="px-1 text-white bg-yellow-700">
+          <FormattedMessage
+            id="err-warning"
+            description="Warning"
+            defaultMessage="Warning"
+          />
+        </div>
+      );
     case Severity.SeverityErr:
-      return <div className="px-1 text-white bg-red-700">Error</div>;
+      return (
+        <div className="px-1 text-white bg-red-700">
+          <FormattedMessage
+            id="err-error"
+            description="Error"
+            defaultMessage="Error"
+          />
+        </div>
+      );
     case Severity.SeverityCritical:
-      return <div className="px-1 text-black bg-yellow-400">Critical</div>;
+      return (
+        <div className="px-1 text-black bg-yellow-400">
+          <FormattedMessage
+            id="err-critical"
+            description="Critical"
+            defaultMessage="Critical"
+          />
+        </div>
+      );
     default:
       //UNRECOGNIZED
       return <div className="px-1 text-black bg-blue-200">UNRECOGNIZED</div>;
@@ -39,9 +88,27 @@ export const LogsRoute = () => {
       <table className="w-full text-xs">
         <thead className="z-10 mb-4">
           <tr>
-            <TH>Timestamp</TH>
-            <TH>Severity</TH>
-            <TH>Message</TH>
+            <TH>
+              <FormattedMessage
+                id="svr-head-timestamp"
+                description="Timestamp"
+                defaultMessage="Timestamp"
+              />
+            </TH>
+            <TH>
+              <FormattedMessage
+                id="svr-head-severity"
+                description="Severity"
+                defaultMessage="Severity"
+              />
+            </TH>
+            <TH>
+              <FormattedMessage
+                id="svr-head-message"
+                description="Message"
+                defaultMessage="Message"
+              />
+            </TH>
           </tr>
         </thead>
         <tbody className="overflow-y-scroll w-full h-full font-mono dark:text-code-100 text-code-500">

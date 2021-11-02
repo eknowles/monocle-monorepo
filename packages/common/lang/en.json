@@ -27,6 +27,30 @@
     "defaultMessage": "Create new view",
     "description": "create view button"
   },
+  "err-critical": {
+    "defaultMessage": "Critical",
+    "description": "Critical"
+  },
+  "err-debug": {
+    "defaultMessage": "Debug",
+    "description": "Debug"
+  },
+  "err-error": {
+    "defaultMessage": "Error",
+    "description": "Error"
+  },
+  "err-info": {
+    "defaultMessage": "Info",
+    "description": "Info"
+  },
+  "err-trace": {
+    "defaultMessage": "Trace",
+    "description": "Trace"
+  },
+  "err-warning": {
+    "defaultMessage": "Warning",
+    "description": "Warning"
+  },
   "log-in": {
     "defaultMessage": "Log In",
     "description": "log in"
@@ -50,6 +74,18 @@
   "servers": {
     "defaultMessage": "Servers",
     "description": "Header for side nav server list"
+  },
+  "svr-head-message": {
+    "defaultMessage": "Message",
+    "description": "Message"
+  },
+  "svr-head-severity": {
+    "defaultMessage": "Severity",
+    "description": "Severity"
+  },
+  "svr-head-timestamp": {
+    "defaultMessage": "Timestamp",
+    "description": "Timestamp"
   },
   "views": {
     "defaultMessage": "Views",

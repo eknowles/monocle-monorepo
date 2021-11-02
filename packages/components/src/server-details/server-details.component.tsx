@@ -1,6 +1,6 @@
 import { Form } from "formik";
 import type { FC } from "react";
-import { FormattedMessage, useIntl } from "react-intl";
+import { useIntl } from "react-intl";
 import { Button } from "../button";
 import { Field } from "../field";
 

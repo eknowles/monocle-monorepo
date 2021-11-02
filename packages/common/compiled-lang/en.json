@@ -41,6 +41,42 @@
       "value": "Create new view"
     }
   ],
+  "err-critical": [
+    {
+      "type": 0,
+      "value": "Critical"
+    }
+  ],
+  "err-debug": [
+    {
+      "type": 0,
+      "value": "Debug"
+    }
+  ],
+  "err-error": [
+    {
+      "type": 0,
+      "value": "Error"
+    }
+  ],
+  "err-info": [
+    {
+      "type": 0,
+      "value": "Info"
+    }
+  ],
+  "err-trace": [
+    {
+      "type": 0,
+      "value": "Trace"
+    }
+  ],
+  "err-warning": [
+    {
+      "type": 0,
+      "value": "Warning"
+    }
+  ],
   "log-in": [
     {
       "type": 0,
@@ -75,6 +111,24 @@
     {
       "type": 0,
       "value": "Servers"
+    }
+  ],
+  "svr-head-message": [
+    {
+      "type": 0,
+      "value": "Message"
+    }
+  ],
+  "svr-head-severity": [
+    {
+      "type": 0,
+      "value": "Severity"
+    }
+  ],
+  "svr-head-timestamp": [
+    {
+      "type": 0,
+      "value": "Timestamp"
     }
   ],
   "views": [

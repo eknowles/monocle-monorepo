@@ -10,7 +10,7 @@ import HomePage from "../routes/app";
 import LoginPage from "../routes/login";
 import AuthButton from "./AuthButton";
 
-import messages from "@monocle/common/lang/en.json";
+import messages from "@monocle/common/compiled-lang/en.json";
 
 const App = () => {
   return (
