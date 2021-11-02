@@ -1,0 +1,86 @@
+{
+  "c-login-btn": [
+    {
+      "type": 0,
+      "value": "Log In"
+    }
+  ],
+  "c-pwd": [
+    {
+      "type": 0,
+      "value": "Password"
+    }
+  ],
+  "c-sdm-arch": [
+    {
+      "type": 0,
+      "value": "Architecture"
+    }
+  ],
+  "c-sdm-sname": [
+    {
+      "type": 0,
+      "value": "Server Name"
+    }
+  ],
+  "c-sdm-vrs": [
+    {
+      "type": 0,
+      "value": "Version"
+    }
+  ],
+  "c-usr": [
+    {
+      "type": 0,
+      "value": "Username"
+    }
+  ],
+  "create-new-view": [
+    {
+      "type": 0,
+      "value": "Create new view"
+    }
+  ],
+  "log-in": [
+    {
+      "type": 0,
+      "value": "Log In"
+    }
+  ],
+  "log-out": [
+    {
+      "type": 0,
+      "value": "Log Out"
+    }
+  ],
+  "new-view-input-placeholder": [
+    {
+      "type": 0,
+      "value": "View Name (e.g. Ground Floor)"
+    }
+  ],
+  "new-view-modal-header": [
+    {
+      "type": 0,
+      "value": "New View"
+    }
+  ],
+  "no-track": [
+    {
+      "type": 0,
+      "value": "No Recording Track"
+    }
+  ],
+  "servers": [
+    {
+      "type": 0,
+      "value": "Servers"
+    }
+  ],
+  "views": [
+    {
+      "type": 0,
+      "value": "Views"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "c-login-btn": {
+    "defaultMessage": "Log In",
+    "description": "Log in button text"
+  },
+  "c-pwd": {
+    "defaultMessage": "Password",
+    "description": "password field placeholder"
+  },
+  "c-sdm-arch": {
+    "defaultMessage": "Architecture",
+    "description": "server detail header Architecture"
+  },
+  "c-sdm-sname": {
+    "defaultMessage": "Server Name",
+    "description": "server detail header Server Name"
+  },
+  "c-sdm-vrs": {
+    "defaultMessage": "Version",
+    "description": "server detail header Version"
+  },
+  "c-usr": {
+    "defaultMessage": "Username",
+    "description": "username field placeholder"
+  },
+  "create-new-view": {
+    "defaultMessage": "Create new view",
+    "description": "create view button"
+  },
+  "log-in": {
+    "defaultMessage": "Log In",
+    "description": "log in"
+  },
+  "log-out": {
+    "defaultMessage": "Log Out",
+    "description": "log out"
+  },
+  "new-view-input-placeholder": {
+    "defaultMessage": "View Name (e.g. Ground Floor)",
+    "description": "new view input placeholder"
+  },
+  "new-view-modal-header": {
+    "defaultMessage": "New View",
+    "description": "new view modal header"
+  },
+  "no-track": {
+    "defaultMessage": "No Recording Track",
+    "description": "when recording has no tracks"
+  },
+  "servers": {
+    "defaultMessage": "Servers",
+    "description": "Header for side nav server list"
+  },
+  "views": {
+    "defaultMessage": "Views",
+    "description": "Header for side nav views list"
+  }
+}
