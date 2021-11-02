@@ -1,5 +1,6 @@
 import { Form, Formik } from "formik";
 import { FC, useState } from "react";
+import { FormattedMessage, useIntl } from "react-intl";
 import { useDispatch } from "react-redux";
 import {
   Button,
@@ -37,7 +38,13 @@ export const AddViewButton = () => {
         shouldReturnFocusAfterClose={true}
         shouldCloseOnOverlayClick={true}
       >
-        <ModalHead onClose={() => setOpen(false)}>NEW VIEW</ModalHead>
+        <ModalHead onClose={() => setOpen(false)}>
+          <FormattedMessage
+            id="new-view-modal-header"
+            description="new view modal header"
+            defaultMessage="New View"
+          />
+        </ModalHead>
         <Formik<NewFormValues> initialValues={{ name: "" }} onSubmit={onSubmit}>
           <NewViewForm />
         </Formik>
@@ -46,13 +53,27 @@ export const AddViewButton = () => {
   );
 };
 
-const NewViewForm: FC = () => (
-  <Form className="grid gap-2 grid-cols-1 p-3 dark:bg-code-800 bg-white">
-    <Field
-      name="name"
-      type="text"
-      placeholder="View Name (e.g. Ground Floor)"
-    />
-    <Button type="submit">Create New View</Button>
-  </Form>
-);
+const NewViewForm: FC = () => {
+  const intl = useIntl();
+
+  return (
+    <Form className="grid gap-2 grid-cols-1 p-3 dark:bg-code-800 bg-white">
+      <Field
+        name="name"
+        type="text"
+        placeholder={intl.formatMessage({
+          id: "new-view-input-placeholder",
+          description: "new view input placeholder",
+          defaultMessage: "View Name (e.g. Ground Floor)",
+        })}
+      />
+      <Button type="submit">
+        <FormattedMessage
+          id="create-new-view"
+          description="create view button"
+          defaultMessage="Create new view"
+        />
+      </Button>
+    </Form>
+  );
+};

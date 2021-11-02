@@ -1,4 +1,8 @@
+import { Form } from "formik";
 import type { FC } from "react";
+import { FormattedMessage, useIntl } from "react-intl";
+import { Button } from "../button";
+import { Field } from "../field";
 
 export type IServerDetailsProps = {
   name: string;
@@ -21,10 +25,34 @@ export const ServerDetails: FC<IServerDetailsProps> = ({
   name,
   architecture,
   version,
-}) => (
-  <div className="p-4">
-    <Metric label="Server Name" value={name} />
-    <Metric label="Architecture" value={architecture} />
-    <Metric label="Version" value={version} />
-  </div>
-);
+}) => {
+  const intl = useIntl();
+  return (
+    <div className="p-4">
+      <Metric
+        label={intl.formatMessage({
+          id: "c-sdm-sname",
+          description: "server detail header Server Name",
+          defaultMessage: "Server Name",
+        })}
+        value={name}
+      />
+      <Metric
+        label={intl.formatMessage({
+          id: "c-sdm-arch",
+          description: "server detail header Architecture",
+          defaultMessage: "Architecture",
+        })}
+        value={architecture}
+      />
+      <Metric
+        label={intl.formatMessage({
+          id: "c-sdm-vrs",
+          description: "server detail header Version",
+          defaultMessage: "Version",
+        })}
+        value={version}
+      />
+    </div>
+  );
+};

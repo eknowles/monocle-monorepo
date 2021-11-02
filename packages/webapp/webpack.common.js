@@ -3,6 +3,7 @@ const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
+const transform = require("@formatjs/ts-transformer").transform;
 
 const child_process = require("child_process");
 function git(command) {
@@ -118,6 +119,15 @@ module.exports = {
                   process.env.NODE_ENV === "development"
                     ? "react-jsxdev"
                     : "react-jsx",
+              },
+              getCustomTransformers() {
+                return {
+                  before: [
+                    transform({
+                      overrideIdFn: "[sha512:contenthash:base64:6]",
+                    }),
+                  ],
+                };
               },
             },
           },

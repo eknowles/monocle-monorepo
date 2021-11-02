@@ -1,4 +1,5 @@
-import { FC, useLayoutEffect, useRef } from "react";
+import React, { FC, useLayoutEffect, useRef } from "react";
+import { FormattedMessage } from "react-intl";
 import { useSelector } from "react-redux";
 import { GRPC_SERVER, HTTP_SERVER } from "../../constants";
 import useDimension from "../../hooks/use-dimensions";
@@ -61,7 +62,11 @@ export const Recording: FC<{ recordingToken: string | number }> = ({
     return (
       <div className="dark:bg-code-900 bg-white dark:text-white w-full h-full dark:text-code-100 flex items-center justify-center">
         <span className="uppercase font-mono text-sm dark:bg-black px-1">
-          No Recording Track
+          <FormattedMessage
+            id="no-track"
+            description="when recording has no tracks"
+            defaultMessage="No Recording Track"
+          />
         </span>
       </div>
     );
