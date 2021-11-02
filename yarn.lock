@@ -4548,6 +4548,11 @@
   resolved "https://registry.yarnpkg.com/@types/long/-/long-4.0.1.tgz#459c65fa1867dafe6a8f322c4c51695663cc55e9"
   integrity sha512-5tXH6Bx/kNGd3MgffdmP4dy2Z+G4eaXw0SE81Tq3BNadtnMR5/ySMzX4SLEzHJzSmPNn4HIdpQsBvXMUykr58w==
 
+"@types/luxon@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@types/luxon/-/luxon-2.0.2.tgz#89db62ab8299ed3a703e75eef525d6bdf94349bc"
+  integrity sha512-CUrDlIVYv7TNkdQV8YfT2WGAHyMAwFIT1PXoUcQhX2EFMVL20lxEQHWc73gdJfRtMsI6Vc22HvR7eUN0jkx6+w==
+
 "@types/markdown-to-jsx@^6.11.3":
   version "6.11.3"
   resolved "https://registry.yarnpkg.com/@types/markdown-to-jsx/-/markdown-to-jsx-6.11.3.tgz#cdd1619308fecbc8be7e6a26f3751260249b020e"
@@ -11283,6 +11288,11 @@ lru-cache@^6.0.0:
   integrity sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==
   dependencies:
     yallist "^4.0.0"
+
+luxon@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/luxon/-/luxon-2.0.2.tgz#11f2cd4a11655fdf92e076b5782d7ede5bcdd133"
+  integrity sha512-ZRioYLCgRHrtTORaZX1mx+jtxKtKuI5ZDvHNAmqpUzGqSrR+tL4FVLn/CUGMA3h0+AKD1MAxGI5GnCqR5txNqg==
 
 make-dir@^2.0.0, make-dir@^2.1.0:
   version "2.1.0"

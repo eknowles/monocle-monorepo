@@ -1,6 +1,5 @@
 import { FC, useLayoutEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
 import { GRPC_SERVER, HTTP_SERVER } from "../../constants";
 import useDimension from "../../hooks/use-dimensions";
 import { getRecordings } from "../../redux/modules/server";
@@ -20,9 +19,11 @@ export const Recording: FC<{ recordingToken: string | number }> = ({
   const currentRecording = (recordings || []).find(
     (recording) => recording.token === recordingToken
   );
+  const hasTracks = (currentRecording?.tracks ?? []).length > 0;
 
   const activeTrackId =
     currentRecording &&
+    currentRecording.jobs.length &&
     currentRecording.jobs
       .find((job) => job.recordingjobtoken === currentRecording.activejob)!
       .recordingjobsources.find(
@@ -56,11 +57,21 @@ export const Recording: FC<{ recordingToken: string | number }> = ({
     };
   }, [recordingToken, activeTrackId]);
 
+  if (!hasTracks) {
+    return (
+      <div className="dark:bg-code-900 bg-white dark:text-white w-full h-full dark:text-code-100 flex items-center justify-center">
+        <span className="uppercase font-mono text-sm dark:bg-black px-1">
+          No Recording Track
+        </span>
+      </div>
+    );
+  }
+
   return (
     <div
       ref={divRef}
       id="video"
-      className="dark:bg-code-900 dark:text-white bg-white w-full h-full"
+      className="dark:bg-code-900 bg-white dark:text-white w-full h-full"
     >
       <video
         ref={videoEl}
@@ -71,7 +82,7 @@ export const Recording: FC<{ recordingToken: string | number }> = ({
           height: `${height}px`,
           width: `${width}px`,
         }}
-        className="object-contain"
+        className="object-contain dark:bg-code-900 bg-white"
       />
     </div>
   );

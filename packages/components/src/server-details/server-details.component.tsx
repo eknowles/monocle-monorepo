@@ -22,11 +22,9 @@ export const ServerDetails: FC<IServerDetailsProps> = ({
   architecture,
   version,
 }) => (
-  <div className="h-full w-full dark:bg-code-900 bg-white p-4">
-    <div>
-      <Metric label="Server Name" value={name} />
-      <Metric label="Architecture" value={architecture} />
-      <Metric label="Version" value={version} />
-    </div>
+  <div className="p-4">
+    <Metric label="Server Name" value={name} />
+    <Metric label="Architecture" value={architecture} />
+    <Metric label="Version" value={version} />
   </div>
 );

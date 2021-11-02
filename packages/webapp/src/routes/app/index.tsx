@@ -11,7 +11,7 @@ import {
   serverSlice,
 } from "../../redux/modules/server";
 import { RecordingRoute } from "./recording";
-import { ServerDetailsRoute } from "./server-details";
+import { ServerRoute } from "./server";
 import { ViewRoute } from "./view";
 
 const AppRoute: FC = () => {
@@ -21,7 +21,6 @@ const AppRoute: FC = () => {
 
   useEffect(() => {
     if (!authStatus && serverAuthToken) {
-      const { protocol, hostname } = window.location;
       dispatch(
         serverSlice.actions.authSuccess({
           host: GRPC_SERVER,
@@ -38,16 +37,12 @@ const AppRoute: FC = () => {
         <AppTabs />
         <Switch>
           <Route
-            component={ServerDetailsRoute}
-            exact
-            path="/app/server/:serverId"
-          />
-          <Route
             component={RecordingRoute}
             exact
             path="/app/recording/:recordingToken"
           />
           <Route component={ViewRoute} exact path="/app/view/:viewId" />
+          <Route component={ServerRoute} path="/app/server/:serverId" />
         </Switch>
       </div>
     </div>

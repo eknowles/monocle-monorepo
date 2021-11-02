@@ -79,6 +79,8 @@ export const loggedOut = createAction(`${serverSlice.name}/loggedOut`);
 export type LoggedOut = ReturnType<typeof loggedOut>;
 
 // selectors
+export const getServerLogs = (state: any) =>
+  (state.server as ServerState).state?.serverlogmessages;
 export const getServerId = (state: any) =>
   (state.server as ServerState).state?.identifier;
 export const getAuthStatus = (state: any) =>
@@ -165,8 +167,11 @@ const subscribeEpic: Epic = (action$, _state$) => {
       monocleSubscribe(payload).pipe(
         // @ts-ignore
         map((value: SubscribeResponse) => {
+          console.log(value.message!.typeUrl);
+
           if (value.message!.typeUrl === "type.googleapis.com/proto.State") {
             const stateObj = MonocleState.decode(value.message!.value);
+            console.log(stateObj);
             return serverSlice.actions.state(stateObj);
           }
 
