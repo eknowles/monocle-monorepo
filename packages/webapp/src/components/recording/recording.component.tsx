@@ -87,7 +87,7 @@ export const Recording: FC<{ recordingToken: string | number }> = ({
           height: `${height}px`,
           width: `${width}px`,
         }}
-        className="object-contain dark:bg-code-900 bg-white"
+        className="object-contain dark:bg-code-900 bg-white transition-opacity duration-700 opacity-0"
       />
     </div>
   );

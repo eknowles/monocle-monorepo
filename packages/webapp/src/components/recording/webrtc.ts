@@ -295,10 +295,11 @@ WebRtcStreamer.prototype.onAddStream = function (event: any) {
   console.debug("Remote track added:" + JSON.stringify(event));
 
   this.videoElement.srcObject = event.stream;
-  (this.videoElement as HTMLVideoElement)
+  this.videoElement
     .play()
     .then(() => {
-      (this.videoElement as HTMLVideoElement).controls = false;
+      this.videoElement.controls = false;
+      this.videoElement.style.opacity = "1.0";
     })
     .catch(function (error: any) {
       console.warn("error:" + error);
