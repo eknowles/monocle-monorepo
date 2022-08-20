@@ -1,11 +1,11 @@
 /* eslint-disable */
-import Long from "long";
 import { grpc } from "@improbable-eng/grpc-web";
-import _m0 from "protobufjs/minimal";
-import { Observable } from "rxjs";
 import { BrowserHeaders } from "browser-headers";
 import { take, share } from "rxjs/operators";
+import Long from "long";
 import { Any } from "./google/protobuf/any";
+import { Observable } from "rxjs";
+import _m0 from "protobufjs/minimal";
 import { DoubleValue, UInt64Value } from "./google/protobuf/wrappers";
 
 export const protobufPackage = "proto";
@@ -73,8 +73,9 @@ export function codecToJSON(object: Codec): string {
       return "CodecPCMU";
     case Codec.CodecG726_32:
       return "CodecG726_32";
+    case Codec.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 
@@ -105,8 +106,9 @@ export function fileMonitorStateToJSON(object: FileMonitorState): string {
       return "FileMonitorStateUnavailable";
     case FileMonitorState.FileMonitorStateAvailable:
       return "FileMonitorStateAvailable";
+    case FileMonitorState.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 
@@ -149,8 +151,9 @@ export function fileStateToJSON(object: FileState): string {
       return "FileStateMounting";
     case FileState.FileStateUnmounting:
       return "FileStateUnmounting";
+    case FileState.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 
@@ -187,8 +190,9 @@ export function gPSDeviceStateToJSON(object: GPSDeviceState): string {
       return "GPSDeviceStateActive";
     case GPSDeviceState.GPSDeviceStateError:
       return "GPSDeviceStateError";
+    case GPSDeviceState.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 
@@ -238,8 +242,9 @@ export function oNVIFUserLevelToJSON(object: ONVIFUserLevel): string {
       return "ONVIFUserLevelOperator";
     case ONVIFUserLevel.ONVIFUserLevelAdministrator:
       return "ONVIFUserLevelAdministrator";
+    case ONVIFUserLevel.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 
@@ -282,8 +287,9 @@ export function pluginStateToJSON(object: PluginState): string {
       return "PluginStateDestroying";
     case PluginState.PluginStateError:
       return "PluginStateError";
+    case PluginState.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 
@@ -320,8 +326,9 @@ export function receiverModeToJSON(object: ReceiverMode): string {
       return "ReceiverModeAlwaysConnect";
     case ReceiverMode.ReceiverModeNeverConnect:
       return "ReceiverModeNeverConnect";
+    case ReceiverMode.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 
@@ -358,8 +365,9 @@ export function receiverStateToJSON(object: ReceiverState): string {
       return "ReceiverStateConnecting";
     case ReceiverState.ReceiverStateConnected:
       return "ReceiverStateConnected";
+    case ReceiverState.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 
@@ -402,8 +410,9 @@ export function recordingJobStateToJSON(object: RecordingJobState): string {
       return "RecordingJobStateError";
     case RecordingJobState.RecordingJobStateActiveNotRecording:
       return "RecordingJobStateActiveNotRecording";
+    case RecordingJobState.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 
@@ -458,8 +467,9 @@ export function severityToJSON(object: Severity): string {
       return "SeverityErr";
     case Severity.SeverityCritical:
       return "SeverityCritical";
+    case Severity.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 
@@ -496,8 +506,9 @@ export function trackTypeToJSON(object: TrackType): string {
       return "TrackTypeAudio";
     case TrackType.TrackTypeMetadata:
       return "TrackTypeMetadata";
+    case TrackType.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 
@@ -1040,14 +1051,16 @@ export interface SubscribeResponse {
   message: Any | undefined;
 }
 
-const baseFile: object = {
-  token: "",
-  path: "",
-  mountpoint: "",
-  numchunks: "0",
-  chunksize: "0",
-  automount: false,
-};
+function createBaseFile(): File {
+  return {
+    token: "",
+    path: "",
+    mountpoint: "",
+    numchunks: "0",
+    chunksize: "0",
+    automount: false,
+  };
+}
 
 export const File = {
   encode(message: File, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
@@ -1075,7 +1088,7 @@ export const File = {
   decode(input: _m0.Reader | Uint8Array, length?: number): File {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseFile } as File;
+    const message = createBaseFile();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -1106,38 +1119,14 @@ export const File = {
   },
 
   fromJSON(object: any): File {
-    const message = { ...baseFile } as File;
-    if (object.token !== undefined && object.token !== null) {
-      message.token = String(object.token);
-    } else {
-      message.token = "";
-    }
-    if (object.path !== undefined && object.path !== null) {
-      message.path = String(object.path);
-    } else {
-      message.path = "";
-    }
-    if (object.mountpoint !== undefined && object.mountpoint !== null) {
-      message.mountpoint = String(object.mountpoint);
-    } else {
-      message.mountpoint = "";
-    }
-    if (object.numchunks !== undefined && object.numchunks !== null) {
-      message.numchunks = String(object.numchunks);
-    } else {
-      message.numchunks = "0";
-    }
-    if (object.chunksize !== undefined && object.chunksize !== null) {
-      message.chunksize = String(object.chunksize);
-    } else {
-      message.chunksize = "0";
-    }
-    if (object.automount !== undefined && object.automount !== null) {
-      message.automount = Boolean(object.automount);
-    } else {
-      message.automount = false;
-    }
-    return message;
+    return {
+      token: isSet(object.token) ? String(object.token) : "",
+      path: isSet(object.path) ? String(object.path) : "",
+      mountpoint: isSet(object.mountpoint) ? String(object.mountpoint) : "",
+      numchunks: isSet(object.numchunks) ? String(object.numchunks) : "0",
+      chunksize: isSet(object.chunksize) ? String(object.chunksize) : "0",
+      automount: isSet(object.automount) ? Boolean(object.automount) : false,
+    };
   },
 
   toJSON(message: File): unknown {
@@ -1151,54 +1140,32 @@ export const File = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<File>): File {
-    const message = { ...baseFile } as File;
-    if (object.token !== undefined && object.token !== null) {
-      message.token = object.token;
-    } else {
-      message.token = "";
-    }
-    if (object.path !== undefined && object.path !== null) {
-      message.path = object.path;
-    } else {
-      message.path = "";
-    }
-    if (object.mountpoint !== undefined && object.mountpoint !== null) {
-      message.mountpoint = object.mountpoint;
-    } else {
-      message.mountpoint = "";
-    }
-    if (object.numchunks !== undefined && object.numchunks !== null) {
-      message.numchunks = object.numchunks;
-    } else {
-      message.numchunks = "0";
-    }
-    if (object.chunksize !== undefined && object.chunksize !== null) {
-      message.chunksize = object.chunksize;
-    } else {
-      message.chunksize = "0";
-    }
-    if (object.automount !== undefined && object.automount !== null) {
-      message.automount = object.automount;
-    } else {
-      message.automount = false;
-    }
+  fromPartial<I extends Exact<DeepPartial<File>, I>>(object: I): File {
+    const message = createBaseFile();
+    message.token = object.token ?? "";
+    message.path = object.path ?? "";
+    message.mountpoint = object.mountpoint ?? "";
+    message.numchunks = object.numchunks ?? "0";
+    message.chunksize = object.chunksize ?? "0";
+    message.automount = object.automount ?? false;
     return message;
   },
 };
 
-const baseGroup: object = {
-  token: "",
-  name: "",
-  manageusers: false,
-  managerecordings: false,
-  managemaps: false,
-  managedevice: false,
-  manageplugins: false,
-  reboot: false,
-  allrecordings: false,
-  recordings: "",
-};
+function createBaseGroup(): Group {
+  return {
+    token: "",
+    name: "",
+    manageusers: false,
+    managerecordings: false,
+    managemaps: false,
+    managedevice: false,
+    manageplugins: false,
+    reboot: false,
+    allrecordings: false,
+    recordings: [],
+  };
+}
 
 export const Group = {
   encode(message: Group, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
@@ -1238,8 +1205,7 @@ export const Group = {
   decode(input: _m0.Reader | Uint8Array, length?: number): Group {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseGroup } as Group;
-    message.recordings = [];
+    const message = createBaseGroup();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -1282,62 +1248,30 @@ export const Group = {
   },
 
   fromJSON(object: any): Group {
-    const message = { ...baseGroup } as Group;
-    message.recordings = [];
-    if (object.token !== undefined && object.token !== null) {
-      message.token = String(object.token);
-    } else {
-      message.token = "";
-    }
-    if (object.name !== undefined && object.name !== null) {
-      message.name = String(object.name);
-    } else {
-      message.name = "";
-    }
-    if (object.manageusers !== undefined && object.manageusers !== null) {
-      message.manageusers = Boolean(object.manageusers);
-    } else {
-      message.manageusers = false;
-    }
-    if (
-      object.managerecordings !== undefined &&
-      object.managerecordings !== null
-    ) {
-      message.managerecordings = Boolean(object.managerecordings);
-    } else {
-      message.managerecordings = false;
-    }
-    if (object.managemaps !== undefined && object.managemaps !== null) {
-      message.managemaps = Boolean(object.managemaps);
-    } else {
-      message.managemaps = false;
-    }
-    if (object.managedevice !== undefined && object.managedevice !== null) {
-      message.managedevice = Boolean(object.managedevice);
-    } else {
-      message.managedevice = false;
-    }
-    if (object.manageplugins !== undefined && object.manageplugins !== null) {
-      message.manageplugins = Boolean(object.manageplugins);
-    } else {
-      message.manageplugins = false;
-    }
-    if (object.reboot !== undefined && object.reboot !== null) {
-      message.reboot = Boolean(object.reboot);
-    } else {
-      message.reboot = false;
-    }
-    if (object.allrecordings !== undefined && object.allrecordings !== null) {
-      message.allrecordings = Boolean(object.allrecordings);
-    } else {
-      message.allrecordings = false;
-    }
-    if (object.recordings !== undefined && object.recordings !== null) {
-      for (const e of object.recordings) {
-        message.recordings.push(String(e));
-      }
-    }
-    return message;
+    return {
+      token: isSet(object.token) ? String(object.token) : "",
+      name: isSet(object.name) ? String(object.name) : "",
+      manageusers: isSet(object.manageusers)
+        ? Boolean(object.manageusers)
+        : false,
+      managerecordings: isSet(object.managerecordings)
+        ? Boolean(object.managerecordings)
+        : false,
+      managemaps: isSet(object.managemaps) ? Boolean(object.managemaps) : false,
+      managedevice: isSet(object.managedevice)
+        ? Boolean(object.managedevice)
+        : false,
+      manageplugins: isSet(object.manageplugins)
+        ? Boolean(object.manageplugins)
+        : false,
+      reboot: isSet(object.reboot) ? Boolean(object.reboot) : false,
+      allrecordings: isSet(object.allrecordings)
+        ? Boolean(object.allrecordings)
+        : false,
+      recordings: Array.isArray(object?.recordings)
+        ? object.recordings.map((e: any) => String(e))
+        : [],
+    };
   },
 
   toJSON(message: Group): unknown {
@@ -1364,67 +1298,25 @@ export const Group = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<Group>): Group {
-    const message = { ...baseGroup } as Group;
-    message.recordings = [];
-    if (object.token !== undefined && object.token !== null) {
-      message.token = object.token;
-    } else {
-      message.token = "";
-    }
-    if (object.name !== undefined && object.name !== null) {
-      message.name = object.name;
-    } else {
-      message.name = "";
-    }
-    if (object.manageusers !== undefined && object.manageusers !== null) {
-      message.manageusers = object.manageusers;
-    } else {
-      message.manageusers = false;
-    }
-    if (
-      object.managerecordings !== undefined &&
-      object.managerecordings !== null
-    ) {
-      message.managerecordings = object.managerecordings;
-    } else {
-      message.managerecordings = false;
-    }
-    if (object.managemaps !== undefined && object.managemaps !== null) {
-      message.managemaps = object.managemaps;
-    } else {
-      message.managemaps = false;
-    }
-    if (object.managedevice !== undefined && object.managedevice !== null) {
-      message.managedevice = object.managedevice;
-    } else {
-      message.managedevice = false;
-    }
-    if (object.manageplugins !== undefined && object.manageplugins !== null) {
-      message.manageplugins = object.manageplugins;
-    } else {
-      message.manageplugins = false;
-    }
-    if (object.reboot !== undefined && object.reboot !== null) {
-      message.reboot = object.reboot;
-    } else {
-      message.reboot = false;
-    }
-    if (object.allrecordings !== undefined && object.allrecordings !== null) {
-      message.allrecordings = object.allrecordings;
-    } else {
-      message.allrecordings = false;
-    }
-    if (object.recordings !== undefined && object.recordings !== null) {
-      for (const e of object.recordings) {
-        message.recordings.push(e);
-      }
-    }
+  fromPartial<I extends Exact<DeepPartial<Group>, I>>(object: I): Group {
+    const message = createBaseGroup();
+    message.token = object.token ?? "";
+    message.name = object.name ?? "";
+    message.manageusers = object.manageusers ?? false;
+    message.managerecordings = object.managerecordings ?? false;
+    message.managemaps = object.managemaps ?? false;
+    message.managedevice = object.managedevice ?? false;
+    message.manageplugins = object.manageplugins ?? false;
+    message.reboot = object.reboot ?? false;
+    message.allrecordings = object.allrecordings ?? false;
+    message.recordings = object.recordings?.map((e) => e) || [];
     return message;
   },
 };
 
-const baseIndex: object = { starttime: "0", endtime: "0" };
+function createBaseIndex(): Index {
+  return { starttime: "0", endtime: "0" };
+}
 
 export const Index = {
   encode(message: Index, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
@@ -1440,7 +1332,7 @@ export const Index = {
   decode(input: _m0.Reader | Uint8Array, length?: number): Index {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseIndex } as Index;
+    const message = createBaseIndex();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -1459,18 +1351,10 @@ export const Index = {
   },
 
   fromJSON(object: any): Index {
-    const message = { ...baseIndex } as Index;
-    if (object.starttime !== undefined && object.starttime !== null) {
-      message.starttime = String(object.starttime);
-    } else {
-      message.starttime = "0";
-    }
-    if (object.endtime !== undefined && object.endtime !== null) {
-      message.endtime = String(object.endtime);
-    } else {
-      message.endtime = "0";
-    }
-    return message;
+    return {
+      starttime: isSet(object.starttime) ? String(object.starttime) : "0",
+      endtime: isSet(object.endtime) ? String(object.endtime) : "0",
+    };
   },
 
   toJSON(message: Index): unknown {
@@ -1480,23 +1364,17 @@ export const Index = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<Index>): Index {
-    const message = { ...baseIndex } as Index;
-    if (object.starttime !== undefined && object.starttime !== null) {
-      message.starttime = object.starttime;
-    } else {
-      message.starttime = "0";
-    }
-    if (object.endtime !== undefined && object.endtime !== null) {
-      message.endtime = object.endtime;
-    } else {
-      message.endtime = "0";
-    }
+  fromPartial<I extends Exact<DeepPartial<Index>, I>>(object: I): Index {
+    const message = createBaseIndex();
+    message.starttime = object.starttime ?? "0";
+    message.endtime = object.endtime ?? "0";
     return message;
   },
 };
 
-const baseLogMessage: object = { time: "0", severity: 0, message: "" };
+function createBaseLogMessage(): LogMessage {
+  return { time: "0", severity: 0, message: "" };
+}
 
 export const LogMessage = {
   encode(
@@ -1518,7 +1396,7 @@ export const LogMessage = {
   decode(input: _m0.Reader | Uint8Array, length?: number): LogMessage {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseLogMessage } as LogMessage;
+    const message = createBaseLogMessage();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -1540,23 +1418,11 @@ export const LogMessage = {
   },
 
   fromJSON(object: any): LogMessage {
-    const message = { ...baseLogMessage } as LogMessage;
-    if (object.time !== undefined && object.time !== null) {
-      message.time = String(object.time);
-    } else {
-      message.time = "0";
-    }
-    if (object.severity !== undefined && object.severity !== null) {
-      message.severity = severityFromJSON(object.severity);
-    } else {
-      message.severity = 0;
-    }
-    if (object.message !== undefined && object.message !== null) {
-      message.message = String(object.message);
-    } else {
-      message.message = "";
-    }
-    return message;
+    return {
+      time: isSet(object.time) ? String(object.time) : "0",
+      severity: isSet(object.severity) ? severityFromJSON(object.severity) : 0,
+      message: isSet(object.message) ? String(object.message) : "",
+    };
   },
 
   toJSON(message: LogMessage): unknown {
@@ -1568,28 +1434,20 @@ export const LogMessage = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<LogMessage>): LogMessage {
-    const message = { ...baseLogMessage } as LogMessage;
-    if (object.time !== undefined && object.time !== null) {
-      message.time = object.time;
-    } else {
-      message.time = "0";
-    }
-    if (object.severity !== undefined && object.severity !== null) {
-      message.severity = object.severity;
-    } else {
-      message.severity = 0;
-    }
-    if (object.message !== undefined && object.message !== null) {
-      message.message = object.message;
-    } else {
-      message.message = "";
-    }
+  fromPartial<I extends Exact<DeepPartial<LogMessage>, I>>(
+    object: I
+  ): LogMessage {
+    const message = createBaseLogMessage();
+    message.time = object.time ?? "0";
+    message.severity = object.severity ?? 0;
+    message.message = object.message ?? "";
     return message;
   },
 };
 
-const baseMap: object = { token: "", name: "", location: "", md5: "" };
+function createBaseMap(): Map {
+  return { token: "", name: "", location: "", md5: "" };
+}
 
 export const Map = {
   encode(message: Map, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
@@ -1611,7 +1469,7 @@ export const Map = {
   decode(input: _m0.Reader | Uint8Array, length?: number): Map {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseMap } as Map;
+    const message = createBaseMap();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -1636,28 +1494,12 @@ export const Map = {
   },
 
   fromJSON(object: any): Map {
-    const message = { ...baseMap } as Map;
-    if (object.token !== undefined && object.token !== null) {
-      message.token = String(object.token);
-    } else {
-      message.token = "";
-    }
-    if (object.name !== undefined && object.name !== null) {
-      message.name = String(object.name);
-    } else {
-      message.name = "";
-    }
-    if (object.location !== undefined && object.location !== null) {
-      message.location = String(object.location);
-    } else {
-      message.location = "";
-    }
-    if (object.md5 !== undefined && object.md5 !== null) {
-      message.md5 = String(object.md5);
-    } else {
-      message.md5 = "";
-    }
-    return message;
+    return {
+      token: isSet(object.token) ? String(object.token) : "",
+      name: isSet(object.name) ? String(object.name) : "",
+      location: isSet(object.location) ? String(object.location) : "",
+      md5: isSet(object.md5) ? String(object.md5) : "",
+    };
   },
 
   toJSON(message: Map): unknown {
@@ -1669,41 +1511,27 @@ export const Map = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<Map>): Map {
-    const message = { ...baseMap } as Map;
-    if (object.token !== undefined && object.token !== null) {
-      message.token = object.token;
-    } else {
-      message.token = "";
-    }
-    if (object.name !== undefined && object.name !== null) {
-      message.name = object.name;
-    } else {
-      message.name = "";
-    }
-    if (object.location !== undefined && object.location !== null) {
-      message.location = object.location;
-    } else {
-      message.location = "";
-    }
-    if (object.md5 !== undefined && object.md5 !== null) {
-      message.md5 = object.md5;
-    } else {
-      message.md5 = "";
-    }
+  fromPartial<I extends Exact<DeepPartial<Map>, I>>(object: I): Map {
+    const message = createBaseMap();
+    message.token = object.token ?? "";
+    message.name = object.name ?? "";
+    message.location = object.location ?? "";
+    message.md5 = object.md5 ?? "";
     return message;
   },
 };
 
-const baseMount: object = {
-  id: "0",
-  parentid: "0",
-  majorstdev: "0",
-  minorstdev: "0",
-  path: "",
-  type: "",
-  source: "",
-};
+function createBaseMount(): Mount {
+  return {
+    id: "0",
+    parentid: "0",
+    majorstdev: "0",
+    minorstdev: "0",
+    path: "",
+    type: "",
+    source: "",
+  };
+}
 
 export const Mount = {
   encode(message: Mount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
@@ -1734,7 +1562,7 @@ export const Mount = {
   decode(input: _m0.Reader | Uint8Array, length?: number): Mount {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseMount } as Mount;
+    const message = createBaseMount();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -1768,43 +1596,15 @@ export const Mount = {
   },
 
   fromJSON(object: any): Mount {
-    const message = { ...baseMount } as Mount;
-    if (object.id !== undefined && object.id !== null) {
-      message.id = String(object.id);
-    } else {
-      message.id = "0";
-    }
-    if (object.parentid !== undefined && object.parentid !== null) {
-      message.parentid = String(object.parentid);
-    } else {
-      message.parentid = "0";
-    }
-    if (object.majorstdev !== undefined && object.majorstdev !== null) {
-      message.majorstdev = String(object.majorstdev);
-    } else {
-      message.majorstdev = "0";
-    }
-    if (object.minorstdev !== undefined && object.minorstdev !== null) {
-      message.minorstdev = String(object.minorstdev);
-    } else {
-      message.minorstdev = "0";
-    }
-    if (object.path !== undefined && object.path !== null) {
-      message.path = String(object.path);
-    } else {
-      message.path = "";
-    }
-    if (object.type !== undefined && object.type !== null) {
-      message.type = String(object.type);
-    } else {
-      message.type = "";
-    }
-    if (object.source !== undefined && object.source !== null) {
-      message.source = String(object.source);
-    } else {
-      message.source = "";
-    }
-    return message;
+    return {
+      id: isSet(object.id) ? String(object.id) : "0",
+      parentid: isSet(object.parentid) ? String(object.parentid) : "0",
+      majorstdev: isSet(object.majorstdev) ? String(object.majorstdev) : "0",
+      minorstdev: isSet(object.minorstdev) ? String(object.minorstdev) : "0",
+      path: isSet(object.path) ? String(object.path) : "",
+      type: isSet(object.type) ? String(object.type) : "",
+      source: isSet(object.source) ? String(object.source) : "",
+    };
   },
 
   toJSON(message: Mount): unknown {
@@ -1819,48 +1619,22 @@ export const Mount = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<Mount>): Mount {
-    const message = { ...baseMount } as Mount;
-    if (object.id !== undefined && object.id !== null) {
-      message.id = object.id;
-    } else {
-      message.id = "0";
-    }
-    if (object.parentid !== undefined && object.parentid !== null) {
-      message.parentid = object.parentid;
-    } else {
-      message.parentid = "0";
-    }
-    if (object.majorstdev !== undefined && object.majorstdev !== null) {
-      message.majorstdev = object.majorstdev;
-    } else {
-      message.majorstdev = "0";
-    }
-    if (object.minorstdev !== undefined && object.minorstdev !== null) {
-      message.minorstdev = object.minorstdev;
-    } else {
-      message.minorstdev = "0";
-    }
-    if (object.path !== undefined && object.path !== null) {
-      message.path = object.path;
-    } else {
-      message.path = "";
-    }
-    if (object.type !== undefined && object.type !== null) {
-      message.type = object.type;
-    } else {
-      message.type = "";
-    }
-    if (object.source !== undefined && object.source !== null) {
-      message.source = object.source;
-    } else {
-      message.source = "";
-    }
+  fromPartial<I extends Exact<DeepPartial<Mount>, I>>(object: I): Mount {
+    const message = createBaseMount();
+    message.id = object.id ?? "0";
+    message.parentid = object.parentid ?? "0";
+    message.majorstdev = object.majorstdev ?? "0";
+    message.minorstdev = object.minorstdev ?? "0";
+    message.path = object.path ?? "";
+    message.type = object.type ?? "";
+    message.source = object.source ?? "";
     return message;
   },
 };
 
-const baseONVIFUser: object = { token: "", username: "", onvifuserlevel: 0 };
+function createBaseONVIFUser(): ONVIFUser {
+  return { token: "", username: "", onvifuserlevel: 0 };
+}
 
 export const ONVIFUser = {
   encode(
@@ -1882,7 +1656,7 @@ export const ONVIFUser = {
   decode(input: _m0.Reader | Uint8Array, length?: number): ONVIFUser {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseONVIFUser } as ONVIFUser;
+    const message = createBaseONVIFUser();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -1904,23 +1678,13 @@ export const ONVIFUser = {
   },
 
   fromJSON(object: any): ONVIFUser {
-    const message = { ...baseONVIFUser } as ONVIFUser;
-    if (object.token !== undefined && object.token !== null) {
-      message.token = String(object.token);
-    } else {
-      message.token = "";
-    }
-    if (object.username !== undefined && object.username !== null) {
-      message.username = String(object.username);
-    } else {
-      message.username = "";
-    }
-    if (object.onvifuserlevel !== undefined && object.onvifuserlevel !== null) {
-      message.onvifuserlevel = oNVIFUserLevelFromJSON(object.onvifuserlevel);
-    } else {
-      message.onvifuserlevel = 0;
-    }
-    return message;
+    return {
+      token: isSet(object.token) ? String(object.token) : "",
+      username: isSet(object.username) ? String(object.username) : "",
+      onvifuserlevel: isSet(object.onvifuserlevel)
+        ? oNVIFUserLevelFromJSON(object.onvifuserlevel)
+        : 0,
+    };
   },
 
   toJSON(message: ONVIFUser): unknown {
@@ -1932,36 +1696,28 @@ export const ONVIFUser = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<ONVIFUser>): ONVIFUser {
-    const message = { ...baseONVIFUser } as ONVIFUser;
-    if (object.token !== undefined && object.token !== null) {
-      message.token = object.token;
-    } else {
-      message.token = "";
-    }
-    if (object.username !== undefined && object.username !== null) {
-      message.username = object.username;
-    } else {
-      message.username = "";
-    }
-    if (object.onvifuserlevel !== undefined && object.onvifuserlevel !== null) {
-      message.onvifuserlevel = object.onvifuserlevel;
-    } else {
-      message.onvifuserlevel = 0;
-    }
+  fromPartial<I extends Exact<DeepPartial<ONVIFUser>, I>>(
+    object: I
+  ): ONVIFUser {
+    const message = createBaseONVIFUser();
+    message.token = object.token ?? "";
+    message.username = object.username ?? "";
+    message.onvifuserlevel = object.onvifuserlevel ?? 0;
     return message;
   },
 };
 
-const basePlugin: object = {
-  token: "",
-  name: "",
-  enabled: false,
-  parameters: "",
-  priority: "0",
-  state: 0,
-  statemessage: "",
-};
+function createBasePlugin(): Plugin {
+  return {
+    token: "",
+    name: "",
+    enabled: false,
+    parameters: "",
+    priority: "0",
+    state: 0,
+    statemessage: "",
+  };
+}
 
 export const Plugin = {
   encode(
@@ -1995,7 +1751,7 @@ export const Plugin = {
   decode(input: _m0.Reader | Uint8Array, length?: number): Plugin {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...basePlugin } as Plugin;
+    const message = createBasePlugin();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -2029,43 +1785,17 @@ export const Plugin = {
   },
 
   fromJSON(object: any): Plugin {
-    const message = { ...basePlugin } as Plugin;
-    if (object.token !== undefined && object.token !== null) {
-      message.token = String(object.token);
-    } else {
-      message.token = "";
-    }
-    if (object.name !== undefined && object.name !== null) {
-      message.name = String(object.name);
-    } else {
-      message.name = "";
-    }
-    if (object.enabled !== undefined && object.enabled !== null) {
-      message.enabled = Boolean(object.enabled);
-    } else {
-      message.enabled = false;
-    }
-    if (object.parameters !== undefined && object.parameters !== null) {
-      message.parameters = String(object.parameters);
-    } else {
-      message.parameters = "";
-    }
-    if (object.priority !== undefined && object.priority !== null) {
-      message.priority = String(object.priority);
-    } else {
-      message.priority = "0";
-    }
-    if (object.state !== undefined && object.state !== null) {
-      message.state = pluginStateFromJSON(object.state);
-    } else {
-      message.state = 0;
-    }
-    if (object.statemessage !== undefined && object.statemessage !== null) {
-      message.statemessage = String(object.statemessage);
-    } else {
-      message.statemessage = "";
-    }
-    return message;
+    return {
+      token: isSet(object.token) ? String(object.token) : "",
+      name: isSet(object.name) ? String(object.name) : "",
+      enabled: isSet(object.enabled) ? Boolean(object.enabled) : false,
+      parameters: isSet(object.parameters) ? String(object.parameters) : "",
+      priority: isSet(object.priority) ? String(object.priority) : "0",
+      state: isSet(object.state) ? pluginStateFromJSON(object.state) : 0,
+      statemessage: isSet(object.statemessage)
+        ? String(object.statemessage)
+        : "",
+    };
   },
 
   toJSON(message: Plugin): unknown {
@@ -2082,56 +1812,30 @@ export const Plugin = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<Plugin>): Plugin {
-    const message = { ...basePlugin } as Plugin;
-    if (object.token !== undefined && object.token !== null) {
-      message.token = object.token;
-    } else {
-      message.token = "";
-    }
-    if (object.name !== undefined && object.name !== null) {
-      message.name = object.name;
-    } else {
-      message.name = "";
-    }
-    if (object.enabled !== undefined && object.enabled !== null) {
-      message.enabled = object.enabled;
-    } else {
-      message.enabled = false;
-    }
-    if (object.parameters !== undefined && object.parameters !== null) {
-      message.parameters = object.parameters;
-    } else {
-      message.parameters = "";
-    }
-    if (object.priority !== undefined && object.priority !== null) {
-      message.priority = object.priority;
-    } else {
-      message.priority = "0";
-    }
-    if (object.state !== undefined && object.state !== null) {
-      message.state = object.state;
-    } else {
-      message.state = 0;
-    }
-    if (object.statemessage !== undefined && object.statemessage !== null) {
-      message.statemessage = object.statemessage;
-    } else {
-      message.statemessage = "";
-    }
+  fromPartial<I extends Exact<DeepPartial<Plugin>, I>>(object: I): Plugin {
+    const message = createBasePlugin();
+    message.token = object.token ?? "";
+    message.name = object.name ?? "";
+    message.enabled = object.enabled ?? false;
+    message.parameters = object.parameters ?? "";
+    message.priority = object.priority ?? "0";
+    message.state = object.state ?? 0;
+    message.statemessage = object.statemessage ?? "";
     return message;
   },
 };
 
-const baseReceiver: object = {
-  token: "",
-  mode: 0,
-  uri: "",
-  autocreated: false,
-  username: "",
-  password: "",
-  parameters: "",
-};
+function createBaseReceiver(): Receiver {
+  return {
+    token: "",
+    mode: 0,
+    uri: "",
+    autocreated: false,
+    username: "",
+    password: "",
+    parameters: [],
+  };
+}
 
 export const Receiver = {
   encode(
@@ -2165,8 +1869,7 @@ export const Receiver = {
   decode(input: _m0.Reader | Uint8Array, length?: number): Receiver {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseReceiver } as Receiver;
-    message.parameters = [];
+    const message = createBaseReceiver();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -2200,44 +1903,19 @@ export const Receiver = {
   },
 
   fromJSON(object: any): Receiver {
-    const message = { ...baseReceiver } as Receiver;
-    message.parameters = [];
-    if (object.token !== undefined && object.token !== null) {
-      message.token = String(object.token);
-    } else {
-      message.token = "";
-    }
-    if (object.mode !== undefined && object.mode !== null) {
-      message.mode = receiverModeFromJSON(object.mode);
-    } else {
-      message.mode = 0;
-    }
-    if (object.uri !== undefined && object.uri !== null) {
-      message.uri = String(object.uri);
-    } else {
-      message.uri = "";
-    }
-    if (object.autocreated !== undefined && object.autocreated !== null) {
-      message.autocreated = Boolean(object.autocreated);
-    } else {
-      message.autocreated = false;
-    }
-    if (object.username !== undefined && object.username !== null) {
-      message.username = String(object.username);
-    } else {
-      message.username = "";
-    }
-    if (object.password !== undefined && object.password !== null) {
-      message.password = String(object.password);
-    } else {
-      message.password = "";
-    }
-    if (object.parameters !== undefined && object.parameters !== null) {
-      for (const e of object.parameters) {
-        message.parameters.push(String(e));
-      }
-    }
-    return message;
+    return {
+      token: isSet(object.token) ? String(object.token) : "",
+      mode: isSet(object.mode) ? receiverModeFromJSON(object.mode) : 0,
+      uri: isSet(object.uri) ? String(object.uri) : "",
+      autocreated: isSet(object.autocreated)
+        ? Boolean(object.autocreated)
+        : false,
+      username: isSet(object.username) ? String(object.username) : "",
+      password: isSet(object.password) ? String(object.password) : "",
+      parameters: Array.isArray(object?.parameters)
+        ? object.parameters.map((e: any) => String(e))
+        : [],
+    };
   },
 
   toJSON(message: Receiver): unknown {
@@ -2257,61 +1935,39 @@ export const Receiver = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<Receiver>): Receiver {
-    const message = { ...baseReceiver } as Receiver;
-    message.parameters = [];
-    if (object.token !== undefined && object.token !== null) {
-      message.token = object.token;
-    } else {
-      message.token = "";
-    }
-    if (object.mode !== undefined && object.mode !== null) {
-      message.mode = object.mode;
-    } else {
-      message.mode = 0;
-    }
-    if (object.uri !== undefined && object.uri !== null) {
-      message.uri = object.uri;
-    } else {
-      message.uri = "";
-    }
-    if (object.autocreated !== undefined && object.autocreated !== null) {
-      message.autocreated = object.autocreated;
-    } else {
-      message.autocreated = false;
-    }
-    if (object.username !== undefined && object.username !== null) {
-      message.username = object.username;
-    } else {
-      message.username = "";
-    }
-    if (object.password !== undefined && object.password !== null) {
-      message.password = object.password;
-    } else {
-      message.password = "";
-    }
-    if (object.parameters !== undefined && object.parameters !== null) {
-      for (const e of object.parameters) {
-        message.parameters.push(e);
-      }
-    }
+  fromPartial<I extends Exact<DeepPartial<Receiver>, I>>(object: I): Receiver {
+    const message = createBaseReceiver();
+    message.token = object.token ?? "";
+    message.mode = object.mode ?? 0;
+    message.uri = object.uri ?? "";
+    message.autocreated = object.autocreated ?? false;
+    message.username = object.username ?? "";
+    message.password = object.password ?? "";
+    message.parameters = object.parameters?.map((e) => e) || [];
     return message;
   },
 };
 
-const baseRecording: object = {
-  token: "",
-  sourceid: "",
-  name: "",
-  location: "",
-  description: "",
-  address: "",
-  content: "",
-  retentiontime: "0",
-  adaptivestreaming: false,
-  relativelocation: false,
-  orientation: 0,
-};
+function createBaseRecording(): Recording {
+  return {
+    token: "",
+    sourceid: "",
+    name: "",
+    location: "",
+    description: "",
+    address: "",
+    content: "",
+    retentiontime: "0",
+    adaptivestreaming: false,
+    relativelocation: false,
+    orientation: 0,
+    jobs: [],
+    tracks: [],
+    latitude: undefined,
+    longitude: undefined,
+    activejob: undefined,
+  };
+}
 
 export const Recording = {
   encode(
@@ -2381,9 +2037,7 @@ export const Recording = {
   decode(input: _m0.Reader | Uint8Array, length?: number): Recording {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseRecording } as Recording;
-    message.jobs = [];
-    message.tracks = [];
+    const message = createBaseRecording();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -2444,96 +2098,34 @@ export const Recording = {
   },
 
   fromJSON(object: any): Recording {
-    const message = { ...baseRecording } as Recording;
-    message.jobs = [];
-    message.tracks = [];
-    if (object.token !== undefined && object.token !== null) {
-      message.token = String(object.token);
-    } else {
-      message.token = "";
-    }
-    if (object.sourceid !== undefined && object.sourceid !== null) {
-      message.sourceid = String(object.sourceid);
-    } else {
-      message.sourceid = "";
-    }
-    if (object.name !== undefined && object.name !== null) {
-      message.name = String(object.name);
-    } else {
-      message.name = "";
-    }
-    if (object.location !== undefined && object.location !== null) {
-      message.location = String(object.location);
-    } else {
-      message.location = "";
-    }
-    if (object.description !== undefined && object.description !== null) {
-      message.description = String(object.description);
-    } else {
-      message.description = "";
-    }
-    if (object.address !== undefined && object.address !== null) {
-      message.address = String(object.address);
-    } else {
-      message.address = "";
-    }
-    if (object.content !== undefined && object.content !== null) {
-      message.content = String(object.content);
-    } else {
-      message.content = "";
-    }
-    if (object.retentiontime !== undefined && object.retentiontime !== null) {
-      message.retentiontime = String(object.retentiontime);
-    } else {
-      message.retentiontime = "0";
-    }
-    if (
-      object.adaptivestreaming !== undefined &&
-      object.adaptivestreaming !== null
-    ) {
-      message.adaptivestreaming = Boolean(object.adaptivestreaming);
-    } else {
-      message.adaptivestreaming = false;
-    }
-    if (
-      object.relativelocation !== undefined &&
-      object.relativelocation !== null
-    ) {
-      message.relativelocation = Boolean(object.relativelocation);
-    } else {
-      message.relativelocation = false;
-    }
-    if (object.orientation !== undefined && object.orientation !== null) {
-      message.orientation = Number(object.orientation);
-    } else {
-      message.orientation = 0;
-    }
-    if (object.jobs !== undefined && object.jobs !== null) {
-      for (const e of object.jobs) {
-        message.jobs.push(RecordingJob.fromJSON(e));
-      }
-    }
-    if (object.tracks !== undefined && object.tracks !== null) {
-      for (const e of object.tracks) {
-        message.tracks.push(RecordingTrack.fromJSON(e));
-      }
-    }
-    if (object.latitude !== undefined && object.latitude !== null) {
-      message.latitude = Number(object.latitude);
-    } else {
-      message.latitude = undefined;
-    }
-    if (object.longitude !== undefined && object.longitude !== null) {
-      message.longitude = Number(object.longitude);
-    } else {
-      message.longitude = undefined;
-    }
-    if (object.activejob !== undefined && object.activejob !== null) {
-      message.activejob = String(object.activejob);
-    } else {
-      message.activejob = undefined;
-    }
-    return message;
+    return {
+      token: isSet(object.token) ? String(object.token) : "",
+      sourceid: isSet(object.sourceid) ? String(object.sourceid) : "",
+      name: isSet(object.name) ? String(object.name) : "",
+      location: isSet(object.location) ? String(object.location) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      address: isSet(object.address) ? String(object.address) : "",
+      content: isSet(object.content) ? String(object.content) : "",
+      retentiontime: isSet(object.retentiontime)
+        ? String(object.retentiontime)
+        : "0",
+      adaptivestreaming: isSet(object.adaptivestreaming)
+        ? Boolean(object.adaptivestreaming)
+        : false,
+      relativelocation: isSet(object.relativelocation)
+        ? Boolean(object.relativelocation)
+        : false,
+      orientation: isSet(object.orientation) ? Number(object.orientation) : 0,
+      jobs: Array.isArray(object?.jobs)
+        ? object.jobs.map((e: any) => RecordingJob.fromJSON(e))
+        : [],
+      tracks: Array.isArray(object?.tracks)
+        ? object.tracks.map((e: any) => RecordingTrack.fromJSON(e))
+        : [],
+      latitude: isSet(object.latitude) ? Number(object.latitude) : undefined,
+      longitude: isSet(object.longitude) ? Number(object.longitude) : undefined,
+      activejob: isSet(object.activejob) ? String(object.activejob) : undefined,
+    };
   },
 
   toJSON(message: Recording): unknown {
@@ -2574,107 +2166,41 @@ export const Recording = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<Recording>): Recording {
-    const message = { ...baseRecording } as Recording;
-    message.jobs = [];
-    message.tracks = [];
-    if (object.token !== undefined && object.token !== null) {
-      message.token = object.token;
-    } else {
-      message.token = "";
-    }
-    if (object.sourceid !== undefined && object.sourceid !== null) {
-      message.sourceid = object.sourceid;
-    } else {
-      message.sourceid = "";
-    }
-    if (object.name !== undefined && object.name !== null) {
-      message.name = object.name;
-    } else {
-      message.name = "";
-    }
-    if (object.location !== undefined && object.location !== null) {
-      message.location = object.location;
-    } else {
-      message.location = "";
-    }
-    if (object.description !== undefined && object.description !== null) {
-      message.description = object.description;
-    } else {
-      message.description = "";
-    }
-    if (object.address !== undefined && object.address !== null) {
-      message.address = object.address;
-    } else {
-      message.address = "";
-    }
-    if (object.content !== undefined && object.content !== null) {
-      message.content = object.content;
-    } else {
-      message.content = "";
-    }
-    if (object.retentiontime !== undefined && object.retentiontime !== null) {
-      message.retentiontime = object.retentiontime;
-    } else {
-      message.retentiontime = "0";
-    }
-    if (
-      object.adaptivestreaming !== undefined &&
-      object.adaptivestreaming !== null
-    ) {
-      message.adaptivestreaming = object.adaptivestreaming;
-    } else {
-      message.adaptivestreaming = false;
-    }
-    if (
-      object.relativelocation !== undefined &&
-      object.relativelocation !== null
-    ) {
-      message.relativelocation = object.relativelocation;
-    } else {
-      message.relativelocation = false;
-    }
-    if (object.orientation !== undefined && object.orientation !== null) {
-      message.orientation = object.orientation;
-    } else {
-      message.orientation = 0;
-    }
-    if (object.jobs !== undefined && object.jobs !== null) {
-      for (const e of object.jobs) {
-        message.jobs.push(RecordingJob.fromPartial(e));
-      }
-    }
-    if (object.tracks !== undefined && object.tracks !== null) {
-      for (const e of object.tracks) {
-        message.tracks.push(RecordingTrack.fromPartial(e));
-      }
-    }
-    if (object.latitude !== undefined && object.latitude !== null) {
-      message.latitude = object.latitude;
-    } else {
-      message.latitude = undefined;
-    }
-    if (object.longitude !== undefined && object.longitude !== null) {
-      message.longitude = object.longitude;
-    } else {
-      message.longitude = undefined;
-    }
-    if (object.activejob !== undefined && object.activejob !== null) {
-      message.activejob = object.activejob;
-    } else {
-      message.activejob = undefined;
-    }
+  fromPartial<I extends Exact<DeepPartial<Recording>, I>>(
+    object: I
+  ): Recording {
+    const message = createBaseRecording();
+    message.token = object.token ?? "";
+    message.sourceid = object.sourceid ?? "";
+    message.name = object.name ?? "";
+    message.location = object.location ?? "";
+    message.description = object.description ?? "";
+    message.address = object.address ?? "";
+    message.content = object.content ?? "";
+    message.retentiontime = object.retentiontime ?? "0";
+    message.adaptivestreaming = object.adaptivestreaming ?? false;
+    message.relativelocation = object.relativelocation ?? false;
+    message.orientation = object.orientation ?? 0;
+    message.jobs = object.jobs?.map((e) => RecordingJob.fromPartial(e)) || [];
+    message.tracks =
+      object.tracks?.map((e) => RecordingTrack.fromPartial(e)) || [];
+    message.latitude = object.latitude ?? undefined;
+    message.longitude = object.longitude ?? undefined;
+    message.activejob = object.activejob ?? undefined;
     return message;
   },
 };
 
-const baseRecordingJob: object = {
-  recordingtoken: "",
-  recordingjobtoken: "",
-  name: "",
-  enabled: false,
-  priority: "0",
-};
+function createBaseRecordingJob(): RecordingJob {
+  return {
+    recordingtoken: "",
+    recordingjobtoken: "",
+    name: "",
+    enabled: false,
+    priority: "0",
+    recordingjobsources: [],
+  };
+}
 
 export const RecordingJob = {
   encode(
@@ -2705,8 +2231,7 @@ export const RecordingJob = {
   decode(input: _m0.Reader | Uint8Array, length?: number): RecordingJob {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseRecordingJob } as RecordingJob;
-    message.recordingjobsources = [];
+    const message = createBaseRecordingJob();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -2739,45 +2264,22 @@ export const RecordingJob = {
   },
 
   fromJSON(object: any): RecordingJob {
-    const message = { ...baseRecordingJob } as RecordingJob;
-    message.recordingjobsources = [];
-    if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
-      message.recordingtoken = String(object.recordingtoken);
-    } else {
-      message.recordingtoken = "";
-    }
-    if (
-      object.recordingjobtoken !== undefined &&
-      object.recordingjobtoken !== null
-    ) {
-      message.recordingjobtoken = String(object.recordingjobtoken);
-    } else {
-      message.recordingjobtoken = "";
-    }
-    if (object.name !== undefined && object.name !== null) {
-      message.name = String(object.name);
-    } else {
-      message.name = "";
-    }
-    if (object.enabled !== undefined && object.enabled !== null) {
-      message.enabled = Boolean(object.enabled);
-    } else {
-      message.enabled = false;
-    }
-    if (object.priority !== undefined && object.priority !== null) {
-      message.priority = String(object.priority);
-    } else {
-      message.priority = "0";
-    }
-    if (
-      object.recordingjobsources !== undefined &&
-      object.recordingjobsources !== null
-    ) {
-      for (const e of object.recordingjobsources) {
-        message.recordingjobsources.push(RecordingJobSource.fromJSON(e));
-      }
-    }
-    return message;
+    return {
+      recordingtoken: isSet(object.recordingtoken)
+        ? String(object.recordingtoken)
+        : "",
+      recordingjobtoken: isSet(object.recordingjobtoken)
+        ? String(object.recordingjobtoken)
+        : "",
+      name: isSet(object.name) ? String(object.name) : "",
+      enabled: isSet(object.enabled) ? Boolean(object.enabled) : false,
+      priority: isSet(object.priority) ? String(object.priority) : "0",
+      recordingjobsources: Array.isArray(object?.recordingjobsources)
+        ? object.recordingjobsources.map((e: any) =>
+            RecordingJobSource.fromJSON(e)
+          )
+        : [],
+    };
   },
 
   toJSON(message: RecordingJob): unknown {
@@ -2799,55 +2301,32 @@ export const RecordingJob = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<RecordingJob>): RecordingJob {
-    const message = { ...baseRecordingJob } as RecordingJob;
-    message.recordingjobsources = [];
-    if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
-      message.recordingtoken = object.recordingtoken;
-    } else {
-      message.recordingtoken = "";
-    }
-    if (
-      object.recordingjobtoken !== undefined &&
-      object.recordingjobtoken !== null
-    ) {
-      message.recordingjobtoken = object.recordingjobtoken;
-    } else {
-      message.recordingjobtoken = "";
-    }
-    if (object.name !== undefined && object.name !== null) {
-      message.name = object.name;
-    } else {
-      message.name = "";
-    }
-    if (object.enabled !== undefined && object.enabled !== null) {
-      message.enabled = object.enabled;
-    } else {
-      message.enabled = false;
-    }
-    if (object.priority !== undefined && object.priority !== null) {
-      message.priority = object.priority;
-    } else {
-      message.priority = "0";
-    }
-    if (
-      object.recordingjobsources !== undefined &&
-      object.recordingjobsources !== null
-    ) {
-      for (const e of object.recordingjobsources) {
-        message.recordingjobsources.push(RecordingJobSource.fromPartial(e));
-      }
-    }
+  fromPartial<I extends Exact<DeepPartial<RecordingJob>, I>>(
+    object: I
+  ): RecordingJob {
+    const message = createBaseRecordingJob();
+    message.recordingtoken = object.recordingtoken ?? "";
+    message.recordingjobtoken = object.recordingjobtoken ?? "";
+    message.name = object.name ?? "";
+    message.enabled = object.enabled ?? false;
+    message.priority = object.priority ?? "0";
+    message.recordingjobsources =
+      object.recordingjobsources?.map((e) =>
+        RecordingJobSource.fromPartial(e)
+      ) || [];
     return message;
   },
 };
 
-const baseRecordingJobSource: object = {
-  recordingtoken: "",
-  recordingjobtoken: "",
-  recordingjobsourcetoken: "",
-  receivertoken: "",
-};
+function createBaseRecordingJobSource(): RecordingJobSource {
+  return {
+    recordingtoken: "",
+    recordingjobtoken: "",
+    recordingjobsourcetoken: "",
+    receivertoken: "",
+    recordingjobsourcetracks: [],
+  };
+}
 
 export const RecordingJobSource = {
   encode(
@@ -2875,8 +2354,7 @@ export const RecordingJobSource = {
   decode(input: _m0.Reader | Uint8Array, length?: number): RecordingJobSource {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseRecordingJobSource } as RecordingJobSource;
-    message.recordingjobsourcetracks = [];
+    const message = createBaseRecordingJobSource();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -2906,45 +2384,25 @@ export const RecordingJobSource = {
   },
 
   fromJSON(object: any): RecordingJobSource {
-    const message = { ...baseRecordingJobSource } as RecordingJobSource;
-    message.recordingjobsourcetracks = [];
-    if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
-      message.recordingtoken = String(object.recordingtoken);
-    } else {
-      message.recordingtoken = "";
-    }
-    if (
-      object.recordingjobtoken !== undefined &&
-      object.recordingjobtoken !== null
-    ) {
-      message.recordingjobtoken = String(object.recordingjobtoken);
-    } else {
-      message.recordingjobtoken = "";
-    }
-    if (
-      object.recordingjobsourcetoken !== undefined &&
-      object.recordingjobsourcetoken !== null
-    ) {
-      message.recordingjobsourcetoken = String(object.recordingjobsourcetoken);
-    } else {
-      message.recordingjobsourcetoken = "";
-    }
-    if (object.receivertoken !== undefined && object.receivertoken !== null) {
-      message.receivertoken = String(object.receivertoken);
-    } else {
-      message.receivertoken = "";
-    }
-    if (
-      object.recordingjobsourcetracks !== undefined &&
-      object.recordingjobsourcetracks !== null
-    ) {
-      for (const e of object.recordingjobsourcetracks) {
-        message.recordingjobsourcetracks.push(
-          RecordingJobSourceTrack.fromJSON(e)
-        );
-      }
-    }
-    return message;
+    return {
+      recordingtoken: isSet(object.recordingtoken)
+        ? String(object.recordingtoken)
+        : "",
+      recordingjobtoken: isSet(object.recordingjobtoken)
+        ? String(object.recordingjobtoken)
+        : "",
+      recordingjobsourcetoken: isSet(object.recordingjobsourcetoken)
+        ? String(object.recordingjobsourcetoken)
+        : "",
+      receivertoken: isSet(object.receivertoken)
+        ? String(object.receivertoken)
+        : "",
+      recordingjobsourcetracks: Array.isArray(object?.recordingjobsourcetracks)
+        ? object.recordingjobsourcetracks.map((e: any) =>
+            RecordingJobSourceTrack.fromJSON(e)
+          )
+        : [],
+    };
   },
 
   toJSON(message: RecordingJobSource): unknown {
@@ -2967,60 +2425,35 @@ export const RecordingJobSource = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<RecordingJobSource>): RecordingJobSource {
-    const message = { ...baseRecordingJobSource } as RecordingJobSource;
-    message.recordingjobsourcetracks = [];
-    if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
-      message.recordingtoken = object.recordingtoken;
-    } else {
-      message.recordingtoken = "";
-    }
-    if (
-      object.recordingjobtoken !== undefined &&
-      object.recordingjobtoken !== null
-    ) {
-      message.recordingjobtoken = object.recordingjobtoken;
-    } else {
-      message.recordingjobtoken = "";
-    }
-    if (
-      object.recordingjobsourcetoken !== undefined &&
-      object.recordingjobsourcetoken !== null
-    ) {
-      message.recordingjobsourcetoken = object.recordingjobsourcetoken;
-    } else {
-      message.recordingjobsourcetoken = "";
-    }
-    if (object.receivertoken !== undefined && object.receivertoken !== null) {
-      message.receivertoken = object.receivertoken;
-    } else {
-      message.receivertoken = "";
-    }
-    if (
-      object.recordingjobsourcetracks !== undefined &&
-      object.recordingjobsourcetracks !== null
-    ) {
-      for (const e of object.recordingjobsourcetracks) {
-        message.recordingjobsourcetracks.push(
-          RecordingJobSourceTrack.fromPartial(e)
-        );
-      }
-    }
+  fromPartial<I extends Exact<DeepPartial<RecordingJobSource>, I>>(
+    object: I
+  ): RecordingJobSource {
+    const message = createBaseRecordingJobSource();
+    message.recordingtoken = object.recordingtoken ?? "";
+    message.recordingjobtoken = object.recordingjobtoken ?? "";
+    message.recordingjobsourcetoken = object.recordingjobsourcetoken ?? "";
+    message.receivertoken = object.receivertoken ?? "";
+    message.recordingjobsourcetracks =
+      object.recordingjobsourcetracks?.map((e) =>
+        RecordingJobSourceTrack.fromPartial(e)
+      ) || [];
     return message;
   },
 };
 
-const baseRecordingJobSourceTrack: object = {
-  recordingtoken: "",
-  recordingjobtoken: "",
-  recordingjobsourcetoken: "",
-  recordingjobsourcetracktoken: "",
-  recordingtrackid: 0,
-  parameters: "",
-  state: 0,
-  error: "",
-  activeparameters: "",
-};
+function createBaseRecordingJobSourceTrack(): RecordingJobSourceTrack {
+  return {
+    recordingtoken: "",
+    recordingjobtoken: "",
+    recordingjobsourcetoken: "",
+    recordingjobsourcetracktoken: "",
+    recordingtrackid: 0,
+    parameters: [],
+    state: 0,
+    error: "",
+    activeparameters: [],
+  };
+}
 
 export const RecordingJobSourceTrack = {
   encode(
@@ -3063,11 +2496,7 @@ export const RecordingJobSourceTrack = {
   ): RecordingJobSourceTrack {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseRecordingJobSourceTrack,
-    } as RecordingJobSourceTrack;
-    message.parameters = [];
-    message.activeparameters = [];
+    const message = createBaseRecordingJobSourceTrack();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -3107,74 +2536,31 @@ export const RecordingJobSourceTrack = {
   },
 
   fromJSON(object: any): RecordingJobSourceTrack {
-    const message = {
-      ...baseRecordingJobSourceTrack,
-    } as RecordingJobSourceTrack;
-    message.parameters = [];
-    message.activeparameters = [];
-    if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
-      message.recordingtoken = String(object.recordingtoken);
-    } else {
-      message.recordingtoken = "";
-    }
-    if (
-      object.recordingjobtoken !== undefined &&
-      object.recordingjobtoken !== null
-    ) {
-      message.recordingjobtoken = String(object.recordingjobtoken);
-    } else {
-      message.recordingjobtoken = "";
-    }
-    if (
-      object.recordingjobsourcetoken !== undefined &&
-      object.recordingjobsourcetoken !== null
-    ) {
-      message.recordingjobsourcetoken = String(object.recordingjobsourcetoken);
-    } else {
-      message.recordingjobsourcetoken = "";
-    }
-    if (
-      object.recordingjobsourcetracktoken !== undefined &&
-      object.recordingjobsourcetracktoken !== null
-    ) {
-      message.recordingjobsourcetracktoken = String(
-        object.recordingjobsourcetracktoken
-      );
-    } else {
-      message.recordingjobsourcetracktoken = "";
-    }
-    if (
-      object.recordingtrackid !== undefined &&
-      object.recordingtrackid !== null
-    ) {
-      message.recordingtrackid = Number(object.recordingtrackid);
-    } else {
-      message.recordingtrackid = 0;
-    }
-    if (object.parameters !== undefined && object.parameters !== null) {
-      for (const e of object.parameters) {
-        message.parameters.push(String(e));
-      }
-    }
-    if (object.state !== undefined && object.state !== null) {
-      message.state = recordingJobStateFromJSON(object.state);
-    } else {
-      message.state = 0;
-    }
-    if (object.error !== undefined && object.error !== null) {
-      message.error = String(object.error);
-    } else {
-      message.error = "";
-    }
-    if (
-      object.activeparameters !== undefined &&
-      object.activeparameters !== null
-    ) {
-      for (const e of object.activeparameters) {
-        message.activeparameters.push(String(e));
-      }
-    }
-    return message;
+    return {
+      recordingtoken: isSet(object.recordingtoken)
+        ? String(object.recordingtoken)
+        : "",
+      recordingjobtoken: isSet(object.recordingjobtoken)
+        ? String(object.recordingjobtoken)
+        : "",
+      recordingjobsourcetoken: isSet(object.recordingjobsourcetoken)
+        ? String(object.recordingjobsourcetoken)
+        : "",
+      recordingjobsourcetracktoken: isSet(object.recordingjobsourcetracktoken)
+        ? String(object.recordingjobsourcetracktoken)
+        : "",
+      recordingtrackid: isSet(object.recordingtrackid)
+        ? Number(object.recordingtrackid)
+        : 0,
+      parameters: Array.isArray(object?.parameters)
+        ? object.parameters.map((e: any) => String(e))
+        : [],
+      state: isSet(object.state) ? recordingJobStateFromJSON(object.state) : 0,
+      error: isSet(object.error) ? String(object.error) : "",
+      activeparameters: Array.isArray(object?.activeparameters)
+        ? object.activeparameters.map((e: any) => String(e))
+        : [],
+    };
   },
 
   toJSON(message: RecordingJobSourceTrack): unknown {
@@ -3188,7 +2574,7 @@ export const RecordingJobSourceTrack = {
     message.recordingjobsourcetracktoken !== undefined &&
       (obj.recordingjobsourcetracktoken = message.recordingjobsourcetracktoken);
     message.recordingtrackid !== undefined &&
-      (obj.recordingtrackid = message.recordingtrackid);
+      (obj.recordingtrackid = Math.round(message.recordingtrackid));
     if (message.parameters) {
       obj.parameters = message.parameters.map((e) => e);
     } else {
@@ -3205,91 +2591,40 @@ export const RecordingJobSourceTrack = {
     return obj;
   },
 
-  fromPartial(
-    object: DeepPartial<RecordingJobSourceTrack>
+  fromPartial<I extends Exact<DeepPartial<RecordingJobSourceTrack>, I>>(
+    object: I
   ): RecordingJobSourceTrack {
-    const message = {
-      ...baseRecordingJobSourceTrack,
-    } as RecordingJobSourceTrack;
-    message.parameters = [];
-    message.activeparameters = [];
-    if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
-      message.recordingtoken = object.recordingtoken;
-    } else {
-      message.recordingtoken = "";
-    }
-    if (
-      object.recordingjobtoken !== undefined &&
-      object.recordingjobtoken !== null
-    ) {
-      message.recordingjobtoken = object.recordingjobtoken;
-    } else {
-      message.recordingjobtoken = "";
-    }
-    if (
-      object.recordingjobsourcetoken !== undefined &&
-      object.recordingjobsourcetoken !== null
-    ) {
-      message.recordingjobsourcetoken = object.recordingjobsourcetoken;
-    } else {
-      message.recordingjobsourcetoken = "";
-    }
-    if (
-      object.recordingjobsourcetracktoken !== undefined &&
-      object.recordingjobsourcetracktoken !== null
-    ) {
-      message.recordingjobsourcetracktoken =
-        object.recordingjobsourcetracktoken;
-    } else {
-      message.recordingjobsourcetracktoken = "";
-    }
-    if (
-      object.recordingtrackid !== undefined &&
-      object.recordingtrackid !== null
-    ) {
-      message.recordingtrackid = object.recordingtrackid;
-    } else {
-      message.recordingtrackid = 0;
-    }
-    if (object.parameters !== undefined && object.parameters !== null) {
-      for (const e of object.parameters) {
-        message.parameters.push(e);
-      }
-    }
-    if (object.state !== undefined && object.state !== null) {
-      message.state = object.state;
-    } else {
-      message.state = 0;
-    }
-    if (object.error !== undefined && object.error !== null) {
-      message.error = object.error;
-    } else {
-      message.error = "";
-    }
-    if (
-      object.activeparameters !== undefined &&
-      object.activeparameters !== null
-    ) {
-      for (const e of object.activeparameters) {
-        message.activeparameters.push(e);
-      }
-    }
+    const message = createBaseRecordingJobSourceTrack();
+    message.recordingtoken = object.recordingtoken ?? "";
+    message.recordingjobtoken = object.recordingjobtoken ?? "";
+    message.recordingjobsourcetoken = object.recordingjobsourcetoken ?? "";
+    message.recordingjobsourcetracktoken =
+      object.recordingjobsourcetracktoken ?? "";
+    message.recordingtrackid = object.recordingtrackid ?? 0;
+    message.parameters = object.parameters?.map((e) => e) || [];
+    message.state = object.state ?? 0;
+    message.error = object.error ?? "";
+    message.activeparameters = object.activeparameters?.map((e) => e) || [];
     return message;
   },
 };
 
-const baseRecordingTrack: object = {
-  recordingtoken: "",
-  recordingtrackid: 0,
-  token: "",
-  tracktype: 0,
-  description: "",
-  fixedfiles: false,
-  digitalsigning: false,
-  encrypt: false,
-  flushfrequency: 0,
-  files: "",
-};
+function createBaseRecordingTrack(): RecordingTrack {
+  return {
+    recordingtoken: "",
+    recordingtrackid: 0,
+    token: "",
+    tracktype: 0,
+    description: "",
+    fixedfiles: false,
+    digitalsigning: false,
+    encrypt: false,
+    flushfrequency: 0,
+    files: [],
+    indices: [],
+    totaltrackdata: [],
+  };
+}
 
 export const RecordingTrack = {
   encode(
@@ -3338,10 +2673,7 @@ export const RecordingTrack = {
   decode(input: _m0.Reader | Uint8Array, length?: number): RecordingTrack {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseRecordingTrack } as RecordingTrack;
-    message.files = [];
-    message.indices = [];
-    message.totaltrackdata = [];
+    const message = createBaseRecordingTrack();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -3392,74 +2724,36 @@ export const RecordingTrack = {
   },
 
   fromJSON(object: any): RecordingTrack {
-    const message = { ...baseRecordingTrack } as RecordingTrack;
-    message.files = [];
-    message.indices = [];
-    message.totaltrackdata = [];
-    if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
-      message.recordingtoken = String(object.recordingtoken);
-    } else {
-      message.recordingtoken = "";
-    }
-    if (
-      object.recordingtrackid !== undefined &&
-      object.recordingtrackid !== null
-    ) {
-      message.recordingtrackid = Number(object.recordingtrackid);
-    } else {
-      message.recordingtrackid = 0;
-    }
-    if (object.token !== undefined && object.token !== null) {
-      message.token = String(object.token);
-    } else {
-      message.token = "";
-    }
-    if (object.tracktype !== undefined && object.tracktype !== null) {
-      message.tracktype = trackTypeFromJSON(object.tracktype);
-    } else {
-      message.tracktype = 0;
-    }
-    if (object.description !== undefined && object.description !== null) {
-      message.description = String(object.description);
-    } else {
-      message.description = "";
-    }
-    if (object.fixedfiles !== undefined && object.fixedfiles !== null) {
-      message.fixedfiles = Boolean(object.fixedfiles);
-    } else {
-      message.fixedfiles = false;
-    }
-    if (object.digitalsigning !== undefined && object.digitalsigning !== null) {
-      message.digitalsigning = Boolean(object.digitalsigning);
-    } else {
-      message.digitalsigning = false;
-    }
-    if (object.encrypt !== undefined && object.encrypt !== null) {
-      message.encrypt = Boolean(object.encrypt);
-    } else {
-      message.encrypt = false;
-    }
-    if (object.flushfrequency !== undefined && object.flushfrequency !== null) {
-      message.flushfrequency = Number(object.flushfrequency);
-    } else {
-      message.flushfrequency = 0;
-    }
-    if (object.files !== undefined && object.files !== null) {
-      for (const e of object.files) {
-        message.files.push(String(e));
-      }
-    }
-    if (object.indices !== undefined && object.indices !== null) {
-      for (const e of object.indices) {
-        message.indices.push(Index.fromJSON(e));
-      }
-    }
-    if (object.totaltrackdata !== undefined && object.totaltrackdata !== null) {
-      for (const e of object.totaltrackdata) {
-        message.totaltrackdata.push(TrackData.fromJSON(e));
-      }
-    }
-    return message;
+    return {
+      recordingtoken: isSet(object.recordingtoken)
+        ? String(object.recordingtoken)
+        : "",
+      recordingtrackid: isSet(object.recordingtrackid)
+        ? Number(object.recordingtrackid)
+        : 0,
+      token: isSet(object.token) ? String(object.token) : "",
+      tracktype: isSet(object.tracktype)
+        ? trackTypeFromJSON(object.tracktype)
+        : 0,
+      description: isSet(object.description) ? String(object.description) : "",
+      fixedfiles: isSet(object.fixedfiles) ? Boolean(object.fixedfiles) : false,
+      digitalsigning: isSet(object.digitalsigning)
+        ? Boolean(object.digitalsigning)
+        : false,
+      encrypt: isSet(object.encrypt) ? Boolean(object.encrypt) : false,
+      flushfrequency: isSet(object.flushfrequency)
+        ? Number(object.flushfrequency)
+        : 0,
+      files: Array.isArray(object?.files)
+        ? object.files.map((e: any) => String(e))
+        : [],
+      indices: Array.isArray(object?.indices)
+        ? object.indices.map((e: any) => Index.fromJSON(e))
+        : [],
+      totaltrackdata: Array.isArray(object?.totaltrackdata)
+        ? object.totaltrackdata.map((e: any) => TrackData.fromJSON(e))
+        : [],
+    };
   },
 
   toJSON(message: RecordingTrack): unknown {
@@ -3467,7 +2761,7 @@ export const RecordingTrack = {
     message.recordingtoken !== undefined &&
       (obj.recordingtoken = message.recordingtoken);
     message.recordingtrackid !== undefined &&
-      (obj.recordingtrackid = message.recordingtrackid);
+      (obj.recordingtrackid = Math.round(message.recordingtrackid));
     message.token !== undefined && (obj.token = message.token);
     message.tracktype !== undefined &&
       (obj.tracktype = trackTypeToJSON(message.tracktype));
@@ -3478,7 +2772,7 @@ export const RecordingTrack = {
       (obj.digitalsigning = message.digitalsigning);
     message.encrypt !== undefined && (obj.encrypt = message.encrypt);
     message.flushfrequency !== undefined &&
-      (obj.flushfrequency = message.flushfrequency);
+      (obj.flushfrequency = Math.round(message.flushfrequency));
     if (message.files) {
       obj.files = message.files.map((e) => e);
     } else {
@@ -3501,79 +2795,30 @@ export const RecordingTrack = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<RecordingTrack>): RecordingTrack {
-    const message = { ...baseRecordingTrack } as RecordingTrack;
-    message.files = [];
-    message.indices = [];
-    message.totaltrackdata = [];
-    if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
-      message.recordingtoken = object.recordingtoken;
-    } else {
-      message.recordingtoken = "";
-    }
-    if (
-      object.recordingtrackid !== undefined &&
-      object.recordingtrackid !== null
-    ) {
-      message.recordingtrackid = object.recordingtrackid;
-    } else {
-      message.recordingtrackid = 0;
-    }
-    if (object.token !== undefined && object.token !== null) {
-      message.token = object.token;
-    } else {
-      message.token = "";
-    }
-    if (object.tracktype !== undefined && object.tracktype !== null) {
-      message.tracktype = object.tracktype;
-    } else {
-      message.tracktype = 0;
-    }
-    if (object.description !== undefined && object.description !== null) {
-      message.description = object.description;
-    } else {
-      message.description = "";
-    }
-    if (object.fixedfiles !== undefined && object.fixedfiles !== null) {
-      message.fixedfiles = object.fixedfiles;
-    } else {
-      message.fixedfiles = false;
-    }
-    if (object.digitalsigning !== undefined && object.digitalsigning !== null) {
-      message.digitalsigning = object.digitalsigning;
-    } else {
-      message.digitalsigning = false;
-    }
-    if (object.encrypt !== undefined && object.encrypt !== null) {
-      message.encrypt = object.encrypt;
-    } else {
-      message.encrypt = false;
-    }
-    if (object.flushfrequency !== undefined && object.flushfrequency !== null) {
-      message.flushfrequency = object.flushfrequency;
-    } else {
-      message.flushfrequency = 0;
-    }
-    if (object.files !== undefined && object.files !== null) {
-      for (const e of object.files) {
-        message.files.push(e);
-      }
-    }
-    if (object.indices !== undefined && object.indices !== null) {
-      for (const e of object.indices) {
-        message.indices.push(Index.fromPartial(e));
-      }
-    }
-    if (object.totaltrackdata !== undefined && object.totaltrackdata !== null) {
-      for (const e of object.totaltrackdata) {
-        message.totaltrackdata.push(TrackData.fromPartial(e));
-      }
-    }
+  fromPartial<I extends Exact<DeepPartial<RecordingTrack>, I>>(
+    object: I
+  ): RecordingTrack {
+    const message = createBaseRecordingTrack();
+    message.recordingtoken = object.recordingtoken ?? "";
+    message.recordingtrackid = object.recordingtrackid ?? 0;
+    message.token = object.token ?? "";
+    message.tracktype = object.tracktype ?? 0;
+    message.description = object.description ?? "";
+    message.fixedfiles = object.fixedfiles ?? false;
+    message.digitalsigning = object.digitalsigning ?? false;
+    message.encrypt = object.encrypt ?? false;
+    message.flushfrequency = object.flushfrequency ?? 0;
+    message.files = object.files?.map((e) => e) || [];
+    message.indices = object.indices?.map((e) => Index.fromPartial(e)) || [];
+    message.totaltrackdata =
+      object.totaltrackdata?.map((e) => TrackData.fromPartial(e)) || [];
     return message;
   },
 };
 
-const baseTrackData: object = { time: "0", totaldata: "0" };
+function createBaseTrackData(): TrackData {
+  return { time: "0", totaldata: "0" };
+}
 
 export const TrackData = {
   encode(
@@ -3592,7 +2837,7 @@ export const TrackData = {
   decode(input: _m0.Reader | Uint8Array, length?: number): TrackData {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseTrackData } as TrackData;
+    const message = createBaseTrackData();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -3611,18 +2856,10 @@ export const TrackData = {
   },
 
   fromJSON(object: any): TrackData {
-    const message = { ...baseTrackData } as TrackData;
-    if (object.time !== undefined && object.time !== null) {
-      message.time = String(object.time);
-    } else {
-      message.time = "0";
-    }
-    if (object.totaldata !== undefined && object.totaldata !== null) {
-      message.totaldata = String(object.totaldata);
-    } else {
-      message.totaldata = "0";
-    }
-    return message;
+    return {
+      time: isSet(object.time) ? String(object.time) : "0",
+      totaldata: isSet(object.totaldata) ? String(object.totaldata) : "0",
+    };
   },
 
   toJSON(message: TrackData): unknown {
@@ -3632,23 +2869,19 @@ export const TrackData = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<TrackData>): TrackData {
-    const message = { ...baseTrackData } as TrackData;
-    if (object.time !== undefined && object.time !== null) {
-      message.time = object.time;
-    } else {
-      message.time = "0";
-    }
-    if (object.totaldata !== undefined && object.totaldata !== null) {
-      message.totaldata = object.totaldata;
-    } else {
-      message.totaldata = "0";
-    }
+  fromPartial<I extends Exact<DeepPartial<TrackData>, I>>(
+    object: I
+  ): TrackData {
+    const message = createBaseTrackData();
+    message.time = object.time ?? "0";
+    message.totaldata = object.totaldata ?? "0";
     return message;
   },
 };
 
-const baseUser: object = { token: "", username: "", grouptoken: "" };
+function createBaseUser(): User {
+  return { token: "", username: "", grouptoken: "" };
+}
 
 export const User = {
   encode(message: User, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
@@ -3667,7 +2900,7 @@ export const User = {
   decode(input: _m0.Reader | Uint8Array, length?: number): User {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseUser } as User;
+    const message = createBaseUser();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -3689,23 +2922,11 @@ export const User = {
   },
 
   fromJSON(object: any): User {
-    const message = { ...baseUser } as User;
-    if (object.token !== undefined && object.token !== null) {
-      message.token = String(object.token);
-    } else {
-      message.token = "";
-    }
-    if (object.username !== undefined && object.username !== null) {
-      message.username = String(object.username);
-    } else {
-      message.username = "";
-    }
-    if (object.grouptoken !== undefined && object.grouptoken !== null) {
-      message.grouptoken = String(object.grouptoken);
-    } else {
-      message.grouptoken = "";
-    }
-    return message;
+    return {
+      token: isSet(object.token) ? String(object.token) : "",
+      username: isSet(object.username) ? String(object.username) : "",
+      grouptoken: isSet(object.grouptoken) ? String(object.grouptoken) : "",
+    };
   },
 
   toJSON(message: User): unknown {
@@ -3716,28 +2937,18 @@ export const User = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<User>): User {
-    const message = { ...baseUser } as User;
-    if (object.token !== undefined && object.token !== null) {
-      message.token = object.token;
-    } else {
-      message.token = "";
-    }
-    if (object.username !== undefined && object.username !== null) {
-      message.username = object.username;
-    } else {
-      message.username = "";
-    }
-    if (object.grouptoken !== undefined && object.grouptoken !== null) {
-      message.grouptoken = object.grouptoken;
-    } else {
-      message.grouptoken = "";
-    }
+  fromPartial<I extends Exact<DeepPartial<User>, I>>(object: I): User {
+    const message = createBaseUser();
+    message.token = object.token ?? "";
+    message.username = object.username ?? "";
+    message.grouptoken = object.grouptoken ?? "";
     return message;
   },
 };
 
-const baseVersion: object = { major: "0", minor: "0", build: "0" };
+function createBaseVersion(): Version {
+  return { major: "0", minor: "0", build: "0" };
+}
 
 export const Version = {
   encode(
@@ -3759,7 +2970,7 @@ export const Version = {
   decode(input: _m0.Reader | Uint8Array, length?: number): Version {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseVersion } as Version;
+    const message = createBaseVersion();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -3781,23 +2992,11 @@ export const Version = {
   },
 
   fromJSON(object: any): Version {
-    const message = { ...baseVersion } as Version;
-    if (object.major !== undefined && object.major !== null) {
-      message.major = String(object.major);
-    } else {
-      message.major = "0";
-    }
-    if (object.minor !== undefined && object.minor !== null) {
-      message.minor = String(object.minor);
-    } else {
-      message.minor = "0";
-    }
-    if (object.build !== undefined && object.build !== null) {
-      message.build = String(object.build);
-    } else {
-      message.build = "0";
-    }
-    return message;
+    return {
+      major: isSet(object.major) ? String(object.major) : "0",
+      minor: isSet(object.minor) ? String(object.minor) : "0",
+      build: isSet(object.build) ? String(object.build) : "0",
+    };
   },
 
   toJSON(message: Version): unknown {
@@ -3808,41 +3007,45 @@ export const Version = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<Version>): Version {
-    const message = { ...baseVersion } as Version;
-    if (object.major !== undefined && object.major !== null) {
-      message.major = object.major;
-    } else {
-      message.major = "0";
-    }
-    if (object.minor !== undefined && object.minor !== null) {
-      message.minor = object.minor;
-    } else {
-      message.minor = "0";
-    }
-    if (object.build !== undefined && object.build !== null) {
-      message.build = object.build;
-    } else {
-      message.build = "0";
-    }
+  fromPartial<I extends Exact<DeepPartial<Version>, I>>(object: I): Version {
+    const message = createBaseVersion();
+    message.major = object.major ?? "0";
+    message.minor = object.minor ?? "0";
+    message.build = object.build ?? "0";
     return message;
   },
 };
 
-const baseState: object = {
-  name: "",
-  publickey: "",
-  architecture: "",
-  identifier: "",
-  environmentvariables: "",
-  commandlinevariables: "",
-  locationtime: "0",
-  gpsdevice: "",
-  gpsdevicestate: 0,
-  gpsdevicestatemessage: "",
-  locationretentiontime: "0",
-  openstreetmapbaseuris: "",
-};
+function createBaseState(): State {
+  return {
+    name: "",
+    publickey: "",
+    architecture: "",
+    version: undefined,
+    identifier: "",
+    environmentvariables: [],
+    commandlinevariables: [],
+    onvifusers: [],
+    groups: [],
+    users: [],
+    files: [],
+    receivers: [],
+    recordings: [],
+    serverlogmessages: [],
+    maps: [],
+    mounts: [],
+    locationtime: "0",
+    latitude: undefined,
+    longitude: undefined,
+    locationindices: [],
+    gpsdevice: "",
+    gpsdevicestate: 0,
+    gpsdevicestatemessage: "",
+    locationretentiontime: "0",
+    openstreetmapbaseuris: [],
+    plugins: [],
+  };
+}
 
 export const State = {
   encode(message: State, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
@@ -3936,21 +3139,7 @@ export const State = {
   decode(input: _m0.Reader | Uint8Array, length?: number): State {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseState } as State;
-    message.environmentvariables = [];
-    message.commandlinevariables = [];
-    message.onvifusers = [];
-    message.groups = [];
-    message.users = [];
-    message.files = [];
-    message.receivers = [];
-    message.recordings = [];
-    message.serverlogmessages = [];
-    message.maps = [];
-    message.mounts = [];
-    message.locationindices = [];
-    message.openstreetmapbaseuris = [];
-    message.plugins = [];
+    const message = createBaseState();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -4045,173 +3234,74 @@ export const State = {
   },
 
   fromJSON(object: any): State {
-    const message = { ...baseState } as State;
-    message.environmentvariables = [];
-    message.commandlinevariables = [];
-    message.onvifusers = [];
-    message.groups = [];
-    message.users = [];
-    message.files = [];
-    message.receivers = [];
-    message.recordings = [];
-    message.serverlogmessages = [];
-    message.maps = [];
-    message.mounts = [];
-    message.locationindices = [];
-    message.openstreetmapbaseuris = [];
-    message.plugins = [];
-    if (object.name !== undefined && object.name !== null) {
-      message.name = String(object.name);
-    } else {
-      message.name = "";
-    }
-    if (object.publickey !== undefined && object.publickey !== null) {
-      message.publickey = String(object.publickey);
-    } else {
-      message.publickey = "";
-    }
-    if (object.architecture !== undefined && object.architecture !== null) {
-      message.architecture = String(object.architecture);
-    } else {
-      message.architecture = "";
-    }
-    if (object.version !== undefined && object.version !== null) {
-      message.version = Version.fromJSON(object.version);
-    } else {
-      message.version = undefined;
-    }
-    if (object.identifier !== undefined && object.identifier !== null) {
-      message.identifier = String(object.identifier);
-    } else {
-      message.identifier = "";
-    }
-    if (
-      object.environmentvariables !== undefined &&
-      object.environmentvariables !== null
-    ) {
-      for (const e of object.environmentvariables) {
-        message.environmentvariables.push(String(e));
-      }
-    }
-    if (
-      object.commandlinevariables !== undefined &&
-      object.commandlinevariables !== null
-    ) {
-      for (const e of object.commandlinevariables) {
-        message.commandlinevariables.push(String(e));
-      }
-    }
-    if (object.onvifusers !== undefined && object.onvifusers !== null) {
-      for (const e of object.onvifusers) {
-        message.onvifusers.push(ONVIFUser.fromJSON(e));
-      }
-    }
-    if (object.groups !== undefined && object.groups !== null) {
-      for (const e of object.groups) {
-        message.groups.push(Group.fromJSON(e));
-      }
-    }
-    if (object.users !== undefined && object.users !== null) {
-      for (const e of object.users) {
-        message.users.push(User.fromJSON(e));
-      }
-    }
-    if (object.files !== undefined && object.files !== null) {
-      for (const e of object.files) {
-        message.files.push(File.fromJSON(e));
-      }
-    }
-    if (object.receivers !== undefined && object.receivers !== null) {
-      for (const e of object.receivers) {
-        message.receivers.push(Receiver.fromJSON(e));
-      }
-    }
-    if (object.recordings !== undefined && object.recordings !== null) {
-      for (const e of object.recordings) {
-        message.recordings.push(Recording.fromJSON(e));
-      }
-    }
-    if (
-      object.serverlogmessages !== undefined &&
-      object.serverlogmessages !== null
-    ) {
-      for (const e of object.serverlogmessages) {
-        message.serverlogmessages.push(LogMessage.fromJSON(e));
-      }
-    }
-    if (object.maps !== undefined && object.maps !== null) {
-      for (const e of object.maps) {
-        message.maps.push(Map.fromJSON(e));
-      }
-    }
-    if (object.mounts !== undefined && object.mounts !== null) {
-      for (const e of object.mounts) {
-        message.mounts.push(Mount.fromJSON(e));
-      }
-    }
-    if (object.locationtime !== undefined && object.locationtime !== null) {
-      message.locationtime = String(object.locationtime);
-    } else {
-      message.locationtime = "0";
-    }
-    if (object.latitude !== undefined && object.latitude !== null) {
-      message.latitude = Number(object.latitude);
-    } else {
-      message.latitude = undefined;
-    }
-    if (object.longitude !== undefined && object.longitude !== null) {
-      message.longitude = Number(object.longitude);
-    } else {
-      message.longitude = undefined;
-    }
-    if (
-      object.locationindices !== undefined &&
-      object.locationindices !== null
-    ) {
-      for (const e of object.locationindices) {
-        message.locationindices.push(Index.fromJSON(e));
-      }
-    }
-    if (object.gpsdevice !== undefined && object.gpsdevice !== null) {
-      message.gpsdevice = String(object.gpsdevice);
-    } else {
-      message.gpsdevice = "";
-    }
-    if (object.gpsdevicestate !== undefined && object.gpsdevicestate !== null) {
-      message.gpsdevicestate = gPSDeviceStateFromJSON(object.gpsdevicestate);
-    } else {
-      message.gpsdevicestate = 0;
-    }
-    if (
-      object.gpsdevicestatemessage !== undefined &&
-      object.gpsdevicestatemessage !== null
-    ) {
-      message.gpsdevicestatemessage = String(object.gpsdevicestatemessage);
-    } else {
-      message.gpsdevicestatemessage = "";
-    }
-    if (
-      object.locationretentiontime !== undefined &&
-      object.locationretentiontime !== null
-    ) {
-      message.locationretentiontime = String(object.locationretentiontime);
-    } else {
-      message.locationretentiontime = "0";
-    }
-    if (
-      object.openstreetmapbaseuris !== undefined &&
-      object.openstreetmapbaseuris !== null
-    ) {
-      for (const e of object.openstreetmapbaseuris) {
-        message.openstreetmapbaseuris.push(String(e));
-      }
-    }
-    if (object.plugins !== undefined && object.plugins !== null) {
-      for (const e of object.plugins) {
-        message.plugins.push(Plugin.fromJSON(e));
-      }
-    }
-    return message;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      publickey: isSet(object.publickey) ? String(object.publickey) : "",
+      architecture: isSet(object.architecture)
+        ? String(object.architecture)
+        : "",
+      version: isSet(object.version)
+        ? Version.fromJSON(object.version)
+        : undefined,
+      identifier: isSet(object.identifier) ? String(object.identifier) : "",
+      environmentvariables: Array.isArray(object?.environmentvariables)
+        ? object.environmentvariables.map((e: any) => String(e))
+        : [],
+      commandlinevariables: Array.isArray(object?.commandlinevariables)
+        ? object.commandlinevariables.map((e: any) => String(e))
+        : [],
+      onvifusers: Array.isArray(object?.onvifusers)
+        ? object.onvifusers.map((e: any) => ONVIFUser.fromJSON(e))
+        : [],
+      groups: Array.isArray(object?.groups)
+        ? object.groups.map((e: any) => Group.fromJSON(e))
+        : [],
+      users: Array.isArray(object?.users)
+        ? object.users.map((e: any) => User.fromJSON(e))
+        : [],
+      files: Array.isArray(object?.files)
+        ? object.files.map((e: any) => File.fromJSON(e))
+        : [],
+      receivers: Array.isArray(object?.receivers)
+        ? object.receivers.map((e: any) => Receiver.fromJSON(e))
+        : [],
+      recordings: Array.isArray(object?.recordings)
+        ? object.recordings.map((e: any) => Recording.fromJSON(e))
+        : [],
+      serverlogmessages: Array.isArray(object?.serverlogmessages)
+        ? object.serverlogmessages.map((e: any) => LogMessage.fromJSON(e))
+        : [],
+      maps: Array.isArray(object?.maps)
+        ? object.maps.map((e: any) => Map.fromJSON(e))
+        : [],
+      mounts: Array.isArray(object?.mounts)
+        ? object.mounts.map((e: any) => Mount.fromJSON(e))
+        : [],
+      locationtime: isSet(object.locationtime)
+        ? String(object.locationtime)
+        : "0",
+      latitude: isSet(object.latitude) ? Number(object.latitude) : undefined,
+      longitude: isSet(object.longitude) ? Number(object.longitude) : undefined,
+      locationindices: Array.isArray(object?.locationindices)
+        ? object.locationindices.map((e: any) => Index.fromJSON(e))
+        : [],
+      gpsdevice: isSet(object.gpsdevice) ? String(object.gpsdevice) : "",
+      gpsdevicestate: isSet(object.gpsdevicestate)
+        ? gPSDeviceStateFromJSON(object.gpsdevicestate)
+        : 0,
+      gpsdevicestatemessage: isSet(object.gpsdevicestatemessage)
+        ? String(object.gpsdevicestatemessage)
+        : "",
+      locationretentiontime: isSet(object.locationretentiontime)
+        ? String(object.locationretentiontime)
+        : "0",
+      openstreetmapbaseuris: Array.isArray(object?.openstreetmapbaseuris)
+        ? object.openstreetmapbaseuris.map((e: any) => String(e))
+        : [],
+      plugins: Array.isArray(object?.plugins)
+        ? object.plugins.map((e: any) => Plugin.fromJSON(e))
+        : [],
+    };
   },
 
   toJSON(message: State): unknown {
@@ -4321,178 +3411,52 @@ export const State = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<State>): State {
-    const message = { ...baseState } as State;
-    message.environmentvariables = [];
-    message.commandlinevariables = [];
-    message.onvifusers = [];
-    message.groups = [];
-    message.users = [];
-    message.files = [];
-    message.receivers = [];
-    message.recordings = [];
-    message.serverlogmessages = [];
-    message.maps = [];
-    message.mounts = [];
-    message.locationindices = [];
-    message.openstreetmapbaseuris = [];
-    message.plugins = [];
-    if (object.name !== undefined && object.name !== null) {
-      message.name = object.name;
-    } else {
-      message.name = "";
-    }
-    if (object.publickey !== undefined && object.publickey !== null) {
-      message.publickey = object.publickey;
-    } else {
-      message.publickey = "";
-    }
-    if (object.architecture !== undefined && object.architecture !== null) {
-      message.architecture = object.architecture;
-    } else {
-      message.architecture = "";
-    }
-    if (object.version !== undefined && object.version !== null) {
-      message.version = Version.fromPartial(object.version);
-    } else {
-      message.version = undefined;
-    }
-    if (object.identifier !== undefined && object.identifier !== null) {
-      message.identifier = object.identifier;
-    } else {
-      message.identifier = "";
-    }
-    if (
-      object.environmentvariables !== undefined &&
-      object.environmentvariables !== null
-    ) {
-      for (const e of object.environmentvariables) {
-        message.environmentvariables.push(e);
-      }
-    }
-    if (
-      object.commandlinevariables !== undefined &&
-      object.commandlinevariables !== null
-    ) {
-      for (const e of object.commandlinevariables) {
-        message.commandlinevariables.push(e);
-      }
-    }
-    if (object.onvifusers !== undefined && object.onvifusers !== null) {
-      for (const e of object.onvifusers) {
-        message.onvifusers.push(ONVIFUser.fromPartial(e));
-      }
-    }
-    if (object.groups !== undefined && object.groups !== null) {
-      for (const e of object.groups) {
-        message.groups.push(Group.fromPartial(e));
-      }
-    }
-    if (object.users !== undefined && object.users !== null) {
-      for (const e of object.users) {
-        message.users.push(User.fromPartial(e));
-      }
-    }
-    if (object.files !== undefined && object.files !== null) {
-      for (const e of object.files) {
-        message.files.push(File.fromPartial(e));
-      }
-    }
-    if (object.receivers !== undefined && object.receivers !== null) {
-      for (const e of object.receivers) {
-        message.receivers.push(Receiver.fromPartial(e));
-      }
-    }
-    if (object.recordings !== undefined && object.recordings !== null) {
-      for (const e of object.recordings) {
-        message.recordings.push(Recording.fromPartial(e));
-      }
-    }
-    if (
-      object.serverlogmessages !== undefined &&
-      object.serverlogmessages !== null
-    ) {
-      for (const e of object.serverlogmessages) {
-        message.serverlogmessages.push(LogMessage.fromPartial(e));
-      }
-    }
-    if (object.maps !== undefined && object.maps !== null) {
-      for (const e of object.maps) {
-        message.maps.push(Map.fromPartial(e));
-      }
-    }
-    if (object.mounts !== undefined && object.mounts !== null) {
-      for (const e of object.mounts) {
-        message.mounts.push(Mount.fromPartial(e));
-      }
-    }
-    if (object.locationtime !== undefined && object.locationtime !== null) {
-      message.locationtime = object.locationtime;
-    } else {
-      message.locationtime = "0";
-    }
-    if (object.latitude !== undefined && object.latitude !== null) {
-      message.latitude = object.latitude;
-    } else {
-      message.latitude = undefined;
-    }
-    if (object.longitude !== undefined && object.longitude !== null) {
-      message.longitude = object.longitude;
-    } else {
-      message.longitude = undefined;
-    }
-    if (
-      object.locationindices !== undefined &&
-      object.locationindices !== null
-    ) {
-      for (const e of object.locationindices) {
-        message.locationindices.push(Index.fromPartial(e));
-      }
-    }
-    if (object.gpsdevice !== undefined && object.gpsdevice !== null) {
-      message.gpsdevice = object.gpsdevice;
-    } else {
-      message.gpsdevice = "";
-    }
-    if (object.gpsdevicestate !== undefined && object.gpsdevicestate !== null) {
-      message.gpsdevicestate = object.gpsdevicestate;
-    } else {
-      message.gpsdevicestate = 0;
-    }
-    if (
-      object.gpsdevicestatemessage !== undefined &&
-      object.gpsdevicestatemessage !== null
-    ) {
-      message.gpsdevicestatemessage = object.gpsdevicestatemessage;
-    } else {
-      message.gpsdevicestatemessage = "";
-    }
-    if (
-      object.locationretentiontime !== undefined &&
-      object.locationretentiontime !== null
-    ) {
-      message.locationretentiontime = object.locationretentiontime;
-    } else {
-      message.locationretentiontime = "0";
-    }
-    if (
-      object.openstreetmapbaseuris !== undefined &&
-      object.openstreetmapbaseuris !== null
-    ) {
-      for (const e of object.openstreetmapbaseuris) {
-        message.openstreetmapbaseuris.push(e);
-      }
-    }
-    if (object.plugins !== undefined && object.plugins !== null) {
-      for (const e of object.plugins) {
-        message.plugins.push(Plugin.fromPartial(e));
-      }
-    }
+  fromPartial<I extends Exact<DeepPartial<State>, I>>(object: I): State {
+    const message = createBaseState();
+    message.name = object.name ?? "";
+    message.publickey = object.publickey ?? "";
+    message.architecture = object.architecture ?? "";
+    message.version =
+      object.version !== undefined && object.version !== null
+        ? Version.fromPartial(object.version)
+        : undefined;
+    message.identifier = object.identifier ?? "";
+    message.environmentvariables =
+      object.environmentvariables?.map((e) => e) || [];
+    message.commandlinevariables =
+      object.commandlinevariables?.map((e) => e) || [];
+    message.onvifusers =
+      object.onvifusers?.map((e) => ONVIFUser.fromPartial(e)) || [];
+    message.groups = object.groups?.map((e) => Group.fromPartial(e)) || [];
+    message.users = object.users?.map((e) => User.fromPartial(e)) || [];
+    message.files = object.files?.map((e) => File.fromPartial(e)) || [];
+    message.receivers =
+      object.receivers?.map((e) => Receiver.fromPartial(e)) || [];
+    message.recordings =
+      object.recordings?.map((e) => Recording.fromPartial(e)) || [];
+    message.serverlogmessages =
+      object.serverlogmessages?.map((e) => LogMessage.fromPartial(e)) || [];
+    message.maps = object.maps?.map((e) => Map.fromPartial(e)) || [];
+    message.mounts = object.mounts?.map((e) => Mount.fromPartial(e)) || [];
+    message.locationtime = object.locationtime ?? "0";
+    message.latitude = object.latitude ?? undefined;
+    message.longitude = object.longitude ?? undefined;
+    message.locationindices =
+      object.locationindices?.map((e) => Index.fromPartial(e)) || [];
+    message.gpsdevice = object.gpsdevice ?? "";
+    message.gpsdevicestate = object.gpsdevicestate ?? 0;
+    message.gpsdevicestatemessage = object.gpsdevicestatemessage ?? "";
+    message.locationretentiontime = object.locationretentiontime ?? "0";
+    message.openstreetmapbaseuris =
+      object.openstreetmapbaseuris?.map((e) => e) || [];
+    message.plugins = object.plugins?.map((e) => Plugin.fromPartial(e)) || [];
     return message;
   },
 };
 
-const baseFileAdded: object = {};
+function createBaseFileAdded(): FileAdded {
+  return { file: undefined };
+}
 
 export const FileAdded = {
   encode(
@@ -4508,7 +3472,7 @@ export const FileAdded = {
   decode(input: _m0.Reader | Uint8Array, length?: number): FileAdded {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseFileAdded } as FileAdded;
+    const message = createBaseFileAdded();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -4524,13 +3488,9 @@ export const FileAdded = {
   },
 
   fromJSON(object: any): FileAdded {
-    const message = { ...baseFileAdded } as FileAdded;
-    if (object.file !== undefined && object.file !== null) {
-      message.file = File.fromJSON(object.file);
-    } else {
-      message.file = undefined;
-    }
-    return message;
+    return {
+      file: isSet(object.file) ? File.fromJSON(object.file) : undefined,
+    };
   },
 
   toJSON(message: FileAdded): unknown {
@@ -4540,18 +3500,21 @@ export const FileAdded = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<FileAdded>): FileAdded {
-    const message = { ...baseFileAdded } as FileAdded;
-    if (object.file !== undefined && object.file !== null) {
-      message.file = File.fromPartial(object.file);
-    } else {
-      message.file = undefined;
-    }
+  fromPartial<I extends Exact<DeepPartial<FileAdded>, I>>(
+    object: I
+  ): FileAdded {
+    const message = createBaseFileAdded();
+    message.file =
+      object.file !== undefined && object.file !== null
+        ? File.fromPartial(object.file)
+        : undefined;
     return message;
   },
 };
 
-const baseFileRemoved: object = { token: "" };
+function createBaseFileRemoved(): FileRemoved {
+  return { token: "" };
+}
 
 export const FileRemoved = {
   encode(
@@ -4567,7 +3530,7 @@ export const FileRemoved = {
   decode(input: _m0.Reader | Uint8Array, length?: number): FileRemoved {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseFileRemoved } as FileRemoved;
+    const message = createBaseFileRemoved();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -4583,13 +3546,9 @@ export const FileRemoved = {
   },
 
   fromJSON(object: any): FileRemoved {
-    const message = { ...baseFileRemoved } as FileRemoved;
-    if (object.token !== undefined && object.token !== null) {
-      message.token = String(object.token);
-    } else {
-      message.token = "";
-    }
-    return message;
+    return {
+      token: isSet(object.token) ? String(object.token) : "",
+    };
   },
 
   toJSON(message: FileRemoved): unknown {
@@ -4598,18 +3557,18 @@ export const FileRemoved = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<FileRemoved>): FileRemoved {
-    const message = { ...baseFileRemoved } as FileRemoved;
-    if (object.token !== undefined && object.token !== null) {
-      message.token = object.token;
-    } else {
-      message.token = "";
-    }
+  fromPartial<I extends Exact<DeepPartial<FileRemoved>, I>>(
+    object: I
+  ): FileRemoved {
+    const message = createBaseFileRemoved();
+    message.token = object.token ?? "";
     return message;
   },
 };
 
-const baseFileMonitorStateChanged: object = { token: "", state: 0 };
+function createBaseFileMonitorStateChanged(): FileMonitorStateChanged {
+  return { token: "", state: 0 };
+}
 
 export const FileMonitorStateChanged = {
   encode(
@@ -4631,9 +3590,7 @@ export const FileMonitorStateChanged = {
   ): FileMonitorStateChanged {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseFileMonitorStateChanged,
-    } as FileMonitorStateChanged;
+    const message = createBaseFileMonitorStateChanged();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -4652,20 +3609,10 @@ export const FileMonitorStateChanged = {
   },
 
   fromJSON(object: any): FileMonitorStateChanged {
-    const message = {
-      ...baseFileMonitorStateChanged,
-    } as FileMonitorStateChanged;
-    if (object.token !== undefined && object.token !== null) {
-      message.token = String(object.token);
-    } else {
-      message.token = "";
-    }
-    if (object.state !== undefined && object.state !== null) {
-      message.state = fileMonitorStateFromJSON(object.state);
-    } else {
-      message.state = 0;
-    }
-    return message;
+    return {
+      token: isSet(object.token) ? String(object.token) : "",
+      state: isSet(object.state) ? fileMonitorStateFromJSON(object.state) : 0,
+    };
   },
 
   toJSON(message: FileMonitorStateChanged): unknown {
@@ -4676,27 +3623,19 @@ export const FileMonitorStateChanged = {
     return obj;
   },
 
-  fromPartial(
-    object: DeepPartial<FileMonitorStateChanged>
+  fromPartial<I extends Exact<DeepPartial<FileMonitorStateChanged>, I>>(
+    object: I
   ): FileMonitorStateChanged {
-    const message = {
-      ...baseFileMonitorStateChanged,
-    } as FileMonitorStateChanged;
-    if (object.token !== undefined && object.token !== null) {
-      message.token = object.token;
-    } else {
-      message.token = "";
-    }
-    if (object.state !== undefined && object.state !== null) {
-      message.state = object.state;
-    } else {
-      message.state = 0;
-    }
+    const message = createBaseFileMonitorStateChanged();
+    message.token = object.token ?? "";
+    message.state = object.state ?? 0;
     return message;
   },
 };
 
-const baseFileStateChanged: object = { token: "", state: 0 };
+function createBaseFileStateChanged(): FileStateChanged {
+  return { token: "", state: 0 };
+}
 
 export const FileStateChanged = {
   encode(
@@ -4715,7 +3654,7 @@ export const FileStateChanged = {
   decode(input: _m0.Reader | Uint8Array, length?: number): FileStateChanged {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseFileStateChanged } as FileStateChanged;
+    const message = createBaseFileStateChanged();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -4734,18 +3673,10 @@ export const FileStateChanged = {
   },
 
   fromJSON(object: any): FileStateChanged {
-    const message = { ...baseFileStateChanged } as FileStateChanged;
-    if (object.token !== undefined && object.token !== null) {
-      message.token = String(object.token);
-    } else {
-      message.token = "";
-    }
-    if (object.state !== undefined && object.state !== null) {
-      message.state = fileStateFromJSON(object.state);
-    } else {
-      message.state = 0;
-    }
-    return message;
+    return {
+      token: isSet(object.token) ? String(object.token) : "",
+      state: isSet(object.state) ? fileStateFromJSON(object.state) : 0,
+    };
   },
 
   toJSON(message: FileStateChanged): unknown {
@@ -4755,23 +3686,19 @@ export const FileStateChanged = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<FileStateChanged>): FileStateChanged {
-    const message = { ...baseFileStateChanged } as FileStateChanged;
-    if (object.token !== undefined && object.token !== null) {
-      message.token = object.token;
-    } else {
-      message.token = "";
-    }
-    if (object.state !== undefined && object.state !== null) {
-      message.state = object.state;
-    } else {
-      message.state = 0;
-    }
+  fromPartial<I extends Exact<DeepPartial<FileStateChanged>, I>>(
+    object: I
+  ): FileStateChanged {
+    const message = createBaseFileStateChanged();
+    message.token = object.token ?? "";
+    message.state = object.state ?? 0;
     return message;
   },
 };
 
-const baseGPSDeviceChanged: object = { gpsdevice: "" };
+function createBaseGPSDeviceChanged(): GPSDeviceChanged {
+  return { gpsdevice: "" };
+}
 
 export const GPSDeviceChanged = {
   encode(
@@ -4787,7 +3714,7 @@ export const GPSDeviceChanged = {
   decode(input: _m0.Reader | Uint8Array, length?: number): GPSDeviceChanged {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseGPSDeviceChanged } as GPSDeviceChanged;
+    const message = createBaseGPSDeviceChanged();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -4803,13 +3730,9 @@ export const GPSDeviceChanged = {
   },
 
   fromJSON(object: any): GPSDeviceChanged {
-    const message = { ...baseGPSDeviceChanged } as GPSDeviceChanged;
-    if (object.gpsdevice !== undefined && object.gpsdevice !== null) {
-      message.gpsdevice = String(object.gpsdevice);
-    } else {
-      message.gpsdevice = "";
-    }
-    return message;
+    return {
+      gpsdevice: isSet(object.gpsdevice) ? String(object.gpsdevice) : "",
+    };
   },
 
   toJSON(message: GPSDeviceChanged): unknown {
@@ -4818,18 +3741,18 @@ export const GPSDeviceChanged = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<GPSDeviceChanged>): GPSDeviceChanged {
-    const message = { ...baseGPSDeviceChanged } as GPSDeviceChanged;
-    if (object.gpsdevice !== undefined && object.gpsdevice !== null) {
-      message.gpsdevice = object.gpsdevice;
-    } else {
-      message.gpsdevice = "";
-    }
+  fromPartial<I extends Exact<DeepPartial<GPSDeviceChanged>, I>>(
+    object: I
+  ): GPSDeviceChanged {
+    const message = createBaseGPSDeviceChanged();
+    message.gpsdevice = object.gpsdevice ?? "";
     return message;
   },
 };
 
-const baseGPSDeviceStateChanged: object = { time: "0", state: 0, message: "" };
+function createBaseGPSDeviceStateChanged(): GPSDeviceStateChanged {
+  return { time: "0", state: 0, message: "" };
+}
 
 export const GPSDeviceStateChanged = {
   encode(
@@ -4854,7 +3777,7 @@ export const GPSDeviceStateChanged = {
   ): GPSDeviceStateChanged {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseGPSDeviceStateChanged } as GPSDeviceStateChanged;
+    const message = createBaseGPSDeviceStateChanged();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -4876,23 +3799,11 @@ export const GPSDeviceStateChanged = {
   },
 
   fromJSON(object: any): GPSDeviceStateChanged {
-    const message = { ...baseGPSDeviceStateChanged } as GPSDeviceStateChanged;
-    if (object.time !== undefined && object.time !== null) {
-      message.time = String(object.time);
-    } else {
-      message.time = "0";
-    }
-    if (object.state !== undefined && object.state !== null) {
-      message.state = gPSDeviceStateFromJSON(object.state);
-    } else {
-      message.state = 0;
-    }
-    if (object.message !== undefined && object.message !== null) {
-      message.message = String(object.message);
-    } else {
-      message.message = "";
-    }
-    return message;
+    return {
+      time: isSet(object.time) ? String(object.time) : "0",
+      state: isSet(object.state) ? gPSDeviceStateFromJSON(object.state) : 0,
+      message: isSet(object.message) ? String(object.message) : "",
+    };
   },
 
   toJSON(message: GPSDeviceStateChanged): unknown {
@@ -4904,30 +3815,20 @@ export const GPSDeviceStateChanged = {
     return obj;
   },
 
-  fromPartial(
-    object: DeepPartial<GPSDeviceStateChanged>
+  fromPartial<I extends Exact<DeepPartial<GPSDeviceStateChanged>, I>>(
+    object: I
   ): GPSDeviceStateChanged {
-    const message = { ...baseGPSDeviceStateChanged } as GPSDeviceStateChanged;
-    if (object.time !== undefined && object.time !== null) {
-      message.time = object.time;
-    } else {
-      message.time = "0";
-    }
-    if (object.state !== undefined && object.state !== null) {
-      message.state = object.state;
-    } else {
-      message.state = 0;
-    }
-    if (object.message !== undefined && object.message !== null) {
-      message.message = object.message;
-    } else {
-      message.message = "";
-    }
+    const message = createBaseGPSDeviceStateChanged();
+    message.time = object.time ?? "0";
+    message.state = object.state ?? 0;
+    message.message = object.message ?? "";
     return message;
   },
 };
 
-const baseGroupAdded: object = {};
+function createBaseGroupAdded(): GroupAdded {
+  return { group: undefined };
+}
 
 export const GroupAdded = {
   encode(
@@ -4943,7 +3844,7 @@ export const GroupAdded = {
   decode(input: _m0.Reader | Uint8Array, length?: number): GroupAdded {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseGroupAdded } as GroupAdded;
+    const message = createBaseGroupAdded();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -4959,13 +3860,9 @@ export const GroupAdded = {
   },
 
   fromJSON(object: any): GroupAdded {
-    const message = { ...baseGroupAdded } as GroupAdded;
-    if (object.group !== undefined && object.group !== null) {
-      message.group = Group.fromJSON(object.group);
-    } else {
-      message.group = undefined;
-    }
-    return message;
+    return {
+      group: isSet(object.group) ? Group.fromJSON(object.group) : undefined,
+    };
   },
 
   toJSON(message: GroupAdded): unknown {
@@ -4975,18 +3872,21 @@ export const GroupAdded = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<GroupAdded>): GroupAdded {
-    const message = { ...baseGroupAdded } as GroupAdded;
-    if (object.group !== undefined && object.group !== null) {
-      message.group = Group.fromPartial(object.group);
-    } else {
-      message.group = undefined;
-    }
+  fromPartial<I extends Exact<DeepPartial<GroupAdded>, I>>(
+    object: I
+  ): GroupAdded {
+    const message = createBaseGroupAdded();
+    message.group =
+      object.group !== undefined && object.group !== null
+        ? Group.fromPartial(object.group)
+        : undefined;
     return message;
   },
 };
 
-const baseGroupChanged: object = {};
+function createBaseGroupChanged(): GroupChanged {
+  return { group: undefined };
+}
 
 export const GroupChanged = {
   encode(
@@ -5002,7 +3902,7 @@ export const GroupChanged = {
   decode(input: _m0.Reader | Uint8Array, length?: number): GroupChanged {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseGroupChanged } as GroupChanged;
+    const message = createBaseGroupChanged();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -5018,13 +3918,9 @@ export const GroupChanged = {
   },
 
   fromJSON(object: any): GroupChanged {
-    const message = { ...baseGroupChanged } as GroupChanged;
-    if (object.group !== undefined && object.group !== null) {
-      message.group = Group.fromJSON(object.group);
-    } else {
-      message.group = undefined;
-    }
-    return message;
+    return {
+      group: isSet(object.group) ? Group.fromJSON(object.group) : undefined,
+    };
   },
 
   toJSON(message: GroupChanged): unknown {
@@ -5034,18 +3930,21 @@ export const GroupChanged = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<GroupChanged>): GroupChanged {
-    const message = { ...baseGroupChanged } as GroupChanged;
-    if (object.group !== undefined && object.group !== null) {
-      message.group = Group.fromPartial(object.group);
-    } else {
-      message.group = undefined;
-    }
+  fromPartial<I extends Exact<DeepPartial<GroupChanged>, I>>(
+    object: I
+  ): GroupChanged {
+    const message = createBaseGroupChanged();
+    message.group =
+      object.group !== undefined && object.group !== null
+        ? Group.fromPartial(object.group)
+        : undefined;
     return message;
   },
 };
 
-const baseGroupRemoved: object = { token: "" };
+function createBaseGroupRemoved(): GroupRemoved {
+  return { token: "" };
+}
 
 export const GroupRemoved = {
   encode(
@@ -5061,7 +3960,7 @@ export const GroupRemoved = {
   decode(input: _m0.Reader | Uint8Array, length?: number): GroupRemoved {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseGroupRemoved } as GroupRemoved;
+    const message = createBaseGroupRemoved();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -5077,13 +3976,9 @@ export const GroupRemoved = {
   },
 
   fromJSON(object: any): GroupRemoved {
-    const message = { ...baseGroupRemoved } as GroupRemoved;
-    if (object.token !== undefined && object.token !== null) {
-      message.token = String(object.token);
-    } else {
-      message.token = "";
-    }
-    return message;
+    return {
+      token: isSet(object.token) ? String(object.token) : "",
+    };
   },
 
   toJSON(message: GroupRemoved): unknown {
@@ -5092,18 +3987,18 @@ export const GroupRemoved = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<GroupRemoved>): GroupRemoved {
-    const message = { ...baseGroupRemoved } as GroupRemoved;
-    if (object.token !== undefined && object.token !== null) {
-      message.token = object.token;
-    } else {
-      message.token = "";
-    }
+  fromPartial<I extends Exact<DeepPartial<GroupRemoved>, I>>(
+    object: I
+  ): GroupRemoved {
+    const message = createBaseGroupRemoved();
+    message.token = object.token ?? "";
     return message;
   },
 };
 
-const baseLocationChanged: object = { time: "0" };
+function createBaseLocationChanged(): LocationChanged {
+  return { time: "0", latitude: undefined, longitude: undefined };
+}
 
 export const LocationChanged = {
   encode(
@@ -5131,7 +4026,7 @@ export const LocationChanged = {
   decode(input: _m0.Reader | Uint8Array, length?: number): LocationChanged {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseLocationChanged } as LocationChanged;
+    const message = createBaseLocationChanged();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -5153,23 +4048,11 @@ export const LocationChanged = {
   },
 
   fromJSON(object: any): LocationChanged {
-    const message = { ...baseLocationChanged } as LocationChanged;
-    if (object.time !== undefined && object.time !== null) {
-      message.time = String(object.time);
-    } else {
-      message.time = "0";
-    }
-    if (object.latitude !== undefined && object.latitude !== null) {
-      message.latitude = Number(object.latitude);
-    } else {
-      message.latitude = undefined;
-    }
-    if (object.longitude !== undefined && object.longitude !== null) {
-      message.longitude = Number(object.longitude);
-    } else {
-      message.longitude = undefined;
-    }
-    return message;
+    return {
+      time: isSet(object.time) ? String(object.time) : "0",
+      latitude: isSet(object.latitude) ? Number(object.latitude) : undefined,
+      longitude: isSet(object.longitude) ? Number(object.longitude) : undefined,
+    };
   },
 
   toJSON(message: LocationChanged): unknown {
@@ -5180,28 +4063,20 @@ export const LocationChanged = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<LocationChanged>): LocationChanged {
-    const message = { ...baseLocationChanged } as LocationChanged;
-    if (object.time !== undefined && object.time !== null) {
-      message.time = object.time;
-    } else {
-      message.time = "0";
-    }
-    if (object.latitude !== undefined && object.latitude !== null) {
-      message.latitude = object.latitude;
-    } else {
-      message.latitude = undefined;
-    }
-    if (object.longitude !== undefined && object.longitude !== null) {
-      message.longitude = object.longitude;
-    } else {
-      message.longitude = undefined;
-    }
+  fromPartial<I extends Exact<DeepPartial<LocationChanged>, I>>(
+    object: I
+  ): LocationChanged {
+    const message = createBaseLocationChanged();
+    message.time = object.time ?? "0";
+    message.latitude = object.latitude ?? undefined;
+    message.longitude = object.longitude ?? undefined;
     return message;
   },
 };
 
-const baseLocationRetentionTimeChanged: object = { locationretentiontime: "0" };
+function createBaseLocationRetentionTimeChanged(): LocationRetentionTimeChanged {
+  return { locationretentiontime: "0" };
+}
 
 export const LocationRetentionTimeChanged = {
   encode(
@@ -5220,9 +4095,7 @@ export const LocationRetentionTimeChanged = {
   ): LocationRetentionTimeChanged {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseLocationRetentionTimeChanged,
-    } as LocationRetentionTimeChanged;
+    const message = createBaseLocationRetentionTimeChanged();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -5240,18 +4113,11 @@ export const LocationRetentionTimeChanged = {
   },
 
   fromJSON(object: any): LocationRetentionTimeChanged {
-    const message = {
-      ...baseLocationRetentionTimeChanged,
-    } as LocationRetentionTimeChanged;
-    if (
-      object.locationretentiontime !== undefined &&
-      object.locationretentiontime !== null
-    ) {
-      message.locationretentiontime = String(object.locationretentiontime);
-    } else {
-      message.locationretentiontime = "0";
-    }
-    return message;
+    return {
+      locationretentiontime: isSet(object.locationretentiontime)
+        ? String(object.locationretentiontime)
+        : "0",
+    };
   },
 
   toJSON(message: LocationRetentionTimeChanged): unknown {
@@ -5261,25 +4127,18 @@ export const LocationRetentionTimeChanged = {
     return obj;
   },
 
-  fromPartial(
-    object: DeepPartial<LocationRetentionTimeChanged>
+  fromPartial<I extends Exact<DeepPartial<LocationRetentionTimeChanged>, I>>(
+    object: I
   ): LocationRetentionTimeChanged {
-    const message = {
-      ...baseLocationRetentionTimeChanged,
-    } as LocationRetentionTimeChanged;
-    if (
-      object.locationretentiontime !== undefined &&
-      object.locationretentiontime !== null
-    ) {
-      message.locationretentiontime = object.locationretentiontime;
-    } else {
-      message.locationretentiontime = "0";
-    }
+    const message = createBaseLocationRetentionTimeChanged();
+    message.locationretentiontime = object.locationretentiontime ?? "0";
     return message;
   },
 };
 
-const baseMapAdded: object = {};
+function createBaseMapAdded(): MapAdded {
+  return { map: undefined };
+}
 
 export const MapAdded = {
   encode(
@@ -5295,7 +4154,7 @@ export const MapAdded = {
   decode(input: _m0.Reader | Uint8Array, length?: number): MapAdded {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseMapAdded } as MapAdded;
+    const message = createBaseMapAdded();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -5311,13 +4170,9 @@ export const MapAdded = {
   },
 
   fromJSON(object: any): MapAdded {
-    const message = { ...baseMapAdded } as MapAdded;
-    if (object.map !== undefined && object.map !== null) {
-      message.map = Map.fromJSON(object.map);
-    } else {
-      message.map = undefined;
-    }
-    return message;
+    return {
+      map: isSet(object.map) ? Map.fromJSON(object.map) : undefined,
+    };
   },
 
   toJSON(message: MapAdded): unknown {
@@ -5327,18 +4182,19 @@ export const MapAdded = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<MapAdded>): MapAdded {
-    const message = { ...baseMapAdded } as MapAdded;
-    if (object.map !== undefined && object.map !== null) {
-      message.map = Map.fromPartial(object.map);
-    } else {
-      message.map = undefined;
-    }
+  fromPartial<I extends Exact<DeepPartial<MapAdded>, I>>(object: I): MapAdded {
+    const message = createBaseMapAdded();
+    message.map =
+      object.map !== undefined && object.map !== null
+        ? Map.fromPartial(object.map)
+        : undefined;
     return message;
   },
 };
 
-const baseMapChanged: object = {};
+function createBaseMapChanged(): MapChanged {
+  return { map: undefined };
+}
 
 export const MapChanged = {
   encode(
@@ -5354,7 +4210,7 @@ export const MapChanged = {
   decode(input: _m0.Reader | Uint8Array, length?: number): MapChanged {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseMapChanged } as MapChanged;
+    const message = createBaseMapChanged();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -5370,13 +4226,9 @@ export const MapChanged = {
   },
 
   fromJSON(object: any): MapChanged {
-    const message = { ...baseMapChanged } as MapChanged;
-    if (object.map !== undefined && object.map !== null) {
-      message.map = Map.fromJSON(object.map);
-    } else {
-      message.map = undefined;
-    }
-    return message;
+    return {
+      map: isSet(object.map) ? Map.fromJSON(object.map) : undefined,
+    };
   },
 
   toJSON(message: MapChanged): unknown {
@@ -5386,18 +4238,21 @@ export const MapChanged = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<MapChanged>): MapChanged {
-    const message = { ...baseMapChanged } as MapChanged;
-    if (object.map !== undefined && object.map !== null) {
-      message.map = Map.fromPartial(object.map);
-    } else {
-      message.map = undefined;
-    }
+  fromPartial<I extends Exact<DeepPartial<MapChanged>, I>>(
+    object: I
+  ): MapChanged {
+    const message = createBaseMapChanged();
+    message.map =
+      object.map !== undefined && object.map !== null
+        ? Map.fromPartial(object.map)
+        : undefined;
     return message;
   },
 };
 
-const baseMapRemoved: object = { token: "" };
+function createBaseMapRemoved(): MapRemoved {
+  return { token: "" };
+}
 
 export const MapRemoved = {
   encode(
@@ -5413,7 +4268,7 @@ export const MapRemoved = {
   decode(input: _m0.Reader | Uint8Array, length?: number): MapRemoved {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseMapRemoved } as MapRemoved;
+    const message = createBaseMapRemoved();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -5429,13 +4284,9 @@ export const MapRemoved = {
   },
 
   fromJSON(object: any): MapRemoved {
-    const message = { ...baseMapRemoved } as MapRemoved;
-    if (object.token !== undefined && object.token !== null) {
-      message.token = String(object.token);
-    } else {
-      message.token = "";
-    }
-    return message;
+    return {
+      token: isSet(object.token) ? String(object.token) : "",
+    };
   },
 
   toJSON(message: MapRemoved): unknown {
@@ -5444,18 +4295,18 @@ export const MapRemoved = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<MapRemoved>): MapRemoved {
-    const message = { ...baseMapRemoved } as MapRemoved;
-    if (object.token !== undefined && object.token !== null) {
-      message.token = object.token;
-    } else {
-      message.token = "";
-    }
+  fromPartial<I extends Exact<DeepPartial<MapRemoved>, I>>(
+    object: I
+  ): MapRemoved {
+    const message = createBaseMapRemoved();
+    message.token = object.token ?? "";
     return message;
   },
 };
 
-const baseMountAdded: object = {};
+function createBaseMountAdded(): MountAdded {
+  return { mount: undefined };
+}
 
 export const MountAdded = {
   encode(
@@ -5471,7 +4322,7 @@ export const MountAdded = {
   decode(input: _m0.Reader | Uint8Array, length?: number): MountAdded {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseMountAdded } as MountAdded;
+    const message = createBaseMountAdded();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -5487,13 +4338,9 @@ export const MountAdded = {
   },
 
   fromJSON(object: any): MountAdded {
-    const message = { ...baseMountAdded } as MountAdded;
-    if (object.mount !== undefined && object.mount !== null) {
-      message.mount = Mount.fromJSON(object.mount);
-    } else {
-      message.mount = undefined;
-    }
-    return message;
+    return {
+      mount: isSet(object.mount) ? Mount.fromJSON(object.mount) : undefined,
+    };
   },
 
   toJSON(message: MountAdded): unknown {
@@ -5503,18 +4350,21 @@ export const MountAdded = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<MountAdded>): MountAdded {
-    const message = { ...baseMountAdded } as MountAdded;
-    if (object.mount !== undefined && object.mount !== null) {
-      message.mount = Mount.fromPartial(object.mount);
-    } else {
-      message.mount = undefined;
-    }
+  fromPartial<I extends Exact<DeepPartial<MountAdded>, I>>(
+    object: I
+  ): MountAdded {
+    const message = createBaseMountAdded();
+    message.mount =
+      object.mount !== undefined && object.mount !== null
+        ? Mount.fromPartial(object.mount)
+        : undefined;
     return message;
   },
 };
 
-const baseMountRemoved: object = {};
+function createBaseMountRemoved(): MountRemoved {
+  return { mount: undefined };
+}
 
 export const MountRemoved = {
   encode(
@@ -5530,7 +4380,7 @@ export const MountRemoved = {
   decode(input: _m0.Reader | Uint8Array, length?: number): MountRemoved {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseMountRemoved } as MountRemoved;
+    const message = createBaseMountRemoved();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -5546,13 +4396,9 @@ export const MountRemoved = {
   },
 
   fromJSON(object: any): MountRemoved {
-    const message = { ...baseMountRemoved } as MountRemoved;
-    if (object.mount !== undefined && object.mount !== null) {
-      message.mount = Mount.fromJSON(object.mount);
-    } else {
-      message.mount = undefined;
-    }
-    return message;
+    return {
+      mount: isSet(object.mount) ? Mount.fromJSON(object.mount) : undefined,
+    };
   },
 
   toJSON(message: MountRemoved): unknown {
@@ -5562,18 +4408,21 @@ export const MountRemoved = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<MountRemoved>): MountRemoved {
-    const message = { ...baseMountRemoved } as MountRemoved;
-    if (object.mount !== undefined && object.mount !== null) {
-      message.mount = Mount.fromPartial(object.mount);
-    } else {
-      message.mount = undefined;
-    }
+  fromPartial<I extends Exact<DeepPartial<MountRemoved>, I>>(
+    object: I
+  ): MountRemoved {
+    const message = createBaseMountRemoved();
+    message.mount =
+      object.mount !== undefined && object.mount !== null
+        ? Mount.fromPartial(object.mount)
+        : undefined;
     return message;
   },
 };
 
-const baseNameChanged: object = { name: "" };
+function createBaseNameChanged(): NameChanged {
+  return { name: "" };
+}
 
 export const NameChanged = {
   encode(
@@ -5589,7 +4438,7 @@ export const NameChanged = {
   decode(input: _m0.Reader | Uint8Array, length?: number): NameChanged {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseNameChanged } as NameChanged;
+    const message = createBaseNameChanged();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -5605,13 +4454,9 @@ export const NameChanged = {
   },
 
   fromJSON(object: any): NameChanged {
-    const message = { ...baseNameChanged } as NameChanged;
-    if (object.name !== undefined && object.name !== null) {
-      message.name = String(object.name);
-    } else {
-      message.name = "";
-    }
-    return message;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+    };
   },
 
   toJSON(message: NameChanged): unknown {
@@ -5620,18 +4465,18 @@ export const NameChanged = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<NameChanged>): NameChanged {
-    const message = { ...baseNameChanged } as NameChanged;
-    if (object.name !== undefined && object.name !== null) {
-      message.name = object.name;
-    } else {
-      message.name = "";
-    }
+  fromPartial<I extends Exact<DeepPartial<NameChanged>, I>>(
+    object: I
+  ): NameChanged {
+    const message = createBaseNameChanged();
+    message.name = object.name ?? "";
     return message;
   },
 };
 
-const baseONVIFUserAdded: object = {};
+function createBaseONVIFUserAdded(): ONVIFUserAdded {
+  return { onvifuser: undefined };
+}
 
 export const ONVIFUserAdded = {
   encode(
@@ -5647,7 +4492,7 @@ export const ONVIFUserAdded = {
   decode(input: _m0.Reader | Uint8Array, length?: number): ONVIFUserAdded {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseONVIFUserAdded } as ONVIFUserAdded;
+    const message = createBaseONVIFUserAdded();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -5663,13 +4508,11 @@ export const ONVIFUserAdded = {
   },
 
   fromJSON(object: any): ONVIFUserAdded {
-    const message = { ...baseONVIFUserAdded } as ONVIFUserAdded;
-    if (object.onvifuser !== undefined && object.onvifuser !== null) {
-      message.onvifuser = ONVIFUser.fromJSON(object.onvifuser);
-    } else {
-      message.onvifuser = undefined;
-    }
-    return message;
+    return {
+      onvifuser: isSet(object.onvifuser)
+        ? ONVIFUser.fromJSON(object.onvifuser)
+        : undefined,
+    };
   },
 
   toJSON(message: ONVIFUserAdded): unknown {
@@ -5681,18 +4524,21 @@ export const ONVIFUserAdded = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<ONVIFUserAdded>): ONVIFUserAdded {
-    const message = { ...baseONVIFUserAdded } as ONVIFUserAdded;
-    if (object.onvifuser !== undefined && object.onvifuser !== null) {
-      message.onvifuser = ONVIFUser.fromPartial(object.onvifuser);
-    } else {
-      message.onvifuser = undefined;
-    }
+  fromPartial<I extends Exact<DeepPartial<ONVIFUserAdded>, I>>(
+    object: I
+  ): ONVIFUserAdded {
+    const message = createBaseONVIFUserAdded();
+    message.onvifuser =
+      object.onvifuser !== undefined && object.onvifuser !== null
+        ? ONVIFUser.fromPartial(object.onvifuser)
+        : undefined;
     return message;
   },
 };
 
-const baseONVIFUserChanged: object = {};
+function createBaseONVIFUserChanged(): ONVIFUserChanged {
+  return { onvifuser: undefined };
+}
 
 export const ONVIFUserChanged = {
   encode(
@@ -5708,7 +4554,7 @@ export const ONVIFUserChanged = {
   decode(input: _m0.Reader | Uint8Array, length?: number): ONVIFUserChanged {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseONVIFUserChanged } as ONVIFUserChanged;
+    const message = createBaseONVIFUserChanged();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -5724,13 +4570,11 @@ export const ONVIFUserChanged = {
   },
 
   fromJSON(object: any): ONVIFUserChanged {
-    const message = { ...baseONVIFUserChanged } as ONVIFUserChanged;
-    if (object.onvifuser !== undefined && object.onvifuser !== null) {
-      message.onvifuser = ONVIFUser.fromJSON(object.onvifuser);
-    } else {
-      message.onvifuser = undefined;
-    }
-    return message;
+    return {
+      onvifuser: isSet(object.onvifuser)
+        ? ONVIFUser.fromJSON(object.onvifuser)
+        : undefined,
+    };
   },
 
   toJSON(message: ONVIFUserChanged): unknown {
@@ -5742,18 +4586,21 @@ export const ONVIFUserChanged = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<ONVIFUserChanged>): ONVIFUserChanged {
-    const message = { ...baseONVIFUserChanged } as ONVIFUserChanged;
-    if (object.onvifuser !== undefined && object.onvifuser !== null) {
-      message.onvifuser = ONVIFUser.fromPartial(object.onvifuser);
-    } else {
-      message.onvifuser = undefined;
-    }
+  fromPartial<I extends Exact<DeepPartial<ONVIFUserChanged>, I>>(
+    object: I
+  ): ONVIFUserChanged {
+    const message = createBaseONVIFUserChanged();
+    message.onvifuser =
+      object.onvifuser !== undefined && object.onvifuser !== null
+        ? ONVIFUser.fromPartial(object.onvifuser)
+        : undefined;
     return message;
   },
 };
 
-const baseONVIFUserRemoved: object = { token: "" };
+function createBaseONVIFUserRemoved(): ONVIFUserRemoved {
+  return { token: "" };
+}
 
 export const ONVIFUserRemoved = {
   encode(
@@ -5769,7 +4616,7 @@ export const ONVIFUserRemoved = {
   decode(input: _m0.Reader | Uint8Array, length?: number): ONVIFUserRemoved {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseONVIFUserRemoved } as ONVIFUserRemoved;
+    const message = createBaseONVIFUserRemoved();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -5785,13 +4632,9 @@ export const ONVIFUserRemoved = {
   },
 
   fromJSON(object: any): ONVIFUserRemoved {
-    const message = { ...baseONVIFUserRemoved } as ONVIFUserRemoved;
-    if (object.token !== undefined && object.token !== null) {
-      message.token = String(object.token);
-    } else {
-      message.token = "";
-    }
-    return message;
+    return {
+      token: isSet(object.token) ? String(object.token) : "",
+    };
   },
 
   toJSON(message: ONVIFUserRemoved): unknown {
@@ -5800,18 +4643,18 @@ export const ONVIFUserRemoved = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<ONVIFUserRemoved>): ONVIFUserRemoved {
-    const message = { ...baseONVIFUserRemoved } as ONVIFUserRemoved;
-    if (object.token !== undefined && object.token !== null) {
-      message.token = object.token;
-    } else {
-      message.token = "";
-    }
+  fromPartial<I extends Exact<DeepPartial<ONVIFUserRemoved>, I>>(
+    object: I
+  ): ONVIFUserRemoved {
+    const message = createBaseONVIFUserRemoved();
+    message.token = object.token ?? "";
     return message;
   },
 };
 
-const baseOpenStreetMapBaseUrisChanged: object = { openstreetmapbaseuris: "" };
+function createBaseOpenStreetMapBaseUrisChanged(): OpenStreetMapBaseUrisChanged {
+  return { openstreetmapbaseuris: [] };
+}
 
 export const OpenStreetMapBaseUrisChanged = {
   encode(
@@ -5830,10 +4673,7 @@ export const OpenStreetMapBaseUrisChanged = {
   ): OpenStreetMapBaseUrisChanged {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseOpenStreetMapBaseUrisChanged,
-    } as OpenStreetMapBaseUrisChanged;
-    message.openstreetmapbaseuris = [];
+    const message = createBaseOpenStreetMapBaseUrisChanged();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -5849,19 +4689,11 @@ export const OpenStreetMapBaseUrisChanged = {
   },
 
   fromJSON(object: any): OpenStreetMapBaseUrisChanged {
-    const message = {
-      ...baseOpenStreetMapBaseUrisChanged,
-    } as OpenStreetMapBaseUrisChanged;
-    message.openstreetmapbaseuris = [];
-    if (
-      object.openstreetmapbaseuris !== undefined &&
-      object.openstreetmapbaseuris !== null
-    ) {
-      for (const e of object.openstreetmapbaseuris) {
-        message.openstreetmapbaseuris.push(String(e));
-      }
-    }
-    return message;
+    return {
+      openstreetmapbaseuris: Array.isArray(object?.openstreetmapbaseuris)
+        ? object.openstreetmapbaseuris.map((e: any) => String(e))
+        : [],
+    };
   },
 
   toJSON(message: OpenStreetMapBaseUrisChanged): unknown {
@@ -5874,26 +4706,19 @@ export const OpenStreetMapBaseUrisChanged = {
     return obj;
   },
 
-  fromPartial(
-    object: DeepPartial<OpenStreetMapBaseUrisChanged>
+  fromPartial<I extends Exact<DeepPartial<OpenStreetMapBaseUrisChanged>, I>>(
+    object: I
   ): OpenStreetMapBaseUrisChanged {
-    const message = {
-      ...baseOpenStreetMapBaseUrisChanged,
-    } as OpenStreetMapBaseUrisChanged;
-    message.openstreetmapbaseuris = [];
-    if (
-      object.openstreetmapbaseuris !== undefined &&
-      object.openstreetmapbaseuris !== null
-    ) {
-      for (const e of object.openstreetmapbaseuris) {
-        message.openstreetmapbaseuris.push(e);
-      }
-    }
+    const message = createBaseOpenStreetMapBaseUrisChanged();
+    message.openstreetmapbaseuris =
+      object.openstreetmapbaseuris?.map((e) => e) || [];
     return message;
   },
 };
 
-const basePluginAdded: object = {};
+function createBasePluginAdded(): PluginAdded {
+  return { plugin: undefined };
+}
 
 export const PluginAdded = {
   encode(
@@ -5909,7 +4734,7 @@ export const PluginAdded = {
   decode(input: _m0.Reader | Uint8Array, length?: number): PluginAdded {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...basePluginAdded } as PluginAdded;
+    const message = createBasePluginAdded();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -5925,13 +4750,9 @@ export const PluginAdded = {
   },
 
   fromJSON(object: any): PluginAdded {
-    const message = { ...basePluginAdded } as PluginAdded;
-    if (object.plugin !== undefined && object.plugin !== null) {
-      message.plugin = Plugin.fromJSON(object.plugin);
-    } else {
-      message.plugin = undefined;
-    }
-    return message;
+    return {
+      plugin: isSet(object.plugin) ? Plugin.fromJSON(object.plugin) : undefined,
+    };
   },
 
   toJSON(message: PluginAdded): unknown {
@@ -5941,25 +4762,28 @@ export const PluginAdded = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<PluginAdded>): PluginAdded {
-    const message = { ...basePluginAdded } as PluginAdded;
-    if (object.plugin !== undefined && object.plugin !== null) {
-      message.plugin = Plugin.fromPartial(object.plugin);
-    } else {
-      message.plugin = undefined;
-    }
+  fromPartial<I extends Exact<DeepPartial<PluginAdded>, I>>(
+    object: I
+  ): PluginAdded {
+    const message = createBasePluginAdded();
+    message.plugin =
+      object.plugin !== undefined && object.plugin !== null
+        ? Plugin.fromPartial(object.plugin)
+        : undefined;
     return message;
   },
 };
 
-const basePluginChanged: object = {
-  token: "",
-  enabled: false,
-  parameters: "",
-  priority: "0",
-  state: 0,
-  statemessage: "",
-};
+function createBasePluginChanged(): PluginChanged {
+  return {
+    token: "",
+    enabled: false,
+    parameters: "",
+    priority: "0",
+    state: 0,
+    statemessage: "",
+  };
+}
 
 export const PluginChanged = {
   encode(
@@ -5990,7 +4814,7 @@ export const PluginChanged = {
   decode(input: _m0.Reader | Uint8Array, length?: number): PluginChanged {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...basePluginChanged } as PluginChanged;
+    const message = createBasePluginChanged();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -6021,38 +4845,16 @@ export const PluginChanged = {
   },
 
   fromJSON(object: any): PluginChanged {
-    const message = { ...basePluginChanged } as PluginChanged;
-    if (object.token !== undefined && object.token !== null) {
-      message.token = String(object.token);
-    } else {
-      message.token = "";
-    }
-    if (object.enabled !== undefined && object.enabled !== null) {
-      message.enabled = Boolean(object.enabled);
-    } else {
-      message.enabled = false;
-    }
-    if (object.parameters !== undefined && object.parameters !== null) {
-      message.parameters = String(object.parameters);
-    } else {
-      message.parameters = "";
-    }
-    if (object.priority !== undefined && object.priority !== null) {
-      message.priority = String(object.priority);
-    } else {
-      message.priority = "0";
-    }
-    if (object.state !== undefined && object.state !== null) {
-      message.state = pluginStateFromJSON(object.state);
-    } else {
-      message.state = 0;
-    }
-    if (object.statemessage !== undefined && object.statemessage !== null) {
-      message.statemessage = String(object.statemessage);
-    } else {
-      message.statemessage = "";
-    }
-    return message;
+    return {
+      token: isSet(object.token) ? String(object.token) : "",
+      enabled: isSet(object.enabled) ? Boolean(object.enabled) : false,
+      parameters: isSet(object.parameters) ? String(object.parameters) : "",
+      priority: isSet(object.priority) ? String(object.priority) : "0",
+      state: isSet(object.state) ? pluginStateFromJSON(object.state) : 0,
+      statemessage: isSet(object.statemessage)
+        ? String(object.statemessage)
+        : "",
+    };
   },
 
   toJSON(message: PluginChanged): unknown {
@@ -6068,43 +4870,23 @@ export const PluginChanged = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<PluginChanged>): PluginChanged {
-    const message = { ...basePluginChanged } as PluginChanged;
-    if (object.token !== undefined && object.token !== null) {
-      message.token = object.token;
-    } else {
-      message.token = "";
-    }
-    if (object.enabled !== undefined && object.enabled !== null) {
-      message.enabled = object.enabled;
-    } else {
-      message.enabled = false;
-    }
-    if (object.parameters !== undefined && object.parameters !== null) {
-      message.parameters = object.parameters;
-    } else {
-      message.parameters = "";
-    }
-    if (object.priority !== undefined && object.priority !== null) {
-      message.priority = object.priority;
-    } else {
-      message.priority = "0";
-    }
-    if (object.state !== undefined && object.state !== null) {
-      message.state = object.state;
-    } else {
-      message.state = 0;
-    }
-    if (object.statemessage !== undefined && object.statemessage !== null) {
-      message.statemessage = object.statemessage;
-    } else {
-      message.statemessage = "";
-    }
+  fromPartial<I extends Exact<DeepPartial<PluginChanged>, I>>(
+    object: I
+  ): PluginChanged {
+    const message = createBasePluginChanged();
+    message.token = object.token ?? "";
+    message.enabled = object.enabled ?? false;
+    message.parameters = object.parameters ?? "";
+    message.priority = object.priority ?? "0";
+    message.state = object.state ?? 0;
+    message.statemessage = object.statemessage ?? "";
     return message;
   },
 };
 
-const basePluginRemoved: object = { token: "" };
+function createBasePluginRemoved(): PluginRemoved {
+  return { token: "" };
+}
 
 export const PluginRemoved = {
   encode(
@@ -6120,7 +4902,7 @@ export const PluginRemoved = {
   decode(input: _m0.Reader | Uint8Array, length?: number): PluginRemoved {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...basePluginRemoved } as PluginRemoved;
+    const message = createBasePluginRemoved();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -6136,13 +4918,9 @@ export const PluginRemoved = {
   },
 
   fromJSON(object: any): PluginRemoved {
-    const message = { ...basePluginRemoved } as PluginRemoved;
-    if (object.token !== undefined && object.token !== null) {
-      message.token = String(object.token);
-    } else {
-      message.token = "";
-    }
-    return message;
+    return {
+      token: isSet(object.token) ? String(object.token) : "",
+    };
   },
 
   toJSON(message: PluginRemoved): unknown {
@@ -6151,18 +4929,18 @@ export const PluginRemoved = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<PluginRemoved>): PluginRemoved {
-    const message = { ...basePluginRemoved } as PluginRemoved;
-    if (object.token !== undefined && object.token !== null) {
-      message.token = object.token;
-    } else {
-      message.token = "";
-    }
+  fromPartial<I extends Exact<DeepPartial<PluginRemoved>, I>>(
+    object: I
+  ): PluginRemoved {
+    const message = createBasePluginRemoved();
+    message.token = object.token ?? "";
     return message;
   },
 };
 
-const basePluginStateChanged: object = { token: "", state: 0, message: "" };
+function createBasePluginStateChanged(): PluginStateChanged {
+  return { token: "", state: 0, message: "" };
+}
 
 export const PluginStateChanged = {
   encode(
@@ -6184,7 +4962,7 @@ export const PluginStateChanged = {
   decode(input: _m0.Reader | Uint8Array, length?: number): PluginStateChanged {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...basePluginStateChanged } as PluginStateChanged;
+    const message = createBasePluginStateChanged();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -6206,23 +4984,11 @@ export const PluginStateChanged = {
   },
 
   fromJSON(object: any): PluginStateChanged {
-    const message = { ...basePluginStateChanged } as PluginStateChanged;
-    if (object.token !== undefined && object.token !== null) {
-      message.token = String(object.token);
-    } else {
-      message.token = "";
-    }
-    if (object.state !== undefined && object.state !== null) {
-      message.state = pluginStateFromJSON(object.state);
-    } else {
-      message.state = 0;
-    }
-    if (object.message !== undefined && object.message !== null) {
-      message.message = String(object.message);
-    } else {
-      message.message = "";
-    }
-    return message;
+    return {
+      token: isSet(object.token) ? String(object.token) : "",
+      state: isSet(object.state) ? pluginStateFromJSON(object.state) : 0,
+      message: isSet(object.message) ? String(object.message) : "",
+    };
   },
 
   toJSON(message: PluginStateChanged): unknown {
@@ -6234,28 +5000,20 @@ export const PluginStateChanged = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<PluginStateChanged>): PluginStateChanged {
-    const message = { ...basePluginStateChanged } as PluginStateChanged;
-    if (object.token !== undefined && object.token !== null) {
-      message.token = object.token;
-    } else {
-      message.token = "";
-    }
-    if (object.state !== undefined && object.state !== null) {
-      message.state = object.state;
-    } else {
-      message.state = 0;
-    }
-    if (object.message !== undefined && object.message !== null) {
-      message.message = object.message;
-    } else {
-      message.message = "";
-    }
+  fromPartial<I extends Exact<DeepPartial<PluginStateChanged>, I>>(
+    object: I
+  ): PluginStateChanged {
+    const message = createBasePluginStateChanged();
+    message.token = object.token ?? "";
+    message.state = object.state ?? 0;
+    message.message = object.message ?? "";
     return message;
   },
 };
 
-const baseReceiverAdded: object = {};
+function createBaseReceiverAdded(): ReceiverAdded {
+  return { receiver: undefined };
+}
 
 export const ReceiverAdded = {
   encode(
@@ -6271,7 +5029,7 @@ export const ReceiverAdded = {
   decode(input: _m0.Reader | Uint8Array, length?: number): ReceiverAdded {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseReceiverAdded } as ReceiverAdded;
+    const message = createBaseReceiverAdded();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -6287,13 +5045,11 @@ export const ReceiverAdded = {
   },
 
   fromJSON(object: any): ReceiverAdded {
-    const message = { ...baseReceiverAdded } as ReceiverAdded;
-    if (object.receiver !== undefined && object.receiver !== null) {
-      message.receiver = Receiver.fromJSON(object.receiver);
-    } else {
-      message.receiver = undefined;
-    }
-    return message;
+    return {
+      receiver: isSet(object.receiver)
+        ? Receiver.fromJSON(object.receiver)
+        : undefined,
+    };
   },
 
   toJSON(message: ReceiverAdded): unknown {
@@ -6305,18 +5061,21 @@ export const ReceiverAdded = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<ReceiverAdded>): ReceiverAdded {
-    const message = { ...baseReceiverAdded } as ReceiverAdded;
-    if (object.receiver !== undefined && object.receiver !== null) {
-      message.receiver = Receiver.fromPartial(object.receiver);
-    } else {
-      message.receiver = undefined;
-    }
+  fromPartial<I extends Exact<DeepPartial<ReceiverAdded>, I>>(
+    object: I
+  ): ReceiverAdded {
+    const message = createBaseReceiverAdded();
+    message.receiver =
+      object.receiver !== undefined && object.receiver !== null
+        ? Receiver.fromPartial(object.receiver)
+        : undefined;
     return message;
   },
 };
 
-const baseReceiverChanged: object = {};
+function createBaseReceiverChanged(): ReceiverChanged {
+  return { receiver: undefined };
+}
 
 export const ReceiverChanged = {
   encode(
@@ -6332,7 +5091,7 @@ export const ReceiverChanged = {
   decode(input: _m0.Reader | Uint8Array, length?: number): ReceiverChanged {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseReceiverChanged } as ReceiverChanged;
+    const message = createBaseReceiverChanged();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -6348,13 +5107,11 @@ export const ReceiverChanged = {
   },
 
   fromJSON(object: any): ReceiverChanged {
-    const message = { ...baseReceiverChanged } as ReceiverChanged;
-    if (object.receiver !== undefined && object.receiver !== null) {
-      message.receiver = Receiver.fromJSON(object.receiver);
-    } else {
-      message.receiver = undefined;
-    }
-    return message;
+    return {
+      receiver: isSet(object.receiver)
+        ? Receiver.fromJSON(object.receiver)
+        : undefined,
+    };
   },
 
   toJSON(message: ReceiverChanged): unknown {
@@ -6366,18 +5123,21 @@ export const ReceiverChanged = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<ReceiverChanged>): ReceiverChanged {
-    const message = { ...baseReceiverChanged } as ReceiverChanged;
-    if (object.receiver !== undefined && object.receiver !== null) {
-      message.receiver = Receiver.fromPartial(object.receiver);
-    } else {
-      message.receiver = undefined;
-    }
+  fromPartial<I extends Exact<DeepPartial<ReceiverChanged>, I>>(
+    object: I
+  ): ReceiverChanged {
+    const message = createBaseReceiverChanged();
+    message.receiver =
+      object.receiver !== undefined && object.receiver !== null
+        ? Receiver.fromPartial(object.receiver)
+        : undefined;
     return message;
   },
 };
 
-const baseReceiverRemoved: object = { token: "" };
+function createBaseReceiverRemoved(): ReceiverRemoved {
+  return { token: "" };
+}
 
 export const ReceiverRemoved = {
   encode(
@@ -6393,7 +5153,7 @@ export const ReceiverRemoved = {
   decode(input: _m0.Reader | Uint8Array, length?: number): ReceiverRemoved {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseReceiverRemoved } as ReceiverRemoved;
+    const message = createBaseReceiverRemoved();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -6409,13 +5169,9 @@ export const ReceiverRemoved = {
   },
 
   fromJSON(object: any): ReceiverRemoved {
-    const message = { ...baseReceiverRemoved } as ReceiverRemoved;
-    if (object.token !== undefined && object.token !== null) {
-      message.token = String(object.token);
-    } else {
-      message.token = "";
-    }
-    return message;
+    return {
+      token: isSet(object.token) ? String(object.token) : "",
+    };
   },
 
   toJSON(message: ReceiverRemoved): unknown {
@@ -6424,18 +5180,18 @@ export const ReceiverRemoved = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<ReceiverRemoved>): ReceiverRemoved {
-    const message = { ...baseReceiverRemoved } as ReceiverRemoved;
-    if (object.token !== undefined && object.token !== null) {
-      message.token = object.token;
-    } else {
-      message.token = "";
-    }
+  fromPartial<I extends Exact<DeepPartial<ReceiverRemoved>, I>>(
+    object: I
+  ): ReceiverRemoved {
+    const message = createBaseReceiverRemoved();
+    message.token = object.token ?? "";
     return message;
   },
 };
 
-const baseRecordingJobSourceAdded: object = {};
+function createBaseRecordingJobSourceAdded(): RecordingJobSourceAdded {
+  return { source: undefined };
+}
 
 export const RecordingJobSourceAdded = {
   encode(
@@ -6457,9 +5213,7 @@ export const RecordingJobSourceAdded = {
   ): RecordingJobSourceAdded {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseRecordingJobSourceAdded,
-    } as RecordingJobSourceAdded;
+    const message = createBaseRecordingJobSourceAdded();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -6475,15 +5229,11 @@ export const RecordingJobSourceAdded = {
   },
 
   fromJSON(object: any): RecordingJobSourceAdded {
-    const message = {
-      ...baseRecordingJobSourceAdded,
-    } as RecordingJobSourceAdded;
-    if (object.source !== undefined && object.source !== null) {
-      message.source = RecordingJobSource.fromJSON(object.source);
-    } else {
-      message.source = undefined;
-    }
-    return message;
+    return {
+      source: isSet(object.source)
+        ? RecordingJobSource.fromJSON(object.source)
+        : undefined,
+    };
   },
 
   toJSON(message: RecordingJobSourceAdded): unknown {
@@ -6495,26 +5245,25 @@ export const RecordingJobSourceAdded = {
     return obj;
   },
 
-  fromPartial(
-    object: DeepPartial<RecordingJobSourceAdded>
+  fromPartial<I extends Exact<DeepPartial<RecordingJobSourceAdded>, I>>(
+    object: I
   ): RecordingJobSourceAdded {
-    const message = {
-      ...baseRecordingJobSourceAdded,
-    } as RecordingJobSourceAdded;
-    if (object.source !== undefined && object.source !== null) {
-      message.source = RecordingJobSource.fromPartial(object.source);
-    } else {
-      message.source = undefined;
-    }
+    const message = createBaseRecordingJobSourceAdded();
+    message.source =
+      object.source !== undefined && object.source !== null
+        ? RecordingJobSource.fromPartial(object.source)
+        : undefined;
     return message;
   },
 };
 
-const baseRecordingJobSourceRemoved: object = {
-  recordingtoken: "",
-  recordingjobtoken: "",
-  recordingjobsourcetoken: "",
-};
+function createBaseRecordingJobSourceRemoved(): RecordingJobSourceRemoved {
+  return {
+    recordingtoken: "",
+    recordingjobtoken: "",
+    recordingjobsourcetoken: "",
+  };
+}
 
 export const RecordingJobSourceRemoved = {
   encode(
@@ -6539,9 +5288,7 @@ export const RecordingJobSourceRemoved = {
   ): RecordingJobSourceRemoved {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseRecordingJobSourceRemoved,
-    } as RecordingJobSourceRemoved;
+    const message = createBaseRecordingJobSourceRemoved();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -6563,31 +5310,17 @@ export const RecordingJobSourceRemoved = {
   },
 
   fromJSON(object: any): RecordingJobSourceRemoved {
-    const message = {
-      ...baseRecordingJobSourceRemoved,
-    } as RecordingJobSourceRemoved;
-    if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
-      message.recordingtoken = String(object.recordingtoken);
-    } else {
-      message.recordingtoken = "";
-    }
-    if (
-      object.recordingjobtoken !== undefined &&
-      object.recordingjobtoken !== null
-    ) {
-      message.recordingjobtoken = String(object.recordingjobtoken);
-    } else {
-      message.recordingjobtoken = "";
-    }
-    if (
-      object.recordingjobsourcetoken !== undefined &&
-      object.recordingjobsourcetoken !== null
-    ) {
-      message.recordingjobsourcetoken = String(object.recordingjobsourcetoken);
-    } else {
-      message.recordingjobsourcetoken = "";
-    }
-    return message;
+    return {
+      recordingtoken: isSet(object.recordingtoken)
+        ? String(object.recordingtoken)
+        : "",
+      recordingjobtoken: isSet(object.recordingjobtoken)
+        ? String(object.recordingjobtoken)
+        : "",
+      recordingjobsourcetoken: isSet(object.recordingjobsourcetoken)
+        ? String(object.recordingjobsourcetoken)
+        : "",
+    };
   },
 
   toJSON(message: RecordingJobSourceRemoved): unknown {
@@ -6601,38 +5334,20 @@ export const RecordingJobSourceRemoved = {
     return obj;
   },
 
-  fromPartial(
-    object: DeepPartial<RecordingJobSourceRemoved>
+  fromPartial<I extends Exact<DeepPartial<RecordingJobSourceRemoved>, I>>(
+    object: I
   ): RecordingJobSourceRemoved {
-    const message = {
-      ...baseRecordingJobSourceRemoved,
-    } as RecordingJobSourceRemoved;
-    if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
-      message.recordingtoken = object.recordingtoken;
-    } else {
-      message.recordingtoken = "";
-    }
-    if (
-      object.recordingjobtoken !== undefined &&
-      object.recordingjobtoken !== null
-    ) {
-      message.recordingjobtoken = object.recordingjobtoken;
-    } else {
-      message.recordingjobtoken = "";
-    }
-    if (
-      object.recordingjobsourcetoken !== undefined &&
-      object.recordingjobsourcetoken !== null
-    ) {
-      message.recordingjobsourcetoken = object.recordingjobsourcetoken;
-    } else {
-      message.recordingjobsourcetoken = "";
-    }
+    const message = createBaseRecordingJobSourceRemoved();
+    message.recordingtoken = object.recordingtoken ?? "";
+    message.recordingjobtoken = object.recordingjobtoken ?? "";
+    message.recordingjobsourcetoken = object.recordingjobsourcetoken ?? "";
     return message;
   },
 };
 
-const baseRecordingJobSourceTrackAdded: object = {};
+function createBaseRecordingJobSourceTrackAdded(): RecordingJobSourceTrackAdded {
+  return { track: undefined };
+}
 
 export const RecordingJobSourceTrackAdded = {
   encode(
@@ -6654,9 +5369,7 @@ export const RecordingJobSourceTrackAdded = {
   ): RecordingJobSourceTrackAdded {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseRecordingJobSourceTrackAdded,
-    } as RecordingJobSourceTrackAdded;
+    const message = createBaseRecordingJobSourceTrackAdded();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -6675,15 +5388,11 @@ export const RecordingJobSourceTrackAdded = {
   },
 
   fromJSON(object: any): RecordingJobSourceTrackAdded {
-    const message = {
-      ...baseRecordingJobSourceTrackAdded,
-    } as RecordingJobSourceTrackAdded;
-    if (object.track !== undefined && object.track !== null) {
-      message.track = RecordingJobSourceTrack.fromJSON(object.track);
-    } else {
-      message.track = undefined;
-    }
-    return message;
+    return {
+      track: isSet(object.track)
+        ? RecordingJobSourceTrack.fromJSON(object.track)
+        : undefined,
+    };
   },
 
   toJSON(message: RecordingJobSourceTrackAdded): unknown {
@@ -6695,27 +5404,26 @@ export const RecordingJobSourceTrackAdded = {
     return obj;
   },
 
-  fromPartial(
-    object: DeepPartial<RecordingJobSourceTrackAdded>
+  fromPartial<I extends Exact<DeepPartial<RecordingJobSourceTrackAdded>, I>>(
+    object: I
   ): RecordingJobSourceTrackAdded {
-    const message = {
-      ...baseRecordingJobSourceTrackAdded,
-    } as RecordingJobSourceTrackAdded;
-    if (object.track !== undefined && object.track !== null) {
-      message.track = RecordingJobSourceTrack.fromPartial(object.track);
-    } else {
-      message.track = undefined;
-    }
+    const message = createBaseRecordingJobSourceTrackAdded();
+    message.track =
+      object.track !== undefined && object.track !== null
+        ? RecordingJobSourceTrack.fromPartial(object.track)
+        : undefined;
     return message;
   },
 };
 
-const baseRecordingJobSourceTrackRemoved: object = {
-  recordingtoken: "",
-  recordingjobtoken: "",
-  recordingjobsourcetoken: "",
-  recordingjobsourcetracktoken: "",
-};
+function createBaseRecordingJobSourceTrackRemoved(): RecordingJobSourceTrackRemoved {
+  return {
+    recordingtoken: "",
+    recordingjobtoken: "",
+    recordingjobsourcetoken: "",
+    recordingjobsourcetracktoken: "",
+  };
+}
 
 export const RecordingJobSourceTrackRemoved = {
   encode(
@@ -6743,9 +5451,7 @@ export const RecordingJobSourceTrackRemoved = {
   ): RecordingJobSourceTrackRemoved {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseRecordingJobSourceTrackRemoved,
-    } as RecordingJobSourceTrackRemoved;
+    const message = createBaseRecordingJobSourceTrackRemoved();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -6770,41 +5476,20 @@ export const RecordingJobSourceTrackRemoved = {
   },
 
   fromJSON(object: any): RecordingJobSourceTrackRemoved {
-    const message = {
-      ...baseRecordingJobSourceTrackRemoved,
-    } as RecordingJobSourceTrackRemoved;
-    if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
-      message.recordingtoken = String(object.recordingtoken);
-    } else {
-      message.recordingtoken = "";
-    }
-    if (
-      object.recordingjobtoken !== undefined &&
-      object.recordingjobtoken !== null
-    ) {
-      message.recordingjobtoken = String(object.recordingjobtoken);
-    } else {
-      message.recordingjobtoken = "";
-    }
-    if (
-      object.recordingjobsourcetoken !== undefined &&
-      object.recordingjobsourcetoken !== null
-    ) {
-      message.recordingjobsourcetoken = String(object.recordingjobsourcetoken);
-    } else {
-      message.recordingjobsourcetoken = "";
-    }
-    if (
-      object.recordingjobsourcetracktoken !== undefined &&
-      object.recordingjobsourcetracktoken !== null
-    ) {
-      message.recordingjobsourcetracktoken = String(
-        object.recordingjobsourcetracktoken
-      );
-    } else {
-      message.recordingjobsourcetracktoken = "";
-    }
-    return message;
+    return {
+      recordingtoken: isSet(object.recordingtoken)
+        ? String(object.recordingtoken)
+        : "",
+      recordingjobtoken: isSet(object.recordingjobtoken)
+        ? String(object.recordingjobtoken)
+        : "",
+      recordingjobsourcetoken: isSet(object.recordingjobsourcetoken)
+        ? String(object.recordingjobsourcetoken)
+        : "",
+      recordingjobsourcetracktoken: isSet(object.recordingjobsourcetracktoken)
+        ? String(object.recordingjobsourcetracktoken)
+        : "",
+    };
   },
 
   toJSON(message: RecordingJobSourceTrackRemoved): unknown {
@@ -6820,47 +5505,22 @@ export const RecordingJobSourceTrackRemoved = {
     return obj;
   },
 
-  fromPartial(
-    object: DeepPartial<RecordingJobSourceTrackRemoved>
+  fromPartial<I extends Exact<DeepPartial<RecordingJobSourceTrackRemoved>, I>>(
+    object: I
   ): RecordingJobSourceTrackRemoved {
-    const message = {
-      ...baseRecordingJobSourceTrackRemoved,
-    } as RecordingJobSourceTrackRemoved;
-    if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
-      message.recordingtoken = object.recordingtoken;
-    } else {
-      message.recordingtoken = "";
-    }
-    if (
-      object.recordingjobtoken !== undefined &&
-      object.recordingjobtoken !== null
-    ) {
-      message.recordingjobtoken = object.recordingjobtoken;
-    } else {
-      message.recordingjobtoken = "";
-    }
-    if (
-      object.recordingjobsourcetoken !== undefined &&
-      object.recordingjobsourcetoken !== null
-    ) {
-      message.recordingjobsourcetoken = object.recordingjobsourcetoken;
-    } else {
-      message.recordingjobsourcetoken = "";
-    }
-    if (
-      object.recordingjobsourcetracktoken !== undefined &&
-      object.recordingjobsourcetracktoken !== null
-    ) {
-      message.recordingjobsourcetracktoken =
-        object.recordingjobsourcetracktoken;
-    } else {
-      message.recordingjobsourcetracktoken = "";
-    }
+    const message = createBaseRecordingJobSourceTrackRemoved();
+    message.recordingtoken = object.recordingtoken ?? "";
+    message.recordingjobtoken = object.recordingjobtoken ?? "";
+    message.recordingjobsourcetoken = object.recordingjobsourcetoken ?? "";
+    message.recordingjobsourcetracktoken =
+      object.recordingjobsourcetracktoken ?? "";
     return message;
   },
 };
 
-const baseRecordingLogMessage: object = { token: "" };
+function createBaseRecordingLogMessage(): RecordingLogMessage {
+  return { token: "", logmessage: undefined };
+}
 
 export const RecordingLogMessage = {
   encode(
@@ -6879,7 +5539,7 @@ export const RecordingLogMessage = {
   decode(input: _m0.Reader | Uint8Array, length?: number): RecordingLogMessage {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseRecordingLogMessage } as RecordingLogMessage;
+    const message = createBaseRecordingLogMessage();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -6898,18 +5558,12 @@ export const RecordingLogMessage = {
   },
 
   fromJSON(object: any): RecordingLogMessage {
-    const message = { ...baseRecordingLogMessage } as RecordingLogMessage;
-    if (object.token !== undefined && object.token !== null) {
-      message.token = String(object.token);
-    } else {
-      message.token = "";
-    }
-    if (object.logmessage !== undefined && object.logmessage !== null) {
-      message.logmessage = LogMessage.fromJSON(object.logmessage);
-    } else {
-      message.logmessage = undefined;
-    }
-    return message;
+    return {
+      token: isSet(object.token) ? String(object.token) : "",
+      logmessage: isSet(object.logmessage)
+        ? LogMessage.fromJSON(object.logmessage)
+        : undefined,
+    };
   },
 
   toJSON(message: RecordingLogMessage): unknown {
@@ -6922,23 +5576,22 @@ export const RecordingLogMessage = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<RecordingLogMessage>): RecordingLogMessage {
-    const message = { ...baseRecordingLogMessage } as RecordingLogMessage;
-    if (object.token !== undefined && object.token !== null) {
-      message.token = object.token;
-    } else {
-      message.token = "";
-    }
-    if (object.logmessage !== undefined && object.logmessage !== null) {
-      message.logmessage = LogMessage.fromPartial(object.logmessage);
-    } else {
-      message.logmessage = undefined;
-    }
+  fromPartial<I extends Exact<DeepPartial<RecordingLogMessage>, I>>(
+    object: I
+  ): RecordingLogMessage {
+    const message = createBaseRecordingLogMessage();
+    message.token = object.token ?? "";
+    message.logmessage =
+      object.logmessage !== undefined && object.logmessage !== null
+        ? LogMessage.fromPartial(object.logmessage)
+        : undefined;
     return message;
   },
 };
 
-const baseRecordingTrackLogMessage: object = { recordingtoken: "", trackid: 0 };
+function createBaseRecordingTrackLogMessage(): RecordingTrackLogMessage {
+  return { recordingtoken: "", trackid: 0, logmessage: undefined };
+}
 
 export const RecordingTrackLogMessage = {
   encode(
@@ -6963,9 +5616,7 @@ export const RecordingTrackLogMessage = {
   ): RecordingTrackLogMessage {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseRecordingTrackLogMessage,
-    } as RecordingTrackLogMessage;
+    const message = createBaseRecordingTrackLogMessage();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -6987,32 +5638,23 @@ export const RecordingTrackLogMessage = {
   },
 
   fromJSON(object: any): RecordingTrackLogMessage {
-    const message = {
-      ...baseRecordingTrackLogMessage,
-    } as RecordingTrackLogMessage;
-    if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
-      message.recordingtoken = String(object.recordingtoken);
-    } else {
-      message.recordingtoken = "";
-    }
-    if (object.trackid !== undefined && object.trackid !== null) {
-      message.trackid = Number(object.trackid);
-    } else {
-      message.trackid = 0;
-    }
-    if (object.logmessage !== undefined && object.logmessage !== null) {
-      message.logmessage = LogMessage.fromJSON(object.logmessage);
-    } else {
-      message.logmessage = undefined;
-    }
-    return message;
+    return {
+      recordingtoken: isSet(object.recordingtoken)
+        ? String(object.recordingtoken)
+        : "",
+      trackid: isSet(object.trackid) ? Number(object.trackid) : 0,
+      logmessage: isSet(object.logmessage)
+        ? LogMessage.fromJSON(object.logmessage)
+        : undefined,
+    };
   },
 
   toJSON(message: RecordingTrackLogMessage): unknown {
     const obj: any = {};
     message.recordingtoken !== undefined &&
       (obj.recordingtoken = message.recordingtoken);
-    message.trackid !== undefined && (obj.trackid = message.trackid);
+    message.trackid !== undefined &&
+      (obj.trackid = Math.round(message.trackid));
     message.logmessage !== undefined &&
       (obj.logmessage = message.logmessage
         ? LogMessage.toJSON(message.logmessage)
@@ -7020,32 +5662,23 @@ export const RecordingTrackLogMessage = {
     return obj;
   },
 
-  fromPartial(
-    object: DeepPartial<RecordingTrackLogMessage>
+  fromPartial<I extends Exact<DeepPartial<RecordingTrackLogMessage>, I>>(
+    object: I
   ): RecordingTrackLogMessage {
-    const message = {
-      ...baseRecordingTrackLogMessage,
-    } as RecordingTrackLogMessage;
-    if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
-      message.recordingtoken = object.recordingtoken;
-    } else {
-      message.recordingtoken = "";
-    }
-    if (object.trackid !== undefined && object.trackid !== null) {
-      message.trackid = object.trackid;
-    } else {
-      message.trackid = 0;
-    }
-    if (object.logmessage !== undefined && object.logmessage !== null) {
-      message.logmessage = LogMessage.fromPartial(object.logmessage);
-    } else {
-      message.logmessage = undefined;
-    }
+    const message = createBaseRecordingTrackLogMessage();
+    message.recordingtoken = object.recordingtoken ?? "";
+    message.trackid = object.trackid ?? 0;
+    message.logmessage =
+      object.logmessage !== undefined && object.logmessage !== null
+        ? LogMessage.fromPartial(object.logmessage)
+        : undefined;
     return message;
   },
 };
 
-const baseRecordingAdded: object = {};
+function createBaseRecordingAdded(): RecordingAdded {
+  return { recording: undefined };
+}
 
 export const RecordingAdded = {
   encode(
@@ -7061,7 +5694,7 @@ export const RecordingAdded = {
   decode(input: _m0.Reader | Uint8Array, length?: number): RecordingAdded {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseRecordingAdded } as RecordingAdded;
+    const message = createBaseRecordingAdded();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -7077,13 +5710,11 @@ export const RecordingAdded = {
   },
 
   fromJSON(object: any): RecordingAdded {
-    const message = { ...baseRecordingAdded } as RecordingAdded;
-    if (object.recording !== undefined && object.recording !== null) {
-      message.recording = Recording.fromJSON(object.recording);
-    } else {
-      message.recording = undefined;
-    }
-    return message;
+    return {
+      recording: isSet(object.recording)
+        ? Recording.fromJSON(object.recording)
+        : undefined,
+    };
   },
 
   toJSON(message: RecordingAdded): unknown {
@@ -7095,18 +5726,21 @@ export const RecordingAdded = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<RecordingAdded>): RecordingAdded {
-    const message = { ...baseRecordingAdded } as RecordingAdded;
-    if (object.recording !== undefined && object.recording !== null) {
-      message.recording = Recording.fromPartial(object.recording);
-    } else {
-      message.recording = undefined;
-    }
+  fromPartial<I extends Exact<DeepPartial<RecordingAdded>, I>>(
+    object: I
+  ): RecordingAdded {
+    const message = createBaseRecordingAdded();
+    message.recording =
+      object.recording !== undefined && object.recording !== null
+        ? Recording.fromPartial(object.recording)
+        : undefined;
     return message;
   },
 };
 
-const baseRecordingChanged: object = {};
+function createBaseRecordingChanged(): RecordingChanged {
+  return { recording: undefined };
+}
 
 export const RecordingChanged = {
   encode(
@@ -7122,7 +5756,7 @@ export const RecordingChanged = {
   decode(input: _m0.Reader | Uint8Array, length?: number): RecordingChanged {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseRecordingChanged } as RecordingChanged;
+    const message = createBaseRecordingChanged();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -7138,13 +5772,11 @@ export const RecordingChanged = {
   },
 
   fromJSON(object: any): RecordingChanged {
-    const message = { ...baseRecordingChanged } as RecordingChanged;
-    if (object.recording !== undefined && object.recording !== null) {
-      message.recording = Recording.fromJSON(object.recording);
-    } else {
-      message.recording = undefined;
-    }
-    return message;
+    return {
+      recording: isSet(object.recording)
+        ? Recording.fromJSON(object.recording)
+        : undefined,
+    };
   },
 
   toJSON(message: RecordingChanged): unknown {
@@ -7156,18 +5788,21 @@ export const RecordingChanged = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<RecordingChanged>): RecordingChanged {
-    const message = { ...baseRecordingChanged } as RecordingChanged;
-    if (object.recording !== undefined && object.recording !== null) {
-      message.recording = Recording.fromPartial(object.recording);
-    } else {
-      message.recording = undefined;
-    }
+  fromPartial<I extends Exact<DeepPartial<RecordingChanged>, I>>(
+    object: I
+  ): RecordingChanged {
+    const message = createBaseRecordingChanged();
+    message.recording =
+      object.recording !== undefined && object.recording !== null
+        ? Recording.fromPartial(object.recording)
+        : undefined;
     return message;
   },
 };
 
-const baseRecordingRemoved: object = { token: "" };
+function createBaseRecordingRemoved(): RecordingRemoved {
+  return { token: "" };
+}
 
 export const RecordingRemoved = {
   encode(
@@ -7183,7 +5818,7 @@ export const RecordingRemoved = {
   decode(input: _m0.Reader | Uint8Array, length?: number): RecordingRemoved {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseRecordingRemoved } as RecordingRemoved;
+    const message = createBaseRecordingRemoved();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -7199,13 +5834,9 @@ export const RecordingRemoved = {
   },
 
   fromJSON(object: any): RecordingRemoved {
-    const message = { ...baseRecordingRemoved } as RecordingRemoved;
-    if (object.token !== undefined && object.token !== null) {
-      message.token = String(object.token);
-    } else {
-      message.token = "";
-    }
-    return message;
+    return {
+      token: isSet(object.token) ? String(object.token) : "",
+    };
   },
 
   toJSON(message: RecordingRemoved): unknown {
@@ -7214,18 +5845,18 @@ export const RecordingRemoved = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<RecordingRemoved>): RecordingRemoved {
-    const message = { ...baseRecordingRemoved } as RecordingRemoved;
-    if (object.token !== undefined && object.token !== null) {
-      message.token = object.token;
-    } else {
-      message.token = "";
-    }
+  fromPartial<I extends Exact<DeepPartial<RecordingRemoved>, I>>(
+    object: I
+  ): RecordingRemoved {
+    const message = createBaseRecordingRemoved();
+    message.token = object.token ?? "";
     return message;
   },
 };
 
-const baseRecordingJobAdded: object = {};
+function createBaseRecordingJobAdded(): RecordingJobAdded {
+  return { recordingjob: undefined };
+}
 
 export const RecordingJobAdded = {
   encode(
@@ -7244,7 +5875,7 @@ export const RecordingJobAdded = {
   decode(input: _m0.Reader | Uint8Array, length?: number): RecordingJobAdded {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseRecordingJobAdded } as RecordingJobAdded;
+    const message = createBaseRecordingJobAdded();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -7260,13 +5891,11 @@ export const RecordingJobAdded = {
   },
 
   fromJSON(object: any): RecordingJobAdded {
-    const message = { ...baseRecordingJobAdded } as RecordingJobAdded;
-    if (object.recordingjob !== undefined && object.recordingjob !== null) {
-      message.recordingjob = RecordingJob.fromJSON(object.recordingjob);
-    } else {
-      message.recordingjob = undefined;
-    }
-    return message;
+    return {
+      recordingjob: isSet(object.recordingjob)
+        ? RecordingJob.fromJSON(object.recordingjob)
+        : undefined,
+    };
   },
 
   toJSON(message: RecordingJobAdded): unknown {
@@ -7278,18 +5907,21 @@ export const RecordingJobAdded = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<RecordingJobAdded>): RecordingJobAdded {
-    const message = { ...baseRecordingJobAdded } as RecordingJobAdded;
-    if (object.recordingjob !== undefined && object.recordingjob !== null) {
-      message.recordingjob = RecordingJob.fromPartial(object.recordingjob);
-    } else {
-      message.recordingjob = undefined;
-    }
+  fromPartial<I extends Exact<DeepPartial<RecordingJobAdded>, I>>(
+    object: I
+  ): RecordingJobAdded {
+    const message = createBaseRecordingJobAdded();
+    message.recordingjob =
+      object.recordingjob !== undefined && object.recordingjob !== null
+        ? RecordingJob.fromPartial(object.recordingjob)
+        : undefined;
     return message;
   },
 };
 
-const baseRecordingJobChanged: object = {};
+function createBaseRecordingJobChanged(): RecordingJobChanged {
+  return { recordingjob: undefined };
+}
 
 export const RecordingJobChanged = {
   encode(
@@ -7308,7 +5940,7 @@ export const RecordingJobChanged = {
   decode(input: _m0.Reader | Uint8Array, length?: number): RecordingJobChanged {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseRecordingJobChanged } as RecordingJobChanged;
+    const message = createBaseRecordingJobChanged();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -7324,13 +5956,11 @@ export const RecordingJobChanged = {
   },
 
   fromJSON(object: any): RecordingJobChanged {
-    const message = { ...baseRecordingJobChanged } as RecordingJobChanged;
-    if (object.recordingjob !== undefined && object.recordingjob !== null) {
-      message.recordingjob = RecordingJob.fromJSON(object.recordingjob);
-    } else {
-      message.recordingjob = undefined;
-    }
-    return message;
+    return {
+      recordingjob: isSet(object.recordingjob)
+        ? RecordingJob.fromJSON(object.recordingjob)
+        : undefined,
+    };
   },
 
   toJSON(message: RecordingJobChanged): unknown {
@@ -7342,21 +5972,21 @@ export const RecordingJobChanged = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<RecordingJobChanged>): RecordingJobChanged {
-    const message = { ...baseRecordingJobChanged } as RecordingJobChanged;
-    if (object.recordingjob !== undefined && object.recordingjob !== null) {
-      message.recordingjob = RecordingJob.fromPartial(object.recordingjob);
-    } else {
-      message.recordingjob = undefined;
-    }
+  fromPartial<I extends Exact<DeepPartial<RecordingJobChanged>, I>>(
+    object: I
+  ): RecordingJobChanged {
+    const message = createBaseRecordingJobChanged();
+    message.recordingjob =
+      object.recordingjob !== undefined && object.recordingjob !== null
+        ? RecordingJob.fromPartial(object.recordingjob)
+        : undefined;
     return message;
   },
 };
 
-const baseRecordingJobRemoved: object = {
-  recordingtoken: "",
-  recordingjobtoken: "",
-};
+function createBaseRecordingJobRemoved(): RecordingJobRemoved {
+  return { recordingtoken: "", recordingjobtoken: "" };
+}
 
 export const RecordingJobRemoved = {
   encode(
@@ -7375,7 +6005,7 @@ export const RecordingJobRemoved = {
   decode(input: _m0.Reader | Uint8Array, length?: number): RecordingJobRemoved {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseRecordingJobRemoved } as RecordingJobRemoved;
+    const message = createBaseRecordingJobRemoved();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -7394,21 +6024,14 @@ export const RecordingJobRemoved = {
   },
 
   fromJSON(object: any): RecordingJobRemoved {
-    const message = { ...baseRecordingJobRemoved } as RecordingJobRemoved;
-    if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
-      message.recordingtoken = String(object.recordingtoken);
-    } else {
-      message.recordingtoken = "";
-    }
-    if (
-      object.recordingjobtoken !== undefined &&
-      object.recordingjobtoken !== null
-    ) {
-      message.recordingjobtoken = String(object.recordingjobtoken);
-    } else {
-      message.recordingjobtoken = "";
-    }
-    return message;
+    return {
+      recordingtoken: isSet(object.recordingtoken)
+        ? String(object.recordingtoken)
+        : "",
+      recordingjobtoken: isSet(object.recordingjobtoken)
+        ? String(object.recordingjobtoken)
+        : "",
+    };
   },
 
   toJSON(message: RecordingJobRemoved): unknown {
@@ -7420,26 +6043,19 @@ export const RecordingJobRemoved = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<RecordingJobRemoved>): RecordingJobRemoved {
-    const message = { ...baseRecordingJobRemoved } as RecordingJobRemoved;
-    if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
-      message.recordingtoken = object.recordingtoken;
-    } else {
-      message.recordingtoken = "";
-    }
-    if (
-      object.recordingjobtoken !== undefined &&
-      object.recordingjobtoken !== null
-    ) {
-      message.recordingjobtoken = object.recordingjobtoken;
-    } else {
-      message.recordingjobtoken = "";
-    }
+  fromPartial<I extends Exact<DeepPartial<RecordingJobRemoved>, I>>(
+    object: I
+  ): RecordingJobRemoved {
+    const message = createBaseRecordingJobRemoved();
+    message.recordingtoken = object.recordingtoken ?? "";
+    message.recordingjobtoken = object.recordingjobtoken ?? "";
     return message;
   },
 };
 
-const baseRecordingTrackAdded: object = {};
+function createBaseRecordingTrackAdded(): RecordingTrackAdded {
+  return { recordingtrack: undefined };
+}
 
 export const RecordingTrackAdded = {
   encode(
@@ -7458,7 +6074,7 @@ export const RecordingTrackAdded = {
   decode(input: _m0.Reader | Uint8Array, length?: number): RecordingTrackAdded {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseRecordingTrackAdded } as RecordingTrackAdded;
+    const message = createBaseRecordingTrackAdded();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -7477,13 +6093,11 @@ export const RecordingTrackAdded = {
   },
 
   fromJSON(object: any): RecordingTrackAdded {
-    const message = { ...baseRecordingTrackAdded } as RecordingTrackAdded;
-    if (object.recordingtrack !== undefined && object.recordingtrack !== null) {
-      message.recordingtrack = RecordingTrack.fromJSON(object.recordingtrack);
-    } else {
-      message.recordingtrack = undefined;
-    }
-    return message;
+    return {
+      recordingtrack: isSet(object.recordingtrack)
+        ? RecordingTrack.fromJSON(object.recordingtrack)
+        : undefined,
+    };
   },
 
   toJSON(message: RecordingTrackAdded): unknown {
@@ -7495,20 +6109,21 @@ export const RecordingTrackAdded = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<RecordingTrackAdded>): RecordingTrackAdded {
-    const message = { ...baseRecordingTrackAdded } as RecordingTrackAdded;
-    if (object.recordingtrack !== undefined && object.recordingtrack !== null) {
-      message.recordingtrack = RecordingTrack.fromPartial(
-        object.recordingtrack
-      );
-    } else {
-      message.recordingtrack = undefined;
-    }
+  fromPartial<I extends Exact<DeepPartial<RecordingTrackAdded>, I>>(
+    object: I
+  ): RecordingTrackAdded {
+    const message = createBaseRecordingTrackAdded();
+    message.recordingtrack =
+      object.recordingtrack !== undefined && object.recordingtrack !== null
+        ? RecordingTrack.fromPartial(object.recordingtrack)
+        : undefined;
     return message;
   },
 };
 
-const baseRecordingTrackChanged: object = {};
+function createBaseRecordingTrackChanged(): RecordingTrackChanged {
+  return { recordingtrack: undefined };
+}
 
 export const RecordingTrackChanged = {
   encode(
@@ -7530,7 +6145,7 @@ export const RecordingTrackChanged = {
   ): RecordingTrackChanged {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseRecordingTrackChanged } as RecordingTrackChanged;
+    const message = createBaseRecordingTrackChanged();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -7549,13 +6164,11 @@ export const RecordingTrackChanged = {
   },
 
   fromJSON(object: any): RecordingTrackChanged {
-    const message = { ...baseRecordingTrackChanged } as RecordingTrackChanged;
-    if (object.recordingtrack !== undefined && object.recordingtrack !== null) {
-      message.recordingtrack = RecordingTrack.fromJSON(object.recordingtrack);
-    } else {
-      message.recordingtrack = undefined;
-    }
-    return message;
+    return {
+      recordingtrack: isSet(object.recordingtrack)
+        ? RecordingTrack.fromJSON(object.recordingtrack)
+        : undefined,
+    };
   },
 
   toJSON(message: RecordingTrackChanged): unknown {
@@ -7567,25 +6180,21 @@ export const RecordingTrackChanged = {
     return obj;
   },
 
-  fromPartial(
-    object: DeepPartial<RecordingTrackChanged>
+  fromPartial<I extends Exact<DeepPartial<RecordingTrackChanged>, I>>(
+    object: I
   ): RecordingTrackChanged {
-    const message = { ...baseRecordingTrackChanged } as RecordingTrackChanged;
-    if (object.recordingtrack !== undefined && object.recordingtrack !== null) {
-      message.recordingtrack = RecordingTrack.fromPartial(
-        object.recordingtrack
-      );
-    } else {
-      message.recordingtrack = undefined;
-    }
+    const message = createBaseRecordingTrackChanged();
+    message.recordingtrack =
+      object.recordingtrack !== undefined && object.recordingtrack !== null
+        ? RecordingTrack.fromPartial(object.recordingtrack)
+        : undefined;
     return message;
   },
 };
 
-const baseRecordingTrackRemoved: object = {
-  recordingtoken: "",
-  recordingtrackid: 0,
-};
+function createBaseRecordingTrackRemoved(): RecordingTrackRemoved {
+  return { recordingtoken: "", recordingtrackid: 0 };
+}
 
 export const RecordingTrackRemoved = {
   encode(
@@ -7607,7 +6216,7 @@ export const RecordingTrackRemoved = {
   ): RecordingTrackRemoved {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseRecordingTrackRemoved } as RecordingTrackRemoved;
+    const message = createBaseRecordingTrackRemoved();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -7626,21 +6235,14 @@ export const RecordingTrackRemoved = {
   },
 
   fromJSON(object: any): RecordingTrackRemoved {
-    const message = { ...baseRecordingTrackRemoved } as RecordingTrackRemoved;
-    if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
-      message.recordingtoken = String(object.recordingtoken);
-    } else {
-      message.recordingtoken = "";
-    }
-    if (
-      object.recordingtrackid !== undefined &&
-      object.recordingtrackid !== null
-    ) {
-      message.recordingtrackid = Number(object.recordingtrackid);
-    } else {
-      message.recordingtrackid = 0;
-    }
-    return message;
+    return {
+      recordingtoken: isSet(object.recordingtoken)
+        ? String(object.recordingtoken)
+        : "",
+      recordingtrackid: isSet(object.recordingtrackid)
+        ? Number(object.recordingtrackid)
+        : 0,
+    };
   },
 
   toJSON(message: RecordingTrackRemoved): unknown {
@@ -7648,32 +6250,23 @@ export const RecordingTrackRemoved = {
     message.recordingtoken !== undefined &&
       (obj.recordingtoken = message.recordingtoken);
     message.recordingtrackid !== undefined &&
-      (obj.recordingtrackid = message.recordingtrackid);
+      (obj.recordingtrackid = Math.round(message.recordingtrackid));
     return obj;
   },
 
-  fromPartial(
-    object: DeepPartial<RecordingTrackRemoved>
+  fromPartial<I extends Exact<DeepPartial<RecordingTrackRemoved>, I>>(
+    object: I
   ): RecordingTrackRemoved {
-    const message = { ...baseRecordingTrackRemoved } as RecordingTrackRemoved;
-    if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
-      message.recordingtoken = object.recordingtoken;
-    } else {
-      message.recordingtoken = "";
-    }
-    if (
-      object.recordingtrackid !== undefined &&
-      object.recordingtrackid !== null
-    ) {
-      message.recordingtrackid = object.recordingtrackid;
-    } else {
-      message.recordingtrackid = 0;
-    }
+    const message = createBaseRecordingTrackRemoved();
+    message.recordingtoken = object.recordingtoken ?? "";
+    message.recordingtrackid = object.recordingtrackid ?? 0;
     return message;
   },
 };
 
-const baseRecordingActiveJobChanged: object = { recordingtoken: "" };
+function createBaseRecordingActiveJobChanged(): RecordingActiveJobChanged {
+  return { recordingtoken: "", activejob: undefined };
+}
 
 export const RecordingActiveJobChanged = {
   encode(
@@ -7698,9 +6291,7 @@ export const RecordingActiveJobChanged = {
   ): RecordingActiveJobChanged {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseRecordingActiveJobChanged,
-    } as RecordingActiveJobChanged;
+    const message = createBaseRecordingActiveJobChanged();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -7719,20 +6310,12 @@ export const RecordingActiveJobChanged = {
   },
 
   fromJSON(object: any): RecordingActiveJobChanged {
-    const message = {
-      ...baseRecordingActiveJobChanged,
-    } as RecordingActiveJobChanged;
-    if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
-      message.recordingtoken = String(object.recordingtoken);
-    } else {
-      message.recordingtoken = "";
-    }
-    if (object.activejob !== undefined && object.activejob !== null) {
-      message.activejob = String(object.activejob);
-    } else {
-      message.activejob = undefined;
-    }
-    return message;
+    return {
+      recordingtoken: isSet(object.recordingtoken)
+        ? String(object.recordingtoken)
+        : "",
+      activejob: isSet(object.activejob) ? String(object.activejob) : undefined,
+    };
   },
 
   toJSON(message: RecordingActiveJobChanged): unknown {
@@ -7743,33 +6326,25 @@ export const RecordingActiveJobChanged = {
     return obj;
   },
 
-  fromPartial(
-    object: DeepPartial<RecordingActiveJobChanged>
+  fromPartial<I extends Exact<DeepPartial<RecordingActiveJobChanged>, I>>(
+    object: I
   ): RecordingActiveJobChanged {
-    const message = {
-      ...baseRecordingActiveJobChanged,
-    } as RecordingActiveJobChanged;
-    if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
-      message.recordingtoken = object.recordingtoken;
-    } else {
-      message.recordingtoken = "";
-    }
-    if (object.activejob !== undefined && object.activejob !== null) {
-      message.activejob = object.activejob;
-    } else {
-      message.activejob = undefined;
-    }
+    const message = createBaseRecordingActiveJobChanged();
+    message.recordingtoken = object.recordingtoken ?? "";
+    message.activejob = object.activejob ?? undefined;
     return message;
   },
 };
 
-const baseRecordingJobSourceTrackActiveParametersChanged: object = {
-  recordingtoken: "",
-  recordingjobtoken: "",
-  recordingjobsourcetoken: "",
-  recordingjobsourcetracktoken: "",
-  activeparameters: "",
-};
+function createBaseRecordingJobSourceTrackActiveParametersChanged(): RecordingJobSourceTrackActiveParametersChanged {
+  return {
+    recordingtoken: "",
+    recordingjobtoken: "",
+    recordingjobsourcetoken: "",
+    recordingjobsourcetracktoken: "",
+    activeparameters: [],
+  };
+}
 
 export const RecordingJobSourceTrackActiveParametersChanged = {
   encode(
@@ -7800,10 +6375,7 @@ export const RecordingJobSourceTrackActiveParametersChanged = {
   ): RecordingJobSourceTrackActiveParametersChanged {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseRecordingJobSourceTrackActiveParametersChanged,
-    } as RecordingJobSourceTrackActiveParametersChanged;
-    message.activeparameters = [];
+    const message = createBaseRecordingJobSourceTrackActiveParametersChanged();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -7831,50 +6403,23 @@ export const RecordingJobSourceTrackActiveParametersChanged = {
   },
 
   fromJSON(object: any): RecordingJobSourceTrackActiveParametersChanged {
-    const message = {
-      ...baseRecordingJobSourceTrackActiveParametersChanged,
-    } as RecordingJobSourceTrackActiveParametersChanged;
-    message.activeparameters = [];
-    if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
-      message.recordingtoken = String(object.recordingtoken);
-    } else {
-      message.recordingtoken = "";
-    }
-    if (
-      object.recordingjobtoken !== undefined &&
-      object.recordingjobtoken !== null
-    ) {
-      message.recordingjobtoken = String(object.recordingjobtoken);
-    } else {
-      message.recordingjobtoken = "";
-    }
-    if (
-      object.recordingjobsourcetoken !== undefined &&
-      object.recordingjobsourcetoken !== null
-    ) {
-      message.recordingjobsourcetoken = String(object.recordingjobsourcetoken);
-    } else {
-      message.recordingjobsourcetoken = "";
-    }
-    if (
-      object.recordingjobsourcetracktoken !== undefined &&
-      object.recordingjobsourcetracktoken !== null
-    ) {
-      message.recordingjobsourcetracktoken = String(
-        object.recordingjobsourcetracktoken
-      );
-    } else {
-      message.recordingjobsourcetracktoken = "";
-    }
-    if (
-      object.activeparameters !== undefined &&
-      object.activeparameters !== null
-    ) {
-      for (const e of object.activeparameters) {
-        message.activeparameters.push(String(e));
-      }
-    }
-    return message;
+    return {
+      recordingtoken: isSet(object.recordingtoken)
+        ? String(object.recordingtoken)
+        : "",
+      recordingjobtoken: isSet(object.recordingjobtoken)
+        ? String(object.recordingjobtoken)
+        : "",
+      recordingjobsourcetoken: isSet(object.recordingjobsourcetoken)
+        ? String(object.recordingjobsourcetoken)
+        : "",
+      recordingjobsourcetracktoken: isSet(object.recordingjobsourcetracktoken)
+        ? String(object.recordingjobsourcetracktoken)
+        : "",
+      activeparameters: Array.isArray(object?.activeparameters)
+        ? object.activeparameters.map((e: any) => String(e))
+        : [],
+    };
   },
 
   toJSON(message: RecordingJobSourceTrackActiveParametersChanged): unknown {
@@ -7895,64 +6440,34 @@ export const RecordingJobSourceTrackActiveParametersChanged = {
     return obj;
   },
 
-  fromPartial(
-    object: DeepPartial<RecordingJobSourceTrackActiveParametersChanged>
-  ): RecordingJobSourceTrackActiveParametersChanged {
-    const message = {
-      ...baseRecordingJobSourceTrackActiveParametersChanged,
-    } as RecordingJobSourceTrackActiveParametersChanged;
-    message.activeparameters = [];
-    if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
-      message.recordingtoken = object.recordingtoken;
-    } else {
-      message.recordingtoken = "";
-    }
-    if (
-      object.recordingjobtoken !== undefined &&
-      object.recordingjobtoken !== null
-    ) {
-      message.recordingjobtoken = object.recordingjobtoken;
-    } else {
-      message.recordingjobtoken = "";
-    }
-    if (
-      object.recordingjobsourcetoken !== undefined &&
-      object.recordingjobsourcetoken !== null
-    ) {
-      message.recordingjobsourcetoken = object.recordingjobsourcetoken;
-    } else {
-      message.recordingjobsourcetoken = "";
-    }
-    if (
-      object.recordingjobsourcetracktoken !== undefined &&
-      object.recordingjobsourcetracktoken !== null
-    ) {
-      message.recordingjobsourcetracktoken =
-        object.recordingjobsourcetracktoken;
-    } else {
-      message.recordingjobsourcetracktoken = "";
-    }
-    if (
-      object.activeparameters !== undefined &&
-      object.activeparameters !== null
-    ) {
-      for (const e of object.activeparameters) {
-        message.activeparameters.push(e);
-      }
-    }
+  fromPartial<
+    I extends Exact<
+      DeepPartial<RecordingJobSourceTrackActiveParametersChanged>,
+      I
+    >
+  >(object: I): RecordingJobSourceTrackActiveParametersChanged {
+    const message = createBaseRecordingJobSourceTrackActiveParametersChanged();
+    message.recordingtoken = object.recordingtoken ?? "";
+    message.recordingjobtoken = object.recordingjobtoken ?? "";
+    message.recordingjobsourcetoken = object.recordingjobsourcetoken ?? "";
+    message.recordingjobsourcetracktoken =
+      object.recordingjobsourcetracktoken ?? "";
+    message.activeparameters = object.activeparameters?.map((e) => e) || [];
     return message;
   },
 };
 
-const baseRecordingJobSourceTrackState: object = {
-  recordingtoken: "",
-  recordingjobtoken: "",
-  recordingjobsourcetoken: "",
-  recordingjobsourcetracktoken: "",
-  time: "0",
-  state: 0,
-  error: "",
-};
+function createBaseRecordingJobSourceTrackState(): RecordingJobSourceTrackState {
+  return {
+    recordingtoken: "",
+    recordingjobtoken: "",
+    recordingjobsourcetoken: "",
+    recordingjobsourcetracktoken: "",
+    time: "0",
+    state: 0,
+    error: "",
+  };
+}
 
 export const RecordingJobSourceTrackState = {
   encode(
@@ -7989,9 +6504,7 @@ export const RecordingJobSourceTrackState = {
   ): RecordingJobSourceTrackState {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseRecordingJobSourceTrackState,
-    } as RecordingJobSourceTrackState;
+    const message = createBaseRecordingJobSourceTrackState();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -8025,56 +6538,23 @@ export const RecordingJobSourceTrackState = {
   },
 
   fromJSON(object: any): RecordingJobSourceTrackState {
-    const message = {
-      ...baseRecordingJobSourceTrackState,
-    } as RecordingJobSourceTrackState;
-    if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
-      message.recordingtoken = String(object.recordingtoken);
-    } else {
-      message.recordingtoken = "";
-    }
-    if (
-      object.recordingjobtoken !== undefined &&
-      object.recordingjobtoken !== null
-    ) {
-      message.recordingjobtoken = String(object.recordingjobtoken);
-    } else {
-      message.recordingjobtoken = "";
-    }
-    if (
-      object.recordingjobsourcetoken !== undefined &&
-      object.recordingjobsourcetoken !== null
-    ) {
-      message.recordingjobsourcetoken = String(object.recordingjobsourcetoken);
-    } else {
-      message.recordingjobsourcetoken = "";
-    }
-    if (
-      object.recordingjobsourcetracktoken !== undefined &&
-      object.recordingjobsourcetracktoken !== null
-    ) {
-      message.recordingjobsourcetracktoken = String(
-        object.recordingjobsourcetracktoken
-      );
-    } else {
-      message.recordingjobsourcetracktoken = "";
-    }
-    if (object.time !== undefined && object.time !== null) {
-      message.time = String(object.time);
-    } else {
-      message.time = "0";
-    }
-    if (object.state !== undefined && object.state !== null) {
-      message.state = recordingJobStateFromJSON(object.state);
-    } else {
-      message.state = 0;
-    }
-    if (object.error !== undefined && object.error !== null) {
-      message.error = String(object.error);
-    } else {
-      message.error = "";
-    }
-    return message;
+    return {
+      recordingtoken: isSet(object.recordingtoken)
+        ? String(object.recordingtoken)
+        : "",
+      recordingjobtoken: isSet(object.recordingjobtoken)
+        ? String(object.recordingjobtoken)
+        : "",
+      recordingjobsourcetoken: isSet(object.recordingjobsourcetoken)
+        ? String(object.recordingjobsourcetoken)
+        : "",
+      recordingjobsourcetracktoken: isSet(object.recordingjobsourcetracktoken)
+        ? String(object.recordingjobsourcetracktoken)
+        : "",
+      time: isSet(object.time) ? String(object.time) : "0",
+      state: isSet(object.state) ? recordingJobStateFromJSON(object.state) : 0,
+      error: isSet(object.error) ? String(object.error) : "",
+    };
   },
 
   toJSON(message: RecordingJobSourceTrackState): unknown {
@@ -8094,69 +6574,32 @@ export const RecordingJobSourceTrackState = {
     return obj;
   },
 
-  fromPartial(
-    object: DeepPartial<RecordingJobSourceTrackState>
+  fromPartial<I extends Exact<DeepPartial<RecordingJobSourceTrackState>, I>>(
+    object: I
   ): RecordingJobSourceTrackState {
-    const message = {
-      ...baseRecordingJobSourceTrackState,
-    } as RecordingJobSourceTrackState;
-    if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
-      message.recordingtoken = object.recordingtoken;
-    } else {
-      message.recordingtoken = "";
-    }
-    if (
-      object.recordingjobtoken !== undefined &&
-      object.recordingjobtoken !== null
-    ) {
-      message.recordingjobtoken = object.recordingjobtoken;
-    } else {
-      message.recordingjobtoken = "";
-    }
-    if (
-      object.recordingjobsourcetoken !== undefined &&
-      object.recordingjobsourcetoken !== null
-    ) {
-      message.recordingjobsourcetoken = object.recordingjobsourcetoken;
-    } else {
-      message.recordingjobsourcetoken = "";
-    }
-    if (
-      object.recordingjobsourcetracktoken !== undefined &&
-      object.recordingjobsourcetracktoken !== null
-    ) {
-      message.recordingjobsourcetracktoken =
-        object.recordingjobsourcetracktoken;
-    } else {
-      message.recordingjobsourcetracktoken = "";
-    }
-    if (object.time !== undefined && object.time !== null) {
-      message.time = object.time;
-    } else {
-      message.time = "0";
-    }
-    if (object.state !== undefined && object.state !== null) {
-      message.state = object.state;
-    } else {
-      message.state = 0;
-    }
-    if (object.error !== undefined && object.error !== null) {
-      message.error = object.error;
-    } else {
-      message.error = "";
-    }
+    const message = createBaseRecordingJobSourceTrackState();
+    message.recordingtoken = object.recordingtoken ?? "";
+    message.recordingjobtoken = object.recordingjobtoken ?? "";
+    message.recordingjobsourcetoken = object.recordingjobsourcetoken ?? "";
+    message.recordingjobsourcetracktoken =
+      object.recordingjobsourcetracktoken ?? "";
+    message.time = object.time ?? "0";
+    message.state = object.state ?? 0;
+    message.error = object.error ?? "";
     return message;
   },
 };
 
-const baseRecordingTrackCodecAdded: object = {
-  recordingtoken: "",
-  recordingtrackid: 0,
-  codecid: "0",
-  codec: 0,
-  parameters: "",
-  timestamp: "0",
-};
+function createBaseRecordingTrackCodecAdded(): RecordingTrackCodecAdded {
+  return {
+    recordingtoken: "",
+    recordingtrackid: 0,
+    codecid: "0",
+    codec: 0,
+    parameters: "",
+    timestamp: "0",
+  };
+}
 
 export const RecordingTrackCodecAdded = {
   encode(
@@ -8190,9 +6633,7 @@ export const RecordingTrackCodecAdded = {
   ): RecordingTrackCodecAdded {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseRecordingTrackCodecAdded,
-    } as RecordingTrackCodecAdded;
+    const message = createBaseRecordingTrackCodecAdded();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -8223,43 +6664,18 @@ export const RecordingTrackCodecAdded = {
   },
 
   fromJSON(object: any): RecordingTrackCodecAdded {
-    const message = {
-      ...baseRecordingTrackCodecAdded,
-    } as RecordingTrackCodecAdded;
-    if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
-      message.recordingtoken = String(object.recordingtoken);
-    } else {
-      message.recordingtoken = "";
-    }
-    if (
-      object.recordingtrackid !== undefined &&
-      object.recordingtrackid !== null
-    ) {
-      message.recordingtrackid = Number(object.recordingtrackid);
-    } else {
-      message.recordingtrackid = 0;
-    }
-    if (object.codecid !== undefined && object.codecid !== null) {
-      message.codecid = String(object.codecid);
-    } else {
-      message.codecid = "0";
-    }
-    if (object.codec !== undefined && object.codec !== null) {
-      message.codec = codecFromJSON(object.codec);
-    } else {
-      message.codec = 0;
-    }
-    if (object.parameters !== undefined && object.parameters !== null) {
-      message.parameters = String(object.parameters);
-    } else {
-      message.parameters = "";
-    }
-    if (object.timestamp !== undefined && object.timestamp !== null) {
-      message.timestamp = String(object.timestamp);
-    } else {
-      message.timestamp = "0";
-    }
-    return message;
+    return {
+      recordingtoken: isSet(object.recordingtoken)
+        ? String(object.recordingtoken)
+        : "",
+      recordingtrackid: isSet(object.recordingtrackid)
+        ? Number(object.recordingtrackid)
+        : 0,
+      codecid: isSet(object.codecid) ? String(object.codecid) : "0",
+      codec: isSet(object.codec) ? codecFromJSON(object.codec) : 0,
+      parameters: isSet(object.parameters) ? String(object.parameters) : "",
+      timestamp: isSet(object.timestamp) ? String(object.timestamp) : "0",
+    };
   },
 
   toJSON(message: RecordingTrackCodecAdded): unknown {
@@ -8267,7 +6683,7 @@ export const RecordingTrackCodecAdded = {
     message.recordingtoken !== undefined &&
       (obj.recordingtoken = message.recordingtoken);
     message.recordingtrackid !== undefined &&
-      (obj.recordingtrackid = message.recordingtrackid);
+      (obj.recordingtrackid = Math.round(message.recordingtrackid));
     message.codecid !== undefined && (obj.codecid = message.codecid);
     message.codec !== undefined && (obj.codec = codecToJSON(message.codec));
     message.parameters !== undefined && (obj.parameters = message.parameters);
@@ -8275,54 +6691,23 @@ export const RecordingTrackCodecAdded = {
     return obj;
   },
 
-  fromPartial(
-    object: DeepPartial<RecordingTrackCodecAdded>
+  fromPartial<I extends Exact<DeepPartial<RecordingTrackCodecAdded>, I>>(
+    object: I
   ): RecordingTrackCodecAdded {
-    const message = {
-      ...baseRecordingTrackCodecAdded,
-    } as RecordingTrackCodecAdded;
-    if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
-      message.recordingtoken = object.recordingtoken;
-    } else {
-      message.recordingtoken = "";
-    }
-    if (
-      object.recordingtrackid !== undefined &&
-      object.recordingtrackid !== null
-    ) {
-      message.recordingtrackid = object.recordingtrackid;
-    } else {
-      message.recordingtrackid = 0;
-    }
-    if (object.codecid !== undefined && object.codecid !== null) {
-      message.codecid = object.codecid;
-    } else {
-      message.codecid = "0";
-    }
-    if (object.codec !== undefined && object.codec !== null) {
-      message.codec = object.codec;
-    } else {
-      message.codec = 0;
-    }
-    if (object.parameters !== undefined && object.parameters !== null) {
-      message.parameters = object.parameters;
-    } else {
-      message.parameters = "";
-    }
-    if (object.timestamp !== undefined && object.timestamp !== null) {
-      message.timestamp = object.timestamp;
-    } else {
-      message.timestamp = "0";
-    }
+    const message = createBaseRecordingTrackCodecAdded();
+    message.recordingtoken = object.recordingtoken ?? "";
+    message.recordingtrackid = object.recordingtrackid ?? 0;
+    message.codecid = object.codecid ?? "0";
+    message.codec = object.codec ?? 0;
+    message.parameters = object.parameters ?? "";
+    message.timestamp = object.timestamp ?? "0";
     return message;
   },
 };
 
-const baseRecordingTrackCodecRemoved: object = {
-  recordingtoken: "",
-  recordingtrackid: 0,
-  codecid: "0",
-};
+function createBaseRecordingTrackCodecRemoved(): RecordingTrackCodecRemoved {
+  return { recordingtoken: "", recordingtrackid: 0, codecid: "0" };
+}
 
 export const RecordingTrackCodecRemoved = {
   encode(
@@ -8347,9 +6732,7 @@ export const RecordingTrackCodecRemoved = {
   ): RecordingTrackCodecRemoved {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseRecordingTrackCodecRemoved,
-    } as RecordingTrackCodecRemoved;
+    const message = createBaseRecordingTrackCodecRemoved();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -8371,28 +6754,15 @@ export const RecordingTrackCodecRemoved = {
   },
 
   fromJSON(object: any): RecordingTrackCodecRemoved {
-    const message = {
-      ...baseRecordingTrackCodecRemoved,
-    } as RecordingTrackCodecRemoved;
-    if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
-      message.recordingtoken = String(object.recordingtoken);
-    } else {
-      message.recordingtoken = "";
-    }
-    if (
-      object.recordingtrackid !== undefined &&
-      object.recordingtrackid !== null
-    ) {
-      message.recordingtrackid = Number(object.recordingtrackid);
-    } else {
-      message.recordingtrackid = 0;
-    }
-    if (object.codecid !== undefined && object.codecid !== null) {
-      message.codecid = String(object.codecid);
-    } else {
-      message.codecid = "0";
-    }
-    return message;
+    return {
+      recordingtoken: isSet(object.recordingtoken)
+        ? String(object.recordingtoken)
+        : "",
+      recordingtrackid: isSet(object.recordingtrackid)
+        ? Number(object.recordingtrackid)
+        : 0,
+      codecid: isSet(object.codecid) ? String(object.codecid) : "0",
+    };
   },
 
   toJSON(message: RecordingTrackCodecRemoved): unknown {
@@ -8400,40 +6770,25 @@ export const RecordingTrackCodecRemoved = {
     message.recordingtoken !== undefined &&
       (obj.recordingtoken = message.recordingtoken);
     message.recordingtrackid !== undefined &&
-      (obj.recordingtrackid = message.recordingtrackid);
+      (obj.recordingtrackid = Math.round(message.recordingtrackid));
     message.codecid !== undefined && (obj.codecid = message.codecid);
     return obj;
   },
 
-  fromPartial(
-    object: DeepPartial<RecordingTrackCodecRemoved>
+  fromPartial<I extends Exact<DeepPartial<RecordingTrackCodecRemoved>, I>>(
+    object: I
   ): RecordingTrackCodecRemoved {
-    const message = {
-      ...baseRecordingTrackCodecRemoved,
-    } as RecordingTrackCodecRemoved;
-    if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
-      message.recordingtoken = object.recordingtoken;
-    } else {
-      message.recordingtoken = "";
-    }
-    if (
-      object.recordingtrackid !== undefined &&
-      object.recordingtrackid !== null
-    ) {
-      message.recordingtrackid = object.recordingtrackid;
-    } else {
-      message.recordingtrackid = 0;
-    }
-    if (object.codecid !== undefined && object.codecid !== null) {
-      message.codecid = object.codecid;
-    } else {
-      message.codecid = "0";
-    }
+    const message = createBaseRecordingTrackCodecRemoved();
+    message.recordingtoken = object.recordingtoken ?? "";
+    message.recordingtrackid = object.recordingtrackid ?? 0;
+    message.codecid = object.codecid ?? "0";
     return message;
   },
 };
 
-const baseServerLogMessage: object = {};
+function createBaseServerLogMessage(): ServerLogMessage {
+  return { logmessage: undefined };
+}
 
 export const ServerLogMessage = {
   encode(
@@ -8449,7 +6804,7 @@ export const ServerLogMessage = {
   decode(input: _m0.Reader | Uint8Array, length?: number): ServerLogMessage {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseServerLogMessage } as ServerLogMessage;
+    const message = createBaseServerLogMessage();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -8465,13 +6820,11 @@ export const ServerLogMessage = {
   },
 
   fromJSON(object: any): ServerLogMessage {
-    const message = { ...baseServerLogMessage } as ServerLogMessage;
-    if (object.logmessage !== undefined && object.logmessage !== null) {
-      message.logmessage = LogMessage.fromJSON(object.logmessage);
-    } else {
-      message.logmessage = undefined;
-    }
-    return message;
+    return {
+      logmessage: isSet(object.logmessage)
+        ? LogMessage.fromJSON(object.logmessage)
+        : undefined,
+    };
   },
 
   toJSON(message: ServerLogMessage): unknown {
@@ -8483,21 +6836,21 @@ export const ServerLogMessage = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<ServerLogMessage>): ServerLogMessage {
-    const message = { ...baseServerLogMessage } as ServerLogMessage;
-    if (object.logmessage !== undefined && object.logmessage !== null) {
-      message.logmessage = LogMessage.fromPartial(object.logmessage);
-    } else {
-      message.logmessage = undefined;
-    }
+  fromPartial<I extends Exact<DeepPartial<ServerLogMessage>, I>>(
+    object: I
+  ): ServerLogMessage {
+    const message = createBaseServerLogMessage();
+    message.logmessage =
+      object.logmessage !== undefined && object.logmessage !== null
+        ? LogMessage.fromPartial(object.logmessage)
+        : undefined;
     return message;
   },
 };
 
-const baseRecordingTrackSetData: object = {
-  recordingtoken: "",
-  recordingtrackid: 0,
-};
+function createBaseRecordingTrackSetData(): RecordingTrackSetData {
+  return { recordingtoken: "", recordingtrackid: 0, indices: [] };
+}
 
 export const RecordingTrackSetData = {
   encode(
@@ -8522,8 +6875,7 @@ export const RecordingTrackSetData = {
   ): RecordingTrackSetData {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseRecordingTrackSetData } as RecordingTrackSetData;
-    message.indices = [];
+    const message = createBaseRecordingTrackSetData();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -8545,27 +6897,17 @@ export const RecordingTrackSetData = {
   },
 
   fromJSON(object: any): RecordingTrackSetData {
-    const message = { ...baseRecordingTrackSetData } as RecordingTrackSetData;
-    message.indices = [];
-    if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
-      message.recordingtoken = String(object.recordingtoken);
-    } else {
-      message.recordingtoken = "";
-    }
-    if (
-      object.recordingtrackid !== undefined &&
-      object.recordingtrackid !== null
-    ) {
-      message.recordingtrackid = Number(object.recordingtrackid);
-    } else {
-      message.recordingtrackid = 0;
-    }
-    if (object.indices !== undefined && object.indices !== null) {
-      for (const e of object.indices) {
-        message.indices.push(Index.fromJSON(e));
-      }
-    }
-    return message;
+    return {
+      recordingtoken: isSet(object.recordingtoken)
+        ? String(object.recordingtoken)
+        : "",
+      recordingtrackid: isSet(object.recordingtrackid)
+        ? Number(object.recordingtrackid)
+        : 0,
+      indices: Array.isArray(object?.indices)
+        ? object.indices.map((e: any) => Index.fromJSON(e))
+        : [],
+    };
   },
 
   toJSON(message: RecordingTrackSetData): unknown {
@@ -8573,7 +6915,7 @@ export const RecordingTrackSetData = {
     message.recordingtoken !== undefined &&
       (obj.recordingtoken = message.recordingtoken);
     message.recordingtrackid !== undefined &&
-      (obj.recordingtrackid = message.recordingtrackid);
+      (obj.recordingtrackid = Math.round(message.recordingtrackid));
     if (message.indices) {
       obj.indices = message.indices.map((e) =>
         e ? Index.toJSON(e) : undefined
@@ -8584,37 +6926,25 @@ export const RecordingTrackSetData = {
     return obj;
   },
 
-  fromPartial(
-    object: DeepPartial<RecordingTrackSetData>
+  fromPartial<I extends Exact<DeepPartial<RecordingTrackSetData>, I>>(
+    object: I
   ): RecordingTrackSetData {
-    const message = { ...baseRecordingTrackSetData } as RecordingTrackSetData;
-    message.indices = [];
-    if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
-      message.recordingtoken = object.recordingtoken;
-    } else {
-      message.recordingtoken = "";
-    }
-    if (
-      object.recordingtrackid !== undefined &&
-      object.recordingtrackid !== null
-    ) {
-      message.recordingtrackid = object.recordingtrackid;
-    } else {
-      message.recordingtrackid = 0;
-    }
-    if (object.indices !== undefined && object.indices !== null) {
-      for (const e of object.indices) {
-        message.indices.push(Index.fromPartial(e));
-      }
-    }
+    const message = createBaseRecordingTrackSetData();
+    message.recordingtoken = object.recordingtoken ?? "";
+    message.recordingtrackid = object.recordingtrackid ?? 0;
+    message.indices = object.indices?.map((e) => Index.fromPartial(e)) || [];
     return message;
   },
 };
 
-const baseRecordingTrackDeleteData: object = {
-  recordingtoken: "",
-  recordingtrackid: 0,
-};
+function createBaseRecordingTrackDeleteData(): RecordingTrackDeleteData {
+  return {
+    recordingtoken: "",
+    recordingtrackid: 0,
+    start: undefined,
+    end: undefined,
+  };
+}
 
 export const RecordingTrackDeleteData = {
   encode(
@@ -8648,9 +6978,7 @@ export const RecordingTrackDeleteData = {
   ): RecordingTrackDeleteData {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseRecordingTrackDeleteData,
-    } as RecordingTrackDeleteData;
+    const message = createBaseRecordingTrackDeleteData();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -8675,33 +7003,16 @@ export const RecordingTrackDeleteData = {
   },
 
   fromJSON(object: any): RecordingTrackDeleteData {
-    const message = {
-      ...baseRecordingTrackDeleteData,
-    } as RecordingTrackDeleteData;
-    if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
-      message.recordingtoken = String(object.recordingtoken);
-    } else {
-      message.recordingtoken = "";
-    }
-    if (
-      object.recordingtrackid !== undefined &&
-      object.recordingtrackid !== null
-    ) {
-      message.recordingtrackid = Number(object.recordingtrackid);
-    } else {
-      message.recordingtrackid = 0;
-    }
-    if (object.start !== undefined && object.start !== null) {
-      message.start = String(object.start);
-    } else {
-      message.start = undefined;
-    }
-    if (object.end !== undefined && object.end !== null) {
-      message.end = String(object.end);
-    } else {
-      message.end = undefined;
-    }
-    return message;
+    return {
+      recordingtoken: isSet(object.recordingtoken)
+        ? String(object.recordingtoken)
+        : "",
+      recordingtrackid: isSet(object.recordingtrackid)
+        ? Number(object.recordingtrackid)
+        : 0,
+      start: isSet(object.start) ? String(object.start) : undefined,
+      end: isSet(object.end) ? String(object.end) : undefined,
+    };
   },
 
   toJSON(message: RecordingTrackDeleteData): unknown {
@@ -8709,46 +7020,27 @@ export const RecordingTrackDeleteData = {
     message.recordingtoken !== undefined &&
       (obj.recordingtoken = message.recordingtoken);
     message.recordingtrackid !== undefined &&
-      (obj.recordingtrackid = message.recordingtrackid);
+      (obj.recordingtrackid = Math.round(message.recordingtrackid));
     message.start !== undefined && (obj.start = message.start);
     message.end !== undefined && (obj.end = message.end);
     return obj;
   },
 
-  fromPartial(
-    object: DeepPartial<RecordingTrackDeleteData>
+  fromPartial<I extends Exact<DeepPartial<RecordingTrackDeleteData>, I>>(
+    object: I
   ): RecordingTrackDeleteData {
-    const message = {
-      ...baseRecordingTrackDeleteData,
-    } as RecordingTrackDeleteData;
-    if (object.recordingtoken !== undefined && object.recordingtoken !== null) {
-      message.recordingtoken = object.recordingtoken;
-    } else {
-      message.recordingtoken = "";
-    }
-    if (
-      object.recordingtrackid !== undefined &&
-      object.recordingtrackid !== null
-    ) {
-      message.recordingtrackid = object.recordingtrackid;
-    } else {
-      message.recordingtrackid = 0;
-    }
-    if (object.start !== undefined && object.start !== null) {
-      message.start = object.start;
-    } else {
-      message.start = undefined;
-    }
-    if (object.end !== undefined && object.end !== null) {
-      message.end = object.end;
-    } else {
-      message.end = undefined;
-    }
+    const message = createBaseRecordingTrackDeleteData();
+    message.recordingtoken = object.recordingtoken ?? "";
+    message.recordingtrackid = object.recordingtrackid ?? 0;
+    message.start = object.start ?? undefined;
+    message.end = object.end ?? undefined;
     return message;
   },
 };
 
-const baseUserAdded: object = {};
+function createBaseUserAdded(): UserAdded {
+  return { user: undefined };
+}
 
 export const UserAdded = {
   encode(
@@ -8764,7 +7056,7 @@ export const UserAdded = {
   decode(input: _m0.Reader | Uint8Array, length?: number): UserAdded {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseUserAdded } as UserAdded;
+    const message = createBaseUserAdded();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -8780,13 +7072,9 @@ export const UserAdded = {
   },
 
   fromJSON(object: any): UserAdded {
-    const message = { ...baseUserAdded } as UserAdded;
-    if (object.user !== undefined && object.user !== null) {
-      message.user = User.fromJSON(object.user);
-    } else {
-      message.user = undefined;
-    }
-    return message;
+    return {
+      user: isSet(object.user) ? User.fromJSON(object.user) : undefined,
+    };
   },
 
   toJSON(message: UserAdded): unknown {
@@ -8796,18 +7084,21 @@ export const UserAdded = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<UserAdded>): UserAdded {
-    const message = { ...baseUserAdded } as UserAdded;
-    if (object.user !== undefined && object.user !== null) {
-      message.user = User.fromPartial(object.user);
-    } else {
-      message.user = undefined;
-    }
+  fromPartial<I extends Exact<DeepPartial<UserAdded>, I>>(
+    object: I
+  ): UserAdded {
+    const message = createBaseUserAdded();
+    message.user =
+      object.user !== undefined && object.user !== null
+        ? User.fromPartial(object.user)
+        : undefined;
     return message;
   },
 };
 
-const baseUserChanged: object = { token: "", grouptoken: "" };
+function createBaseUserChanged(): UserChanged {
+  return { token: "", grouptoken: "" };
+}
 
 export const UserChanged = {
   encode(
@@ -8826,7 +7117,7 @@ export const UserChanged = {
   decode(input: _m0.Reader | Uint8Array, length?: number): UserChanged {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseUserChanged } as UserChanged;
+    const message = createBaseUserChanged();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -8845,18 +7136,10 @@ export const UserChanged = {
   },
 
   fromJSON(object: any): UserChanged {
-    const message = { ...baseUserChanged } as UserChanged;
-    if (object.token !== undefined && object.token !== null) {
-      message.token = String(object.token);
-    } else {
-      message.token = "";
-    }
-    if (object.grouptoken !== undefined && object.grouptoken !== null) {
-      message.grouptoken = String(object.grouptoken);
-    } else {
-      message.grouptoken = "";
-    }
-    return message;
+    return {
+      token: isSet(object.token) ? String(object.token) : "",
+      grouptoken: isSet(object.grouptoken) ? String(object.grouptoken) : "",
+    };
   },
 
   toJSON(message: UserChanged): unknown {
@@ -8866,23 +7149,19 @@ export const UserChanged = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<UserChanged>): UserChanged {
-    const message = { ...baseUserChanged } as UserChanged;
-    if (object.token !== undefined && object.token !== null) {
-      message.token = object.token;
-    } else {
-      message.token = "";
-    }
-    if (object.grouptoken !== undefined && object.grouptoken !== null) {
-      message.grouptoken = object.grouptoken;
-    } else {
-      message.grouptoken = "";
-    }
+  fromPartial<I extends Exact<DeepPartial<UserChanged>, I>>(
+    object: I
+  ): UserChanged {
+    const message = createBaseUserChanged();
+    message.token = object.token ?? "";
+    message.grouptoken = object.grouptoken ?? "";
     return message;
   },
 };
 
-const baseUserRemoved: object = { token: "" };
+function createBaseUserRemoved(): UserRemoved {
+  return { token: "" };
+}
 
 export const UserRemoved = {
   encode(
@@ -8898,7 +7177,7 @@ export const UserRemoved = {
   decode(input: _m0.Reader | Uint8Array, length?: number): UserRemoved {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseUserRemoved } as UserRemoved;
+    const message = createBaseUserRemoved();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -8914,13 +7193,9 @@ export const UserRemoved = {
   },
 
   fromJSON(object: any): UserRemoved {
-    const message = { ...baseUserRemoved } as UserRemoved;
-    if (object.token !== undefined && object.token !== null) {
-      message.token = String(object.token);
-    } else {
-      message.token = "";
-    }
-    return message;
+    return {
+      token: isSet(object.token) ? String(object.token) : "",
+    };
   },
 
   toJSON(message: UserRemoved): unknown {
@@ -8929,21 +7204,18 @@ export const UserRemoved = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<UserRemoved>): UserRemoved {
-    const message = { ...baseUserRemoved } as UserRemoved;
-    if (object.token !== undefined && object.token !== null) {
-      message.token = object.token;
-    } else {
-      message.token = "";
-    }
+  fromPartial<I extends Exact<DeepPartial<UserRemoved>, I>>(
+    object: I
+  ): UserRemoved {
+    const message = createBaseUserRemoved();
+    message.token = object.token ?? "";
     return message;
   },
 };
 
-const baseAddIceCandidateWebRTCRequest: object = {
-  peerid: "",
-  icecandidiate: "",
-};
+function createBaseAddIceCandidateWebRTCRequest(): AddIceCandidateWebRTCRequest {
+  return { peerid: "", icecandidiate: "" };
+}
 
 export const AddIceCandidateWebRTCRequest = {
   encode(
@@ -8965,9 +7237,7 @@ export const AddIceCandidateWebRTCRequest = {
   ): AddIceCandidateWebRTCRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseAddIceCandidateWebRTCRequest,
-    } as AddIceCandidateWebRTCRequest;
+    const message = createBaseAddIceCandidateWebRTCRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -8986,20 +7256,12 @@ export const AddIceCandidateWebRTCRequest = {
   },
 
   fromJSON(object: any): AddIceCandidateWebRTCRequest {
-    const message = {
-      ...baseAddIceCandidateWebRTCRequest,
-    } as AddIceCandidateWebRTCRequest;
-    if (object.peerid !== undefined && object.peerid !== null) {
-      message.peerid = String(object.peerid);
-    } else {
-      message.peerid = "";
-    }
-    if (object.icecandidiate !== undefined && object.icecandidiate !== null) {
-      message.icecandidiate = String(object.icecandidiate);
-    } else {
-      message.icecandidiate = "";
-    }
-    return message;
+    return {
+      peerid: isSet(object.peerid) ? String(object.peerid) : "",
+      icecandidiate: isSet(object.icecandidiate)
+        ? String(object.icecandidiate)
+        : "",
+    };
   },
 
   toJSON(message: AddIceCandidateWebRTCRequest): unknown {
@@ -9010,27 +7272,19 @@ export const AddIceCandidateWebRTCRequest = {
     return obj;
   },
 
-  fromPartial(
-    object: DeepPartial<AddIceCandidateWebRTCRequest>
+  fromPartial<I extends Exact<DeepPartial<AddIceCandidateWebRTCRequest>, I>>(
+    object: I
   ): AddIceCandidateWebRTCRequest {
-    const message = {
-      ...baseAddIceCandidateWebRTCRequest,
-    } as AddIceCandidateWebRTCRequest;
-    if (object.peerid !== undefined && object.peerid !== null) {
-      message.peerid = object.peerid;
-    } else {
-      message.peerid = "";
-    }
-    if (object.icecandidiate !== undefined && object.icecandidiate !== null) {
-      message.icecandidiate = object.icecandidiate;
-    } else {
-      message.icecandidiate = "";
-    }
+    const message = createBaseAddIceCandidateWebRTCRequest();
+    message.peerid = object.peerid ?? "";
+    message.icecandidiate = object.icecandidiate ?? "";
     return message;
   },
 };
 
-const baseAddIceCandidateWebRTCResponse: object = {};
+function createBaseAddIceCandidateWebRTCResponse(): AddIceCandidateWebRTCResponse {
+  return {};
+}
 
 export const AddIceCandidateWebRTCResponse = {
   encode(
@@ -9046,9 +7300,7 @@ export const AddIceCandidateWebRTCResponse = {
   ): AddIceCandidateWebRTCResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseAddIceCandidateWebRTCResponse,
-    } as AddIceCandidateWebRTCResponse;
+    const message = createBaseAddIceCandidateWebRTCResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -9061,10 +7313,7 @@ export const AddIceCandidateWebRTCResponse = {
   },
 
   fromJSON(_: any): AddIceCandidateWebRTCResponse {
-    const message = {
-      ...baseAddIceCandidateWebRTCResponse,
-    } as AddIceCandidateWebRTCResponse;
-    return message;
+    return {};
   },
 
   toJSON(_: AddIceCandidateWebRTCResponse): unknown {
@@ -9072,17 +7321,17 @@ export const AddIceCandidateWebRTCResponse = {
     return obj;
   },
 
-  fromPartial(
-    _: DeepPartial<AddIceCandidateWebRTCResponse>
+  fromPartial<I extends Exact<DeepPartial<AddIceCandidateWebRTCResponse>, I>>(
+    _: I
   ): AddIceCandidateWebRTCResponse {
-    const message = {
-      ...baseAddIceCandidateWebRTCResponse,
-    } as AddIceCandidateWebRTCResponse;
+    const message = createBaseAddIceCandidateWebRTCResponse();
     return message;
   },
 };
 
-const baseAuthenticateRequest: object = { username: "", password: "" };
+function createBaseAuthenticateRequest(): AuthenticateRequest {
+  return { username: "", password: "" };
+}
 
 export const AuthenticateRequest = {
   encode(
@@ -9101,7 +7350,7 @@ export const AuthenticateRequest = {
   decode(input: _m0.Reader | Uint8Array, length?: number): AuthenticateRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseAuthenticateRequest } as AuthenticateRequest;
+    const message = createBaseAuthenticateRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -9120,18 +7369,10 @@ export const AuthenticateRequest = {
   },
 
   fromJSON(object: any): AuthenticateRequest {
-    const message = { ...baseAuthenticateRequest } as AuthenticateRequest;
-    if (object.username !== undefined && object.username !== null) {
-      message.username = String(object.username);
-    } else {
-      message.username = "";
-    }
-    if (object.password !== undefined && object.password !== null) {
-      message.password = String(object.password);
-    } else {
-      message.password = "";
-    }
-    return message;
+    return {
+      username: isSet(object.username) ? String(object.username) : "",
+      password: isSet(object.password) ? String(object.password) : "",
+    };
   },
 
   toJSON(message: AuthenticateRequest): unknown {
@@ -9141,23 +7382,19 @@ export const AuthenticateRequest = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<AuthenticateRequest>): AuthenticateRequest {
-    const message = { ...baseAuthenticateRequest } as AuthenticateRequest;
-    if (object.username !== undefined && object.username !== null) {
-      message.username = object.username;
-    } else {
-      message.username = "";
-    }
-    if (object.password !== undefined && object.password !== null) {
-      message.password = object.password;
-    } else {
-      message.password = "";
-    }
+  fromPartial<I extends Exact<DeepPartial<AuthenticateRequest>, I>>(
+    object: I
+  ): AuthenticateRequest {
+    const message = createBaseAuthenticateRequest();
+    message.username = object.username ?? "";
+    message.password = object.password ?? "";
     return message;
   },
 };
 
-const baseAuthenticateResponse: object = { jwttoken: "" };
+function createBaseAuthenticateResponse(): AuthenticateResponse {
+  return { jwttoken: "" };
+}
 
 export const AuthenticateResponse = {
   encode(
@@ -9176,7 +7413,7 @@ export const AuthenticateResponse = {
   ): AuthenticateResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseAuthenticateResponse } as AuthenticateResponse;
+    const message = createBaseAuthenticateResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -9192,13 +7429,9 @@ export const AuthenticateResponse = {
   },
 
   fromJSON(object: any): AuthenticateResponse {
-    const message = { ...baseAuthenticateResponse } as AuthenticateResponse;
-    if (object.jwttoken !== undefined && object.jwttoken !== null) {
-      message.jwttoken = String(object.jwttoken);
-    } else {
-      message.jwttoken = "";
-    }
-    return message;
+    return {
+      jwttoken: isSet(object.jwttoken) ? String(object.jwttoken) : "",
+    };
   },
 
   toJSON(message: AuthenticateResponse): unknown {
@@ -9207,18 +7440,18 @@ export const AuthenticateResponse = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<AuthenticateResponse>): AuthenticateResponse {
-    const message = { ...baseAuthenticateResponse } as AuthenticateResponse;
-    if (object.jwttoken !== undefined && object.jwttoken !== null) {
-      message.jwttoken = object.jwttoken;
-    } else {
-      message.jwttoken = "";
-    }
+  fromPartial<I extends Exact<DeepPartial<AuthenticateResponse>, I>>(
+    object: I
+  ): AuthenticateResponse {
+    const message = createBaseAuthenticateResponse();
+    message.jwttoken = object.jwttoken ?? "";
     return message;
   },
 };
 
-const baseAddUserRequest: object = { username: "", digest: "", group: "" };
+function createBaseAddUserRequest(): AddUserRequest {
+  return { username: "", digest: "", group: "" };
+}
 
 export const AddUserRequest = {
   encode(
@@ -9240,7 +7473,7 @@ export const AddUserRequest = {
   decode(input: _m0.Reader | Uint8Array, length?: number): AddUserRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseAddUserRequest } as AddUserRequest;
+    const message = createBaseAddUserRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -9262,23 +7495,11 @@ export const AddUserRequest = {
   },
 
   fromJSON(object: any): AddUserRequest {
-    const message = { ...baseAddUserRequest } as AddUserRequest;
-    if (object.username !== undefined && object.username !== null) {
-      message.username = String(object.username);
-    } else {
-      message.username = "";
-    }
-    if (object.digest !== undefined && object.digest !== null) {
-      message.digest = String(object.digest);
-    } else {
-      message.digest = "";
-    }
-    if (object.group !== undefined && object.group !== null) {
-      message.group = String(object.group);
-    } else {
-      message.group = "";
-    }
-    return message;
+    return {
+      username: isSet(object.username) ? String(object.username) : "",
+      digest: isSet(object.digest) ? String(object.digest) : "",
+      group: isSet(object.group) ? String(object.group) : "",
+    };
   },
 
   toJSON(message: AddUserRequest): unknown {
@@ -9289,28 +7510,20 @@ export const AddUserRequest = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<AddUserRequest>): AddUserRequest {
-    const message = { ...baseAddUserRequest } as AddUserRequest;
-    if (object.username !== undefined && object.username !== null) {
-      message.username = object.username;
-    } else {
-      message.username = "";
-    }
-    if (object.digest !== undefined && object.digest !== null) {
-      message.digest = object.digest;
-    } else {
-      message.digest = "";
-    }
-    if (object.group !== undefined && object.group !== null) {
-      message.group = object.group;
-    } else {
-      message.group = "";
-    }
+  fromPartial<I extends Exact<DeepPartial<AddUserRequest>, I>>(
+    object: I
+  ): AddUserRequest {
+    const message = createBaseAddUserRequest();
+    message.username = object.username ?? "";
+    message.digest = object.digest ?? "";
+    message.group = object.group ?? "";
     return message;
   },
 };
 
-const baseAddUserResponse: object = {};
+function createBaseAddUserResponse(): AddUserResponse {
+  return {};
+}
 
 export const AddUserResponse = {
   encode(
@@ -9323,7 +7536,7 @@ export const AddUserResponse = {
   decode(input: _m0.Reader | Uint8Array, length?: number): AddUserResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseAddUserResponse } as AddUserResponse;
+    const message = createBaseAddUserResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -9336,8 +7549,7 @@ export const AddUserResponse = {
   },
 
   fromJSON(_: any): AddUserResponse {
-    const message = { ...baseAddUserResponse } as AddUserResponse;
-    return message;
+    return {};
   },
 
   toJSON(_: AddUserResponse): unknown {
@@ -9345,13 +7557,17 @@ export const AddUserResponse = {
     return obj;
   },
 
-  fromPartial(_: DeepPartial<AddUserResponse>): AddUserResponse {
-    const message = { ...baseAddUserResponse } as AddUserResponse;
+  fromPartial<I extends Exact<DeepPartial<AddUserResponse>, I>>(
+    _: I
+  ): AddUserResponse {
+    const message = createBaseAddUserResponse();
     return message;
   },
 };
 
-const baseUpdateUserRequest: object = { token: "", password: "", group: "" };
+function createBaseUpdateUserRequest(): UpdateUserRequest {
+  return { token: "", password: "", group: "" };
+}
 
 export const UpdateUserRequest = {
   encode(
@@ -9373,7 +7589,7 @@ export const UpdateUserRequest = {
   decode(input: _m0.Reader | Uint8Array, length?: number): UpdateUserRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseUpdateUserRequest } as UpdateUserRequest;
+    const message = createBaseUpdateUserRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -9395,23 +7611,11 @@ export const UpdateUserRequest = {
   },
 
   fromJSON(object: any): UpdateUserRequest {
-    const message = { ...baseUpdateUserRequest } as UpdateUserRequest;
-    if (object.token !== undefined && object.token !== null) {
-      message.token = String(object.token);
-    } else {
-      message.token = "";
-    }
-    if (object.password !== undefined && object.password !== null) {
-      message.password = String(object.password);
-    } else {
-      message.password = "";
-    }
-    if (object.group !== undefined && object.group !== null) {
-      message.group = String(object.group);
-    } else {
-      message.group = "";
-    }
-    return message;
+    return {
+      token: isSet(object.token) ? String(object.token) : "",
+      password: isSet(object.password) ? String(object.password) : "",
+      group: isSet(object.group) ? String(object.group) : "",
+    };
   },
 
   toJSON(message: UpdateUserRequest): unknown {
@@ -9422,28 +7626,20 @@ export const UpdateUserRequest = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<UpdateUserRequest>): UpdateUserRequest {
-    const message = { ...baseUpdateUserRequest } as UpdateUserRequest;
-    if (object.token !== undefined && object.token !== null) {
-      message.token = object.token;
-    } else {
-      message.token = "";
-    }
-    if (object.password !== undefined && object.password !== null) {
-      message.password = object.password;
-    } else {
-      message.password = "";
-    }
-    if (object.group !== undefined && object.group !== null) {
-      message.group = object.group;
-    } else {
-      message.group = "";
-    }
+  fromPartial<I extends Exact<DeepPartial<UpdateUserRequest>, I>>(
+    object: I
+  ): UpdateUserRequest {
+    const message = createBaseUpdateUserRequest();
+    message.token = object.token ?? "";
+    message.password = object.password ?? "";
+    message.group = object.group ?? "";
     return message;
   },
 };
 
-const baseUpdateUserResponse: object = {};
+function createBaseUpdateUserResponse(): UpdateUserResponse {
+  return {};
+}
 
 export const UpdateUserResponse = {
   encode(
@@ -9456,7 +7652,7 @@ export const UpdateUserResponse = {
   decode(input: _m0.Reader | Uint8Array, length?: number): UpdateUserResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseUpdateUserResponse } as UpdateUserResponse;
+    const message = createBaseUpdateUserResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -9469,8 +7665,7 @@ export const UpdateUserResponse = {
   },
 
   fromJSON(_: any): UpdateUserResponse {
-    const message = { ...baseUpdateUserResponse } as UpdateUserResponse;
-    return message;
+    return {};
   },
 
   toJSON(_: UpdateUserResponse): unknown {
@@ -9478,13 +7673,17 @@ export const UpdateUserResponse = {
     return obj;
   },
 
-  fromPartial(_: DeepPartial<UpdateUserResponse>): UpdateUserResponse {
-    const message = { ...baseUpdateUserResponse } as UpdateUserResponse;
+  fromPartial<I extends Exact<DeepPartial<UpdateUserResponse>, I>>(
+    _: I
+  ): UpdateUserResponse {
+    const message = createBaseUpdateUserResponse();
     return message;
   },
 };
 
-const baseDeleteUserRequest: object = { token: "" };
+function createBaseDeleteUserRequest(): DeleteUserRequest {
+  return { token: "" };
+}
 
 export const DeleteUserRequest = {
   encode(
@@ -9500,7 +7699,7 @@ export const DeleteUserRequest = {
   decode(input: _m0.Reader | Uint8Array, length?: number): DeleteUserRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseDeleteUserRequest } as DeleteUserRequest;
+    const message = createBaseDeleteUserRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -9516,13 +7715,9 @@ export const DeleteUserRequest = {
   },
 
   fromJSON(object: any): DeleteUserRequest {
-    const message = { ...baseDeleteUserRequest } as DeleteUserRequest;
-    if (object.token !== undefined && object.token !== null) {
-      message.token = String(object.token);
-    } else {
-      message.token = "";
-    }
-    return message;
+    return {
+      token: isSet(object.token) ? String(object.token) : "",
+    };
   },
 
   toJSON(message: DeleteUserRequest): unknown {
@@ -9531,18 +7726,18 @@ export const DeleteUserRequest = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<DeleteUserRequest>): DeleteUserRequest {
-    const message = { ...baseDeleteUserRequest } as DeleteUserRequest;
-    if (object.token !== undefined && object.token !== null) {
-      message.token = object.token;
-    } else {
-      message.token = "";
-    }
+  fromPartial<I extends Exact<DeepPartial<DeleteUserRequest>, I>>(
+    object: I
+  ): DeleteUserRequest {
+    const message = createBaseDeleteUserRequest();
+    message.token = object.token ?? "";
     return message;
   },
 };
 
-const baseDeleteUserResponse: object = {};
+function createBaseDeleteUserResponse(): DeleteUserResponse {
+  return {};
+}
 
 export const DeleteUserResponse = {
   encode(
@@ -9555,7 +7750,7 @@ export const DeleteUserResponse = {
   decode(input: _m0.Reader | Uint8Array, length?: number): DeleteUserResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseDeleteUserResponse } as DeleteUserResponse;
+    const message = createBaseDeleteUserResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -9568,8 +7763,7 @@ export const DeleteUserResponse = {
   },
 
   fromJSON(_: any): DeleteUserResponse {
-    const message = { ...baseDeleteUserResponse } as DeleteUserResponse;
-    return message;
+    return {};
   },
 
   toJSON(_: DeleteUserResponse): unknown {
@@ -9577,13 +7771,17 @@ export const DeleteUserResponse = {
     return obj;
   },
 
-  fromPartial(_: DeepPartial<DeleteUserResponse>): DeleteUserResponse {
-    const message = { ...baseDeleteUserResponse } as DeleteUserResponse;
+  fromPartial<I extends Exact<DeepPartial<DeleteUserResponse>, I>>(
+    _: I
+  ): DeleteUserResponse {
+    const message = createBaseDeleteUserResponse();
     return message;
   },
 };
 
-const baseGetUserDataRequest: object = { key: "0" };
+function createBaseGetUserDataRequest(): GetUserDataRequest {
+  return { key: "0" };
+}
 
 export const GetUserDataRequest = {
   encode(
@@ -9599,7 +7797,7 @@ export const GetUserDataRequest = {
   decode(input: _m0.Reader | Uint8Array, length?: number): GetUserDataRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseGetUserDataRequest } as GetUserDataRequest;
+    const message = createBaseGetUserDataRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -9615,13 +7813,9 @@ export const GetUserDataRequest = {
   },
 
   fromJSON(object: any): GetUserDataRequest {
-    const message = { ...baseGetUserDataRequest } as GetUserDataRequest;
-    if (object.key !== undefined && object.key !== null) {
-      message.key = String(object.key);
-    } else {
-      message.key = "0";
-    }
-    return message;
+    return {
+      key: isSet(object.key) ? String(object.key) : "0",
+    };
   },
 
   toJSON(message: GetUserDataRequest): unknown {
@@ -9630,18 +7824,18 @@ export const GetUserDataRequest = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<GetUserDataRequest>): GetUserDataRequest {
-    const message = { ...baseGetUserDataRequest } as GetUserDataRequest;
-    if (object.key !== undefined && object.key !== null) {
-      message.key = object.key;
-    } else {
-      message.key = "0";
-    }
+  fromPartial<I extends Exact<DeepPartial<GetUserDataRequest>, I>>(
+    object: I
+  ): GetUserDataRequest {
+    const message = createBaseGetUserDataRequest();
+    message.key = object.key ?? "0";
     return message;
   },
 };
 
-const baseGetUserDataResponse: object = { data: "" };
+function createBaseGetUserDataResponse(): GetUserDataResponse {
+  return { data: "" };
+}
 
 export const GetUserDataResponse = {
   encode(
@@ -9657,7 +7851,7 @@ export const GetUserDataResponse = {
   decode(input: _m0.Reader | Uint8Array, length?: number): GetUserDataResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseGetUserDataResponse } as GetUserDataResponse;
+    const message = createBaseGetUserDataResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -9673,13 +7867,9 @@ export const GetUserDataResponse = {
   },
 
   fromJSON(object: any): GetUserDataResponse {
-    const message = { ...baseGetUserDataResponse } as GetUserDataResponse;
-    if (object.data !== undefined && object.data !== null) {
-      message.data = String(object.data);
-    } else {
-      message.data = "";
-    }
-    return message;
+    return {
+      data: isSet(object.data) ? String(object.data) : "",
+    };
   },
 
   toJSON(message: GetUserDataResponse): unknown {
@@ -9688,18 +7878,18 @@ export const GetUserDataResponse = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<GetUserDataResponse>): GetUserDataResponse {
-    const message = { ...baseGetUserDataResponse } as GetUserDataResponse;
-    if (object.data !== undefined && object.data !== null) {
-      message.data = object.data;
-    } else {
-      message.data = "";
-    }
+  fromPartial<I extends Exact<DeepPartial<GetUserDataResponse>, I>>(
+    object: I
+  ): GetUserDataResponse {
+    const message = createBaseGetUserDataResponse();
+    message.data = object.data ?? "";
     return message;
   },
 };
 
-const baseSetUserDataRequest: object = { key: "0", data: "" };
+function createBaseSetUserDataRequest(): SetUserDataRequest {
+  return { key: "0", data: "" };
+}
 
 export const SetUserDataRequest = {
   encode(
@@ -9718,7 +7908,7 @@ export const SetUserDataRequest = {
   decode(input: _m0.Reader | Uint8Array, length?: number): SetUserDataRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseSetUserDataRequest } as SetUserDataRequest;
+    const message = createBaseSetUserDataRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -9737,18 +7927,10 @@ export const SetUserDataRequest = {
   },
 
   fromJSON(object: any): SetUserDataRequest {
-    const message = { ...baseSetUserDataRequest } as SetUserDataRequest;
-    if (object.key !== undefined && object.key !== null) {
-      message.key = String(object.key);
-    } else {
-      message.key = "0";
-    }
-    if (object.data !== undefined && object.data !== null) {
-      message.data = String(object.data);
-    } else {
-      message.data = "";
-    }
-    return message;
+    return {
+      key: isSet(object.key) ? String(object.key) : "0",
+      data: isSet(object.data) ? String(object.data) : "",
+    };
   },
 
   toJSON(message: SetUserDataRequest): unknown {
@@ -9758,23 +7940,19 @@ export const SetUserDataRequest = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<SetUserDataRequest>): SetUserDataRequest {
-    const message = { ...baseSetUserDataRequest } as SetUserDataRequest;
-    if (object.key !== undefined && object.key !== null) {
-      message.key = object.key;
-    } else {
-      message.key = "0";
-    }
-    if (object.data !== undefined && object.data !== null) {
-      message.data = object.data;
-    } else {
-      message.data = "";
-    }
+  fromPartial<I extends Exact<DeepPartial<SetUserDataRequest>, I>>(
+    object: I
+  ): SetUserDataRequest {
+    const message = createBaseSetUserDataRequest();
+    message.key = object.key ?? "0";
+    message.data = object.data ?? "";
     return message;
   },
 };
 
-const baseSetUserDataResponse: object = {};
+function createBaseSetUserDataResponse(): SetUserDataResponse {
+  return {};
+}
 
 export const SetUserDataResponse = {
   encode(
@@ -9787,7 +7965,7 @@ export const SetUserDataResponse = {
   decode(input: _m0.Reader | Uint8Array, length?: number): SetUserDataResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseSetUserDataResponse } as SetUserDataResponse;
+    const message = createBaseSetUserDataResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -9800,8 +7978,7 @@ export const SetUserDataResponse = {
   },
 
   fromJSON(_: any): SetUserDataResponse {
-    const message = { ...baseSetUserDataResponse } as SetUserDataResponse;
-    return message;
+    return {};
   },
 
   toJSON(_: SetUserDataResponse): unknown {
@@ -9809,18 +7986,23 @@ export const SetUserDataResponse = {
     return obj;
   },
 
-  fromPartial(_: DeepPartial<SetUserDataResponse>): SetUserDataResponse {
-    const message = { ...baseSetUserDataResponse } as SetUserDataResponse;
+  fromPartial<I extends Exact<DeepPartial<SetUserDataResponse>, I>>(
+    _: I
+  ): SetUserDataResponse {
+    const message = createBaseSetUserDataResponse();
     return message;
   },
 };
 
-const baseCallWebRTCRequest: object = {
-  peerid: "",
-  recording: "",
-  videotrackid: 0,
-  sdp: "",
-};
+function createBaseCallWebRTCRequest(): CallWebRTCRequest {
+  return {
+    peerid: "",
+    recording: "",
+    videotrackid: 0,
+    audiotrackid: undefined,
+    sdp: "",
+  };
+}
 
 export const CallWebRTCRequest = {
   encode(
@@ -9848,7 +8030,7 @@ export const CallWebRTCRequest = {
   decode(input: _m0.Reader | Uint8Array, length?: number): CallWebRTCRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseCallWebRTCRequest } as CallWebRTCRequest;
+    const message = createBaseCallWebRTCRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -9876,33 +8058,17 @@ export const CallWebRTCRequest = {
   },
 
   fromJSON(object: any): CallWebRTCRequest {
-    const message = { ...baseCallWebRTCRequest } as CallWebRTCRequest;
-    if (object.peerid !== undefined && object.peerid !== null) {
-      message.peerid = String(object.peerid);
-    } else {
-      message.peerid = "";
-    }
-    if (object.recording !== undefined && object.recording !== null) {
-      message.recording = String(object.recording);
-    } else {
-      message.recording = "";
-    }
-    if (object.videotrackid !== undefined && object.videotrackid !== null) {
-      message.videotrackid = Number(object.videotrackid);
-    } else {
-      message.videotrackid = 0;
-    }
-    if (object.audiotrackid !== undefined && object.audiotrackid !== null) {
-      message.audiotrackid = Number(object.audiotrackid);
-    } else {
-      message.audiotrackid = undefined;
-    }
-    if (object.sdp !== undefined && object.sdp !== null) {
-      message.sdp = String(object.sdp);
-    } else {
-      message.sdp = "";
-    }
-    return message;
+    return {
+      peerid: isSet(object.peerid) ? String(object.peerid) : "",
+      recording: isSet(object.recording) ? String(object.recording) : "",
+      videotrackid: isSet(object.videotrackid)
+        ? Number(object.videotrackid)
+        : 0,
+      audiotrackid: isSet(object.audiotrackid)
+        ? Number(object.audiotrackid)
+        : undefined,
+      sdp: isSet(object.sdp) ? String(object.sdp) : "",
+    };
   },
 
   toJSON(message: CallWebRTCRequest): unknown {
@@ -9910,45 +8076,29 @@ export const CallWebRTCRequest = {
     message.peerid !== undefined && (obj.peerid = message.peerid);
     message.recording !== undefined && (obj.recording = message.recording);
     message.videotrackid !== undefined &&
-      (obj.videotrackid = message.videotrackid);
+      (obj.videotrackid = Math.round(message.videotrackid));
     message.audiotrackid !== undefined &&
-      (obj.audiotrackid = message.audiotrackid);
+      (obj.audiotrackid = Math.round(message.audiotrackid));
     message.sdp !== undefined && (obj.sdp = message.sdp);
     return obj;
   },
 
-  fromPartial(object: DeepPartial<CallWebRTCRequest>): CallWebRTCRequest {
-    const message = { ...baseCallWebRTCRequest } as CallWebRTCRequest;
-    if (object.peerid !== undefined && object.peerid !== null) {
-      message.peerid = object.peerid;
-    } else {
-      message.peerid = "";
-    }
-    if (object.recording !== undefined && object.recording !== null) {
-      message.recording = object.recording;
-    } else {
-      message.recording = "";
-    }
-    if (object.videotrackid !== undefined && object.videotrackid !== null) {
-      message.videotrackid = object.videotrackid;
-    } else {
-      message.videotrackid = 0;
-    }
-    if (object.audiotrackid !== undefined && object.audiotrackid !== null) {
-      message.audiotrackid = object.audiotrackid;
-    } else {
-      message.audiotrackid = undefined;
-    }
-    if (object.sdp !== undefined && object.sdp !== null) {
-      message.sdp = object.sdp;
-    } else {
-      message.sdp = "";
-    }
+  fromPartial<I extends Exact<DeepPartial<CallWebRTCRequest>, I>>(
+    object: I
+  ): CallWebRTCRequest {
+    const message = createBaseCallWebRTCRequest();
+    message.peerid = object.peerid ?? "";
+    message.recording = object.recording ?? "";
+    message.videotrackid = object.videotrackid ?? 0;
+    message.audiotrackid = object.audiotrackid ?? undefined;
+    message.sdp = object.sdp ?? "";
     return message;
   },
 };
 
-const baseCallWebRTCResponse: object = { sdp: "" };
+function createBaseCallWebRTCResponse(): CallWebRTCResponse {
+  return { sdp: "" };
+}
 
 export const CallWebRTCResponse = {
   encode(
@@ -9964,7 +8114,7 @@ export const CallWebRTCResponse = {
   decode(input: _m0.Reader | Uint8Array, length?: number): CallWebRTCResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseCallWebRTCResponse } as CallWebRTCResponse;
+    const message = createBaseCallWebRTCResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -9980,13 +8130,9 @@ export const CallWebRTCResponse = {
   },
 
   fromJSON(object: any): CallWebRTCResponse {
-    const message = { ...baseCallWebRTCResponse } as CallWebRTCResponse;
-    if (object.sdp !== undefined && object.sdp !== null) {
-      message.sdp = String(object.sdp);
-    } else {
-      message.sdp = "";
-    }
-    return message;
+    return {
+      sdp: isSet(object.sdp) ? String(object.sdp) : "",
+    };
   },
 
   toJSON(message: CallWebRTCResponse): unknown {
@@ -9995,18 +8141,18 @@ export const CallWebRTCResponse = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<CallWebRTCResponse>): CallWebRTCResponse {
-    const message = { ...baseCallWebRTCResponse } as CallWebRTCResponse;
-    if (object.sdp !== undefined && object.sdp !== null) {
-      message.sdp = object.sdp;
-    } else {
-      message.sdp = "";
-    }
+  fromPartial<I extends Exact<DeepPartial<CallWebRTCResponse>, I>>(
+    object: I
+  ): CallWebRTCResponse {
+    const message = createBaseCallWebRTCResponse();
+    message.sdp = object.sdp ?? "";
     return message;
   },
 };
 
-const baseGetIceCandidatesWebRTCRequest: object = { peerid: "" };
+function createBaseGetIceCandidatesWebRTCRequest(): GetIceCandidatesWebRTCRequest {
+  return { peerid: "" };
+}
 
 export const GetIceCandidatesWebRTCRequest = {
   encode(
@@ -10025,9 +8171,7 @@ export const GetIceCandidatesWebRTCRequest = {
   ): GetIceCandidatesWebRTCRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseGetIceCandidatesWebRTCRequest,
-    } as GetIceCandidatesWebRTCRequest;
+    const message = createBaseGetIceCandidatesWebRTCRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -10043,15 +8187,9 @@ export const GetIceCandidatesWebRTCRequest = {
   },
 
   fromJSON(object: any): GetIceCandidatesWebRTCRequest {
-    const message = {
-      ...baseGetIceCandidatesWebRTCRequest,
-    } as GetIceCandidatesWebRTCRequest;
-    if (object.peerid !== undefined && object.peerid !== null) {
-      message.peerid = String(object.peerid);
-    } else {
-      message.peerid = "";
-    }
-    return message;
+    return {
+      peerid: isSet(object.peerid) ? String(object.peerid) : "",
+    };
   },
 
   toJSON(message: GetIceCandidatesWebRTCRequest): unknown {
@@ -10060,22 +8198,18 @@ export const GetIceCandidatesWebRTCRequest = {
     return obj;
   },
 
-  fromPartial(
-    object: DeepPartial<GetIceCandidatesWebRTCRequest>
+  fromPartial<I extends Exact<DeepPartial<GetIceCandidatesWebRTCRequest>, I>>(
+    object: I
   ): GetIceCandidatesWebRTCRequest {
-    const message = {
-      ...baseGetIceCandidatesWebRTCRequest,
-    } as GetIceCandidatesWebRTCRequest;
-    if (object.peerid !== undefined && object.peerid !== null) {
-      message.peerid = object.peerid;
-    } else {
-      message.peerid = "";
-    }
+    const message = createBaseGetIceCandidatesWebRTCRequest();
+    message.peerid = object.peerid ?? "";
     return message;
   },
 };
 
-const baseGetIceCandidatesWebRTCResponse: object = { peerlist: "" };
+function createBaseGetIceCandidatesWebRTCResponse(): GetIceCandidatesWebRTCResponse {
+  return { peerlist: "" };
+}
 
 export const GetIceCandidatesWebRTCResponse = {
   encode(
@@ -10094,9 +8228,7 @@ export const GetIceCandidatesWebRTCResponse = {
   ): GetIceCandidatesWebRTCResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseGetIceCandidatesWebRTCResponse,
-    } as GetIceCandidatesWebRTCResponse;
+    const message = createBaseGetIceCandidatesWebRTCResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -10112,15 +8244,9 @@ export const GetIceCandidatesWebRTCResponse = {
   },
 
   fromJSON(object: any): GetIceCandidatesWebRTCResponse {
-    const message = {
-      ...baseGetIceCandidatesWebRTCResponse,
-    } as GetIceCandidatesWebRTCResponse;
-    if (object.peerlist !== undefined && object.peerlist !== null) {
-      message.peerlist = String(object.peerlist);
-    } else {
-      message.peerlist = "";
-    }
-    return message;
+    return {
+      peerlist: isSet(object.peerlist) ? String(object.peerlist) : "",
+    };
   },
 
   toJSON(message: GetIceCandidatesWebRTCResponse): unknown {
@@ -10129,22 +8255,18 @@ export const GetIceCandidatesWebRTCResponse = {
     return obj;
   },
 
-  fromPartial(
-    object: DeepPartial<GetIceCandidatesWebRTCResponse>
+  fromPartial<I extends Exact<DeepPartial<GetIceCandidatesWebRTCResponse>, I>>(
+    object: I
   ): GetIceCandidatesWebRTCResponse {
-    const message = {
-      ...baseGetIceCandidatesWebRTCResponse,
-    } as GetIceCandidatesWebRTCResponse;
-    if (object.peerlist !== undefined && object.peerlist !== null) {
-      message.peerlist = object.peerlist;
-    } else {
-      message.peerlist = "";
-    }
+    const message = createBaseGetIceCandidatesWebRTCResponse();
+    message.peerlist = object.peerlist ?? "";
     return message;
   },
 };
 
-const baseHangUpWebRTCRequest: object = { peerid: "" };
+function createBaseHangUpWebRTCRequest(): HangUpWebRTCRequest {
+  return { peerid: "" };
+}
 
 export const HangUpWebRTCRequest = {
   encode(
@@ -10160,7 +8282,7 @@ export const HangUpWebRTCRequest = {
   decode(input: _m0.Reader | Uint8Array, length?: number): HangUpWebRTCRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseHangUpWebRTCRequest } as HangUpWebRTCRequest;
+    const message = createBaseHangUpWebRTCRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -10176,13 +8298,9 @@ export const HangUpWebRTCRequest = {
   },
 
   fromJSON(object: any): HangUpWebRTCRequest {
-    const message = { ...baseHangUpWebRTCRequest } as HangUpWebRTCRequest;
-    if (object.peerid !== undefined && object.peerid !== null) {
-      message.peerid = String(object.peerid);
-    } else {
-      message.peerid = "";
-    }
-    return message;
+    return {
+      peerid: isSet(object.peerid) ? String(object.peerid) : "",
+    };
   },
 
   toJSON(message: HangUpWebRTCRequest): unknown {
@@ -10191,18 +8309,18 @@ export const HangUpWebRTCRequest = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<HangUpWebRTCRequest>): HangUpWebRTCRequest {
-    const message = { ...baseHangUpWebRTCRequest } as HangUpWebRTCRequest;
-    if (object.peerid !== undefined && object.peerid !== null) {
-      message.peerid = object.peerid;
-    } else {
-      message.peerid = "";
-    }
+  fromPartial<I extends Exact<DeepPartial<HangUpWebRTCRequest>, I>>(
+    object: I
+  ): HangUpWebRTCRequest {
+    const message = createBaseHangUpWebRTCRequest();
+    message.peerid = object.peerid ?? "";
     return message;
   },
 };
 
-const baseHangUpWebRTCResponse: object = {};
+function createBaseHangUpWebRTCResponse(): HangUpWebRTCResponse {
+  return {};
+}
 
 export const HangUpWebRTCResponse = {
   encode(
@@ -10218,7 +8336,7 @@ export const HangUpWebRTCResponse = {
   ): HangUpWebRTCResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseHangUpWebRTCResponse } as HangUpWebRTCResponse;
+    const message = createBaseHangUpWebRTCResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -10231,8 +8349,7 @@ export const HangUpWebRTCResponse = {
   },
 
   fromJSON(_: any): HangUpWebRTCResponse {
-    const message = { ...baseHangUpWebRTCResponse } as HangUpWebRTCResponse;
-    return message;
+    return {};
   },
 
   toJSON(_: HangUpWebRTCResponse): unknown {
@@ -10240,13 +8357,17 @@ export const HangUpWebRTCResponse = {
     return obj;
   },
 
-  fromPartial(_: DeepPartial<HangUpWebRTCResponse>): HangUpWebRTCResponse {
-    const message = { ...baseHangUpWebRTCResponse } as HangUpWebRTCResponse;
+  fromPartial<I extends Exact<DeepPartial<HangUpWebRTCResponse>, I>>(
+    _: I
+  ): HangUpWebRTCResponse {
+    const message = createBaseHangUpWebRTCResponse();
     return message;
   },
 };
 
-const baseRefreshTokenRequest: object = {};
+function createBaseRefreshTokenRequest(): RefreshTokenRequest {
+  return {};
+}
 
 export const RefreshTokenRequest = {
   encode(
@@ -10259,7 +8380,7 @@ export const RefreshTokenRequest = {
   decode(input: _m0.Reader | Uint8Array, length?: number): RefreshTokenRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseRefreshTokenRequest } as RefreshTokenRequest;
+    const message = createBaseRefreshTokenRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -10272,8 +8393,7 @@ export const RefreshTokenRequest = {
   },
 
   fromJSON(_: any): RefreshTokenRequest {
-    const message = { ...baseRefreshTokenRequest } as RefreshTokenRequest;
-    return message;
+    return {};
   },
 
   toJSON(_: RefreshTokenRequest): unknown {
@@ -10281,13 +8401,17 @@ export const RefreshTokenRequest = {
     return obj;
   },
 
-  fromPartial(_: DeepPartial<RefreshTokenRequest>): RefreshTokenRequest {
-    const message = { ...baseRefreshTokenRequest } as RefreshTokenRequest;
+  fromPartial<I extends Exact<DeepPartial<RefreshTokenRequest>, I>>(
+    _: I
+  ): RefreshTokenRequest {
+    const message = createBaseRefreshTokenRequest();
     return message;
   },
 };
 
-const baseRefreshTokenResponse: object = { jwttoken: "" };
+function createBaseRefreshTokenResponse(): RefreshTokenResponse {
+  return { jwttoken: "" };
+}
 
 export const RefreshTokenResponse = {
   encode(
@@ -10306,7 +8430,7 @@ export const RefreshTokenResponse = {
   ): RefreshTokenResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseRefreshTokenResponse } as RefreshTokenResponse;
+    const message = createBaseRefreshTokenResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -10322,13 +8446,9 @@ export const RefreshTokenResponse = {
   },
 
   fromJSON(object: any): RefreshTokenResponse {
-    const message = { ...baseRefreshTokenResponse } as RefreshTokenResponse;
-    if (object.jwttoken !== undefined && object.jwttoken !== null) {
-      message.jwttoken = String(object.jwttoken);
-    } else {
-      message.jwttoken = "";
-    }
-    return message;
+    return {
+      jwttoken: isSet(object.jwttoken) ? String(object.jwttoken) : "",
+    };
   },
 
   toJSON(message: RefreshTokenResponse): unknown {
@@ -10337,18 +8457,18 @@ export const RefreshTokenResponse = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<RefreshTokenResponse>): RefreshTokenResponse {
-    const message = { ...baseRefreshTokenResponse } as RefreshTokenResponse;
-    if (object.jwttoken !== undefined && object.jwttoken !== null) {
-      message.jwttoken = object.jwttoken;
-    } else {
-      message.jwttoken = "";
-    }
+  fromPartial<I extends Exact<DeepPartial<RefreshTokenResponse>, I>>(
+    object: I
+  ): RefreshTokenResponse {
+    const message = createBaseRefreshTokenResponse();
+    message.jwttoken = object.jwttoken ?? "";
     return message;
   },
 };
 
-const baseSubscribeRequest: object = {};
+function createBaseSubscribeRequest(): SubscribeRequest {
+  return {};
+}
 
 export const SubscribeRequest = {
   encode(
@@ -10361,7 +8481,7 @@ export const SubscribeRequest = {
   decode(input: _m0.Reader | Uint8Array, length?: number): SubscribeRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseSubscribeRequest } as SubscribeRequest;
+    const message = createBaseSubscribeRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -10374,8 +8494,7 @@ export const SubscribeRequest = {
   },
 
   fromJSON(_: any): SubscribeRequest {
-    const message = { ...baseSubscribeRequest } as SubscribeRequest;
-    return message;
+    return {};
   },
 
   toJSON(_: SubscribeRequest): unknown {
@@ -10383,13 +8502,17 @@ export const SubscribeRequest = {
     return obj;
   },
 
-  fromPartial(_: DeepPartial<SubscribeRequest>): SubscribeRequest {
-    const message = { ...baseSubscribeRequest } as SubscribeRequest;
+  fromPartial<I extends Exact<DeepPartial<SubscribeRequest>, I>>(
+    _: I
+  ): SubscribeRequest {
+    const message = createBaseSubscribeRequest();
     return message;
   },
 };
 
-const baseSubscribeResponse: object = {};
+function createBaseSubscribeResponse(): SubscribeResponse {
+  return { message: undefined };
+}
 
 export const SubscribeResponse = {
   encode(
@@ -10405,7 +8528,7 @@ export const SubscribeResponse = {
   decode(input: _m0.Reader | Uint8Array, length?: number): SubscribeResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseSubscribeResponse } as SubscribeResponse;
+    const message = createBaseSubscribeResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -10421,13 +8544,9 @@ export const SubscribeResponse = {
   },
 
   fromJSON(object: any): SubscribeResponse {
-    const message = { ...baseSubscribeResponse } as SubscribeResponse;
-    if (object.message !== undefined && object.message !== null) {
-      message.message = Any.fromJSON(object.message);
-    } else {
-      message.message = undefined;
-    }
-    return message;
+    return {
+      message: isSet(object.message) ? Any.fromJSON(object.message) : undefined,
+    };
   },
 
   toJSON(message: SubscribeResponse): unknown {
@@ -10437,13 +8556,14 @@ export const SubscribeResponse = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<SubscribeResponse>): SubscribeResponse {
-    const message = { ...baseSubscribeResponse } as SubscribeResponse;
-    if (object.message !== undefined && object.message !== null) {
-      message.message = Any.fromPartial(object.message);
-    } else {
-      message.message = undefined;
-    }
+  fromPartial<I extends Exact<DeepPartial<SubscribeResponse>, I>>(
+    object: I
+  ): SubscribeResponse {
+    const message = createBaseSubscribeResponse();
+    message.message =
+      object.message !== undefined && object.message !== null
+        ? Any.fromPartial(object.message)
+        : undefined;
     return message;
   },
 };
@@ -10714,27 +8834,28 @@ export const MonocleServiceDesc = {
   serviceName: "proto.MonocleService",
 };
 
-export const MonocleServiceAddIceCandidateWebRTCDesc: UnaryMethodDefinitionish = {
-  methodName: "AddIceCandidateWebRTC",
-  service: MonocleServiceDesc,
-  requestStream: false,
-  responseStream: false,
-  requestType: {
-    serializeBinary() {
-      return AddIceCandidateWebRTCRequest.encode(this).finish();
-    },
-  } as any,
-  responseType: {
-    deserializeBinary(data: Uint8Array) {
-      return {
-        ...AddIceCandidateWebRTCResponse.decode(data),
-        toObject() {
-          return this;
-        },
-      };
-    },
-  } as any,
-};
+export const MonocleServiceAddIceCandidateWebRTCDesc: UnaryMethodDefinitionish =
+  {
+    methodName: "AddIceCandidateWebRTC",
+    service: MonocleServiceDesc,
+    requestStream: false,
+    responseStream: false,
+    requestType: {
+      serializeBinary() {
+        return AddIceCandidateWebRTCRequest.encode(this).finish();
+      },
+    } as any,
+    responseType: {
+      deserializeBinary(data: Uint8Array) {
+        return {
+          ...AddIceCandidateWebRTCResponse.decode(data),
+          toObject() {
+            return this;
+          },
+        };
+      },
+    } as any,
+  };
 
 export const MonocleServiceAddUserDesc: UnaryMethodDefinitionish = {
   methodName: "AddUser",
@@ -10868,27 +8989,28 @@ export const MonocleServiceCallWebRTCDesc: UnaryMethodDefinitionish = {
   } as any,
 };
 
-export const MonocleServiceGetIceCandidatesWebRTCDesc: UnaryMethodDefinitionish = {
-  methodName: "GetIceCandidatesWebRTC",
-  service: MonocleServiceDesc,
-  requestStream: false,
-  responseStream: false,
-  requestType: {
-    serializeBinary() {
-      return GetIceCandidatesWebRTCRequest.encode(this).finish();
-    },
-  } as any,
-  responseType: {
-    deserializeBinary(data: Uint8Array) {
-      return {
-        ...GetIceCandidatesWebRTCResponse.decode(data),
-        toObject() {
-          return this;
-        },
-      };
-    },
-  } as any,
-};
+export const MonocleServiceGetIceCandidatesWebRTCDesc: UnaryMethodDefinitionish =
+  {
+    methodName: "GetIceCandidatesWebRTC",
+    service: MonocleServiceDesc,
+    requestStream: false,
+    responseStream: false,
+    requestType: {
+      serializeBinary() {
+        return GetIceCandidatesWebRTCRequest.encode(this).finish();
+      },
+    } as any,
+    responseType: {
+      deserializeBinary(data: Uint8Array) {
+        return {
+          ...GetIceCandidatesWebRTCResponse.decode(data),
+          toObject() {
+            return this;
+          },
+        };
+      },
+    } as any,
+  };
 
 export const MonocleServiceHangUpWebRTCDesc: UnaryMethodDefinitionish = {
   methodName: "HangUpWebRTC",
@@ -10962,6 +9084,7 @@ export class GrpcWebImpl {
     streamingTransport?: grpc.TransportFactory;
     debug?: boolean;
     metadata?: grpc.Metadata;
+    upStreamRetryCodes?: number[];
   };
 
   constructor(
@@ -10971,6 +9094,7 @@ export class GrpcWebImpl {
       streamingTransport?: grpc.TransportFactory;
       debug?: boolean;
       metadata?: grpc.Metadata;
+      upStreamRetryCodes?: number[];
     }
   ) {
     this.host = host;
@@ -10999,7 +9123,12 @@ export class GrpcWebImpl {
         debug: this.options.debug,
         onEnd: (next) => {
           if (next.status !== 0) {
-            observer.error({ code: next.status, message: next.statusMessage });
+            const err = new GrpcWebError(
+              next.statusMessage,
+              next.status,
+              next.trailers
+            );
+            observer.error(err);
           } else {
             observer.next(next.message as any);
             observer.complete();
@@ -11014,8 +9143,7 @@ export class GrpcWebImpl {
     _request: any,
     metadata: grpc.Metadata | undefined
   ): Observable<any> {
-    // Status Response Codes (https://developers.google.com/maps-booking/reference/grpc-api/status_codes)
-    const upStreamCodes = [2, 4, 8, 9, 10, 13, 14, 15];
+    const upStreamCodes = this.options.upStreamRetryCodes || [];
     const DEFAULT_TIMEOUT_TIME: number = 3_000;
     const request = { ..._request, ...methodDesc.requestType };
     const maybeCombinedMetadata =
@@ -11034,13 +9162,20 @@ export class GrpcWebImpl {
           metadata: maybeCombinedMetadata,
           debug: this.options.debug,
           onMessage: (next) => observer.next(next),
-          onEnd: (code: grpc.Code, message: string) => {
+          onEnd: (
+            code: grpc.Code,
+            message: string,
+            trailers: grpc.Metadata
+          ) => {
             if (code === 0) {
               observer.complete();
             } else if (upStreamCodes.includes(code)) {
               setTimeout(upStream, DEFAULT_TIMEOUT_TIME);
             } else {
-              observer.error(new Error(`Error ${code} ${message}`));
+              const err = new Error(message) as any;
+              err.code = code;
+              err.metadata = trailers;
+              observer.error(err);
             }
           },
         });
@@ -11059,6 +9194,7 @@ type Builtin =
   | number
   | boolean
   | undefined;
+
 export type DeepPartial<T> = T extends Builtin
   ? T
   : T extends Array<infer U>
@@ -11069,6 +9205,13 @@ export type DeepPartial<T> = T extends Builtin
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
+type KeysOfUnion<T> = T extends T ? keyof T : never;
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
+
 function longToString(long: Long) {
   return long.toString();
 }
@@ -11076,4 +9219,18 @@ function longToString(long: Long) {
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;
   _m0.configure();
+}
+
+function isSet(value: any): boolean {
+  return value !== null && value !== undefined;
+}
+
+export class GrpcWebError extends Error {
+  constructor(
+    message: string,
+    public code: grpc.Code,
+    public metadata: grpc.Metadata
+  ) {
+    super(message);
+  }
 }

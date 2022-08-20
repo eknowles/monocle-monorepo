@@ -1,10 +1,10 @@
-import type { FC, ReactChild, MouseEvent, PropsWithChildren } from "react";
+import type { FC, MouseEvent, PropsWithChildren } from "react";
 import classnames from "classnames";
 
 import CrossIcon from "@monocle/icons/src/x.svg";
 
 export interface IPageTabProps {
-  icon: ReactChild;
+  icon: PropsWithChildren['children'];
   name: string;
   isActive?: boolean;
   onClose: (event: MouseEvent<HTMLButtonElement>) => void;

@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    "skipLibCheck": true,
     "outDir": "lib",
     "rootDir": "src",
     "baseUrl": "src",
@@ -8,9 +9,5 @@
   },
   "include": ["src", "../../common.d.ts"],
   "exclude": ["node_modules"],
-  "references": [
-    { "path": "../icons/src" },
-    { "path": "../common" },
-    { "path": "../protobuf/generated" }
-  ]
+  "references": []
 }

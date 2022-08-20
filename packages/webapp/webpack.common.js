@@ -35,30 +35,30 @@ module.exports = {
       TEST_SERVER,
     }),
     new ForkTsCheckerWebpackPlugin(),
-    new FaviconsWebpackPlugin({
-      logo: path.resolve(__dirname, "../icons/src/logo.svg"),
-      cache: true,
-      inject: true,
-      favicons: {
-        appName: "Monocle Security",
-        appDescription: null,
-        developerName: null,
-        developerURL: null,
-        background: "#ddd",
-        theme_color: "#333",
-        version: GIT_VERSION,
-        icons: {
-          android: false,
-          appleIcon: true,
-          appleStartup: true,
-          coast: false,
-          favicons: true,
-          firefox: true,
-          windows: true,
-          yandex: false,
-        },
-      },
-    }),
+    // new FaviconsWebpackPlugin({
+    //   logo: path.resolve(__dirname, "../icons/src/logo.svg"),
+    //   cache: true,
+    //   inject: true,
+    //   favicons: {
+    //     appName: "Monocle Security",
+    //     appDescription: null,
+    //     developerName: null,
+    //     developerURL: null,
+    //     background: "#ddd",
+    //     theme_color: "#333",
+    //     version: GIT_VERSION,
+    //     icons: {
+    //       android: false,
+    //       appleIcon: true,
+    //       appleStartup: true,
+    //       coast: false,
+    //       favicons: true,
+    //       firefox: true,
+    //       windows: true,
+    //       yandex: false,
+    //     },
+    //   },
+    // }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "index.ejs"),
       templateParameters: {
@@ -96,7 +96,6 @@ module.exports = {
               plugins: [
                 // plugin-proposal-decorators is only needed if you're using experimental decorators in TypeScript
                 ["@babel/plugin-proposal-class-properties", { loose: true }],
-                "react-hot-loader/babel",
               ],
               presets: [
                 [

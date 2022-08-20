@@ -25,7 +25,7 @@ export const ServerDetails: FC<PropsWithChildren<IServerDetailsProps>> = ({
 }) => {
   const intl = useIntl();
   return (
-    <div className="p-4">
+    <div className="p-4 dark:bg-code-900 bg-white w-full">
       <Metric
         label={intl.formatMessage({
           id: "c-sdm-sname",
