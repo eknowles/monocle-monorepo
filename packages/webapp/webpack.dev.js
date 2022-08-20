@@ -6,7 +6,7 @@ const common = require("./webpack.common.js");
 module.exports = merge(common, {
   mode: "development",
   entry: {
-    app: ["react-hot-loader/patch", path.resolve(__dirname, "./src/index.tsx")],
+    app: [path.resolve(__dirname, "./src/index.tsx")],
   },
   devtool: "inline-source-map",
   devServer: {
@@ -20,10 +20,5 @@ module.exports = merge(common, {
   },
   stats: {
     errorDetails: true,
-  },
-  resolve: {
-    alias: {
-      "react-dom": "@hot-loader/react-dom",
-    },
-  },
+  }
 });

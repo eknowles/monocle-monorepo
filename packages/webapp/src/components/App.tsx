@@ -1,5 +1,4 @@
 import type { FC } from "react";
-import { hot } from "react-hot-loader";
 import { Provider } from "react-redux";
 import { Outlet, Route, Routes, BrowserRouter, Navigate } from "react-router-dom";
 import { IntlProvider } from "react-intl";
@@ -50,4 +49,4 @@ const App: FC = () => {
   );
 };
 
-export default hot(module)(App);
+export default App;

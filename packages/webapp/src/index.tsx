@@ -1,14 +1,15 @@
 import adapter from "webrtc-adapter";
-import ReactDOM from "react-dom";
+import { createRoot } from 'react-dom/client';
 import { setAppElement } from "react-modal";
 import "@monocle/common/index.css";
 
 import App from "./components/App";
 
 document.documentElement.classList.add("dark");
-const root = document.getElementById("root");
+const container = document.getElementById("root");
+const root = createRoot(container!);
 
 // react modal
 setAppElement("#root");
 
-ReactDOM.render(<App />, root);
+root.render(<App />);
