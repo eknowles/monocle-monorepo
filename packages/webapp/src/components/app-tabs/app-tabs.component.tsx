@@ -33,7 +33,7 @@ const Tab: FC<ITabProps> = ({ icon, name, params, onClose }) => {
   return (
     <Link<ILocationSetTabState>
       to={{ pathname: path, state: { setTab: { name, icon, params, path } } }}
-      className="inline-flex"
+      className="inline-flex focus:outline-none focus:ring focus:border-blue-900 focus:z-50"
     >
       <PageTab
         onClose={onClose}
