@@ -15,3 +15,5 @@ export const DetailsRoute = () => {
     />
   );
 };
+
+DetailsRoute.title = "Details";

@@ -88,6 +88,7 @@ export const viewsSelectors = viewsAdapter.getSelectors(
 const hangUpEpic: Epic = (action$, state$) => {
   return action$.pipe(
     ofType<HangUp, any>(hangUp.type),
+    // @ts-ignore
     map(({ payload }) => {
       const clientOptions = {
         host: GRPC_SERVER,

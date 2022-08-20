@@ -1,5 +1,5 @@
 import { Form, Formik } from "formik";
-import { FC, useState } from "react";
+import { FC, useState, PropsWithChildren } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useDispatch } from "react-redux";
 import {
@@ -53,7 +53,7 @@ export const AddViewButton = () => {
   );
 };
 
-const NewViewForm: FC = () => {
+const NewViewForm: FC<PropsWithChildren<unknown>> = () => {
   const intl = useIntl();
 
   return (

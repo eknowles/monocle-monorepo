@@ -1,3 +1,4 @@
+import type { EntityId } from "@reduxjs/toolkit/dist/entities/models";
 import type { FC } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -7,7 +8,7 @@ import { viewsSelectors } from "../../../redux/modules/view";
 
 export const ViewRoute: FC = () => {
   const { viewId } = useParams<any>();
-  const view = useSelector((state) => viewsSelectors.selectById(state, viewId));
+  const view = useSelector((state) => viewsSelectors.selectById(state, viewId as EntityId));
 
   return (
     <PackedGrid

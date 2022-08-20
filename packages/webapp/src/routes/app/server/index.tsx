@@ -1,7 +1,7 @@
-import type { FC } from "react";
+import { createElement, FC } from "react";
 import { SideNavItem } from "@monocle/components";
 import { useSelector } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { useRoutes } from "react-router-dom";
 import { getServerListItem } from "../../../redux/modules/server";
 import { DetailsRoute } from "./details";
 import { LogsRoute } from "./logs";
@@ -17,26 +17,18 @@ export const ServerRoute: FC = () => {
 
   const routes = [
     {
-      path: `${basePath}/details`,
+      path: `details`,
       name: "Details",
       component: DetailsRoute,
     },
     {
-      path: `${basePath}/logs`,
+      path: `logs`,
       name: "Logs",
       component: LogsRoute,
     },
-    // {
-    //   path: `${basePath}/groups`,
-    //   name: "Groups",
-    //   component: GroupsRoute,
-    // },
-    // {
-    //   path: `${basePath}/users`,
-    //   name: "Users",
-    //   component: UsersRoute,
-    // },
   ];
+
+  const element = useRoutes(routes.map(r => ({path: r.path, element: createElement(r.component)})))
 
   return (
     <div className="h-full w-full dark:bg-code-900 bg-white flex">
@@ -58,16 +50,7 @@ export const ServerRoute: FC = () => {
           </SideNavItem>
         ))}
       </div>
-      <Switch>
-        {routes.map((route) => (
-          <Route
-            key={route.path}
-            path={route.path}
-            component={route.component}
-            exact={false}
-          />
-        ))}
-      </Switch>
+      {element}
     </div>
   );
 };

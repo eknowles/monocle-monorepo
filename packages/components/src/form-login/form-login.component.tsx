@@ -1,12 +1,12 @@
 import { Form } from "formik";
-import type { FC } from "react";
+import type { FC, PropsWithChildren } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import { Button } from "../button";
 import { Field } from "../field";
 
 export type IFormValues = Record<"username" | "password", string>;
 
-export const FormLogin: FC = () => {
+export const FormLogin: FC<PropsWithChildren<unknown>> = () => {
   const intl = useIntl();
   return (
     <Form className="grid gap-2 grid-cols-1 max-w-sm p-4 dark:bg-code-800 bg-white shadow-lg">

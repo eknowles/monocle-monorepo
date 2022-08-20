@@ -5,8 +5,7 @@ module.exports = {
     builder: "webpack5",
   },
   stories: [
-    "../../components/**/*.stories.mdx",
-    "../../components/**/*.stories.@(js|jsx|ts|tsx)",
+    "../../components/src/*/*.stories.{js,jsx,ts,tsx,mdx}",
   ],
   typescript: {
     reactDocgen: "react-docgen-typescript",
@@ -18,11 +17,13 @@ module.exports = {
     },
   },
   addons: [
-    "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@storybook/addon-postcss",
   ],
   webpackFinal: async (config) => {
+    config.resolve = {
+      extensions: [".ts", ".js", ".tsx"],
+    };
     config.module.rules = [
       {
         test: /\.(jpe?g|gif|png|woff|ttf|wav|mp3)$/i,
@@ -36,7 +37,7 @@ module.exports = {
         use: ["@svgr/webpack"],
       },
       {
-        test: /\.tsx?$/,
+        test: /\.(t|j)sx?$/,
         use: [
           {
             loader: "babel-loader",

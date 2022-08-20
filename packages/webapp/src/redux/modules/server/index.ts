@@ -116,6 +116,7 @@ export const getServerMeta = createSelector(
 const authEpic: Epic = (action$, _state$, { history }) => {
   return action$.pipe(
     ofType<Auth, any>(auth.type),
+    // @ts-ignore
     switchMap(({ payload: { host, username, password } }) =>
       // @ts-ignore
       authenticate(host, username, password).pipe(
@@ -134,7 +135,7 @@ const authEpic: Epic = (action$, _state$, { history }) => {
         }),
         catchError((_error) => {
           toast.error(_error.message || "Failed to authenticate");
-          return [serverSlice.actions.authFailed({ host })];
+          return [serverSlice.actions.logout()];
         })
       )
     )
@@ -144,6 +145,7 @@ const authEpic: Epic = (action$, _state$, { history }) => {
 const onAuthSuccessEpic: Epic = (action$, state$) => {
   return action$.pipe(
     ofType(serverSlice.actions.authSuccess.type),
+    // @ts-ignore
     map(({ payload: { host, token } }) => subscribe({ host, token }))
   );
 };
@@ -151,10 +153,11 @@ const onAuthSuccessEpic: Epic = (action$, state$) => {
 const logoutEpic: Epic = (action$, _state$, { history }) => {
   return action$.pipe(
     ofType(serverSlice.actions.logout.type),
+    // @ts-ignore
     map(() => {
       localStorage.removeItem(LOCALSTORAGE_AUTH_TOKEN_KEY);
       history.push("/login");
-      return loggedOut();
+      return [serverSlice.actions.authFailed({ host: '' }), loggedOut()];
     })
   );
 };
@@ -162,6 +165,7 @@ const logoutEpic: Epic = (action$, _state$, { history }) => {
 const subscribeEpic: Epic = (action$, _state$) => {
   return action$.pipe(
     ofType<Subscribe, any>(subscribe.type),
+    // @ts-ignore
     switchMap(({ payload }) =>
       // @ts-ignore
       monocleSubscribe(payload).pipe(

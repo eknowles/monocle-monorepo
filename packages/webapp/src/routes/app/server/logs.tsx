@@ -1,18 +1,18 @@
-import { FC } from "react";
+import { FC, PropsWithChildren } from "react";
 import { FormattedMessage } from "react-intl";
 import { useSelector } from "react-redux";
 import { DateTime } from "luxon";
 import { getServerLogs } from "../../../redux/modules/server";
 import { Severity } from "@monocle/protobuf/generated/monocle";
 
-const TH: FC = ({ children }) => (
+const TH: FC<PropsWithChildren<unknown>> = ({ children }) => (
   <th className="sticky top-0 p-2 text-xs font-normal tracking-tight text-left uppercase bg-white dark:text-code-400 text-code-500 dark:bg-black">
     {children}
   </th>
 );
-const TD: FC = ({ children }) => <td className="px-2">{children}</td>;
+const TD: FC<PropsWithChildren<unknown>> = ({ children }) => <td className="px-2">{children}</td>;
 
-const SeverityMessage: FC<{ type: number }> = ({ type }) => {
+const SeverityMessage: FC<PropsWithChildren<{ type: number }>> = ({ type }) => {
   switch (type) {
     case Severity.SeverityTrace:
       return (

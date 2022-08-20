@@ -1,7 +1,6 @@
-import React from "react";
-import type { FC } from "react";
+import type { FC, PropsWithChildren } from "react";
 
-export const PageTabBar: FC = ({ children }) => {
+export const PageTabBar: FC<PropsWithChildren<unknown>> = ({ children }) => {
   return (
     <div className="dark:bg-code-800 bg-grey-100 flex">
       {children}

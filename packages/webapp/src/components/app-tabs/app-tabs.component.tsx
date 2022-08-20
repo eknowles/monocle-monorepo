@@ -1,6 +1,6 @@
 import { PageTab, PageTabBar } from "@monocle/components";
-import type { FC } from "react";
-import { Link, useRouteMatch, generatePath } from "react-router-dom";
+import type { FC, PropsWithChildren } from "react";
+import { NavLink, useMatch, generatePath, Params } from "react-router-dom";
 import { IconTypes, ILocationSetTabState, usePageTabs } from "./use-page-tabs";
 import Server from "@monocle/icons/src/server.svg";
 import Grid from "@monocle/icons/src/grid.svg";
@@ -25,27 +25,29 @@ interface ITabProps {
   onClose: () => void;
 }
 
-const Tab: FC<ITabProps> = ({ icon, name, params, onClose }) => {
+const Tab: FC<PropsWithChildren<ITabProps>> = ({ icon, name, params, onClose }) => {
   const Icon = iconMap[icon as string];
-  const path = generatePath(pathMap[icon], params);
-  const match = useRouteMatch({ path, exact: false });
+  const path = generatePath(pathMap[icon], params as Params);
 
   return (
-    <Link<ILocationSetTabState>
-      to={{ pathname: path, state: { setTab: { name, icon, params, path } } }}
-      className="inline-flex focus:outline-none focus:ring focus:border-blue-900 focus:z-50"
+    <NavLink
+      to={{ pathname: path }}
+      state={{ setTab: { name, icon, params, path } }}
+      className={"inline-flex focus:outline-none focus:ring focus:border-blue-900 focus:z-50"}
     >
-      <PageTab
-        onClose={onClose}
-        icon={<Icon width="14" height="14" />}
-        name={name}
-        isActive={!!match}
-      />
-    </Link>
+      {({ isActive }) => (
+        <PageTab
+          onClose={onClose}
+          icon={<Icon width="14" height="14" />}
+          name={name}
+          isActive={isActive}
+        />
+      )}
+    </NavLink>
   );
 };
 
-export const AppTabs: FC = () => {
+export const AppTabs: FC<PropsWithChildren<unknown>> = () => {
   const { tabs, removeTab } = usePageTabs();
 
   return (

@@ -1,8 +1,5 @@
-import { Form } from "formik";
-import type { FC } from "react";
+import type { FC, PropsWithChildren } from "react";
 import { useIntl } from "react-intl";
-import { Button } from "../button";
-import { Field } from "../field";
 
 export type IServerDetailsProps = {
   name: string;
@@ -10,7 +7,7 @@ export type IServerDetailsProps = {
   version: string;
 };
 
-const Metric: FC<{ label: string; value: string }> = ({ label, value }) => (
+const Metric: FC<PropsWithChildren<{ label: string; value: string }>> = ({ label, value }) => (
   <div>
     <div className="tracking-tight text-xs dark:text-code-400 uppercase">
       {label}
@@ -21,7 +18,7 @@ const Metric: FC<{ label: string; value: string }> = ({ label, value }) => (
   </div>
 );
 
-export const ServerDetails: FC<IServerDetailsProps> = ({
+export const ServerDetails: FC<PropsWithChildren<IServerDetailsProps>> = ({
   name,
   architecture,
   version,

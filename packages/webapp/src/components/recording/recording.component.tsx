@@ -1,4 +1,4 @@
-import React, { FC, useLayoutEffect, useRef } from "react";
+import React, { FC, useLayoutEffect, useRef, PropsWithChildren } from "react";
 import { FormattedMessage } from "react-intl";
 import { useSelector } from "react-redux";
 import { GRPC_SERVER, HTTP_SERVER } from "../../constants";
@@ -9,7 +9,7 @@ import { getClient } from "../../services/monocle";
 
 import WebRtcStreamer from "./webrtc";
 
-export const Recording: FC<{ recordingToken: string | number }> = ({
+export const Recording: FC<PropsWithChildren<{ recordingToken: string | number }>> = ({
   recordingToken,
 }) => {
   const divRef = useRef(null);
@@ -87,7 +87,7 @@ export const Recording: FC<{ recordingToken: string | number }> = ({
           height: `${height}px`,
           width: `${width}px`,
         }}
-        className="object-contain dark:bg-code-900 bg-white transition-opacity duration-700 opacity-0"
+        className="object-contain dark:bg-code-900 bg-white transition-opacity duration-300 opacity-0"
       />
     </div>
   );

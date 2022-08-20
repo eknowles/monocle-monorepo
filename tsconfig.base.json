@@ -1,6 +1,6 @@
 {
   "include": ["./packages/**/*", "./common.d.ts"],
-  "exclude": ["./packages/*/dist", "./packages/*/public", "./packages/*/build"],
+  "exclude": ["./packages/*/dist", "./packages/*/public", "./packages/*/build", "./node_modules/"],
   "compilerOptions": {
     "allowUmdGlobalAccess": true,
     "baseUrl": ".",
@@ -12,6 +12,8 @@
     "lib": ["dom", "esnext"],
     "moduleResolution": "node",
     "resolveJsonModule": true,
+    "jsx": "react-jsx",
+    "downlevelIteration": true,
     "paths": {
       "@monocle/icons": ["./packages/icons/src"],
       "@monocle/components": ["./packages/components/src"],

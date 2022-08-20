@@ -1,30 +1,50 @@
+import type { FC } from "react";
 import { hot } from "react-hot-loader";
 import { Provider } from "react-redux";
-import { Router, Route, Switch } from "react-router-dom";
+import { Outlet, Route, Routes, BrowserRouter, Navigate } from "react-router-dom";
 import { IntlProvider } from "react-intl";
+import { ErrorBoundary } from 'react-error-boundary'
 import { Shell } from "@monocle/components";
 
-import { history } from "../history";
 import { store } from "../redux";
 import HomePage from "../routes/app";
+import { RecordingRoute } from "../routes/app/recording";
+import { ServerRoute } from "../routes/app/server";
+import { ViewRoute } from "../routes/app/view";
 import LoginPage from "../routes/login";
 import AuthButton from "./AuthButton";
 
 import messages from "@monocle/common/compiled-lang/en.json";
 
-const App = () => {
+const Fallback = () => <div>error</div>
+
+const Main: FC = () => (
+  <Shell appActions={<AuthButton />}>
+    <Outlet />
+  </Shell>
+)
+
+const App: FC = () => {
   return (
     <IntlProvider messages={messages as any} locale="en" defaultLocale="en">
       <Provider store={store}>
-        <Router history={history}>
-          <Shell appActions={<AuthButton />}>
-            <Switch>
-              <Route component={HomePage} path="/app" />
-              <Route component={LoginPage} path="/login" />
-              <Route component={LoginPage} />
-            </Switch>
-          </Shell>
-        </Router>
+        <BrowserRouter>
+          <ErrorBoundary FallbackComponent={Fallback}>
+            <Routes>
+              <Route path="/*" element={<Main />}>
+                <Route path="login" element={<LoginPage />} />
+                <Route path="app" element={<HomePage />}>
+                  <Route
+                    element={<RecordingRoute />}
+                    path="recording/:recordingToken"
+                  />
+                  <Route element={<ViewRoute />} path="view/:viewId" />
+                  <Route element={<ServerRoute />} path="server/:serverId/*" />
+                </Route>
+              </Route>
+            </Routes>
+          </ErrorBoundary>
+        </BrowserRouter>
       </Provider>
     </IntlProvider>
   );

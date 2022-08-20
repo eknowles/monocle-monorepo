@@ -1,7 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, PropsWithChildren } from "react";
 import type { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { AppTabs } from "../../components/app-tabs";
 import { SideNav } from "../../components/side-nav";
 import { GRPC_SERVER } from "../../constants";
@@ -10,14 +10,12 @@ import {
   getServerAuthToken,
   serverSlice,
 } from "../../redux/modules/server";
-import { RecordingRoute } from "./recording";
-import { ServerRoute } from "./server";
-import { ViewRoute } from "./view";
 
-const AppRoute: FC = () => {
+const AppRoute: FC<PropsWithChildren> = () => {
   const serverAuthToken = useSelector(getServerAuthToken);
   const authStatus = useSelector(getAuthStatus);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!authStatus && serverAuthToken) {
@@ -28,6 +26,9 @@ const AppRoute: FC = () => {
         })
       );
     }
+    if (authStatus && !serverAuthToken) {
+      navigate('/login');
+    }
   }, [serverAuthToken, authStatus, dispatch]);
 
   return (
@@ -35,15 +36,7 @@ const AppRoute: FC = () => {
       <SideNav />
       <div className="flex flex-col w-full h-full">
         <AppTabs />
-        <Switch>
-          <Route
-            component={RecordingRoute}
-            exact
-            path="/app/recording/:recordingToken"
-          />
-          <Route component={ViewRoute} exact path="/app/view/:viewId" />
-          <Route component={ServerRoute} path="/app/server/:serverId" />
-        </Switch>
+        <Outlet />
       </div>
     </div>
   );
