@@ -48,6 +48,7 @@
     "favicons": "^6.2.2",
     "favicons-webpack-plugin": "^5.0.2",
     "luxon": "^3.0.1",
+    "vis-timeline": "^7.7.0",
     "webpack-merge": "^5.8.0"
   }
 }

@@ -1,0 +1,13 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "outDir": "lib",
+    "rootDir": "src",
+    "baseUrl": "src",
+    "jsx": "react"
+  },
+  "include": ["src", "../../common.d.ts"],
+  "exclude": ["node_modules"],
+  "references": []
+}
