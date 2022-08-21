@@ -179,7 +179,7 @@ const subscribeEpic: Epic = (action$, _state$) => {
             return serverSlice.actions.state(stateObj);
           }
 
-          return [{ type: value.message!.typeUrl }];
+          return { type: value.message!.typeUrl };
         })
       )
     )
