@@ -8,7 +8,9 @@ import { viewsSelectors } from "../../../redux/modules/view";
 
 export const ViewRoute: FC = () => {
   const { viewId } = useParams<any>();
-  const view = useSelector((state) => viewsSelectors.selectById(state, viewId as EntityId));
+  const view = useSelector((state) =>
+    viewsSelectors.selectById(state, viewId as EntityId)
+  );
 
   return (
     <PackedGrid

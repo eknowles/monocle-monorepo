@@ -7,7 +7,10 @@ export type IServerDetailsProps = {
   version: string;
 };
 
-const Metric: FC<PropsWithChildren<{ label: string; value: string }>> = ({ label, value }) => (
+const Metric: FC<PropsWithChildren<{ label: string; value: string }>> = ({
+  label,
+  value,
+}) => (
   <div>
     <div className="tracking-tight text-xs dark:text-code-400 uppercase">
       {label}

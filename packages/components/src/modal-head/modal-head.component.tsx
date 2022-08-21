@@ -1,7 +1,10 @@
 import type { FC, PropsWithChildren } from "react";
 import CrossIcon from "@monocle/icons/src/x.svg";
 
-export const ModalHead: FC<PropsWithChildren<{ onClose?: any }>> = ({ children, onClose }) => (
+export const ModalHead: FC<PropsWithChildren<{ onClose?: any }>> = ({
+  children,
+  onClose,
+}) => (
   <div className="inline-flex items-center justify-between dark:bg-black bg-gray-200 w-full">
     <div className="flex items-center">
       <div className="dark:text-code-100 text-black py-2 px-3 uppercase text-xs font-bold">

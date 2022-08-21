@@ -10,7 +10,9 @@ const TH: FC<PropsWithChildren<unknown>> = ({ children }) => (
     {children}
   </th>
 );
-const TD: FC<PropsWithChildren<unknown>> = ({ children }) => <td className="px-2">{children}</td>;
+const TD: FC<PropsWithChildren<unknown>> = ({ children }) => (
+  <td className="px-2">{children}</td>
+);
 
 const SeverityMessage: FC<PropsWithChildren<{ type: number }>> = ({ type }) => {
   switch (type) {

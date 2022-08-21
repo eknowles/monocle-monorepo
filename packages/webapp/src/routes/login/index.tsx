@@ -19,7 +19,7 @@ const LoginPage: FC<PropsWithChildren<unknown>> = () => {
         password: values.password,
       })
     );
-    navigate('/app');
+    navigate("/app");
   };
 
   return (

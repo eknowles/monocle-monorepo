@@ -1,8 +1,14 @@
 import type { FC } from "react";
 import { Provider } from "react-redux";
-import { Outlet, Route, Routes, BrowserRouter, Navigate } from "react-router-dom";
+import {
+  Outlet,
+  Route,
+  Routes,
+  BrowserRouter,
+  Navigate,
+} from "react-router-dom";
 import { IntlProvider } from "react-intl";
-import { ErrorBoundary } from 'react-error-boundary'
+import { ErrorBoundary } from "react-error-boundary";
 import { Shell } from "@monocle/components";
 
 import { store } from "../redux";
@@ -15,13 +21,13 @@ import AuthButton from "./AuthButton";
 
 import messages from "@monocle/common/compiled-lang/en.json";
 
-const Fallback = () => <div>error</div>
+const Fallback = () => <div>error</div>;
 
 const Main: FC = () => (
   <Shell appActions={<AuthButton />}>
     <Outlet />
   </Shell>
-)
+);
 
 const App: FC = () => {
   return (

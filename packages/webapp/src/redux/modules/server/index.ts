@@ -157,7 +157,7 @@ const logoutEpic: Epic = (action$, _state$, { history }) => {
     map(() => {
       localStorage.removeItem(LOCALSTORAGE_AUTH_TOKEN_KEY);
       history.push("/login");
-      return [serverSlice.actions.authFailed({ host: '' }), loggedOut()];
+      return [serverSlice.actions.authFailed({ host: "" }), loggedOut()];
     })
   );
 };

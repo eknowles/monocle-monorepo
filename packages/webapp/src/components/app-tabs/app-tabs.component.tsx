@@ -25,7 +25,12 @@ interface ITabProps {
   onClose: () => void;
 }
 
-const Tab: FC<PropsWithChildren<ITabProps>> = ({ icon, name, params, onClose }) => {
+const Tab: FC<PropsWithChildren<ITabProps>> = ({
+  icon,
+  name,
+  params,
+  onClose,
+}) => {
   const Icon = iconMap[icon as string];
   const path = generatePath(pathMap[icon], params as Params);
 
@@ -33,7 +38,9 @@ const Tab: FC<PropsWithChildren<ITabProps>> = ({ icon, name, params, onClose }) 
     <NavLink
       to={{ pathname: path }}
       state={{ setTab: { name, icon, params, path } }}
-      className={"inline-flex focus:outline-none focus:ring focus:border-blue-900 focus:z-50"}
+      className={
+        "inline-flex focus:outline-none focus:ring focus:border-blue-900 focus:z-50"
+      }
     >
       {({ isActive }) => (
         <PageTab

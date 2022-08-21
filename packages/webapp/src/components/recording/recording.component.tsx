@@ -9,9 +9,9 @@ import { getClient } from "../../services/monocle";
 
 import WebRtcStreamer from "./webrtc";
 
-export const Recording: FC<PropsWithChildren<{ recordingToken: string | number }>> = ({
-  recordingToken,
-}) => {
+export const Recording: FC<
+  PropsWithChildren<{ recordingToken: string | number }>
+> = ({ recordingToken }) => {
   const divRef = useRef(null);
   const { height, width } = useDimension(divRef);
   const videoEl = useRef<HTMLVideoElement>(null);

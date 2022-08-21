@@ -4,7 +4,7 @@ import classnames from "classnames";
 import CrossIcon from "@monocle/icons/src/x.svg";
 
 export interface IPageTabProps {
-  icon: PropsWithChildren['children'];
+  icon: PropsWithChildren["children"];
   name: string;
   isActive?: boolean;
   onClose: (event: MouseEvent<HTMLButtonElement>) => void;

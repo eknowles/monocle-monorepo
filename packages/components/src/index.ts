@@ -1,4 +1,5 @@
 // COMPONENTS
+export * from "./timeline";
 export * from "./field";
 export * from "./modal-head";
 export * from "./modal";

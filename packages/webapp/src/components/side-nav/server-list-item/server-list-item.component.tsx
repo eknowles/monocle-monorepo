@@ -7,7 +7,10 @@ interface IServerListItemProps {
   name: string;
 }
 
-export const ServerListItem: FC<PropsWithChildren<IServerListItemProps>> = ({ name, id }) => {
+export const ServerListItem: FC<PropsWithChildren<IServerListItemProps>> = ({
+  name,
+  id,
+}) => {
   const path = `/app/server/${id}`;
   return (
     <SideNavItem

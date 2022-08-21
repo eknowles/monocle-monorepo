@@ -1,11 +1,11 @@
-import type { FC, PropsWithChildren } from 'react';
-import { useSelector } from 'react-redux';
-import { Route, Navigate } from 'react-router-dom';
-import { RootState } from '../redux';
+import type { FC, PropsWithChildren } from "react";
+import { useSelector } from "react-redux";
+import { Route, Navigate } from "react-router-dom";
+import { RootState } from "../redux";
 
 const PrivateRoute: FC<PropsWithChildren<any>> = ({ children, ...rest }) => {
   const isAuthed = useSelector<RootState>(
-    (state) => state.server.authenticated,
+    (state) => state.server.authenticated
   );
 
   return (
@@ -17,8 +17,8 @@ const PrivateRoute: FC<PropsWithChildren<any>> = ({ children, ...rest }) => {
         ) : (
           <Navigate
             replace={true}
-            to={{ pathname: '/login' }}
-            state={{ from: '/' }}
+            to={{ pathname: "/login" }}
+            state={{ from: "/" }}
           />
         )
       }

@@ -1,1 +1,1 @@
-export * from './form-login.component';
+export * from "./form-login.component";

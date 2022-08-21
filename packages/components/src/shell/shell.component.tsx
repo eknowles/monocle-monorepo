@@ -9,7 +9,10 @@ interface IShellProps {
   children?: ReactNode;
 }
 
-export const Shell: FC<PropsWithChildren<IShellProps>> = ({ children, appActions }) => (
+export const Shell: FC<PropsWithChildren<IShellProps>> = ({
+  children,
+  appActions,
+}) => (
   <>
     <ToastProvider />
     <div className="w-screen h-screen flex flex-col dark:bg-code-900 bg-gray-50 dark:text-dawn-200 overflow-hidden">

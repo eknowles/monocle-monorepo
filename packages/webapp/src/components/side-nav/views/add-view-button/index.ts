@@ -1,1 +1,1 @@
-export * from './add-view-button.component';
+export * from "./add-view-button.component";

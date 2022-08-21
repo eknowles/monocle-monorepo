@@ -1,5 +1,5 @@
 import adapter from "webrtc-adapter";
-import { render } from 'react-dom';
+import { render } from "react-dom";
 import { setAppElement } from "react-modal";
 import "@monocle/common/index.css";
 

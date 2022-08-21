@@ -27,7 +27,7 @@ const AppRoute: FC<PropsWithChildren> = () => {
       );
     }
     if (authStatus && !serverAuthToken) {
-      navigate('/login');
+      navigate("/login");
     }
   }, [serverAuthToken, authStatus, dispatch]);
 

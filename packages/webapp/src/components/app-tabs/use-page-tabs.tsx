@@ -1,14 +1,17 @@
-import type { IPageTabProps } from '@monocle/components';
-import { useEffect, useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import type { IPageTabProps } from "@monocle/components";
+import { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export enum IconTypes {
-  SERVER = 'server',
-  VIEW = 'view',
-  RECORDING = 'recording',
+  SERVER = "server",
+  VIEW = "view",
+  RECORDING = "recording",
 }
 
-export type ILocationTabState = { path: string; icon: IconTypes } & Pick<IPageTabProps, 'name'> & {
+export type ILocationTabState = { path: string; icon: IconTypes } & Pick<
+  IPageTabProps,
+  "name"
+> & {
     params: object;
   };
 export type ILocationSetTabState = { setTab: ILocationTabState };
@@ -31,7 +34,7 @@ export const usePageTabs = () => {
     // close first and only tab
     if (tabs.length === 1 && index === 0) {
       setTabs([]);
-      navigate('/app');
+      navigate("/app");
       return;
     }
 

@@ -1,6 +1,6 @@
 const path = require("path");
 
-import type { StorybookConfig } from '@storybook/core-common';
+import type { StorybookConfig } from "@storybook/core-common";
 
 const config: StorybookConfig = {
   core: {
@@ -23,14 +23,12 @@ const config: StorybookConfig = {
       },
     },
   },
-  addons: [
-    "@storybook/addon-postcss",
-    "@storybook/addon-essentials",
-  ],
-  framework: '@storybook/react',
+  addons: ["@storybook/addon-postcss", "@storybook/addon-essentials"],
+  framework: "@storybook/react",
   webpackFinal: async (config) => {
     const fileLoaderRule = config.module!.rules!.find(
-      (rule: any) => rule.test && !Array.isArray(rule.test) && rule.test.test(".svg"),
+      (rule: any) =>
+        rule.test && !Array.isArray(rule.test) && rule.test.test(".svg")
     );
     (fileLoaderRule as any).exclude = /\.svg$/;
     config.module!.rules!.push({

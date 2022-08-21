@@ -12,18 +12,19 @@ export const SideNavItem: FC<ISideNavItemProps<any>> = ({
   state = {},
   children,
 }) => {
-
   return (
     <NavLink
       to={{ pathname: path as string }}
       state={state}
-      className={({ isActive }) => classnames(
-        "px-2 py-1 dark:text-white w-full text-xs flex items-center focus:outline-none focus:ring focus:border-blue-900",
-        {
-          "dark:hover:bg-code-700 hover:bg-gray-200": !isActive,
-          "dark:bg-code-700 bg-gray-200": !!isActive,
-        }
-      )}
+      className={({ isActive }) =>
+        classnames(
+          "px-2 py-1 dark:text-white w-full text-xs flex items-center focus:outline-none focus:ring focus:border-blue-900",
+          {
+            "dark:hover:bg-code-700 hover:bg-gray-200": !isActive,
+            "dark:bg-code-700 bg-gray-200": !!isActive,
+          }
+        )
+      }
     >
       {/*// @ts-ignore */}
       {children}

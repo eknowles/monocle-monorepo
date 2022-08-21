@@ -34,8 +34,8 @@ function WebRtcStreamer(
 
   // @ts-ignore
   this.mediaConstraints = {
-    sdpSemantics: 'unified-plan',
-    bundlePolicy: 'max-bundle',
+    sdpSemantics: "unified-plan",
+    bundlePolicy: "max-bundle",
     offerToReceiveAudio: true,
     offerToReceiveVideo: true,
   };

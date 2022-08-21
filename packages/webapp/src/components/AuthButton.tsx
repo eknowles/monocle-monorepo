@@ -11,12 +11,11 @@ const AuthButton = () => {
     (state) => state.server.authenticated
   );
 
-
   if (isAuthed) {
     const handleLogout = () => {
       dispatch(serverSlice.actions.logout());
       navigate("/login");
-    }
+    };
 
     return (
       <button onClick={handleLogout}>
@@ -26,7 +25,7 @@ const AuthButton = () => {
           defaultMessage="Log Out"
         />
       </button>
-    )
+    );
   }
 
   return (
@@ -37,7 +36,7 @@ const AuthButton = () => {
         defaultMessage="Log In"
       />
     </NavLink>
-  )
+  );
 };
 
 export default AuthButton;

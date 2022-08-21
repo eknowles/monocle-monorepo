@@ -1,7 +1,7 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { createEpicMiddleware } from 'redux-observable';
-import { rootEpic, rootReducer } from './modules';
-import { history } from '../history';
+import { configureStore } from "@reduxjs/toolkit";
+import { createEpicMiddleware } from "redux-observable";
+import { rootEpic, rootReducer } from "./modules";
+import { history } from "../history";
 
 const epicMiddleware = createEpicMiddleware({
   dependencies: {
@@ -17,7 +17,7 @@ export const configStore = () => {
         thunk: true,
       }).concat(
         // Custom middleware:
-        epicMiddleware,
+        epicMiddleware
       ),
   });
 

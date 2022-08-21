@@ -1,6 +1,6 @@
-import { useDispatch } from 'react-redux';
-import { configStore } from './configureStore';
-import { rootReducer } from './modules';
+import { useDispatch } from "react-redux";
+import { configStore } from "./configureStore";
+import { rootReducer } from "./modules";
 
 export const store = configStore();
 

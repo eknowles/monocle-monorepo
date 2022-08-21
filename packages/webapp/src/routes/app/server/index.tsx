@@ -28,7 +28,9 @@ export const ServerRoute: FC = () => {
     },
   ];
 
-  const element = useRoutes(routes.map(r => ({path: r.path, element: createElement(r.component)})))
+  const element = useRoutes(
+    routes.map((r) => ({ path: r.path, element: createElement(r.component) }))
+  );
 
   return (
     <div className="h-full w-full dark:bg-code-900 bg-white flex">
