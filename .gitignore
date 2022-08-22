@@ -8,3 +8,4 @@ lib
 /packages/webapp/node_modules/
 build/
 dist/
+dist.zip

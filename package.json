@@ -3,6 +3,9 @@
   "private": true,
   "version": "1.0.0",
   "license": "UNLICENCED",
+  "engines": {
+    "node": ">= 16.17.0"
+  },
   "workspaces": [
     "packages/*"
   ],

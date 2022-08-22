@@ -1,5 +1,4 @@
 import { Timeline } from "@monocle/components";
-import type { RecordingTrack } from "@monocle/protobuf/generated/monocle";
 import React, {
   FC,
   useLayoutEffect,
@@ -9,13 +8,13 @@ import React, {
 } from "react";
 import { FormattedMessage } from "react-intl";
 import { useSelector } from "react-redux";
+import { TimelineGroup } from "vis-timeline";
 import type { TimelineItem } from "vis-timeline";
-import { GRPC_SERVER, HTTP_SERVER } from "../../constants";
+import { GRPC_SERVER, HTTP_SERVER, TIMELINE_HEIGHT } from "../../constants";
 import useDimension from "../../hooks/use-dimensions";
 import { getRecordings } from "../../redux/modules/server";
 import { getServerAuthToken } from "../../redux/modules/server";
 import { getClient } from "../../services/monocle";
-
 import WebRtcStreamer from "./webrtc";
 
 export const Recording: FC<
@@ -45,21 +44,29 @@ export const Recording: FC<
   );
 
   const timelineItems = useMemo<TimelineItem[]>(() => {
+    const now = new Date().getTime();
     if (!activeTrack) return [];
-    return (activeTrack.indices || []).map((indice, index) => ({
-      id: `${index}`,
-      content: `${activeTrack.description} ${index}`,
-      start: indice.starttime,
-      end: indice.endtime,
-      type: "background",
-    }));
+    const items = (activeTrack.indices || []).map<TimelineItem>(
+      (trackIndex, i) => ({
+        id: i,
+        content: i.toString(),
+        start: trackIndex.starttime,
+        end: trackIndex.endtime,
+        type: "background",
+        group: activeTrack.recordingtrackid,
+      })
+    );
+    return items;
   }, [activeTrack]);
+
+  const groups: TimelineGroup[] = [];
 
   const minimumTimelineTime = useMemo(() => {
     // @ts-ignore
     return Math.min(...timelineItems.map((t) => t.start));
   }, [timelineItems]);
-  console.log(activeTrack);
+
+  const handleRequestedTime = (time: Date) => {};
 
   useLayoutEffect(() => {
     let webRtcServer: any;
@@ -88,7 +95,7 @@ export const Recording: FC<
     };
   }, [recordingToken, activeTrackId]);
 
-  if (!hasTracks) {
+  if (!hasTracks || !activeTrack) {
     return (
       <div className="dark:bg-code-900 bg-white dark:text-white w-full h-full dark:text-code-100 flex items-center justify-center">
         <span className="uppercase font-mono text-sm dark:bg-black px-1">
@@ -101,6 +108,12 @@ export const Recording: FC<
       </div>
     );
   }
+
+  groups.push({
+    id: activeTrack.recordingtrackid,
+    content: activeTrack.description,
+    title: activeTrack.description,
+  });
 
   // 36 px is the height of the tab bar so we need to take that off the calculation
   return (
@@ -116,12 +129,17 @@ export const Recording: FC<
         muted
         controls={true}
         style={{
-          height: `${height - 130}px`,
+          height: `${height - TIMELINE_HEIGHT}px`,
           width: `${width}px`,
         }}
         className="object-contain dark:bg-code-900 bg-white transition-opacity duration-300 opacity-0 flex grow"
       />
-      <Timeline min={minimumTimelineTime} items={timelineItems} />
+      <Timeline
+        onTimeChange={handleRequestedTime}
+        min={minimumTimelineTime}
+        items={timelineItems}
+        groups={groups}
+      />
     </div>
   );
 };

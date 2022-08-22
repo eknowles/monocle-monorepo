@@ -8,3 +8,4 @@ const SERVER_IP =
 export const GRPC_SERVER = `http://${SERVER_IP}:${GRPC_WEB_PORT}`;
 export const HTTP_SERVER = `http://${SERVER_IP}:${HTTP_PORT}`;
 export const LOCALSTORAGE_AUTH_TOKEN_KEY = "monocle-auth-token";
+export const TIMELINE_HEIGHT = 130;

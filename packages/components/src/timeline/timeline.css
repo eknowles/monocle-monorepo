@@ -2,6 +2,7 @@
     --timeline-border-color: theme('colors.code.700');
     --timeline-border-color-minor: theme('colors.code.800');
     --timeline-background-item-color: theme('colors.code.600');
+    --timeline-custom-time: theme('colors.blue.600');
 }
 
 vis-time-axis {
@@ -76,7 +77,7 @@ vis-time-axis {
 }
 
 .vis-custom-time {
-    background-color: #6E94FF;
+    background-color: var(--timeline-custom-time);
     width: 2px;
     cursor: move;
     z-index: 1;
@@ -133,26 +134,22 @@ vis-time-axis {
 }
 
 .vis-rolling-mode-btn {
-    height: 30px;
-    width: 30px;
+    @apply p-2 font-mono text-xs font-light text-center uppercase shadow-md bg-blue-700 text-white;
     position: absolute;
-    top: 8px;
-    right: 8px;
+    bottom: 4px;
+    right: 4px;
     border-radius: 0;
-    font-size: 28px;
     cursor: pointer;
-    opacity: 0.6;
-    color: white;
-    font-weight: bold;
+    opacity: 1;
     text-align: center;
-    background-color: theme('colors.blue.900');
 }
 .vis-rolling-mode-btn:before {
-    content: "\26F6";
+    content: "Reset Center";
+    /*content: "\26F6";*/
 }
 
 .vis-rolling-mode-btn:hover {
-    opacity: 1;
+    background-color: theme('colors.blue.600');
 }
 .vis-panel {
     position: absolute;
