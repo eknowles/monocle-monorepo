@@ -5,6 +5,7 @@ import {
   Route,
   Routes,
   BrowserRouter,
+  unstable_HistoryRouter as HistoryRouter,
   Navigate,
 } from "react-router-dom";
 import { IntlProvider } from "react-intl";
@@ -18,10 +19,12 @@ import { ServerRoute } from "../routes/app/server";
 import { ViewRoute } from "../routes/app/view";
 import LoginPage from "../routes/login";
 import AuthButton from "./AuthButton";
+import { history } from "../history";
 
 import messages from "@monocle/common/compiled-lang/en.json";
 
-const Fallback = () => <div>error</div>;
+// todo add better error screens
+const Fallback = () => <Shell>Error</Shell>;
 
 const Main: FC = () => (
   <Shell appActions={<AuthButton />}>
@@ -33,7 +36,7 @@ const App: FC = () => {
   return (
     <IntlProvider messages={messages as any} locale="en" defaultLocale="en">
       <Provider store={store}>
-        <BrowserRouter>
+        <HistoryRouter history={history}>
           <ErrorBoundary FallbackComponent={Fallback}>
             <Routes>
               <Route path="/*" element={<Main />}>
@@ -49,7 +52,7 @@ const App: FC = () => {
               </Route>
             </Routes>
           </ErrorBoundary>
-        </BrowserRouter>
+        </HistoryRouter>
       </Provider>
     </IntlProvider>
   );

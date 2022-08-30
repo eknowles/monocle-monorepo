@@ -128,8 +128,6 @@ const authEpic: Epic = (action$, _state$, { history }) => {
 
           localStorage.setItem(LOCALSTORAGE_AUTH_TOKEN_KEY, jwttoken);
 
-          history.push("/app");
-
           toast.success("Authentication successful");
           return serverSlice.actions.authSuccess({ host, token: jwttoken! });
         }),
@@ -142,11 +140,14 @@ const authEpic: Epic = (action$, _state$, { history }) => {
   );
 };
 
-const onAuthSuccessEpic: Epic = (action$, state$) => {
+const onAuthSuccessEpic: Epic = (action$, state$, { history }) => {
   return action$.pipe(
     ofType(serverSlice.actions.authSuccess.type),
     // @ts-ignore
-    map(({ payload: { host, token } }) => subscribe({ host, token }))
+    map(({ payload: { host, token } }) => {
+      history.push("/app");
+      return subscribe({ host, token });
+    })
   );
 };
 
@@ -182,7 +183,11 @@ const subscribeEpic: Epic = (action$, _state$) => {
           return { type: value.message!.typeUrl };
         })
       )
-    )
+    ),
+    catchError((_error) => {
+      toast.error(_error.message || "Failed to authenticate");
+      return [serverSlice.actions.logout()];
+    })
   );
 };
 

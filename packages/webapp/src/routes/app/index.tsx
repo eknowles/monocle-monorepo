@@ -9,6 +9,7 @@ import {
   getAuthStatus,
   getServerAuthToken,
   serverSlice,
+  subscribe,
 } from "../../redux/modules/server";
 
 const AppRoute: FC<PropsWithChildren> = () => {
@@ -18,16 +19,15 @@ const AppRoute: FC<PropsWithChildren> = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!authStatus && serverAuthToken) {
+    if (serverAuthToken) {
       dispatch(
-        serverSlice.actions.authSuccess({
+        subscribe({
           host: GRPC_SERVER,
           token: serverAuthToken,
         })
       );
-    }
-    if (authStatus && !serverAuthToken) {
-      navigate("/login");
+    } else {
+      dispatch(serverSlice.actions.logout());
     }
   }, [serverAuthToken, authStatus, dispatch]);
 
