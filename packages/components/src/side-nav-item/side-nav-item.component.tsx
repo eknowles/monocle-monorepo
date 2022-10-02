@@ -21,7 +21,7 @@ export const SideNavItem: FC<ISideNavItemProps<any>> = ({
           "px-2 py-1 dark:text-white w-full text-xs flex items-center focus:outline-none focus:ring focus:border-blue-900",
           {
             "dark:hover:bg-code-700 hover:bg-gray-200": !isActive,
-            "dark:bg-code-700 bg-gray-200": !!isActive,
+            "dark:bg-code-900 bg-gray-200": !!isActive,
           }
         )
       }
