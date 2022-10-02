@@ -1,21 +1,22 @@
 import { Timeline } from "@monocle/components";
+import { PlayRequest } from "@monocle/protobuf/generated/monocle";
 import React, {
   FC,
-  useLayoutEffect,
+  useEffect,
   useRef,
   PropsWithChildren,
   useMemo,
+  useState,
 } from "react";
 import { FormattedMessage } from "react-intl";
 import { useSelector } from "react-redux";
-import { TimelineGroup } from "vis-timeline";
-import type { TimelineItem } from "vis-timeline";
 import { GRPC_SERVER, HTTP_SERVER, TIMELINE_HEIGHT } from "../../constants";
 import useDimension from "../../hooks/use-dimensions";
-import { getRecordings } from "../../redux/modules/server";
+import { useTimeline } from "../../hooks/use-timeline";
+import { useTrack } from "../../hooks/use-track";
 import { getServerAuthToken } from "../../redux/modules/server";
 import { getClient } from "../../services/monocle";
-import WebRtcStreamer from "./webrtc";
+import { WebRTC, WebRTCOptions } from "./webrtc-class";
 
 export const Recording: FC<
   PropsWithChildren<{ recordingToken: string | number }>
@@ -24,51 +25,26 @@ export const Recording: FC<
   const { height, width } = useDimension(divRef);
   const videoEl = useRef<HTMLVideoElement>(null);
   const serverAuthToken = useSelector(getServerAuthToken);
-  const recordings = useSelector(getRecordings);
-  const currentRecording = (recordings || []).find(
-    (recording) => recording.token === recordingToken
-  );
-  const hasTracks = (currentRecording?.tracks ?? []).length > 0;
+  const { activeTrack, activeTrackId, hasTracks } = useTrack(recordingToken);
+  const { groups, timelineItems, minimumTimelineTime } =
+    useTimeline(recordingToken);
 
-  const activeTrackId =
-    currentRecording &&
-    currentRecording.jobs.length &&
-    currentRecording.jobs
-      .find((job) => job.recordingjobtoken === currentRecording.activejob)!
-      .recordingjobsources.find(
-        (source) => source.recordingjobsourcetracks.length === 1
-      )!.recordingjobsourcetracks[0].recordingtrackid;
+  const handleRequestedTime = (time: Date) => {
+    if (activeTrackId) {
+      const grpc = getClient({
+        host: GRPC_SERVER,
+        token: serverAuthToken as string,
+      });
+      const request: PlayRequest = {
+        starttime: Math.floor(time.getTime() / 1000) as unknown as string,
+        peerid: activeTrackId as unknown as string,
+      };
+      console.log(request);
+      grpc.client.Play(request, grpc.meta).toPromise();
+    }
+  };
 
-  const activeTrack = currentRecording?.tracks!.find(
-    (track) => track.recordingtrackid === activeTrackId
-  );
-
-  const timelineItems = useMemo<TimelineItem[]>(() => {
-    const now = new Date().getTime();
-    if (!activeTrack) return [];
-    const items = (activeTrack.indices || []).map<TimelineItem>(
-      (trackIndex, i) => ({
-        id: i,
-        content: i.toString(),
-        start: trackIndex.starttime,
-        end: trackIndex.endtime,
-        type: "background",
-        group: activeTrack.recordingtrackid,
-      })
-    );
-    return items;
-  }, [activeTrack]);
-
-  const groups: TimelineGroup[] = [];
-
-  const minimumTimelineTime = useMemo(() => {
-    // @ts-ignore
-    return Math.min(...timelineItems.map((t) => t.start));
-  }, [timelineItems]);
-
-  const handleRequestedTime = (time: Date) => {};
-
-  useLayoutEffect(() => {
+  useEffect(() => {
     let webRtcServer: any;
     if (videoEl.current && activeTrackId) {
       const grpc = getClient({
@@ -76,14 +52,15 @@ export const Recording: FC<
         token: serverAuthToken as string,
       });
 
-      // @ts-ignore
-      webRtcServer = new WebRtcStreamer(
+      const options: WebRTCOptions = {
+        videotrackid: activeTrackId,
+        recording: recordingToken,
+        videoElement: videoEl.current,
+        srvurl: HTTP_SERVER,
         grpc,
-        videoEl.current,
-        HTTP_SERVER,
-        recordingToken,
-        activeTrackId
-      );
+      };
+
+      webRtcServer = new WebRTC(options);
 
       webRtcServer.connect();
     }

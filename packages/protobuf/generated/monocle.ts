@@ -1051,6 +1051,19 @@ export interface SubscribeResponse {
   message: Any | undefined;
 }
 
+export interface PlayRequest {
+  peerid: string;
+  starttime: string;
+}
+
+export interface PauseRequest {
+  peerid: string;
+}
+
+export interface PlayResponse {}
+
+export interface PauseResponse {}
+
 function createBaseFile(): File {
   return {
     token: "",
@@ -8568,6 +8581,211 @@ export const SubscribeResponse = {
   },
 };
 
+function createBasePlayRequest(): PlayRequest {
+  return { peerid: "", starttime: "0" };
+}
+
+export const PlayRequest = {
+  encode(
+    message: PlayRequest,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.peerid !== "") {
+      writer.uint32(10).string(message.peerid);
+    }
+    if (message.starttime !== "0") {
+      writer.uint32(16).uint64(message.starttime);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): PlayRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePlayRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.peerid = reader.string();
+          break;
+        case 2:
+          message.starttime = longToString(reader.uint64() as Long);
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): PlayRequest {
+    return {
+      peerid: isSet(object.peerid) ? String(object.peerid) : "",
+      starttime: isSet(object.starttime) ? String(object.starttime) : "0",
+    };
+  },
+
+  toJSON(message: PlayRequest): unknown {
+    const obj: any = {};
+    message.peerid !== undefined && (obj.peerid = message.peerid);
+    message.starttime !== undefined && (obj.starttime = message.starttime);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<PlayRequest>, I>>(
+    object: I
+  ): PlayRequest {
+    const message = createBasePlayRequest();
+    message.peerid = object.peerid ?? "";
+    message.starttime = object.starttime ?? "0";
+    return message;
+  },
+};
+
+function createBasePauseRequest(): PauseRequest {
+  return { peerid: "" };
+}
+
+export const PauseRequest = {
+  encode(
+    message: PauseRequest,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.peerid !== "") {
+      writer.uint32(10).string(message.peerid);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): PauseRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePauseRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.peerid = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): PauseRequest {
+    return {
+      peerid: isSet(object.peerid) ? String(object.peerid) : "",
+    };
+  },
+
+  toJSON(message: PauseRequest): unknown {
+    const obj: any = {};
+    message.peerid !== undefined && (obj.peerid = message.peerid);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<PauseRequest>, I>>(
+    object: I
+  ): PauseRequest {
+    const message = createBasePauseRequest();
+    message.peerid = object.peerid ?? "";
+    return message;
+  },
+};
+
+function createBasePlayResponse(): PlayResponse {
+  return {};
+}
+
+export const PlayResponse = {
+  encode(
+    _: PlayResponse,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): PlayResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePlayResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): PlayResponse {
+    return {};
+  },
+
+  toJSON(_: PlayResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<PlayResponse>, I>>(
+    _: I
+  ): PlayResponse {
+    const message = createBasePlayResponse();
+    return message;
+  },
+};
+
+function createBasePauseResponse(): PauseResponse {
+  return {};
+}
+
+export const PauseResponse = {
+  encode(
+    _: PauseResponse,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): PauseResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePauseResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): PauseResponse {
+    return {};
+  },
+
+  toJSON(_: PauseResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<PauseResponse>, I>>(
+    _: I
+  ): PauseResponse {
+    const message = createBasePauseResponse();
+    return message;
+  },
+};
+
 export interface AuthService {
   Authenticate(
     request: DeepPartial<AuthenticateRequest>,
@@ -8700,6 +8918,14 @@ export interface MonocleService {
     request: DeepPartial<SubscribeRequest>,
     metadata?: grpc.Metadata
   ): Observable<SubscribeResponse>;
+  Play(
+    request: DeepPartial<PlayRequest>,
+    metadata?: grpc.Metadata
+  ): Observable<PlayResponse>;
+  Pause(
+    request: DeepPartial<PauseRequest>,
+    metadata?: grpc.Metadata
+  ): Observable<PauseResponse>;
 }
 
 export class MonocleServiceClientImpl implements MonocleService {
@@ -8717,6 +8943,8 @@ export class MonocleServiceClientImpl implements MonocleService {
     this.GetIceCandidatesWebRTC = this.GetIceCandidatesWebRTC.bind(this);
     this.HangUpWebRTC = this.HangUpWebRTC.bind(this);
     this.Subscribe = this.Subscribe.bind(this);
+    this.Play = this.Play.bind(this);
+    this.Pause = this.Pause.bind(this);
   }
 
   AddIceCandidateWebRTC(
@@ -8825,6 +9053,28 @@ export class MonocleServiceClientImpl implements MonocleService {
     return this.rpc.invoke(
       MonocleServiceSubscribeDesc,
       SubscribeRequest.fromPartial(request),
+      metadata
+    );
+  }
+
+  Play(
+    request: DeepPartial<PlayRequest>,
+    metadata?: grpc.Metadata
+  ): Observable<PlayResponse> {
+    return this.rpc.unary(
+      MonocleServicePlayDesc,
+      PlayRequest.fromPartial(request),
+      metadata
+    );
+  }
+
+  Pause(
+    request: DeepPartial<PauseRequest>,
+    metadata?: grpc.Metadata
+  ): Observable<PauseResponse> {
+    return this.rpc.unary(
+      MonocleServicePauseDesc,
+      PauseRequest.fromPartial(request),
       metadata
     );
   }
@@ -9048,6 +9298,50 @@ export const MonocleServiceSubscribeDesc: UnaryMethodDefinitionish = {
     deserializeBinary(data: Uint8Array) {
       return {
         ...SubscribeResponse.decode(data),
+        toObject() {
+          return this;
+        },
+      };
+    },
+  } as any,
+};
+
+export const MonocleServicePlayDesc: UnaryMethodDefinitionish = {
+  methodName: "Play",
+  service: MonocleServiceDesc,
+  requestStream: false,
+  responseStream: false,
+  requestType: {
+    serializeBinary() {
+      return PlayRequest.encode(this).finish();
+    },
+  } as any,
+  responseType: {
+    deserializeBinary(data: Uint8Array) {
+      return {
+        ...PlayResponse.decode(data),
+        toObject() {
+          return this;
+        },
+      };
+    },
+  } as any,
+};
+
+export const MonocleServicePauseDesc: UnaryMethodDefinitionish = {
+  methodName: "Pause",
+  service: MonocleServiceDesc,
+  requestStream: false,
+  responseStream: false,
+  requestType: {
+    serializeBinary() {
+      return PauseRequest.encode(this).finish();
+    },
+  } as any,
+  responseType: {
+    deserializeBinary(data: Uint8Array) {
+      return {
+        ...PauseResponse.decode(data),
         toObject() {
           return this;
         },

@@ -744,6 +744,27 @@ message SubscribeResponse
   google.protobuf.Any message = 1;
 }
 
+message PlayRequest
+{
+  string peerid = 1;
+  uint64 starttime = 2;
+}
+
+message PauseRequest
+{
+  string peerid = 1;
+}
+
+message PlayResponse
+{
+
+}
+
+message PauseResponse
+{
+
+}
+
 service AuthService
 {
   rpc Authenticate(AuthenticateRequest) returns (AuthenticateResponse);
@@ -762,4 +783,6 @@ service MonocleService
   rpc GetIceCandidatesWebRTC(GetIceCandidatesWebRTCRequest) returns (GetIceCandidatesWebRTCResponse);
   rpc HangUpWebRTC(HangUpWebRTCRequest) returns (HangUpWebRTCResponse);
   rpc Subscribe(SubscribeRequest) returns (stream SubscribeResponse);
+  rpc Play(PlayRequest) returns (PlayResponse);
+  rpc Pause(PauseRequest) returns (PauseResponse);
 }
