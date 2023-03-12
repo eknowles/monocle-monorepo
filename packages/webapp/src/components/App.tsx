@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import { StrictMode, FC } from "react";
 import { Provider } from "react-redux";
 import {
   Outlet,
@@ -34,27 +34,32 @@ const Main: FC = () => (
 
 const App: FC = () => {
   return (
-    <IntlProvider messages={messages as any} locale="en" defaultLocale="en">
-      <Provider store={store}>
-        <HistoryRouter history={history}>
-          <ErrorBoundary FallbackComponent={Fallback}>
-            <Routes>
-              <Route path="/*" element={<Main />}>
-                <Route path="login" element={<LoginPage />} />
-                <Route path="app" element={<HomePage />}>
-                  <Route
-                    element={<RecordingRoute />}
-                    path="recording/:recordingToken"
-                  />
-                  <Route element={<ViewRoute />} path="view/:viewId" />
-                  <Route element={<ServerRoute />} path="server/:serverId/*" />
+    <StrictMode>
+      <IntlProvider messages={messages as any} locale="en" defaultLocale="en">
+        <Provider store={store}>
+          <HistoryRouter history={history}>
+            <ErrorBoundary FallbackComponent={Fallback}>
+              <Routes>
+                <Route path="/*" element={<Main />}>
+                  <Route path="login" element={<LoginPage />} />
+                  <Route path="app" element={<HomePage />}>
+                    <Route
+                      element={<RecordingRoute />}
+                      path="recording/:recordingToken"
+                    />
+                    <Route element={<ViewRoute />} path="view/:viewId" />
+                    <Route
+                      element={<ServerRoute />}
+                      path="server/:serverId/*"
+                    />
+                  </Route>
                 </Route>
-              </Route>
-            </Routes>
-          </ErrorBoundary>
-        </HistoryRouter>
-      </Provider>
-    </IntlProvider>
+              </Routes>
+            </ErrorBoundary>
+          </HistoryRouter>
+        </Provider>
+      </IntlProvider>
+    </StrictMode>
   );
 };
 

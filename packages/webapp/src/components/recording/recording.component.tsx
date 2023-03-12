@@ -1,4 +1,3 @@
-import { Timeline } from "@monocle/components";
 import { PlayRequest } from "@monocle/protobuf/generated/monocle";
 import React, {
   FC,
@@ -12,10 +11,10 @@ import { FormattedMessage } from "react-intl";
 import { useSelector } from "react-redux";
 import { GRPC_SERVER, HTTP_SERVER, TIMELINE_HEIGHT } from "../../constants";
 import useDimension from "../../hooks/use-dimensions";
-import { useTimeline } from "../../hooks/use-timeline";
 import { useTrack } from "../../hooks/use-track";
 import { getServerAuthToken } from "../../redux/modules/server";
 import { getClient } from "../../services/monocle";
+import { RecordingTimeline } from "./recording-timeline.component";
 import { WebRTC, WebRTCOptions } from "./webrtc-class";
 
 export const Recording: FC<
@@ -26,8 +25,6 @@ export const Recording: FC<
   const videoEl = useRef<HTMLVideoElement>(null);
   const serverAuthToken = useSelector(getServerAuthToken);
   const { activeTrack, activeTrackId, hasTracks } = useTrack(recordingToken);
-  const { groups, timelineItems, minimumTimelineTime } =
-    useTimeline(recordingToken);
 
   const handleRequestedTime = (time: Date) => {
     if (activeTrackId) {
@@ -36,10 +33,9 @@ export const Recording: FC<
         token: serverAuthToken as string,
       });
       const request: PlayRequest = {
-        starttime: Math.floor(time.getTime() / 1000) as unknown as string,
-        peerid: activeTrackId as unknown as string,
+        starttime: `${Math.floor(time.getTime() / 1000)}`,
+        peerid: `${activeTrackId}`,
       };
-      console.log(request);
       grpc.client.Play(request, grpc.meta).toPromise();
     }
   };
@@ -86,12 +82,6 @@ export const Recording: FC<
     );
   }
 
-  groups.push({
-    id: activeTrack.recordingtrackid,
-    content: activeTrack.description,
-    title: activeTrack.description,
-  });
-
   // 36 px is the height of the tab bar so we need to take that off the calculation
   return (
     <div
@@ -111,11 +101,9 @@ export const Recording: FC<
         }}
         className="object-contain dark:bg-code-900 bg-white transition-opacity duration-300 opacity-0 flex grow"
       />
-      <Timeline
-        onTimeChange={handleRequestedTime}
-        min={minimumTimelineTime}
-        items={timelineItems}
-        groups={groups}
+      <RecordingTimeline
+        onChangeTime={handleRequestedTime}
+        recordingToken={recordingToken}
       />
     </div>
   );

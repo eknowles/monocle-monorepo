@@ -7,7 +7,5 @@
   ],
   "scripts": {
     "build": "echo 'done'"
-  },
-  "devDependencies": {},
-  "dependencies": {}
+  }
 }
