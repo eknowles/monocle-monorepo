@@ -9,3 +9,7 @@ lib
 build/
 dist/
 dist.zip
+
+.DS_Store
+node_modules
+.yarn
