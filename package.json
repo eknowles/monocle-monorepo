@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "plop": "plop --plopfile scripts/plop/plopfile.ts --dest . --require ./scripts/ts-node-register",
-    "build": "lerna run build --stream --scope=@monocle/*",
+    "build": "lerna run build --stream",
     "extract": "formatjs extract",
     "compile": "formatjs compile",
     "extract-en": "yarn extract 'packages/**/*.tsx' --out-file packages/common/lang/en.json --id-interpolation-pattern '[sha512:contenthash:base64:6]'",
@@ -79,5 +79,9 @@
   },
   "resolutions": {
     "postcss": "8"
+  },
+  "volta": {
+    "node": "18.15.0",
+    "yarn": "4.0.0-rc.40"
   }
 }

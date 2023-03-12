@@ -49,7 +49,7 @@ export class WebRTC {
   }
 
   log(message: string, objects: object = {}) {
-    console.debug({ message, objects });
+    // console.debug({ message, objects });
   }
 
   disconnect() {
