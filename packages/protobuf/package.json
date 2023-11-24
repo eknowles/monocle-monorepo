@@ -13,6 +13,6 @@
   },
   "dependencies": {
     "google-protobuf": "^3.18.0-rc.1",
-    "ts-proto": "^1.82.5"
+    "ts-proto": "^1.164.1"
   }
 }

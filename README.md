@@ -1,9 +1,19 @@
 # Monocole
 
-## Setup
+## Initial Setup
 
-Install with `yarn`
+Install `yarn`
 
+```shell
+corepack enable
+yarn set version stable
+yarn install
+```
 
-```yarn build``` to compile packages to js from typescript
-```yarn build``` to compile packages to js from typescript
+## Build Packages
+
+To compile packages to js from typescript
+
+```shell
+yarn build
+``` 

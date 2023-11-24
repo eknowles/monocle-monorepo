@@ -1,5 +1,5 @@
 export const PROJECT = "Server";
-export const GRPC_WEB_PORT = "8080"; // http only
+export const GRPC_WEB_PORT = "9849"; // http only
 export const HTTP_PORT = "9854"; // getIceServers
 const SERVER_IP =
   (window as any).env.NODE_ENV === "production"
