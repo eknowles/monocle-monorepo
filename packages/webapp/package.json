@@ -6,6 +6,8 @@
     "dev": "webpack --mode development",
     "start": "NODE_ENV=development webpack serve --config webpack.dev.js --mode development",
     "build": "NODE_ENV=production webpack --config webpack.prod.js --mode production",
+    "build:monocle": "BRAND=monocle && yarn build",
+    "build:alienfence": "BRAND=alienfence && yarn build",
     "eject": "react-scripts eject"
   },
   "browserslist": {

@@ -19,10 +19,14 @@ jobs:
         with:
           node-version: '18.15.0'
       - run: yarn
-      - run: cd ./packages/webapp && yarn build
+      - run: cd ./packages/webapp && yarn build:monocle && yarn build:alienfence
         env:
           NODE_ENV: production
       - uses: actions/upload-artifact@v2
         with:
-          name: build
-          path: ./packages/webapp/dist/
+          name: build-monocle
+          path: ./packages/webapp/dist/monocle
+      - uses: actions/upload-artifact@v2
+        with:
+          name: build-alienfence
+          path: ./packages/webapp/dist/alienfence

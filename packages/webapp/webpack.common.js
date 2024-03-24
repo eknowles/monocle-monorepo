@@ -17,14 +17,14 @@ const GIT_AUTHOR_DATE = git("log -1 --format=%aI").split("\n").pop();
 
 console.log({ NODE_ENV, GIT_VERSION, GIT_AUTHOR_DATE });
 
-module.exports = {
+module.exports = (brandConfig) => ({
   entry: {
     app: path.resolve(__dirname, "./src/index.tsx"),
   },
   output: {
     publicPath: "/",
     filename: "[name].bundle.js",
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, `dist/${brandConfig.id}`),
     clean: true,
   },
   plugins: [
@@ -33,40 +33,44 @@ module.exports = {
       GIT_VERSION,
       GIT_AUTHOR_DATE,
       TEST_SERVER,
+      BRAND_NAME: brandConfig.appName,
+      BRAND_ID: brandConfig.id,
     }),
     new ForkTsCheckerWebpackPlugin(),
-    // new FaviconsWebpackPlugin({
-    //   logo: path.resolve(__dirname, "../icons/src/logo.svg"),
-    //   cache: true,
-    //   inject: true,
-    //   favicons: {
-    //     appName: "Monocle Security",
-    //     appDescription: null,
-    //     developerName: null,
-    //     developerURL: null,
-    //     background: "#ddd",
-    //     theme_color: "#333",
-    //     version: GIT_VERSION,
-    //     icons: {
-    //       android: false,
-    //       appleIcon: true,
-    //       appleStartup: true,
-    //       coast: false,
-    //       favicons: true,
-    //       firefox: true,
-    //       windows: true,
-    //       yandex: false,
-    //     },
-    //   },
-    // }),
+    new FaviconsWebpackPlugin({
+      logo: path.resolve(__dirname, `../icons/src/${brandConfig.icon}.svg`),
+      cache: true,
+      inject: true,
+      favicons: {
+        appName: brandConfig.appName,
+        appDescription: null,
+        developerName: null,
+        developerURL: null,
+        background: "#ddd",
+        theme_color: "#333",
+        version: GIT_VERSION,
+        icons: {
+          android: false,
+          appleIcon: true,
+          appleStartup: true,
+          coast: false,
+          favicons: true,
+          firefox: true,
+          windows: true,
+          yandex: false,
+        },
+      },
+    }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "index.ejs"),
       templateParameters: {
-        title: "Monocle Security",
+        title: brandConfig.appName,
         NODE_ENV,
         GIT_VERSION,
         GIT_AUTHOR_DATE,
         TEST_SERVER,
+        BRAND_NAME: brandConfig.appName,
+        BRAND_ID: brandConfig.id,
       },
     }),
   ],
@@ -149,4 +153,4 @@ module.exports = {
     ],
   },
   ignoreWarnings: [/Failed to parse source map/],
-};
+});

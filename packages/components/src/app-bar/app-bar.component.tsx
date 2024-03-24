@@ -8,8 +8,7 @@ export const AppBar: FC<PropsWithChildren<AppBarProps>> = ({ actions }) => (
       className="dark:text-code-400 uppercase"
       title={`${process.env.NODE_ENV} - ${process.env.GIT_VERSION} - ${process.env.GIT_AUTHOR_DATE}`}
     >
-      <span className="font-medium">Monocle</span>
-      <span className="font-bold ml-1">Security</span>
+      <span className="font-medium">{process.env.BRAND_NAME}</span>
     </div>
     <div>{actions}</div>
   </div>

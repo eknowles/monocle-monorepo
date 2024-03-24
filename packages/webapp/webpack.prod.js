@@ -1,11 +1,17 @@
 const { merge } = require("webpack-merge");
 const common = require("./webpack.common.js");
+const distributions = require("./distributions.js");
 // const BundleAnalyzerPlugin =
 //   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 process.env.NODE_ENV = "production";
 
-module.exports = merge(common, {
+if (!process.env.BRAND) {
+  console.warn("Missing BRAND env var")
+  process.env.BRAND = "monocle"
+}
+
+module.exports = merge(common(distributions[process.env.BRAND]), {
   mode: "production",
   plugins: [
     // new BundleAnalyzerPlugin({
