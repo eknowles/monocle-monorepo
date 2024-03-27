@@ -2,9 +2,9 @@ import { PageTab, PageTabBar } from "@monocle/components";
 import type { FC, PropsWithChildren } from "react";
 import { NavLink, useMatch, generatePath, Params } from "react-router-dom";
 import { IconTypes, ILocationSetTabState, usePageTabs } from "./use-page-tabs";
-import Server from "@monocle/icons/src/server.svg";
-import Grid from "@monocle/icons/src/grid.svg";
-import Camera from "@monocle/icons/src/camera.svg";
+import Server from "@monocle/icons/src/server.svg?react";
+import Grid from "@monocle/icons/src/grid.svg?react";
+import Camera from "@monocle/icons/src/camera.svg?react";
 
 const iconMap: any = {
   [IconTypes.SERVER]: Server,

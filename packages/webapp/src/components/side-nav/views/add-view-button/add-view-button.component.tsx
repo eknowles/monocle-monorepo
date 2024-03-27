@@ -9,7 +9,7 @@ import {
   Modal,
   ModalHead,
 } from "@monocle/components";
-import Plus from "@monocle/icons/src/plus.svg";
+import Plus from "@monocle/icons/src/plus.svg?react";
 import { actions as viewActions } from "../../../../redux/modules/view";
 
 type NewFormValues = { name: string };

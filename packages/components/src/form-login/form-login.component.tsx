@@ -6,12 +6,12 @@ import { Field } from "../field";
 
 export type IFormValues = Record<"username" | "password", string>;
 
-export const FormLogin: FC<PropsWithChildren<unknown>> = () => {
+export const FormLogin: FC<PropsWithChildren<{title: string}>> = ({ title }) => {
   const intl = useIntl();
   return (
     <Form className="grid gap-2 grid-cols-1 max-w-sm p-4 dark:bg-code-800 bg-white shadow-lg">
       <h2 className="dark:text-code-300 text-sm font-light font-mono tracking-wider">
-        {window.location.host}
+        {title}
       </h2>
       <Field
         name="username"

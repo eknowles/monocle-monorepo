@@ -1,7 +1,7 @@
 import type { FC, MouseEvent, PropsWithChildren } from "react";
 import classnames from "classnames";
 
-import CrossIcon from "@monocle/icons/src/x.svg";
+import CrossIcon from "@monocle/icons/src/x.svg?react";
 
 export interface IPageTabProps {
   icon: PropsWithChildren["children"];

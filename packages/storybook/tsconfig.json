@@ -1,11 +1,12 @@
 {
-  "extends": "../../tsconfig.json",
+  // "extends": "../../tsconfig.json",
   "compilerOptions": {
     "skipLibCheck": true,
     "outDir": "lib",
     "rootDir": "src",
     "baseUrl": "src",
-    "jsx": "react"
+    "jsx": "react",
+    "moduleResolution": "Node" 
   },
   "include": ["src", "../../common.d.ts"],
   "exclude": ["node_modules"],

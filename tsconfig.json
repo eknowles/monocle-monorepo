@@ -14,8 +14,9 @@
     "resolveJsonModule": true,
     "jsx": "react-jsx",
     "downlevelIteration": true,
+    "module": "esnext",
     "paths": {
-      "@monocle/icons": ["./packages/icons/src"],
+      "@monocle/icons": ["./packages/icons"],
       "@monocle/components": ["./packages/components/src"],
       "@monocle/common": ["./packages/common"],
       "@monocle/protobuf": ["./packages/protobuf/generated"]

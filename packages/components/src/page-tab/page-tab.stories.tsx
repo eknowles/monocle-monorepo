@@ -1,7 +1,7 @@
 import { Meta, Story } from "@storybook/react";
 import { IPageTabProps, PageTab } from "./page-tab.component";
 
-import Icon from "@monocle/icons/src/grid.svg";
+import Icon from "@monocle/icons/src/grid.svg?react";
 
 export default {
   title: "Components/PageTab",
