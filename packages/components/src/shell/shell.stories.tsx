@@ -7,7 +7,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story = (args) => <Shell {...args} />;
+const Template: Story = (args: {title: string}) => <Shell {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
