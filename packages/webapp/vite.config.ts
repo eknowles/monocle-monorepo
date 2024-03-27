@@ -17,9 +17,11 @@ process.env.GIT_VERSION = GIT_VERSION
 process.env.GIT_AUTHOR_DATE = GIT_AUTHOR_DATE
 
 // https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [svgr(), react(), tsconfigPaths()],
-  build: {
-    outDir: `dist/${process.env.NODE_ENV}`
-  }
-})
+export default ({mode}) => {
+  return defineConfig({
+    plugins: [svgr(), react(), tsconfigPaths()],
+    build: {
+      outDir: `dist/${mode}`
+    }
+  })
+}

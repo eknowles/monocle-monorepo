@@ -1,12 +1,12 @@
 import { createRef, useLayoutEffect, useState } from "react";
 import type { FC } from "react";
-import { useSelector } from "react-redux";
 import { TimelineOptions } from "vis-timeline";
 import { Timeline as VisTimeline } from "vis-timeline/esnext";
 import { DateType, TimelineGroup } from "vis-timeline/types";
 import type { TimelineItem } from "vis-timeline/types";
 import "./timeline.css";
-import { TIMELINE_HEIGHT } from "@monocle/webapp/src/constants";
+
+const TIMELINE_HEIGHT = 130
 
 // Configuration for the Timeline
 const defaultOptions: TimelineOptions = {

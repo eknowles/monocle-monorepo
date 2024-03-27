@@ -5,10 +5,14 @@ import { Formik } from "formik";
 export default {
   title: "Components/FormLogin",
   component: FormLogin,
-  argTypes: {},
+  argTypes: {
+    title: {
+      control: 'text',
+    },
+  },
 } as Meta;
 
-const Template: Story = (args) => (
+const Template: Story = (args: {title: string}) => (
   <Formik initialValues={{}} onSubmit={() => {}}>
     <FormLogin {...args} />
   </Formik>
