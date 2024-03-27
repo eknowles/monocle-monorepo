@@ -1,5 +1,5 @@
 import type { FC, PropsWithChildren } from "react";
-import CrossIcon from "@monocle/icons/src/x.svg";
+import CrossIcon from "@monocle/icons/src/x.svg?react";
 
 export const ModalHead: FC<PropsWithChildren<{ onClose?: any }>> = ({
   children,

@@ -16,9 +16,9 @@
     "jsx": "react"
   },
   "references": [
-    { "path": "../components/src" },
-    { "path": "../icons/src" },
+    { "path": "../components" },
+    { "path": "../icons" },
     { "path": "../common" },
-    { "path": "../protobuf/generated" }
+    { "path": "../protobuf" }
   ]
 }

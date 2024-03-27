@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import CameraIcon from "@monocle/icons/src/camera.svg";
+import CameraIcon from "@monocle/icons/src/camera.svg?react";
 import { SideNavItem } from "@monocle/components";
 
 interface IRecordingListItemProps {

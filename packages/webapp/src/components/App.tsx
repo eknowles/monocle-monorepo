@@ -23,11 +23,13 @@ import { history } from "../history";
 
 import messages from "@monocle/common/compiled-lang/en.json";
 
+const title = import.meta.env.VITE_BRAND_NAME;
+
 // todo add better error screens
-const Fallback = () => <Shell>Error</Shell>;
+const Fallback = () => <Shell title={title}>Error</Shell>;
 
 const Main: FC = () => (
-  <Shell appActions={<AuthButton />}>
+  <Shell title={title} appActions={<AuthButton />}>
     <Outlet />
   </Shell>
 );

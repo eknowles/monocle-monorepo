@@ -24,7 +24,7 @@ const LoginPage: FC<PropsWithChildren<unknown>> = () => {
         initialValues={{ username: "", password: "" }}
         onSubmit={onSubmit}
       >
-        <FormLogin />
+        <FormLogin title={GRPC_SERVER} />
       </Formik>
     </div>
   );

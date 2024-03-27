@@ -1,5 +1,5 @@
 import type { FC, PropsWithChildren } from "react";
-import ServerIcon from "@monocle/icons/src/server.svg";
+import ServerIcon from "@monocle/icons/src/server.svg?react";
 import { SideNavItem } from "@monocle/components";
 
 interface IServerListItemProps {

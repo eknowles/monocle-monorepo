@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import GridIcon from "@monocle/icons/src/grid.svg";
+import GridIcon from "@monocle/icons/src/grid.svg?react";
 import { SideNavItem } from "@monocle/components";
 
 interface ISideViewItemProps {
