@@ -1,6 +1,12 @@
-# Monocole
+# Monocle
 
 ## Initial Setup
+
+Install [protoc](https://protobuf.dev/installation/)
+
+```shell
+brew install protobuf
+```
 
 Install `yarn`
 
