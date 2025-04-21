@@ -10,7 +10,7 @@ export const useTrack = (recordingToken: number | string) => {
   );
   const hasTracks = (currentRecording?.tracks ?? []).length > 0;
   const activeTrack = currentRecording?.tracks!.find(
-    (track) => track.recordingtrackid === activeTrackId
+    (track) => track.id === activeTrackId
   );
 
   return {

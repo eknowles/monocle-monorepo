@@ -5,13 +5,12 @@ import { getServerMeta } from "../../../redux/modules/server";
 export const DetailsRoute = () => {
   const { version, architecture, name } = useSelector(getServerMeta);
   if (!name || !architecture || !version) return null;
-  const versionString = `${version!.major}.${version!.minor}.${version!.build}`;
 
   return (
     <ServerDetails
       name={name}
       architecture={architecture}
-      version={versionString}
+      version={version}
     />
   );
 };

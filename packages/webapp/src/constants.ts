@@ -5,4 +5,5 @@ const SERVER_IP = import.meta.env.PROD ? window.location.hostname : import.meta.
 export const GRPC_SERVER = `http://${SERVER_IP}:${GRPC_WEB_PORT}`;
 export const HTTP_SERVER = `http://${SERVER_IP}:${HTTP_PORT}`;
 export const LOCALSTORAGE_AUTH_TOKEN_KEY = "monocle-auth-token";
+export const WEBSOCKET_SERVER = "ws://213.199.34.124:9854/json";
 export const TIMELINE_HEIGHT = 130;
