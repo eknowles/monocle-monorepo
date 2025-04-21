@@ -21,7 +21,7 @@ const LoginPage: FC<PropsWithChildren<unknown>> = () => {
   return (
     <div className="w-full h-full flex items-center justify-center">
       <Formik<IFormValues>
-        initialValues={{ username: "", password: "" }}
+        initialValues={{ username: "admin", password: "Zoggins8" }}
         onSubmit={onSubmit}
       >
         <FormLogin title={GRPC_SERVER} />

@@ -6,16 +6,14 @@ import {
   PayloadAction,
 } from "@reduxjs/toolkit";
 import {
-  State as MonocleState,
-  SubscribeResponse,
-} from "@monocle/protobuf/generated/monocle";
+  type State as MonocleState,
+} from "../../../services/monocle/types";
 import { toast } from "@monocle/components";
 import { combineEpics, Epic, ofType } from "redux-observable";
-import { catchError, map } from "rxjs/operators";
-import { switchMap } from "rxjs/operators";
+import { catchError, map, switchMap } from "rxjs/operators";
 import { LOCALSTORAGE_AUTH_TOKEN_KEY } from "../../../constants";
-import { authenticate } from "../../../services/auth/authenticate";
-import { subscribe as monocleSubscribe } from "../../../services/monocle";
+import { from, Observable } from "rxjs";
+import WebSocketService from "../../../services/websocket/websocket";
 
 const NAME = "server";
 const initialToken =
@@ -74,13 +72,23 @@ export type Auth = ReturnType<typeof auth>;
 export const subscribe = createAction<Record<"host" | "token", string>>(
   `${serverSlice.name}/subscribe`
 );
+
+type SubscribeRes = {
+  method: "subscribe";
+  result: MonocleState;
+}
+
+export const wsMessage = createAction<{ id: string; jsonrpc: string; } & SubscribeRes | { method: string; params?: object }>(
+  `${serverSlice.name}/ws`
+);
+export type WSMesaage = ReturnType<typeof wsMessage>;
 export type Subscribe = ReturnType<typeof subscribe>;
 export const loggedOut = createAction(`${serverSlice.name}/loggedOut`);
 export type LoggedOut = ReturnType<typeof loggedOut>;
 
 // selectors
 export const getServerLogs = (state: any) =>
-  (state.server as ServerState).state?.serverlogmessages;
+  (state.server as ServerState).state?.serverLogMessages;
 export const getServerId = (state: any) =>
   (state.server as ServerState).state?.identifier;
 export const getAuthStatus = (state: any) =>
@@ -116,11 +124,31 @@ export const getServerMeta = createSelector(
 const authEpic: Epic = (action$, _state$, { history }) => {
   return action$.pipe(
     ofType<Auth, any>(auth.type),
-    // @ts-ignore
-    switchMap(({ payload: { host, username, password } }) =>
-      // @ts-ignore
-      authenticate(host, username, password).pipe(
-        // @ts-ignore
+    switchMap(({ payload: { host, username, password } }) => {
+      return new Observable<{ jwttoken: string }>((subscriber) => {
+        const sendAuth = () => {
+          WebSocketService.send("authenticate", { username, password }, {});
+        };
+
+        if (WebSocketService.readyState === WebSocket.OPEN) {
+          sendAuth();
+        } else {
+          WebSocketService.on("open", () => {
+            sendAuth();
+          });
+        }
+
+        WebSocketService.on("message", (data: any) => {
+          if (data.method === "authenticate") {
+            if (data.result && data.result.jwttoken) {
+              subscriber.next({ jwttoken: data.result.jwttoken });
+              subscriber.complete();
+            } else {
+              subscriber.error(new Error("Authentication failed"));
+            }
+          }
+        });
+      }).pipe(
         map(({ jwttoken }) => {
           if (!jwttoken) {
             throw new Error("no token");
@@ -135,15 +163,14 @@ const authEpic: Epic = (action$, _state$, { history }) => {
           toast.error(_error.message || "Failed to authenticate");
           return [serverSlice.actions.logout()];
         })
-      )
-    )
+      );
+    })
   );
 };
 
 const onAuthSuccessEpic: Epic = (action$, state$, { history }) => {
   return action$.pipe(
     ofType(serverSlice.actions.authSuccess.type),
-    // @ts-ignore
     map(({ payload: { host, token } }) => {
       history.push("/app");
       return subscribe({ host, token });
@@ -154,7 +181,6 @@ const onAuthSuccessEpic: Epic = (action$, state$, { history }) => {
 const logoutEpic: Epic = (action$, _state$, { history }) => {
   return action$.pipe(
     ofType(serverSlice.actions.logout.type),
-    // @ts-ignore
     map(() => {
       localStorage.removeItem(LOCALSTORAGE_AUTH_TOKEN_KEY);
       history.push("/login");
@@ -166,27 +192,34 @@ const logoutEpic: Epic = (action$, _state$, { history }) => {
 const subscribeEpic: Epic = (action$, _state$) => {
   return action$.pipe(
     ofType<Subscribe, any>(subscribe.type),
-    // @ts-ignore
-    switchMap(({ payload }) =>
-      // @ts-ignore
-      monocleSubscribe(payload).pipe(
-        // @ts-ignore
-        map((value: SubscribeResponse) => {
-          console.log(value.message!.typeUrl);
+    switchMap(({ payload: { token } }) => {
+      return new Observable<any>((subscriber) => {
+        const sendSubscribe = () => {
+          WebSocketService.send("subscribe", { jwttoken: token }, {});
+        };
 
-          if (value.message!.typeUrl === "type.googleapis.com/proto.State") {
-            const stateObj = MonocleState.decode(value.message!.value);
-            console.log(stateObj);
-            return serverSlice.actions.state(stateObj);
+        if (WebSocketService.readyState === WebSocket.OPEN) {
+          sendSubscribe();
+        } else {
+          WebSocketService.on("open", () => {
+            sendSubscribe();
+          });
+        }
+
+        WebSocketService.on("message", (data: any) => {
+          if (data.method == "subscribe") {
+            subscriber.next(serverSlice.actions.state(data.result));
+          } else {
+            // subscriber.next(wsMessage(data));
           }
-
-          return { type: value.message!.typeUrl };
+        });
+      }).pipe(
+        map((data: any) => data),
+        catchError((_error) => {
+          toast.error(_error.message || "Failed to subscribe");
+          return [serverSlice.actions.logout()];
         })
-      )
-    ),
-    catchError((_error) => {
-      toast.error(_error.message || "Failed to authenticate");
-      return [serverSlice.actions.logout()];
+      );
     })
   );
 };

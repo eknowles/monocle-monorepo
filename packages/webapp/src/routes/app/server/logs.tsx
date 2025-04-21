@@ -3,7 +3,6 @@ import { FormattedMessage } from "react-intl";
 import { useSelector } from "react-redux";
 import { DateTime } from "luxon";
 import { getServerLogs } from "../../../redux/modules/server";
-import { Severity } from "@monocle/protobuf/generated/monocle";
 
 const TH: FC<PropsWithChildren<unknown>> = ({ children }) => (
   <th className="sticky top-0 p-2 text-xs font-normal tracking-tight text-left uppercase bg-white dark:text-code-400 text-code-500 dark:bg-black">
@@ -14,9 +13,9 @@ const TD: FC<PropsWithChildren<unknown>> = ({ children }) => (
   <td className="px-2">{children}</td>
 );
 
-const SeverityMessage: FC<PropsWithChildren<{ type: number }>> = ({ type }) => {
+const SeverityMessage: FC<PropsWithChildren<{ type: string }>> = ({ type }) => {
   switch (type) {
-    case Severity.SeverityTrace:
+    case "Trace":
       return (
         <div className="px-1 text-white bg-blue-700">
           <FormattedMessage
@@ -26,7 +25,7 @@ const SeverityMessage: FC<PropsWithChildren<{ type: number }>> = ({ type }) => {
           />
         </div>
       );
-    case Severity.SeverityDebug:
+    case "Debug":
       return (
         <div className="px-1 text-white bg-blue-800">
           <FormattedMessage
@@ -36,7 +35,7 @@ const SeverityMessage: FC<PropsWithChildren<{ type: number }>> = ({ type }) => {
           />
         </div>
       );
-    case Severity.SeverityInfo:
+    case "Info":
       return (
         <div className="px-1 text-white bg-blue-900">
           <FormattedMessage
@@ -46,7 +45,7 @@ const SeverityMessage: FC<PropsWithChildren<{ type: number }>> = ({ type }) => {
           />
         </div>
       );
-    case Severity.SeverityWarn:
+    case "Warn":
       return (
         <div className="px-1 text-white bg-yellow-700">
           <FormattedMessage
@@ -56,7 +55,7 @@ const SeverityMessage: FC<PropsWithChildren<{ type: number }>> = ({ type }) => {
           />
         </div>
       );
-    case Severity.SeverityErr:
+    case "Err":
       return (
         <div className="px-1 text-white bg-red-700">
           <FormattedMessage
@@ -66,7 +65,7 @@ const SeverityMessage: FC<PropsWithChildren<{ type: number }>> = ({ type }) => {
           />
         </div>
       );
-    case Severity.SeverityCritical:
+    case "Critical":
       return (
         <div className="px-1 text-black bg-yellow-400">
           <FormattedMessage
