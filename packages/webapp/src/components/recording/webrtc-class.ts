@@ -9,16 +9,13 @@ export class WebRTC {
   private pc: RTCPeerConnection;
 
   constructor(private options: WebRTCOptions) {
-    this.pc = new RTCPeerConnection({ iceServers: this.options.iceServers });
-    this.pc.ontrack = this.onTrack;
+    const { onStream, onDataChannel, iceServers } = options;
+    this.pc = new RTCPeerConnection({ iceServers });
+    this.pc.ontrack = (event) => onStream(event.streams[0]);
+    this.pc.ondatachannel = (event) => onDataChannel(event.channel);
     this.pc.onicecandidate = this.onIceCandidate;
-    this.pc.ondatachannel = this.onDataChannel;
     this.pc.createDataChannel("ClientDataChannel");
   }
-
-  private onTrack = (event: RTCTrackEvent) => {
-    this.options.onStream(event.streams[0]);
-  };
 
   private onIceCandidate = (event: RTCPeerConnectionIceEvent) => {
     if (!event.candidate) {
@@ -26,16 +23,16 @@ export class WebRTC {
     }
   };
 
-  private onDataChannel = (event: RTCDataChannelEvent) => {
-    this.options.onDataChannel(event.channel);
-  };
-
   public async createOffer() {
-    const offer = await this.pc.createOffer({
-      offerToReceiveAudio: true,
-      offerToReceiveVideo: true,
-    });
-    await this.pc.setLocalDescription(offer);
+    try {
+      const offer = await this.pc.createOffer({
+        offerToReceiveAudio: true,
+        offerToReceiveVideo: true,
+      });
+      await this.pc.setLocalDescription(offer);
+    } catch (error) {
+      console.error("createOffer error", error);
+    }
   }
 
   public async setRemoteDescription(description: RTCSessionDescriptionInit) {
