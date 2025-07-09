@@ -11,14 +11,10 @@ export const useActiveTrackId = (
 
   if (!recordingToken) return undefined;
 
-  const activeTrackId =
-    currentRecording &&
-    currentRecording.jobs.length &&
-    currentRecording.jobs
-      .find((job) => job.token === currentRecording.active_job)!
-      .sources.find(
-        (source) => source.sourceTracks.length === 1
-      )!.sourceTracks[0].trackid;
+  const activeTrackId = currentRecording?.jobs
+    .find((job) => job.token === currentRecording.active_job)
+    ?.sources.find((source) => source.sourceTracks.length === 1)
+    ?.sourceTracks[0].trackid;
 
   return activeTrackId ? String(activeTrackId) : undefined;
 };

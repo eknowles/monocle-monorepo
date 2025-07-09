@@ -33,18 +33,20 @@ export const Recording: FC<
   const onStream = useCallback((stream: MediaStream) => {
     if (videoEl.current) {
       videoEl.current.srcObject = stream;
-      videoEl.current.play().catch((e) => console.error("play error", e));
+      const playPromise = videoEl.current.play();
+      if (playPromise !== undefined) {
+        playPromise.catch((error) => {
+          if (error.name !== "AbortError") {
+            console.error("play error", error);
+          }
+        });
+      }
     }
   }, []);
 
   const onDataChannel = useCallback((channel: RTCDataChannel) => {
     channel.onopen = () => {
       channel.send(JSON.stringify({ method: "live" }));
-    };
-    channel.onmessage = (event) => {
-      if (event.data === "Ping") {
-        // channel.send("Pong");
-      }
     };
   }, []);
 
@@ -112,7 +114,11 @@ export const Recording: FC<
     <div
       ref={divRef}
       id="video"
-      style={{ height: SHOW_TIMELINE ? `calc(100% - 36px)` : "100%" }}
+      style={{
+        height: SHOW_TIMELINE
+          ? `calc(100% - ${TIMELINE_HEIGHT}px)`
+          : "100%",
+      }}
       className="dark:bg-code-900 bg-white dark:text-white w-full h-full flex flex-1 flex-col"
     >
       <video
