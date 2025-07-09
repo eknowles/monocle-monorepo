@@ -8,9 +8,9 @@ import {
   PayloadAction,
 } from "@reduxjs/toolkit";
 import { combineEpics, Epic, ofType } from "redux-observable";
-import { map, switchMap } from "rxjs/operators";
-import { GRPC_SERVER } from "../../../constants";
-import { getClient } from "../../../services/monocle";
+import { filter, map, switchMap, take, mergeMap } from "rxjs/operators";
+import { of, concat } from "rxjs";
+import { message as wsMessage, send as wsSend } from "../websocket";
 
 const NAME = "views";
 
@@ -88,19 +88,24 @@ export const viewsSelectors = viewsAdapter.getSelectors(
 const hangUpEpic: Epic = (action$, state$) => {
   return action$.pipe(
     ofType<HangUp, any>(hangUp.type),
-    // @ts-ignore
-    map(({ payload }) => {
-      const clientOptions = {
-        host: GRPC_SERVER,
-        token: state$.value.server.token,
-      };
-      const { client, meta } = getClient(clientOptions);
-      return client.HangUpWebRTC(payload, meta).pipe(
-        // @ts-ignore
-        map(() => ({
-          type: "WebRTC/hangUpSuccess",
-        }))
+    mergeMap(({ payload }) => {
+      const traceId = nanoid(5);
+      const sendAction = wsSend({
+        method: "hangUpWebRTC",
+        params: {
+          peerid: payload.peerid,
+        },
+        return_params: { traceId },
+      });
+
+      const response$ = action$.pipe(
+        ofType(wsMessage.type),
+        filter((action: any) => action.payload.return_params?.traceId === traceId),
+        take(1),
+        map(() => ({ type: "WebRTC/hangUpSuccess" }))
       );
+
+      return concat(of(sendAction), response$);
     })
   );
 };

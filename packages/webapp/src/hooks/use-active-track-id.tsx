@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { getRecordings, getServerAuthToken } from "../redux/modules/server";
+import { getRecordings } from "../redux/modules/server";
 
 export const useActiveTrackId = (
   recordingToken?: string | number
@@ -15,7 +15,7 @@ export const useActiveTrackId = (
     currentRecording &&
     currentRecording.jobs.length &&
     currentRecording.jobs
-      .find((job) => job.token === currentRecording.activeJob)!
+      .find((job) => job.token === currentRecording.active_job)!
       .sources.find(
         (source) => source.sourceTracks.length === 1
       )!.sourceTracks[0].trackid;

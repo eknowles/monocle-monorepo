@@ -4,16 +4,17 @@ import {
   createSlice,
   Draft,
   PayloadAction,
+  nanoid,
 } from "@reduxjs/toolkit";
 import {
   type State as MonocleState,
 } from "../../../services/monocle/types";
 import { toast } from "@monocle/components";
 import { combineEpics, Epic, ofType } from "redux-observable";
-import { catchError, map, switchMap } from "rxjs/operators";
+import { catchError, filter, map, switchMap, take, mergeMap } from "rxjs/operators";
 import { LOCALSTORAGE_AUTH_TOKEN_KEY } from "../../../constants";
-import { from, Observable } from "rxjs";
-import WebSocketService from "../../../services/websocket/websocket";
+import { of, concat } from "rxjs";
+import { message as wsMessage, send as wsSend } from "../websocket";
 
 const NAME = "server";
 const initialToken =
@@ -69,26 +70,15 @@ export const serverSlice = createSlice({
 export const auth = createAction<AuthPayload>(`${serverSlice.name}/auth`);
 export type Auth = ReturnType<typeof auth>;
 
-export const subscribe = createAction<Record<"host" | "token", string>>(
-  `${serverSlice.name}/subscribe`
-);
-
-type SubscribeRes = {
-  method: "subscribe";
-  result: MonocleState;
-}
-
-export const wsMessage = createAction<{ id: string; jsonrpc: string; } & SubscribeRes | { method: string; params?: object }>(
-  `${serverSlice.name}/ws`
-);
-export type WSMesaage = ReturnType<typeof wsMessage>;
+export const subscribe = createAction<Record<"host" | "token", string>>(`${serverSlice.name}/subscribe`);
 export type Subscribe = ReturnType<typeof subscribe>;
+
 export const loggedOut = createAction(`${serverSlice.name}/loggedOut`);
 export type LoggedOut = ReturnType<typeof loggedOut>;
 
 // selectors
 export const getServerLogs = (state: any) =>
-  (state.server as ServerState).state?.serverLogMessages;
+  (state.server as ServerState).state?.log_messages;
 export const getServerId = (state: any) =>
   (state.server as ServerState).state?.identifier;
 export const getAuthStatus = (state: any) =>
@@ -110,6 +100,7 @@ export const getServerListItem = createSelector(
     name,
   })
 );
+
 export const getServerMeta = createSelector(
   [getServerId, getServerName, getServerVersion, getServerArchitecture],
   (id, name, version, architecture) => ({
@@ -124,46 +115,34 @@ export const getServerMeta = createSelector(
 const authEpic: Epic = (action$, _state$, { history }) => {
   return action$.pipe(
     ofType<Auth, any>(auth.type),
-    switchMap(({ payload: { host, username, password } }) => {
-      return new Observable<{ jwttoken: string }>((subscriber) => {
-        const sendAuth = () => {
-          WebSocketService.send("authenticate", { username, password }, {});
-        };
+    mergeMap(({ payload: { host, username, password } }) => {
+      const id = nanoid(5);
+      const sendAction = wsSend({
+        id,
+        method: "authenticate",
+        params: { username, password },
+      });
 
-        if (WebSocketService.readyState === WebSocket.OPEN) {
-          sendAuth();
-        } else {
-          WebSocketService.on("open", () => {
-            sendAuth();
-          });
-        }
-
-        WebSocketService.on("message", (data: any) => {
-          if (data.method === "authenticate") {
-            if (data.result && data.result.jwttoken) {
-              subscriber.next({ jwttoken: data.result.jwttoken });
-              subscriber.complete();
-            } else {
-              subscriber.error(new Error("Authentication failed"));
-            }
-          }
-        });
-      }).pipe(
-        map(({ jwttoken }) => {
+      const response$ = action$.pipe(
+        ofType(wsMessage.type),
+        filter((action: any) => action.payload.method === "authenticate" && action.payload.result?.jwttoken),
+        take(1),
+        map((action: any) => {
+          const { jwttoken } = action.payload.result;
           if (!jwttoken) {
             throw new Error("no token");
           }
-
           localStorage.setItem(LOCALSTORAGE_AUTH_TOKEN_KEY, jwttoken);
-
           toast.success("Authentication successful");
           return serverSlice.actions.authSuccess({ host, token: jwttoken! });
         }),
         catchError((_error) => {
           toast.error(_error.message || "Failed to authenticate");
-          return [serverSlice.actions.logout()];
+          return of(serverSlice.actions.logout());
         })
       );
+
+      return concat(of(sendAction), response$);
     })
   );
 };
@@ -184,7 +163,7 @@ const logoutEpic: Epic = (action$, _state$, { history }) => {
     map(() => {
       localStorage.removeItem(LOCALSTORAGE_AUTH_TOKEN_KEY);
       history.push("/login");
-      return [serverSlice.actions.authFailed({ host: "" }), loggedOut()];
+      return serverSlice.actions.authFailed({ host: "" });
     })
   );
 };
@@ -192,34 +171,26 @@ const logoutEpic: Epic = (action$, _state$, { history }) => {
 const subscribeEpic: Epic = (action$, _state$) => {
   return action$.pipe(
     ofType<Subscribe, any>(subscribe.type),
-    switchMap(({ payload: { token } }) => {
-      return new Observable<any>((subscriber) => {
-        const sendSubscribe = () => {
-          WebSocketService.send("subscribe", { jwttoken: token }, {});
-        };
+    mergeMap(({ payload: { token } }) => {
+      const traceId = nanoid(5);
+      const sendAction = wsSend({
+        method: "subscribe",
+        params: { jwttoken: token },
+        return_params: { traceId },
+      });
 
-        if (WebSocketService.readyState === WebSocket.OPEN) {
-          sendSubscribe();
-        } else {
-          WebSocketService.on("open", () => {
-            sendSubscribe();
-          });
-        }
-
-        WebSocketService.on("message", (data: any) => {
-          if (data.method == "subscribe") {
-            subscriber.next(serverSlice.actions.state(data.result));
-          } else {
-            // subscriber.next(wsMessage(data));
-          }
-        });
-      }).pipe(
-        map((data: any) => data),
+      const response$ = action$.pipe(
+        ofType(wsMessage.type),
+        filter((action: any) => action.payload.method === "subscribe" && action.payload.result),
+        take(1),
+        map((action: any) => serverSlice.actions.state(action.payload.result)),
         catchError((_error) => {
           toast.error(_error.message || "Failed to subscribe");
-          return [serverSlice.actions.logout()];
+          return of(serverSlice.actions.logout());
         })
       );
+
+      return concat(of(sendAction), response$);
     })
   );
 };

@@ -1,23 +1,22 @@
-import { PlayRequest } from "@monocle/protobuf/generated/monocle";
 import React, {
   FC,
   useEffect,
   useRef,
   PropsWithChildren,
-  useMemo,
   useState,
 } from "react";
 import { FormattedMessage } from "react-intl";
-import { useSelector } from "react-redux";
-import { GRPC_SERVER, HTTP_SERVER, TIMELINE_HEIGHT } from "../../constants";
+import { useSelector, useDispatch } from "react-redux";
+import { SERVER_IP, STUN_SERVER_PORT, TIMELINE_HEIGHT } from "../../constants";
 import useDimension from "../../hooks/use-dimensions";
 import { useTrack } from "../../hooks/use-track";
 import { getServerAuthToken } from "../../redux/modules/server";
-import { getClient } from "../../services/monocle";
 import { RecordingTimeline } from "./recording-timeline.component";
-import { WebRTC, WebRTCOptions } from "./webrtc-class";
+import { WebRTC } from "./webrtc-class";
+import { webrtcSlice } from "../../redux/modules/webrtc";
+import { RootState } from "../../redux";
 
-const SHOW_TIMELINE = import.meta.env.VITE_FEATURE_TIMELINE === "true"
+const SHOW_TIMELINE = import.meta.env.VITE_FEATURE_TIMELINE === "true";
 
 export const Recording: FC<
   PropsWithChildren<{ recordingToken: string | number }>
@@ -25,50 +24,48 @@ export const Recording: FC<
   const divRef = useRef(null);
   const { height, width } = useDimension(divRef);
   const videoEl = useRef<HTMLVideoElement>(null);
-  const serverAuthToken = useSelector(getServerAuthToken);
   const { activeTrack, activeTrackId, hasTracks } = useTrack(recordingToken);
-
-  const handleRequestedTime = (time: Date) => {
-    if (activeTrackId) {
-      const grpc = getClient({
-        host: GRPC_SERVER,
-        token: serverAuthToken as string,
-      });
-      const request: PlayRequest = {
-        starttime: `${Math.floor(time.getTime() / 1000)}`,
-        peerid: `${activeTrackId}`,
-      };
-      grpc.client.Play(request, grpc.meta).toPromise();
-    }
-  };
+  const dispatch = useDispatch();
+  const peerId = useRef(`${Math.random() + 1}`.replace(".", ""));
+  const [webRtc, setWebRtc] = useState<WebRTC | null>(null);
+  const webrtcState = useSelector((state: RootState) => state.webrtc[peerId.current]);
 
   useEffect(() => {
-    let webRtcServer: any;
-    if (videoEl.current && activeTrackId) {
-      const grpc = getClient({
-        host: GRPC_SERVER,
-        token: serverAuthToken as string,
+    if (activeTrackId && videoEl.current) {
+      dispatch(webrtcSlice.actions.connecting({ peerId: peerId.current }));
+      const newWebRtc = new WebRTC({
+        iceServers: [{ urls: `stun:${SERVER_IP}:${STUN_SERVER_PORT}` }],
+        onLocalDescription: (description) => {
+          dispatch(
+            webrtcSlice.actions.localDescriptionCreated({
+              peerId: peerId.current,
+              description,
+              recordingToken,
+              videotrackid: parseInt(activeTrackId, 10),
+            })
+          );
+        },
+        onStream: (stream) => {
+          if (videoEl.current) {
+            videoEl.current.srcObject = stream;
+          }
+        },
       });
+      setWebRtc(newWebRtc);
+      newWebRtc.createOffer();
 
-      const options: WebRTCOptions = {
-        videotrackid: activeTrackId,
-        recording: recordingToken,
-        videoElement: videoEl.current,
-        srvurl: HTTP_SERVER,
-        grpc,
+      return () => {
+        newWebRtc.close();
+        dispatch(webrtcSlice.actions.disconnected({ peerId: peerId.current }));
       };
-
-      webRtcServer = new WebRTC(options);
-
-      webRtcServer.connect();
     }
+  }, [recordingToken, activeTrackId, dispatch]);
 
-    return () => {
-      if (webRtcServer) {
-        webRtcServer.disconnect();
-      }
-    };
-  }, [recordingToken, activeTrackId]);
+  useEffect(() => {
+    if (webRtc && webrtcState?.remoteDescription) {
+      webRtc.setRemoteDescription(webrtcState.remoteDescription);
+    }
+  }, [webRtc, webrtcState?.remoteDescription]);
 
   if (!hasTracks || !activeTrack) {
     return (
@@ -84,7 +81,6 @@ export const Recording: FC<
     );
   }
 
-  // 36 px is the height of the tab bar so we need to take that off the calculation
   return (
     <div
       ref={divRef}
@@ -97,6 +93,7 @@ export const Recording: FC<
         title={`${recordingToken}`}
         muted
         controls={true}
+        autoPlay
         style={{
           height: `${height - (SHOW_TIMELINE ? TIMELINE_HEIGHT : 0)}px`,
           width: `${width}px`,
@@ -105,7 +102,7 @@ export const Recording: FC<
       />
       {import.meta.env.VITE_FEATURE_TIMELINE === "true" && (
         <RecordingTimeline
-          onChangeTime={handleRequestedTime}
+          onChangeTime={() => {}}
           recordingToken={recordingToken}
         />
       )}
