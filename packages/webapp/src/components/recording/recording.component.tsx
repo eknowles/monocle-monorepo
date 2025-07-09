@@ -4,13 +4,13 @@ import React, {
   useRef,
   PropsWithChildren,
   useState,
+  useCallback,
 } from "react";
 import { FormattedMessage } from "react-intl";
 import { useSelector, useDispatch } from "react-redux";
 import { SERVER_IP, STUN_SERVER_PORT, TIMELINE_HEIGHT } from "../../constants";
 import useDimension from "../../hooks/use-dimensions";
 import { useTrack } from "../../hooks/use-track";
-import { getServerAuthToken } from "../../redux/modules/server";
 import { RecordingTimeline } from "./recording-timeline.component";
 import { WebRTC } from "./webrtc-class";
 import { webrtcSlice } from "../../redux/modules/webrtc";
@@ -30,39 +30,48 @@ export const Recording: FC<
   const [webRtc, setWebRtc] = useState<WebRTC | null>(null);
   const webrtcState = useSelector((state: RootState) => state.webrtc[peerId.current]);
 
+  const onStream = useCallback((stream: MediaStream) => {
+    if (videoEl.current) {
+      videoEl.current.srcObject = stream;
+      videoEl.current.play().catch((e) => console.error("play error", e));
+    }
+  }, []);
+
+  const onDataChannel = useCallback((channel: RTCDataChannel) => {
+    channel.onopen = () => {
+      channel.send(JSON.stringify({ method: "live" }));
+    };
+    channel.onmessage = (event) => {
+      if (event.data === "Ping") {
+        // channel.send("Pong");
+      }
+    };
+  }, []);
+
+  const onLocalDescription = useCallback(
+    (description: RTCSessionDescriptionInit) => {
+      dispatch(
+        webrtcSlice.actions.localDescriptionCreated({
+          peerId: peerId.current,
+          description,
+          recordingToken,
+          videotrackid: parseInt(activeTrackId!, 10),
+        })
+      );
+    },
+    [dispatch, peerId, recordingToken, activeTrackId]
+  );
+
   useEffect(() => {
     if (activeTrackId && videoEl.current) {
-      dispatch(webrtcSlice.actions.connecting({ peerId: peerId.current }));
       const newWebRtc = new WebRTC({
         iceServers: [{ urls: `stun:${SERVER_IP}:${STUN_SERVER_PORT}` }],
-        onLocalDescription: (description) => {
-          dispatch(
-            webrtcSlice.actions.localDescriptionCreated({
-              peerId: peerId.current,
-              description,
-              recordingToken,
-              videotrackid: parseInt(activeTrackId, 10),
-            })
-          );
-        },
-        onStream: (stream) => {
-          if (videoEl.current) {
-            videoEl.current.srcObject = stream;
-            videoEl.current.play().catch((e) => console.error("play error", e));
-          }
-        },
-        onDataChannel: (channel) => {
-          channel.onopen = () => {
-            channel.send(JSON.stringify({ method: "live" }));
-          };
-          channel.onmessage = (event) => {
-            if (event.data === "Ping") {
-              // channel.send("Pong");
-            }
-          };
-        },
+        onLocalDescription,
+        onStream,
+        onDataChannel,
       });
       setWebRtc(newWebRtc);
+      dispatch(webrtcSlice.actions.connecting({ peerId: peerId.current }));
       newWebRtc.createOffer();
 
       return () => {
@@ -70,7 +79,14 @@ export const Recording: FC<
         dispatch(webrtcSlice.actions.disconnected({ peerId: peerId.current }));
       };
     }
-  }, [recordingToken, activeTrackId, dispatch]);
+  }, [
+    recordingToken,
+    activeTrackId,
+    dispatch,
+    onLocalDescription,
+    onStream,
+    onDataChannel,
+  ]);
 
   useEffect(() => {
     if (webRtc && webrtcState?.remoteDescription) {

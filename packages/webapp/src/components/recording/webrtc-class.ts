@@ -10,17 +10,25 @@ export class WebRTC {
 
   constructor(private options: WebRTCOptions) {
     this.pc = new RTCPeerConnection({ iceServers: this.options.iceServers });
-    this.pc.ontrack = (event) => this.options.onStream(event.streams[0]);
-    this.pc.onicecandidate = (event) => {
-      if (!event.candidate) {
-        this.options.onLocalDescription(this.pc.localDescription!.toJSON());
-      }
-    };
-    this.pc.ondatachannel = (event) => {
-      this.options.onDataChannel(event.channel);
-    };
+    this.pc.ontrack = this.onTrack;
+    this.pc.onicecandidate = this.onIceCandidate;
+    this.pc.ondatachannel = this.onDataChannel;
     this.pc.createDataChannel("ClientDataChannel");
   }
+
+  private onTrack = (event: RTCTrackEvent) => {
+    this.options.onStream(event.streams[0]);
+  };
+
+  private onIceCandidate = (event: RTCPeerConnectionIceEvent) => {
+    if (!event.candidate) {
+      this.options.onLocalDescription(this.pc.localDescription!.toJSON());
+    }
+  };
+
+  private onDataChannel = (event: RTCDataChannelEvent) => {
+    this.options.onDataChannel(event.channel);
+  };
 
   public async createOffer() {
     const offer = await this.pc.createOffer({
