@@ -11,6 +11,7 @@ import {
   serverSlice,
   subscribe,
 } from "../../redux/modules/server";
+import { connect } from "../../redux/modules/websocket";
 
 const AppRoute: FC<PropsWithChildren> = () => {
   const serverAuthToken = useSelector(getServerAuthToken);
@@ -18,18 +19,19 @@ const AppRoute: FC<PropsWithChildren> = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (serverAuthToken) {
-      dispatch(
-        subscribe({
-          host: GRPC_SERVER,
-          token: serverAuthToken,
-        })
-      );
-    } else {
-      dispatch(serverSlice.actions.logout());
-    }
-  }, [serverAuthToken, authStatus, dispatch]);
+  // useEffect(() => {
+  //   dispatch(connect());
+  //   if (serverAuthToken) {
+  //     dispatch(
+  //       subscribe({
+  //         host: GRPC_SERVER,
+  //         token: serverAuthToken,
+  //       })
+  //     );
+  //   } else {
+  //     dispatch(serverSlice.actions.logout());
+  //   }
+  // }, [serverAuthToken, dispatch]);
 
   return (
     <div className="flex h-full">
