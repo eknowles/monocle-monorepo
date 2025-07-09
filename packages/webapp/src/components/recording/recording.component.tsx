@@ -48,7 +48,18 @@ export const Recording: FC<
         onStream: (stream) => {
           if (videoEl.current) {
             videoEl.current.srcObject = stream;
+            videoEl.current.play().catch((e) => console.error("play error", e));
           }
+        },
+        onDataChannel: (channel) => {
+          channel.onopen = () => {
+            channel.send(JSON.stringify({ method: "live" }));
+          };
+          channel.onmessage = (event) => {
+            if (event.data === "Ping") {
+              // channel.send("Pong");
+            }
+          };
         },
       });
       setWebRtc(newWebRtc);
@@ -98,7 +109,7 @@ export const Recording: FC<
           height: `${height - (SHOW_TIMELINE ? TIMELINE_HEIGHT : 0)}px`,
           width: `${width}px`,
         }}
-        className="object-contain dark:bg-code-900 bg-white transition-opacity duration-300 opacity-0 flex grow"
+        className="object-contain dark:bg-code-900 bg-white transition-opacity duration-300 opacity-100 flex grow"
       />
       {import.meta.env.VITE_FEATURE_TIMELINE === "true" && (
         <RecordingTimeline
