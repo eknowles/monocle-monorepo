@@ -2,6 +2,7 @@ export type WebRTCOptions = {
   iceServers: RTCConfiguration["iceServers"];
   onLocalDescription: (description: RTCSessionDescriptionInit) => void;
   onStream: (stream: MediaStream) => void;
+  onDataChannel: (dataChannel: RTCDataChannel) => void;
 };
 
 export class WebRTC {
@@ -12,8 +13,11 @@ export class WebRTC {
     this.pc.ontrack = (event) => this.options.onStream(event.streams[0]);
     this.pc.onicecandidate = (event) => {
       if (!event.candidate) {
-        this.options.onLocalDescription(this.pc.localDescription!);
+        this.options.onLocalDescription(this.pc.localDescription!.toJSON());
       }
+    };
+    this.pc.ondatachannel = (event) => {
+      this.options.onDataChannel(event.channel);
     };
     this.pc.createDataChannel("ClientDataChannel");
   }
