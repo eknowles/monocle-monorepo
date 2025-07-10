@@ -11,22 +11,34 @@ jobs:
     name: "Pre Release"
     runs-on: "ubuntu-latest"
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js from .nvmrc
+        uses: actions/setup-node@v4
         with:
-          token: ${{ github.token }}
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '18.15.0'
-      - run: yarn
-      - run: cd ./packages/webapp && yarn build:monocle && yarn build:alienfence
+          node-version-file: '.nvmrc'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Build webapp
+        working-directory: ./packages/webapp
+        run: |
+          yarn build:monocle
+          yarn build:alienfence
         env:
           NODE_ENV: production
-      - uses: actions/upload-artifact@v2
+
+      - name: Upload monocle artifact
+        uses: actions/upload-artifact@v4
         with:
           name: build-monocle
           path: ./packages/webapp/dist/monocle
-      - uses: actions/upload-artifact@v2
+
+      - name: Upload alienfence artifact
+        uses: actions/upload-artifact@v4
         with:
           name: build-alienfence
           path: ./packages/webapp/dist/alienfence
