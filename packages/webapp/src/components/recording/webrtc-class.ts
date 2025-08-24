@@ -12,6 +12,8 @@ export class WebRTC {
     const { onStream, onDataChannel, iceServers } = options;
     this.pc = new RTCPeerConnection({ iceServers });
     this.pc.ontrack = (event) => onStream(event.streams[0]);
+    this.pc.addTransceiver('video', { direction: 'recvonly' });
+    this.pc.addTransceiver('audio', { direction: 'recvonly' });
     this.pc.ondatachannel = (event) => onDataChannel(event.channel);
     this.pc.onicecandidate = this.onIceCandidate;
     this.pc.createDataChannel("ClientDataChannel");
@@ -26,6 +28,7 @@ export class WebRTC {
   public async createOffer() {
     try {
       const offer = await this.pc.createOffer({
+        voiceActivityDetection: false,
         offerToReceiveAudio: true,
         offerToReceiveVideo: true,
       });
